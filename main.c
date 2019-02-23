@@ -49,13 +49,15 @@ int main (){
     //fp3 = fopen("Vendas_1M.txt", "r");
     // leitura de produtos
     while(fgets(str, 10, fp1)){
-        produtos[i] = str; //strcpy(produtos[i], str); ?
+        //strcpy(produtos[i], str);
+        produtos[i] = strdup(str); 
         printf("%s  &&  produtos -> %s e o i = %d\n", str, produtos[i], i);
         i++;
     }
     // -> validação de produtos
     printf("acabou -> %s\n", produtos[0]);
-    //printf("acabou -> %s\n", produtos[1]);
-    //printf("acabou -> %s\n", produtos[2]);
+    printf("acabou -> %s\n", produtos[1]);
+    printf("acabou -> %s\n", produtos[2]);
+    printf("acabou -> %s\n", produtos[171007]);
     return 0;
 }

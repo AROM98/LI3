@@ -1,5 +1,5 @@
-CFLAGS=-g
-LDFLAGS=-g
+CFLAGS=-g 
+LDFLAGS=-g 
 
 main: main.o 
 main.o: main.c head.h
