@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "head.h"
 
 //Leitura de ficheiros e tratamento de dados
@@ -37,5 +38,24 @@ void escrevefvalidC(){
 
 //Main -> função principal que chama todas as outras.
 int main (){
-return 0;
+    char* produtos[200000];
+    //char* clientes[20000];
+    //char* vendas[1000000];
+    FILE *fp1, *fp2, *fp3;
+    char str[10];
+    int i = 0;
+    fp1 = fopen("Produtos.txt", "r");
+    //fp2 = fopen("Clientes.txt", "r");
+    //fp3 = fopen("Vendas_1M.txt", "r");
+    // leitura de produtos
+    while(fgets(str, 10, fp1)){
+        produtos[i] = str; //strcpy(produtos[i], str); ?
+        printf("%s  &&  produtos -> %s e o i = %d\n", str, produtos[i], i);
+        i++;
+    }
+    // -> validação de produtos
+    printf("acabou -> %s\n", produtos[0]);
+    //printf("acabou -> %s\n", produtos[1]);
+    //printf("acabou -> %s\n", produtos[2]);
+    return 0;
 }
