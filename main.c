@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+//#include <glib.h>
 #include "head.h"
 
 // -> Catalogo de Produtos: validação e organização dos códigos dos produtos.
@@ -13,7 +15,8 @@ void validprod(){
     int flag = 0; //para nao imprimir resultados iguais(na validaçao das letras)
     fp = fopen("Produtos.txt", "r");
     while(fgets(str, 10, fp)){
-        produtos[i] = strdup(str); 
+        
+        produtos[i] = strdup(strtok(str, "\n\r")); 
         //printf("%s  &&  produtos -> %s e o i = %d\n", str, produtos[i], i);
         i++;
     }
@@ -28,12 +31,15 @@ void validprod(){
         if(produtos[a][2] == '0'){ //verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido.
         printf("nao é valido o produto1: %s\n", produtos[a]); 
         }
+        //if(produtos[a][8] != '\0') printf("nao é valido o produto1: %s\n", produtos[a]); -> isto testa se a string é maior
+                                                                                        //   do que o suposto.
     }
     
     //printf("acabou -> %s\n", produtos[0]);
     //printf("acabou -> %s\n", produtos[1]);       **** TESTES ****
     //printf("acabou -> %s\n", produtos[2]);
-    //printf("acabou -> %c %c\n", produtos[171007][1], produtos[171007][2]);
+    //printf("acabou -> %c %c\n", produtos[171007][1], produtos[171007][6]);
+    printf("acabou -> %s -> %lu\n", produtos[171007], strlen(produtos[171007]));
 }
 
 
@@ -46,7 +52,7 @@ void validclient(){
     FILE *fp;
     fp = fopen("Clientes.txt", "r");
     while(fgets(str, 10, fp)){
-        clientes[i] = strdup(str); 
+        clientes[i] = strdup(strtok(str, "\n\r")); 
         //printf("%s  &&  produtos -> %s e o i = %d\n", str, clientes[i], i);
         //printf("Cliente -> %s", clientes[i]);
         i++;
@@ -79,13 +85,13 @@ void validvendas(){
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
     while(fgets(str, 50, fp)){
-        vendas[i] = strdup(str); 
+        vendas[i] = strdup(strtok(str, "\n\r")); 
         //printf("%s  &&  produtos -> %s e o i = %d\n", str, clientes[i], i);
         //printf("VENDA -> %s", vendas[i]);
         i++;
     }
     //printf("existem %d vendas\n", i); 
-    //printf("acabou -> %s\n", vendas[999999]);       **** TESTES ****
+    //printf("acabou -> %s\n", vendas[999999]);      // **** TESTES ****
 }
 
 // -> Facturação Global: 
@@ -94,8 +100,15 @@ void validvendas(){
 
 //Main -> função principal que chama todas as outras.
 int main (){
+    //mediçao do tempo 
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
     validprod();
     validclient();
     validvendas();
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("CPU Time:%f\n", cpu_time_used );
     return 0;
 }
