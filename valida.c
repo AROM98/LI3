@@ -1,28 +1,48 @@
+#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include "head.h"
-#include <gmodule.h>
+#include <glib.h>
 
+//fazer struct de vendas
+typedef struct vendas{
+    char* prod;
+    int preco;
+    int unidades;
+    char tcompra;
+    char* cliente;
+    int mes;
+    int filial;
+}Vendas;
 
+#define TamProd 200000
+#define TamClientes 20000
+#define TamVendas 1000000
+#define staAux 50
+
+void escreveArray(FILE *fp, char *array[]){
+    char str[staAux];
+    int i = 0;
+    while(fgets(str, staAux, fp)){
+        strtok(str, "\n\r");
+        array[i] = strdup(str);
+        //array[i] = malloc(sizeof(strlen(str)+1));
+        //strcpy(array[i], str); 
+        //printf("%s  &&  produtos -> %s e o i = %d\n", str, produtos[i], i);
+        i++;
+    }  
+}
 
 // -> Catalogo de Produtos: validação e organização dos códigos dos produtos.
 //SE a organização for feita de forma alfabetica, o prog é mais eficiente. (na procura)
 void validprod(){
-    char* produtos[200000];
+    //char str[10];
+    char* produtos[TamProd];
     FILE *fp;
-    char str[10];
-    int i = 0;
-    int flag = 0; //para nao imprimir resultados iguais(na validaçao das letras)
     fp = fopen("Produtos.txt", "r");
-    while(fgets(str, 10, fp)){
-        strtok(str, "\n\r");
-        produtos[i] = malloc(strlen(str)+1);
-        strcpy(produtos[i], str); 
-        //printf("%s  &&  produtos -> %s e o i = %d\n", str, produtos[i], i);
-        i++;
-    }
+    escreveArray(fp, produtos);
     // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
     for(int a = 0; produtos[a] != '\0'; a++){
         if(produtos[a][0]>='A' && produtos[a][0]<='Z' && produtos[a][1]>='A' && produtos[a][1]<='Z'){
@@ -49,19 +69,10 @@ void validprod(){
 // -> Catalogo de Clientes: analogo ao Catalogo de Produtos.
 //muda apenas a parte da verificaçao, porque o tipo de dados é diferente.
 void validclient(){
-    char* clientes[20000];
-    int i = 0;
-    char str[10];
+    char* clientes[TamClientes];
     FILE *fp;
     fp = fopen("Clientes.txt", "r");
-    while(fgets(str, 10, fp)){
-        strtok(str, "\n\r");
-        clientes[i] = malloc(strlen(str)+1);
-        strcpy(clientes[i], str);
-        //printf("%s  &&  produtos -> %s e o i = %d\n", str, clientes[i], i);
-        //printf("Cliente -> %s", clientes[i]);
-        i++;
-    }
+    escreveArray(fp, clientes);
     // -> validação de clientes : cliente valido tem uma letra maiuscula e um numero entre 1000 e 5000
     for(int a = 0; clientes[a] != '\0'; a++){
         if(clientes[a][0]>='A' && clientes[a][0]<='Z'){
@@ -84,19 +95,19 @@ void validclient(){
 
 //Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
 void validvendas(){
-    char* vendas[1000000];
-    char str[50];
-    int i = 0;
+    //Vendas vendas[1000000];
+    char* vendas[TamVendas];
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
-    while(fgets(str, 50, fp)){
+    escreveArray(fp, vendas);
+    /*while(fgets(str, 50, fp)){
         strtok(str, "\n\r");
         vendas[i] = malloc(strlen(str)+1);
         strcpy(vendas[i], str);
         //printf("%s  &&  produtos -> %s e o i = %d\n", str, clientes[i], i);
         //printf("VENDA -> %s", vendas[i]);
         i++;
-    }
+    }*/
     //printf("existem %d vendas\n", i); 
     //printf("acabou -> %s\n", vendas[999999]);      // **** TESTES ****
 }

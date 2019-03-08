@@ -1,5 +1,13 @@
-CFLAGS=-g `pkg-config --cflags --libs glib-2.0` -ansi
-LDFLAGS=-g `pkg-config --cflags --libs glib-2.0` -ansi
+IDIR=../include
+ODIR=obj
+LDIR=lib
+OLDIR=$(ODIR)/lib
+
+CC=gcc
+#CFLAGS = -Wall -std=c11 -g -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR)
+CFLAGS = -Wall -ansi -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR) 
+#LDFLAGS= -Wall -std=c11 -g  -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR) #-ansi
+
 
 main: main.o valida.o
 main.o: main.c head.h
