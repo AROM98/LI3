@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -6,8 +7,7 @@
 #include "head.h"
 
 
-// -> Facturação Global: 
-//A fazer depois de conseguir ordenar os dados.
+
 
 
 //Main -> função principal que chama todas as outras.
@@ -16,7 +16,7 @@ int main (){
     clock_t start, end;
     double cpu_time_used;
     start = clock();
-    validprod();
+    prodtoArray();
     validclient();
     validvendas();
     end = clock();
