@@ -8,5 +8,5 @@
 //stacks ou heaps?
 
 void validvendas();
-void validclient();
+void clienttoArray();
 void prodtoArray();

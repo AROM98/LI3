@@ -9,43 +9,43 @@
 //fazer struct de vendas
 typedef struct vendas{
     char* prod;
-    int preco;
+    double preco;
     int unidades;
-    char tcompra;
+    char* tcompra;
     char* cliente;
     int mes;
     int filial;
-}Vendas;
+}*Vendas;
 
+#define CAMPOSVENDA 7
 #define TamProd 200000
 #define TamClientes 20000
 #define TamVendas 1000000
 #define staAux 50
 
 //escreve na struct
-/*
-Venda (char* linhaVendaOk)  {
+
+Vendas fazStruct (char* linhaVendaOk)  {
     char* campos[CAMPOSVENDA];
-    Venda vendaAux;
-     vendaAux = (Venda) malloc(sizeof(struct venda));
+    Vendas vendaAux;
+    vendaAux = malloc(sizeof(struct vendas));
     int index = 0;
     char* token = strtok(linhaVendaOk," ");  
     while(!(token == NULL)) {
         campos[index] = strdup(token);
         // printf(" %s\n", token);
-        token = strtok(NULL," ");             **** solucao para meter cenas na struct *****
-        index++;                                    **** a funcionar brevemente ****
+        token = strtok(NULL," ");
+        index++;                                    
     } 
-    vendaAux -> codProd = strdup(campos[0]);
-    vendaAux -> codCli = strdup(campos[3]);
-    vendaAux -> precoUnit = atof(campos[1]);
-    vendaAux -> quantidade = atoi(campos[2]);
-    vendaAux -> tipo = campos[4];
+    vendaAux -> prod = strdup(campos[0]);
+    vendaAux -> preco = atof(campos[1]);
+    vendaAux -> unidades = atoi(campos[2]);
+    vendaAux -> tcompra = campos[3];
+    vendaAux -> cliente = strdup(campos[4]);
     vendaAux -> mes = atoi(campos[5]);
-    vendaAux ->filial = atoi(campos[6]);  
+    vendaAux -> filial = atoi(campos[6]);  
     return vendaAux;   
 }
-*/
 
 void escreveArray(FILE *fp, char *array[]){
     char str[staAux];
@@ -144,15 +144,16 @@ void clienttoArray(){
 
 //Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
 void validvendas(){
-    //int i = 0;
-    //Vendas vendas[1000000];
+    int i = 0;
+    //Vendas vendas[TamVendas];
     char* venda[TamVendas];
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
     escreveArray(fp, venda);
-    //while(vendas[i]){
-        //fazStruct(vendas[i]);
-    //}
+    while(venda[i]){
+        fazStruct(venda[i]);
+        i++;
+    }
     //printf("existem %d vendas\n", i); 
     //printf("acabou -> %s\n", vendas[999999]);      // **** TESTES ****
 }
