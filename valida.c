@@ -33,8 +33,8 @@ Venda (char* linhaVendaOk)  {
     while(!(token == NULL)) {
         campos[index] = strdup(token);
         // printf(" %s\n", token);
-        token = strtok(NULL," ");
-        index++;
+        token = strtok(NULL," ");             **** solucao para meter cenas na struct *****
+        index++;                                    **** a funcionar brevemente ****
     } 
     vendaAux -> codProd = strdup(campos[0]);
     vendaAux -> codCli = strdup(campos[3]);
@@ -62,19 +62,22 @@ void escreveArray(FILE *fp, char *array[]){
 // -> Catalogo de Produtos: validação e organização dos códigos dos produtos.
 //SE a organização for feita de forma alfabetica, o prog é mais eficiente. (na procura)
 
-void validProd(char *produtos){
-    for(int a = 0; produtos[a] != '\0'; a++){
+void validProd(char produtos[]){
+    //for(int a = 0; produtos[a] != '\0'; a++){
+        if(strlen(produtos) != 6){
+            printf("nao é valido o cliente: %s\n", produtos);
+        }
         if(produtos[0]>='A' && produtos[0]<='Z' && produtos[1]>='A' && produtos[1]<='Z'){
             //printf("é valido o produto: %s", produtos[a]);
         }
         else{
-            printf("nao é valido o produto1: %c\n", produtos[a]);
+            printf("nao é valido o produto1: %s\n", produtos);
         }
         if(produtos[2] == '0'){ //verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido.
-        printf("nao é valido o produto1: %c\n", produtos[a]); 
+        printf("nao é valido o produto1: %s\n", produtos); 
         }
         //if(produtos[a][8] != '\0') printf("nao é valido o produto1: %s\n", produtos[a]); -> isto testa se a string é maior                                                            //   do que o suposto.
-    }
+    //}
 }
 
 
@@ -88,6 +91,7 @@ void prodtoArray(){
     // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
     while(produtos[i] != '\0'){
         validProd(produtos[i]);
+        i++;
     }
         //if(produtos[a][8] != '\0') printf("nao é valido o produto1: %s\n", produtos[a]); -> isto testa se a string é maior
                                                                                         //   do que o suposto.
@@ -100,27 +104,38 @@ void prodtoArray(){
 }
 
 
+//Funcao que verifica se um cliente é valido ou nao.
+void validclient(char clientes[]){
+    //for(int a = 0; clientes[a] != '\0'; a++){
+        if(strlen(clientes) != 5){
+            printf("nao é valido o cliente: %s\n", clientes);
+        }
+        if(clientes[0]>='A' && clientes[0]<='Z'){
+           //printf("é valido o produto: %s", clientes[a]);
+        }
+        else printf("nao é valido o cliente: %s\n", clientes);
+        if(clientes[1] == '0'){ //verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido.
+           printf("nao é valido o cliente: %s\n", clientes); 
+        }
+        if(clientes[1] > '5') printf("nao é valido o cliente: %s\n", clientes);
+        if(clientes[1] == '5'){
+            if(clientes[2] == '0' && clientes[3] == '0' && clientes[4] == '0'){} //entao cliente é valido
+            else printf("nao é valido o cliente: %s\n", clientes); 
+        }
+    //}
+}
+
 // -> Catalogo de Clientes: analogo ao Catalogo de Produtos.
 //muda apenas a parte da verificaçao, porque o tipo de dados é diferente.
-void validclient(){
+void clienttoArray(){
+    int i = 0;
     char* clientes[TamClientes];
     FILE *fp;
     fp = fopen("Clientes.txt", "r");
     escreveArray(fp, clientes);
-    // -> validação de clientes : cliente valido tem uma letra maiuscula e um numero entre 1000 e 5000
-    for(int a = 0; clientes[a] != '\0'; a++){
-        if(clientes[a][0]>='A' && clientes[a][0]<='Z'){
-           //printf("é valido o produto: %s", clientes[a]);
-        }
-        else printf("nao é valido o cliente: %s\n", clientes[a]);
-        if(clientes[a][1] == '0'){ //verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido.
-           printf("nao é valido o cliente: %s\n", clientes[a]); 
-        }
-        if(clientes[a][1] > '5') printf("nao é valido o cliente: %s\n", clientes[a]);
-        if(clientes[a][1] == '5'){
-            if(clientes[a][2] == '0' && clientes[a][3] == '0' && clientes[a][4] == '0'){} //entao cliente é valido
-            else printf("nao é valido o cliente: %s\n", clientes[a]); 
-        }
+    while(clientes[i] != '\0'){
+        validclient(clientes[i]);
+        i++;
     }
     //printf("acabou -> %s\n", clientes[0]);
     //printf("existem %d clientes\n", i);           **** TESTES ****

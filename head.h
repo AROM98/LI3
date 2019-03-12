@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -8,4 +9,4 @@
 
 void validvendas();
 void validclient();
-void validprod();
+void prodtoArray();
