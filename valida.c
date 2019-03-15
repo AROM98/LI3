@@ -17,6 +17,8 @@ typedef struct vendas{
     int filial;
 }*Vendas;
 
+//printf("%s %d %d %s %s %d %d",vendas[i]->prod,vendas[i]->preco,vendas[i]->unidades,vendas[i]->tcompra,)
+
 typedef struct query{
     int unidcompradas;
     double precototal;
@@ -31,21 +33,31 @@ typedef struct query{
 //escreve na struct
 char* produtos[TAMPROD];
 char* clientes[TAMCLIENTES];
+int teste = 0;
+int validadas = 0;
 
 
-int verprod(char* campos, char* produtos){
-    int val = -1;
+int verprod(char* campos){
+    int val = 0;
+    //printf("%s\n",campos);
+
     for (int i = 0; produtos[i] && !val; i++){
-        if(strcmp(campos,produtos[i]) == 0){
-            val = 1;
-            return val;
-        }
+        if(strcmp(campos,produtos[i]) == 0) val = 1;
+    }
+    return val;
+}
+
+int verclien(char* campos){
+    int val = 0;
+
+    for(int i = 0;clientes[i] && !val;i++){
+        if(strcmp(campos,clientes[i]) == 0) val = 1;
     }
     return val;
 }
 
 int verunidec(double unidec){
-    if(unidec > 0.0 && unidec <999.99) return 1;
+    if(unidec >= 0.0 && unidec <=999.99) return 1;
     return 0;
 }
 
@@ -54,26 +66,53 @@ int verunidadesvend(int unidades){
     return 0;
 }
 
-int vertcompra(char compra){
-    if(compra == 'N' || compra == 'P') return 1;
-        else return 0;
+int vertcompra(char* compra){
+    if (strcmp(compra,"N")|| strcmp(compra,"P"))return 1;
+    return 0;
 }
 
-Vendas fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
+int vermes(int mes){
+    if(mes >= 0 || mes <= 0) return 1;
+    return 0;
+}
+
+int verfilial(int filial){
+    if (filial > 0 || filial <=3) return 1;
+    return 0;
+}
+
+int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
     Vendas vendaAux;
+    int val=0;
     vendaAux = malloc(sizeof(struct vendas));
     int index = 0;
-    char* token = strtok(linhaVendaOk," ");
+    char* aux = strdup (linhaVendaOk);
+    char* token = strtok(aux," ");
     while(!(token == NULL)) {
         campos[index] = strdup(token);
         // printf(" %s\n", token);
         token = strtok(NULL," ");
         index++;
     }
-//verprod(campos[0], produtos) && 
-    if(verunidec(atof(campos[1])) && verunidadesvend(campos[2]) && vertcompra(campos[3])){
-    // printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
+
+    int a = verprod(campos[0]);
+    int b = verunidec(atof(campos[1])); 
+    int c = verunidadesvend(atoi(campos[2]));
+    int d = vertcompra(campos[3]);
+    int e = verclien(campos[4]);
+    int f = vermes(atoi(campos[5]));
+    int g = verfilial(atoi(campos[6]));
+/**/
+    if(!(a && b && c && d && e && f && g)){
+        printf("a=%d,b=%d,c=%d,d=%d,e=%d,f=%d,g=%d\n",a,b,c,d,e,f,g);
+        printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
+    }
+
+
+    if (a && b && c && d && e && f && g){
+    validadas++;
+    val = 1;
     vendaAux -> prod = strdup(campos[0]);
     vendaAux -> preco = atof(campos[1]);
     vendaAux -> unidades = atoi(campos[2]);
@@ -82,9 +121,10 @@ Vendas fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
     vendaAux -> mes = atoi(campos[5]);
     vendaAux -> filial = atoi(campos[6]);
     }
-    return vendaAux;
+    return val;
 
 }
+//269.99
 
 void escreveArray(FILE *fp, char *array[]){
     char str[staAux];
@@ -124,7 +164,6 @@ void validProd(char produtos[]){
 void prodtoArray(){
     //char str[10];
     int i = 0;
-    char* produtos[TAMPROD];
     FILE *fp;
     fp = fopen("Produtos.txt", "r");
     escreveArray(fp, produtos);
@@ -184,29 +223,21 @@ void clienttoArray(){
 //Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
 void validvendas(){
     int i = 0;
-    int counter = 0;
-    Vendas vendaAux;
-    //Vendas vendas[TAMVENDAS];
     char* venda[TAMVENDAS];
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
     escreveArray(fp, venda);
     fclose(fp);
-    fp = fopen("Produtos.txt","r");
-    escreveArray(fp, produtos);
-    while(venda[i] && i<TAMVENDAS){
-        if (fazStruct(venda[i])){
-            printf("%s\n",venda[i]);
+    fp = fopen("Venda_confirmadas.txt","w");
+
+    while(venda[i]){
+            if(fazStruct(venda[i])){
+                fprintf(fp,"%s\n", venda[i]);
+            }
             i++;
-        }
     }
-    printf("%d\n", i);
-    i=0;
-    fp = fopen("Venda_confirmadas2.txt","w");
-    while(venda[i] && i<TAMVENDAS){
-        fprintf(fp,"%s \n",venda[i]);
-        i++;
-    }
+
+    printf("%d\n", validadas);
     fclose(fp);
 
     //printf("existem %d vendas\n", i); 
