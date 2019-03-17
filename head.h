@@ -10,3 +10,4 @@
 void validvendas();
 void clienttoArray();
 void prodtoArray();
+void testa_brp();

@@ -23,6 +23,7 @@ int main (){
     //printf("coisas3\n");
     validvendas();
     //printf("coisas4\n");
+    testa_brp();
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("CPU Time:%f\n", cpu_time_used );

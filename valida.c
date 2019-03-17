@@ -33,6 +33,7 @@ typedef struct query{
 //escreve na struct
 char* produtos[TAMPROD];
 char* clientes[TAMCLIENTES];
+char* venda[TAMVENDAS];
 int teste = 0;
 int validadas = 0;
 
@@ -222,24 +223,53 @@ void clienttoArray(){
 
 //Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
 void validvendas(){
-    int i = 0;
-    char* venda[TAMVENDAS];
+    //int i = 0;
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
     escreveArray(fp, venda);
     fclose(fp);
     fp = fopen("Venda_confirmadas.txt","w");
-
+    /*
     while(venda[i]){
             if(fazStruct(venda[i])){
                 fprintf(fp,"%s\n", venda[i]);
             }
             i++;
     }
-
+    */
     printf("%d\n", validadas);
     fclose(fp);
 
     //printf("existem %d vendas\n", i); 
     //printf("acabou -> %s\n", vendas[999999]);      // **** TESTES ****
+}
+
+
+//QUERIES DO BRP1
+//linhas mais longa das vendas
+int linha_mais_longa(char* array[]){
+    int tam = 0;
+    for(int i = 0; array[i] && i < TAMVENDAS; i++){
+        if(strlen(array[i]) > tam){
+            tam = strlen(array[i]);
+        }
+    }
+    printf("A maior linha tem tamanho de %d\n", tam);
+    return tam;
+}
+
+//imprime ultimo cliente
+void imprime_ultimo(char* array[]){
+    int i = 0;
+    while(array[i +1] && i < (TAMCLIENTES -1)){
+        i++;
+    }
+    printf("O ultimos cliente da lista é: %s\n", array[i]);
+}
+
+void testa_brp(){
+    printf("cenas1\n");
+    linha_mais_longa(venda);
+    printf("cenas2\n");
+    imprime_ultimo(clientes);
 }
