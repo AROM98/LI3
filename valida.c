@@ -174,11 +174,11 @@ void prodtoArray(char* fich){
     //char str[10];
     int i = 0;
     FILE *fp;
-    if(fich == NULL) fich = "Produtos.txt";
-    fp = fopen(fich, "r");
+    //if(fich != NULL) fp = fopen(fich, "r");
+    fp = fopen("Produtos.txt", "r");
     escreveArray(fp, produtos);
     // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
-    while(*produtos[i] != '\0'){
+    while(produtos[i] != '\0'){
         validProd(produtos[i]);
         i++;
     }
@@ -217,10 +217,11 @@ void validclient(char clientes[]){
 void clienttoArray(char* fich){
     int i = 0;
     FILE *fp;
-    if(fich == NULL) fich = "Clientes.txt";
+   // if(fich == NULL) 
+        fich = "Clientes.txt";
     fp = fopen(fich, "r");
     escreveArray(fp, clientes);
-    while(*clientes[i] != '\0'){
+    while(clientes[i] != '\0'){
         validclient(clientes[i]);
         i++;
     }
@@ -230,7 +231,8 @@ void clienttoArray(char* fich){
 void validvendas(char* fich){
     int i = 0;
     FILE *fp;
-    if(fich == NULL) fich = "Vendas_1M.txt";
+  //  if(fich == NULL) 
+    fich = "Vendas_1M.txt";
     fp = fopen(fich, "r");
     escreveArray(fp, venda);
     fclose(fp);
@@ -242,7 +244,7 @@ void validvendas(char* fich){
             i++;
     }
 
-    printf("%d\n", validadas);
+    printf("vendas validas: %d\n", validadas);
     fclose(fp);
 }
 
