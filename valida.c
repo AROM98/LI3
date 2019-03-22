@@ -170,11 +170,12 @@ void validProd(char produtos[]){
     //}
 }
 
-void prodtoArray(){
+void prodtoArray(char* fich){
     //char str[10];
     int i = 0;
     FILE *fp;
-    fp = fopen("Produtos.txt", "r");
+    if(fich == NULL) fich = "Produtos.txt";
+    fp = fopen(fich, "r");
     escreveArray(fp, produtos);
     // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
     while(*produtos[i] != '\0'){
@@ -213,10 +214,11 @@ void validclient(char clientes[]){
 
 // -> Catalogo de Clientes: analogo ao Catalogo de Produtos.
 //muda apenas a parte da verificaçao, porque o tipo de dados é diferente.
-void clienttoArray(){
+void clienttoArray(char* fich){
     int i = 0;
     FILE *fp;
-    fp = fopen("Clientes.txt", "r");
+    if(fich == NULL) fich = "Clientes.txt";
+    fp = fopen(fich, "r");
     escreveArray(fp, clientes);
     while(*clientes[i] != '\0'){
         validclient(clientes[i]);
@@ -225,10 +227,11 @@ void clienttoArray(){
 }
 
 //Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
-void validvendas(){
+void validvendas(char* fich){
     int i = 0;
     FILE *fp;
-    fp = fopen("Vendas_1M.txt", "r");
+    if(fich == NULL) fich = "Vendas_1M.txt";
+    fp = fopen(fich, "r");
     escreveArray(fp, venda);
     fclose(fp);
     fp = fopen("Venda_confirmadas.txt","w");

@@ -7,7 +7,7 @@
 //ficheiro a ser usado para defenir esturuturas de dados.
 //stacks ou heaps?
 
-void validvendas();
-void clienttoArray();
-void prodtoArray();
+void validvendas(char* fich);
+void clienttoArray(char* fich);
+void prodtoArray(char* fich);
 void testa_brp();

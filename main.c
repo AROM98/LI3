@@ -11,17 +11,20 @@
 
 
 //Main -> função principal que chama todas as outras.
-int main (){
+int main (int argc, char* argv[]){
     //mediçao do tempo 
     clock_t start, end;
     double cpu_time_used;
     start = clock();
     //printf("coisas1\n");
-    prodtoArray();
+    if(argv[1]) prodtoArray(argv[1]);
+    prodtoArray(NULL);
     //printf("coisas2\n");
-    clienttoArray();
+    if(argv[2]) clienttoArray(argv[2]);
+    clienttoArray(NULL);
     //printf("coisas3\n");
-    validvendas();
+    if(argv[3]) validvendas(argv[3]);
+    validvendas(NULL);
     //printf("coisas4\n");
     testa_brp();
     end = clock();
