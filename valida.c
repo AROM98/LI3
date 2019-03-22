@@ -34,10 +34,11 @@ typedef struct query{
 char* produtos[TAMPROD];
 char* clientes[TAMCLIENTES];
 char* venda[TAMVENDAS];
+Vendas ven[TAMVENDAS];
 int teste = 0;
 int validadas = 0;
 
-
+//Condicoes de verificaçao de cada linha de venda.
 int verprod(char* campos){
     int val = 0;
     //printf("%s\n",campos);
@@ -82,6 +83,7 @@ int verfilial(int filial){
     return 0;
 }
 
+//Escreve cada linha do array de  vendas num array de struct.
 int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
     Vendas vendaAux;
@@ -109,8 +111,6 @@ int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
         printf("a=%d,b=%d,c=%d,d=%d,e=%d,f=%d,g=%d\n",a,b,c,d,e,f,g);
         printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
     }
-
-
     if (a && b && c && d && e && f && g){
     validadas++;
     val = 1;
@@ -137,7 +137,7 @@ void escreveArray(FILE *fp, char *array[]){
         //strcpy(array[i], str);                    estas duas linhas, substituem o strdup.
         i++;
     }
-    array[i] = '\0';
+    //array[i] = '\0';
 }
 
 // -> Catalogo de Produtos: validação e organização dos códigos dos produtos.
@@ -223,20 +223,19 @@ void clienttoArray(){
 
 //Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
 void validvendas(){
-    //int i = 0;
+    int i = 0;
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
     escreveArray(fp, venda);
     fclose(fp);
     fp = fopen("Venda_confirmadas.txt","w");
-    /*
     while(venda[i]){
             if(fazStruct(venda[i])){
                 fprintf(fp,"%s\n", venda[i]);
             }
             i++;
     }
-    */
+
     printf("%d\n", validadas);
     fclose(fp);
 
