@@ -6,6 +6,15 @@
 #include "head.h"
 #include <glib.h>
 
+/*
+typedef Struct sgv{
+    catProds catProds;
+    catClie catCli;
+    Facturacao fact; ---> quant, prod unit, total $ , codCli;
+    Filial flilias[NUMFILIAIS];
+} +SGV;
+*/
+
 //fazer struct de vendas
 typedef struct vendas{
     char* prod;
@@ -86,9 +95,9 @@ int verfilial(int filial){
 //Escreve cada linha do array de  vendas num array de struct.
 int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
-    Vendas vendaAux;
+    //Vendas vendaAux;
     int val=0;
-    vendaAux = malloc(sizeof(struct vendas));
+    //vendaAux = malloc(sizeof(struct vendas));
     int index = 0;
     char* aux = strdup (linhaVendaOk);
     char* token = strtok(aux," ");
@@ -106,26 +115,26 @@ int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
     int e = verclien(campos[4]);
     int f = vermes(atoi(campos[5]));
     int g = verfilial(atoi(campos[6]));
-/**/
+/*
     if(!(a && b && c && d && e && f && g)){
         printf("a=%d,b=%d,c=%d,d=%d,e=%d,f=%d,g=%d\n",a,b,c,d,e,f,g);
         printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
     }
+*/
     if (a && b && c && d && e && f && g){
     validadas++;
     val = 1;
-    vendaAux -> prod = strdup(campos[0]);
+  /*  vendaAux -> prod = strdup(campos[0]);
     vendaAux -> preco = atof(campos[1]);
     vendaAux -> unidades = atoi(campos[2]);
     vendaAux -> tcompra = campos[3];
     vendaAux -> cliente = strdup(campos[4]);
     vendaAux -> mes = atoi(campos[5]);
     vendaAux -> filial = atoi(campos[6]);
-    }
+    */}
     return val;
 
 }
-//269.99
 
 void escreveArray(FILE *fp, char *array[]){
     char str[staAux];
@@ -161,7 +170,6 @@ void validProd(char produtos[]){
     //}
 }
 
-
 void prodtoArray(){
     //char str[10];
     int i = 0;
@@ -169,7 +177,7 @@ void prodtoArray(){
     fp = fopen("Produtos.txt", "r");
     escreveArray(fp, produtos);
     // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
-    while(produtos[i] != '\0'){
+    while(*produtos[i] != '\0'){
         validProd(produtos[i]);
         i++;
     }
@@ -180,13 +188,12 @@ void prodtoArray(){
     //printf("acabou -> %s\n", produtos[1]);       **** TESTES ****
     //printf("acabou -> %s\n", produtos[2]);
     //printf("acabou -> %c %c\n", produtos[171007][1], produtos[171007][6]);
+    
     printf("acabou -> %s -> %lu\n", produtos[171007], strlen(produtos[171007]));
 }
 
-
 //Funcao que verifica se um cliente é valido ou nao.
 void validclient(char clientes[]){
-    //for(int a = 0; clientes[a] != '\0'; a++){
         if(strlen(clientes) != 5){
             printf("nao é valido o cliente: %s\n", clientes);
         }
@@ -202,7 +209,6 @@ void validclient(char clientes[]){
             if(clientes[2] == '0' && clientes[3] == '0' && clientes[4] == '0'){} //entao cliente é valido
             else printf("nao é valido o cliente: %s\n", clientes); 
         }
-    //}
 }
 
 // -> Catalogo de Clientes: analogo ao Catalogo de Produtos.
@@ -212,13 +218,10 @@ void clienttoArray(){
     FILE *fp;
     fp = fopen("Clientes.txt", "r");
     escreveArray(fp, clientes);
-    while(clientes[i] != '\0'){
+    while(*clientes[i] != '\0'){
         validclient(clientes[i]);
         i++;
     }
-    //printf("acabou -> %s\n", clientes[0]);
-    //printf("existem %d clientes\n", i);           **** TESTES ****
-    //printf("acabou -> %s\n", clientes[16383]);
 }
 
 //Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
@@ -238,9 +241,6 @@ void validvendas(){
 
     printf("%d\n", validadas);
     fclose(fp);
-
-    //printf("existem %d vendas\n", i); 
-    //printf("acabou -> %s\n", vendas[999999]);      // **** TESTES ****
 }
 
 
