@@ -15,6 +15,10 @@ int main (int argc, char* argv[]){
     clock_t start, end;
     double cpu_time_used;
     start = clock();
+    if (argc < 3){
+        printf("\tIndica os ficheiros de Produtos, Clientes e Vendas quando invocas o programa!\n");
+        exit(-1);
+    }
     initt(argv);
     /* if(argv[1]){ 
         //printf("argv1 ->%s\n",argv[1]);
