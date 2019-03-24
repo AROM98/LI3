@@ -6,44 +6,6 @@
 #include "head.h"
 #include <glib.h>
 
-/*
-typedef Struct sgv{
-    catProds catProds;
-    catClie catCli;
-    Facturacao fact; ---> quant, prod unit, total $ , codCli;
-    Filial flilias[NUMFILIAIS];
-} +SGV;
-*/
-
-//fazer struct de vendas
-typedef struct vendas{
-    char* prod;
-    double preco;
-    int unidades;
-    char* tcompra;
-    char* cliente;
-    int mes;
-    int filial;
-}*Vendas;
-
-//printf("%s %d %d %s %s %d %d",vendas[i]->prod,vendas[i]->preco,vendas[i]->unidades,vendas[i]->tcompra,)
-
-typedef struct query{
-    int unidcompradas;
-    double precototal;
-}Query;
-
-#define CAMPOSVENDA 7
-#define TAMPROD 200000
-#define TAMCLIENTES 20000
-#define TAMVENDAS 1000000
-#define staAux 50
-
-//escreve na struct
-char* produtos[TAMPROD];
-char* clientes[TAMCLIENTES];
-char* venda[TAMVENDAS];
-Vendas ven[TAMVENDAS];
 int teste = 0;
 int validadas = 0;
 
@@ -107,7 +69,6 @@ int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
         token = strtok(NULL," ");
         index++;
     }
-
     int a = verprod(campos[0]);
     int b = verunidec(atof(campos[1])); 
     int c = verunidadesvend(atoi(campos[2]));
@@ -122,16 +83,9 @@ int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
     }
 */
     if (a && b && c && d && e && f && g){
-    validadas++;
-    val = 1;
-  /*  vendaAux -> prod = strdup(campos[0]);
-    vendaAux -> preco = atof(campos[1]);
-    vendaAux -> unidades = atoi(campos[2]);
-    vendaAux -> tcompra = campos[3];
-    vendaAux -> cliente = strdup(campos[4]);
-    vendaAux -> mes = atoi(campos[5]);
-    vendaAux -> filial = atoi(campos[6]);
-    */}
+        validadas++;
+        val = 1;
+    }
     return val;
 
 }
@@ -174,8 +128,8 @@ void prodtoArray(char* fich){
     //char str[10];
     int i = 0;
     FILE *fp;
-    //if(fich != NULL) fp = fopen(fich, "r");
-    fp = fopen("Produtos.txt", "r");
+    //if(fich != NULL) fp = fopen(fich, "r");  "Produtos.txt"
+    fp = fopen(fich, "r");
     escreveArray(fp, produtos);
     // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
     while(produtos[i] != '\0'){
@@ -218,7 +172,7 @@ void clienttoArray(char* fich){
     int i = 0;
     FILE *fp;
    // if(fich == NULL) 
-        fich = "Clientes.txt";
+        //fich = "Clientes.txt";
     fp = fopen(fich, "r");
     escreveArray(fp, clientes);
     while(clientes[i] != '\0'){
@@ -227,12 +181,12 @@ void clienttoArray(char* fich){
     }
 }
 
-//Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação(parte ainda nao feita)
+//Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação.
 void validvendas(char* fich){
     int i = 0;
     FILE *fp;
   //  if(fich == NULL) 
-    fich = "Vendas_1M.txt";
+    //fich = "Vendas_1M.txt";
     fp = fopen(fich, "r");
     escreveArray(fp, venda);
     fclose(fp);
@@ -243,37 +197,6 @@ void validvendas(char* fich){
             }
             i++;
     }
-
     printf("vendas validas: %d\n", validadas);
     fclose(fp);
-}
-
-
-//QUERIES DO BRP1
-//linhas mais longa das vendas
-int linha_mais_longa(char* array[]){
-    int tam = 0;
-    for(int i = 0; array[i] && i < TAMVENDAS; i++){
-        if(strlen(array[i]) > tam){
-            tam = strlen(array[i]);
-        }
-    }
-    printf("A maior linha tem tamanho de %d\n", tam);
-    return tam;
-}
-
-//imprime ultimo cliente
-void imprime_ultimo(char* array[]){
-    int i = 0;
-    while(array[i +1] && i < (TAMCLIENTES -1)){
-        i++;
-    }
-    printf("O ultimos cliente da lista é: %s\n", array[i]);
-}
-
-void testa_brp(){
-    printf("cenas1\n");
-    linha_mais_longa(venda);
-    printf("cenas2\n");
-    imprime_ultimo(clientes);
 }

@@ -4,7 +4,6 @@
 #include <string.h>
 #include <time.h>
 #include <glib.h>
-#include "head.h"
 
 
 
@@ -16,6 +15,14 @@ int main (int argc, char* argv[]){
     clock_t start, end;
     double cpu_time_used;
     start = clock();
+    initt(argv);
+    /* if(argv[1]){ 
+        //printf("argv1 ->%s\n",argv[1]);
+        printf("argv1 ->%s, valido? ->%d\n",argv[1], strcmp(argv[1], "Produtos.txt"));
+    } 
+    if(argv[2]) printf("argv2 ->%s, valido? ->%d\n",argv[2], strcmp(argv[2], "Clientes.txt"));
+    if(argv[3]) printf("argv3 ->%s, valido? ->%d\n",argv[3], strcmp(argv[3], "Vendas_1M.txt"));
+    printf("comparaçao!?!? -> %d\n",strcmp("coisas", "coisas"));
     //printf("coisas1\n");
     //if(argv[1]) prodtoArray(argv[1]);
         prodtoArray();
@@ -26,7 +33,7 @@ int main (int argc, char* argv[]){
     //if(argv[3]) validvendas(argv[3]);
         validvendas();
     //printf("coisas4\n");
-    testa_brp();
+    testa_brp();*/
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("CPU Time:%f\n", cpu_time_used );
