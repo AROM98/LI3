@@ -5,9 +5,29 @@
 #include <time.h>
 #include "head.h"
 #include <glib.h>
+#include <gmodule.h>
 
 int teste = 0;
 int validadas = 0;
+
+GTree* arrayprod[90];
+
+// A == 65
+void initArrayTree(GTree* arrayprod[90]){
+    for(int i = 65 ; i<26 ; i++){
+        arrayprod[i] = g_tree_new(1);
+        g_tree_foreach(arrayprod[i],printf("%s\n",arrayprod[i]),NULL);
+    }
+}
+
+void prodToTree(char* campos,GTree** arrayprod){
+    int pos = campos[0];
+    GTree* tree = arrayprod[pos];
+    g_tree_insert(tree,NULL,campos);
+    arrayprod[pos] = tree;
+
+
+}
 
 //Condicoes de verificaçao de cada linha de venda.
 int verprod(char* campos){
