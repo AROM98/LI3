@@ -1,0 +1,12 @@
+#define _GNU_SOURCE
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <glib.h>
+
+
+//Funcoes para queries.
+void testa_brp();
+int linha_mais_longa(char* array[]);
+void imprime_ultimo(char* array[]);

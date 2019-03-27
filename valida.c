@@ -3,30 +3,71 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "head.h"
 #include <glib.h>
-#include <gmodule.h>
 
+//Struct da Venda.
+typedef struct vendas{
+    char* prod;
+    double preco;
+    int unidades;
+    char* tcompra;
+    char* cliente;
+    int mes;
+    int filial;
+}*Vendas;
+
+//Struct usada numa querie.
+typedef struct query{
+    int unidcompradas;
+    double precototal;
+}Query;
+
+//Defines para tamanhos de arrays.
+#define CAMPOSVENDA 7
+#define TAMPROD 200000
+#define TAMCLIENTES 20000
+#define TAMVENDAS 1000000
+#define staAux 50
+
+//Arrays e variaveis definidos globalmente para todas as funçoes.
+char* produtos[TAMPROD];
+char* clientes[TAMCLIENTES];
+char* venda[TAMVENDAS];
+Vendas ven[TAMVENDAS];
 int teste = 0;
 int validadas = 0;
 
+////////////////////////////////////////////////////////////////////////////////////////
+
 GTree* arrayprod[90];
+
+void printelements(gpointer key, gpointer value , gpointer user_data){
+    char * str = (char*)key;
+    int * count = (int*) user_data;
+
+    *count= *count + 1;
+
+    printf("%s - i= %d\n",str,*count);
+}
 
 // A == 65
 void initArrayTree(GTree* arrayprod[90]){
+    int* count = g_malloc(sizeof(int));
+    *count = 0;
+
     for(int i = 65 ; i<26 ; i++){
-        arrayprod[i] = g_tree_new(1);
-        g_tree_foreach(arrayprod[i],printf("%s\n",arrayprod[i]),NULL);
-    }
+        arrayprod[i] = g_tree_new(strcmp/*função que descrimina como comparar arguments*/);   
+        g_tree_foreach(arrayprod[i],printelements, count);
+        }
+
 }
 
 void prodToTree(char* campos,GTree** arrayprod){
     int pos = campos[0];
     GTree* tree = arrayprod[pos];
-    g_tree_insert(tree,NULL,campos);
+
+    g_tree_insert(tree, campos, NULL);/* tem de ser especificada a chave e o valor*/
     arrayprod[pos] = tree;
-
-
 }
 
 //Condicoes de verificaçao de cada linha de venda.

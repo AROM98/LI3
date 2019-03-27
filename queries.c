@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "head.h"
 #include <glib.h>
+
 
 //QUERIES DO BRP1
 //linhas mais longa das vendas
