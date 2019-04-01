@@ -6,7 +6,12 @@
 #include "valida.h"
 #include <glib.h>
 
-
+/**
+ * @brief Função initt, chama todas as outras funções.
+ * 
+ * @param argv Nomes do ficheiros de Produtos, Clientes e Vendas. por esta ordem.
+ * @return int 
+ */
 int initt(char* argv[]){
     //leitura de ficheiros e formaçao de structs.
     prodtoArray(argv[1]);
@@ -14,6 +19,6 @@ int initt(char* argv[]){
     validvendas(argv[3]);
 
     //Quueries..
-    //testa_brp();
+    testa_brp();
     return 0;
 }

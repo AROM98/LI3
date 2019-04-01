@@ -11,7 +11,14 @@
 
 
 
-//Main -> função principal que chama todas as outras.
+/**
+ * @brief Função Main, onde a função initt é chamada; também é feita a contagem do tempo de
+ * execução do programa.
+ * 
+ * @param argc 
+ * @param argv Nomes do ficheiros de Produtos, Clientes e Vendas. por esta ordem.
+ * @return int 
+ */
 int main (int argc, char* argv[]){
     //mediçao do tempo 
     clock_t start, end;

@@ -1,3 +1,5 @@
+#ifndef QUERIES_H
+#define QUERIES_H
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,3 +12,5 @@
 void testa_brp();
 int linha_mais_longa(char* array[]);
 void imprime_ultimo(char* array[]);
+
+#endif

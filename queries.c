@@ -4,30 +4,47 @@
 #include <string.h>
 #include <time.h>
 #include <glib.h>
+#include "valida.h"
 
 
 //QUERIES DO BRP1
-//linhas mais longa das vendas
+
+
+/**
+ * @brief Função que descobre o tamanho da linha mais longa das vendas
+ * 
+ * @param array 
+ * @return int 
+ */
 int linha_mais_longa(char* array[]){
     int tam = 0;
+    int linha  = 0;
     for(int i = 0; array[i] && i < TAMVENDAS; i++){
         if(strlen(array[i]) > tam){
             tam = strlen(array[i]);
+            linha = i + 1;
         }
     }
-    printf("A maior linha tem tamanho de %d\n", tam);
+    printf("A linha %d é maior e tem tamanho de %d\n",linha, tam);
     return tam;
 }
 
-//imprime ultimo cliente
+/**
+ * @brief Função que imprime ultimo cliente.
+ * 
+ * @param array 
+ */
 void imprime_ultimo(char* array[]){
     int i = 0;
     while(array[i +1] && i < (TAMCLIENTES -1)){
         i++;
     }
-    printf("O ultimos cliente da lista é: %s\n", array[i]);
+    printf("O ultimo cliente da lista é: %s\n", array[i]);
 }
-
+/**
+ * @brief Funçao de testes.
+ * 
+ */
 void testa_brp(){
     printf("cenas1\n");
     linha_mais_longa(venda);

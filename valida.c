@@ -5,7 +5,10 @@
 #include <time.h>
 #include <glib.h>
 
-//Struct da Venda.
+/**
+ * @brief Struct de Venda.
+ * 
+ */
 typedef struct vendas{
     char* prod;
     double preco;
@@ -16,20 +19,29 @@ typedef struct vendas{
     int filial;
 }*Vendas;
 
-//Struct usada numa querie.
+/**
+ * @brief Struct usada numa querie.
+ * 
+ */
 typedef struct query{
     int unidcompradas;
     double precototal;
 }Query;
 
-//Defines para tamanhos de arrays.
+/**
+ * @brief Defines para tamanhos de arrays.
+ * 
+ */
 #define CAMPOSVENDA 7
 #define TAMPROD 200000
 #define TAMCLIENTES 20000
 #define TAMVENDAS 1000000
 #define staAux 50
 
-//Arrays e variaveis definidos globalmente para todas as funçoes.
+/**
+ * @brief Arrays e variaveis definidos globalmente para todas as funçoes.
+ * 
+ */
 char* produtos[TAMPROD];
 char* clientes[TAMCLIENTES];
 char* venda[TAMVENDAS];
@@ -41,6 +53,14 @@ int validadas = 0;
 
 GTree* arrayprod[90];
 
+/**
+ * @brief Função que imprime um elemento de um nodo de arvore.
+ * Será usada com g_tree_foreach(), logo irá imprimir todos os nodos da árvore.
+ * 
+ * @param key (conteudo de cada nodo da árvore) 
+ * @param value (valor associado a chave)
+ * @param user_data (contador - conta o numero de nodos que passou pela função)
+ */
 void printelements(gpointer key, gpointer value , gpointer user_data){
     char * str = (char*)key;
     int * count = (int*) user_data;
@@ -61,7 +81,12 @@ void initArrayTree(GTree* arrayprod[90]){
         }
 
 }
-
+/**
+ * @brief 
+ * 
+ * @param campos 
+ * @param arrayprod 
+ */
 void prodToTree(char* campos,GTree** arrayprod){
     int pos = campos[0];
     GTree* tree = arrayprod[pos];
@@ -70,7 +95,12 @@ void prodToTree(char* campos,GTree** arrayprod){
     arrayprod[pos] = tree;
 }
 
-//Condicoes de verificaçao de cada linha de venda.
+/**
+ * @brief Função que verifica se o Produto é válido.
+ * Procura a venda dada como input no array de Produtos validos.
+ * @param campos 
+ * @return int 
+ */
 int verprod(char* campos){
     int val = 0;
     //printf("%s\n",campos);
@@ -81,6 +111,12 @@ int verprod(char* campos){
     return val;
 }
 
+/**
+ * @brief Função que verifica se o Cliente é válido.
+ * 
+ * @param campos 
+ * @return int 
+ */
 int verclien(char* campos){
     int val = 0;
 
@@ -90,32 +126,68 @@ int verclien(char* campos){
     return val;
 }
 
-int verunidec(double unidec){
+/**
+ * @brief Função que verifica se Preço do Produto é válido.
+ * 
+ * @param unidec 
+ * @return int 
+ */
+int verpreco(double unidec){
     if(unidec >= 0.0 && unidec <=999.99) return 1;
     return 0;
 }
 
+/**
+ * @brief Função que verifica se o número de unidades compradas é válido.
+ * 
+ * @param unidades 
+ * @return int 
+ */
 int verunidadesvend(int unidades){
     if(unidades>= 0 && unidades <= 200) return 1;
     return 0;
 }
 
+/**
+ * @brief Função que verifica se o tipo de compra é válido.
+ * 
+ * @param compra 
+ * @return int 
+ */
 int vertcompra(char* compra){
     if (strcmp(compra,"N")|| strcmp(compra,"P"))return 1;
     return 0;
 }
 
+/**
+ * @brief Função que verifica se o mês da compra é válido.
+ * 
+ * @param mes 
+ * @return int 
+ */
 int vermes(int mes){
     if(mes >= 0 || mes <= 0) return 1;
     return 0;
 }
 
+/**
+ * @brief Função que verifica se a filial é válida.
+ * 
+ * @param filial 
+ * @return int 
+ */
 int verfilial(int filial){
     if (filial > 0 || filial <=3) return 1;
     return 0;
 }
 
-//Escreve cada linha do array de  vendas num array de struct.
+/**
+ * @brief Função que escreve cada linha do array de vendas num array de struct;
+ * também verifica se cada elemento da venda é valido.
+ *
+ * @param linhaVendaOk - uma linha do array de vendas.
+ * @return int 
+ */
 int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
     //Vendas vendaAux;
@@ -131,7 +203,7 @@ int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
         index++;
     }
     int a = verprod(campos[0]);
-    int b = verunidec(atof(campos[1])); 
+    int b = verpreco(atof(campos[1])); 
     int c = verunidadesvend(atoi(campos[2]));
     int d = vertcompra(campos[3]);
     int e = verclien(campos[4]);
@@ -151,6 +223,13 @@ int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
 
 }
 
+/**
+ * @brief Função que dado um apontador para um ficheiro e um array de "strings" (vaziu),
+ * preenche o array com o que esta no ficheiro
+ * 
+ * @param fp 
+ * @param array 
+ */
 void escreveArray(FILE *fp, char *array[]){
     char str[staAux];
     int i = 0;
@@ -164,9 +243,12 @@ void escreveArray(FILE *fp, char *array[]){
     //array[i] = '\0';
 }
 
-// -> Catalogo de Produtos: validação e organização dos códigos dos produtos.
-//SE a organização for feita de forma alfabetica, o prog é mais eficiente. (na procura)
 
+/**
+ * @brief Função que valida Produtos antes de os inserir num array.
+ * 
+ * @param produtos 
+ */
 void validProd(char produtos[]){
     //for(int a = 0; produtos[a] != '\0'; a++){
         if(strlen(produtos) != 6){
@@ -185,6 +267,11 @@ void validProd(char produtos[]){
     //}
 }
 
+/**
+ * @brief 
+ * 
+ * @param fich 
+ */
 void prodtoArray(char* fich){
     //char str[10];
     int i = 0;
@@ -208,7 +295,11 @@ void prodtoArray(char* fich){
     printf("acabou -> %s -> %lu\n", produtos[171007], strlen(produtos[171007]));
 }
 
-//Funcao que verifica se um cliente é valido ou nao.
+/**
+ * @brief Função que valida Clientes antes de os inserir num array.
+ * 
+ * @param clientes 
+ */
 void validclient(char clientes[]){
         if(strlen(clientes) != 5){
             printf("nao é valido o cliente: %s\n", clientes);
@@ -227,8 +318,13 @@ void validclient(char clientes[]){
         }
 }
 
-// -> Catalogo de Clientes: analogo ao Catalogo de Produtos.
-//muda apenas a parte da verificaçao, porque o tipo de dados é diferente.
+
+/**
+ * @brief Função que lê os Cleintes do ficheiro e os poes num array de strings. 
+ * Tambem faz a validação usando a função validclient.
+ * 
+ * @param fich 
+ */
 void clienttoArray(char* fich){
     int i = 0;
     FILE *fp;
@@ -242,7 +338,12 @@ void clienttoArray(char* fich){
     }
 }
 
-//Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação.
+
+/**
+ * @brief Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação.
+ * 
+ * @param fich 
+ */
 void validvendas(char* fich){
     int i = 0;
     FILE *fp;
