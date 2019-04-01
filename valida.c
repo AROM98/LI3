@@ -1,3 +1,10 @@
+/**
+ * @file valida.c
+ * \brief Ficheio valida
+ *
+ * Ficheiro onde é feito todas as validaaçoes de dados.
+ * tambem é onde se mexe nas estruturas.
+ */
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>

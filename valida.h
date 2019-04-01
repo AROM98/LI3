@@ -1,3 +1,9 @@
+/**
+ * @file valida.h
+ * \brief head de valida
+ *
+ * Contem as definiçoes de todas as funcoes unicas de valida.c
+ */
 #ifndef VALIDA_H
 #define VALIDA_H
 #define _GNU_SOURCE

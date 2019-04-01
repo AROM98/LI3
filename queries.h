@@ -1,3 +1,9 @@
+/**
+ * @file queries.h
+ * \brief head de queries
+ *
+ * Contem as definiçoes de todas as funcoes unicas de queries.c
+ */
 #ifndef QUERIES_H
 #define QUERIES_H
 #define _GNU_SOURCE

@@ -1,3 +1,9 @@
+/**
+ * @file queries.c
+ * \brief Ficheio queries
+ *
+ * Ficheiro onde é feitos as queries do trabalho.
+ */
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>

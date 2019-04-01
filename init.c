@@ -1,3 +1,9 @@
+/**
+ * @file init.c
+ * \brief Ficheio init
+ *
+ * Ficheiro onde é chamada todas as outras funções.
+ */
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
