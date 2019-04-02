@@ -11,7 +11,6 @@
 #include <time.h>
 #include "init.h"
 #include <glib.h>
-//#include <gmodule.h>
 
 
 
@@ -30,11 +29,11 @@ int main (int argc, char* argv[]){
     clock_t start, end;
     double cpu_time_used;
     start = clock();
-    if (argc < 3){
+  /*  if (argc < 3){
         printf("\tIndica os ficheiros de Produtos, Clientes e Vendas quando invocas o programa!\n");
         exit(-1);
     }
-    initt(argv);
+    */initt(argv);
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("CPU Time:%f\n", cpu_time_used );

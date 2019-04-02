@@ -20,9 +20,11 @@
  */
 int initt(char* argv[]){
     //leitura de ficheiros e formaçao de structs.
-    prodtoArray(argv[1]);
-    clienttoArray(argv[2]);
-    validvendas(argv[3]);
+    
+    prodTree("Produtos.txt");
+    //prodtoArray(argv[1]);
+    //clienttoArray(argv[2]);
+    //validvendas(argv[3]);
 
     //Quueries..
     testa_brp();

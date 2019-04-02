@@ -58,7 +58,7 @@ int validadas = 0;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-GTree* arrayprod[90];
+GTree* arrayTreeprod[90];
 
 /**
  * @brief Função que imprime um elemento de um nodo de arvore.
@@ -78,29 +78,44 @@ void printelements(gpointer key, gpointer value , gpointer user_data){
 }
 
 // A == 65
-void initArrayTree(GTree* arrayprod[90]){
+
+gint comparechar(gconstpointer name1, gconstpointer name2){
+    return (strcmp(name1,name2));
+}
+
+void initArrayTree(GTree** arraytree){
     int* count = g_malloc(sizeof(int));
     *count = 0;
 
     for(int i = 65 ; i<26 ; i++){
-        arrayprod[i] = g_tree_new(strcmp/*função que descrimina como comparar arguments*/);   
-        g_tree_foreach(arrayprod[i],printelements, count);
-        }
-
+        arraytree[i] = g_tree_new(comparechar);/* strcmp função que descrimina como comparar arguments*/
+        //g_tree_foreach(arraytree[i],printelements, count);
+    }
 }
-/**
- * @brief 
- * 
- * @param campos 
- * @param arrayprod 
- */
-void prodToTree(char* campos,GTree** arrayprod){
-    int pos = campos[0];
-    GTree* tree = arrayprod[pos];
 
-    g_tree_insert(tree, campos, NULL);/* tem de ser especificada a chave e o valor*/
-    arrayprod[pos] = tree;
+
+void placeProdinTree(char* produto,GTree** arraytree){
+    int pos = produto[0];
+    GTree* tree = arraytree[pos];
+    g_tree_insert(arraytree[produto[0]], produto, produto);/* tem de ser especificada a chave e o valor*/
+    arraytree[pos] = tree;
 }
+
+void prodTree(char* fich){
+    FILE *fp;
+    //if(fich != NULL) fp = fopen(fich, "r");  "Produtos.txt"
+    fp = fopen(fich, "r");
+    char str[staAux];
+    initArrayTree(arrayTreeprod);
+    while(fgets(str, staAux, fp)){
+        strtok(str, "\n\r");
+        char* pro = strdup(str);
+        placeProdinTree(pro, arrayTreeprod);
+    // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
+    }
+    fclose(fp);
+}
+
 
 /**
  * @brief Função que verifica se o Produto é válido.
@@ -227,8 +242,8 @@ int fazStruct (char* linhaVendaOk){//, char produtos[TamProd]){
         val = 1;
     }
     return val;
-
 }
+
 
 /**
  * @brief Função que dado um apontador para um ficheiro e um array de "strings" (vaziu),
