@@ -27,6 +27,6 @@ int initt(char* argv[]){
     //validvendas(argv[3]);
 
     //Quueries..
-    testa_brp();
+    testa_brp(); //ainda nao funciona nas arvores....
     return 0;
 }

@@ -60,6 +60,7 @@ int validadas = 0;
 
 GTree* arrayTreeprod[90];
 
+
 /**
  * @brief Função que imprime um elemento de um nodo de arvore.
  * Será usada com g_tree_foreach(), logo irá imprimir todos os nodos da árvore.
@@ -74,12 +75,12 @@ void printelements(gpointer key, gpointer value , gpointer user_data){
 
     *count= *count + 1;
 
-    printf("%s - i= %d\n",str,*count);
+    printf("%s -> i= %d\n",str,*count);
 }
 
 // A == 65
 
-gint comparechar(gconstpointer name1, gconstpointer name2){
+gint comparechar(gconstpointer name1, gconstpointer name2){ //faz a mesma coisa que o strcmp!?
     return (strcmp(name1,name2));
 }
 
@@ -87,33 +88,40 @@ void initArrayTree(GTree** arraytree){
     int* count = g_malloc(sizeof(int));
     *count = 0;
 
-    for(int i = 65 ; i<26 ; i++){
-        arraytree[i] = g_tree_new(comparechar);/* strcmp função que descrimina como comparar arguments*/
+    for(int i = 0 ; i<26 ; i++){
+        arraytree[i] = g_tree_new(&strcmp);/* strcmp função que descrimina como comparar arguments*/
         //g_tree_foreach(arraytree[i],printelements, count);
     }
 }
 
-
+//poe cada produto na arvore certa, que por sua vez ja inserem o produto por por ordem.
 void placeProdinTree(char* produto,GTree** arraytree){
-    int pos = produto[0];
-    GTree* tree = arraytree[pos];
-    g_tree_insert(arraytree[produto[0]], produto, produto);/* tem de ser especificada a chave e o valor*/
-    arraytree[pos] = tree;
+    int pos = abs('A' - produto[0]);
+    //printf("ind -> %d\n", pos);
+    //GTree* tree = arraytree[pos];
+    g_tree_insert(arraytree[pos], produto, produto);/* tem de ser especificada a chave e o valor*/
+    //arraytree[pos] = tree;
 }
 
 void prodTree(char* fich){
     FILE *fp;
+    char* pro;
+    int* count = g_malloc(sizeof(int));
+    *count = 0;
     //if(fich != NULL) fp = fopen(fich, "r");  "Produtos.txt"
     fp = fopen(fich, "r");
     char str[staAux];
     initArrayTree(arrayTreeprod);
     while(fgets(str, staAux, fp)){
         strtok(str, "\n\r");
-        char* pro = strdup(str);
+        pro = strdup(str);
         placeProdinTree(pro, arrayTreeprod);
-    // -> validação de produtos : prod valido tem duas letras maiusculas e um numero entre 1000 e 9999
     }
     fclose(fp);
+    for(int j = 0; j < 26; j++){
+        printf("%d\n",g_tree_nnodes (arrayTreeprod[j])); //imprime on nodos usados em casa avl.
+        g_tree_foreach(arrayTreeprod[j],printelements, count);
+    }
 }
 
 

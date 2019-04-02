@@ -47,13 +47,30 @@ void imprime_ultimo(char* array[]){
     }
     printf("O ultimo cliente da lista é: %s\n", array[i]);
 }
+
+//se existir devolde o apontador, se nao existir deveolve 0 (NULL).
+void existe(GTree** arraytree){
+    char* test = "MN1980";
+    gpointer j;
+    //gpointer i = g_tree_search (arraytree[0], &strcmp, &test);
+    for(int i = 0; i < 26; i++){    
+        j = g_tree_lookup(arraytree[i], test);
+        if(j != NULL) break;
+    }
+    //int j = (int) i; 
+    printf("Este elemento esta na avl? -> %s\n", j);
+}
+
 /**
  * @brief Funçao de testes.
  * 
  */
 void testa_brp(){
-    printf("cenas1\n");
-    linha_mais_longa(venda);
-    printf("cenas2\n");
-    imprime_ultimo(clientes);
+    //printf("cenas1\n");
+    //linha_mais_longa(venda);
+    //printf("cenas2\n");
+    //imprime_ultimo(clientes);
+    printf("cenas3\n");
+    existe(arrayTreeprod);
+    printf("cenas4\n");
 }

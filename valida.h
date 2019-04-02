@@ -34,6 +34,8 @@ char* venda[TAMVENDAS];
 //int teste = 0;
 //int validadas = 0;
 
+GTree* arrayTreeprod[90];
+
 //Funcoes principais, mexem nos ficheiros, arrays, e structs.
 void validvendas(char* fich);
 void clienttoArray(char* fich);

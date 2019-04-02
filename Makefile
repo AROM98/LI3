@@ -4,8 +4,8 @@ LDIR=lib
 OLDIR=$(ODIR)/lib
 
 CC=gcc
-CFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config --libs glib-2.0`
-LDFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config --cflags glib-2.0`
+CFLAGS = -Wall -std=c11 -g -v -Ofast -ansi `pkg-config --libs glib-2.0`
+LDFLAGS = -Wall -std=c11 -g -v -Ofast -ansi `pkg-config --cflags glib-2.0`
 #CFLAGS = -lglib-2.0  #-std=c11 -g -v -Ofast
 #CFLAGS = -Wall -ansi -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` `--pkg-config --cflags --libs gmodule-2.0` -I$(IDIR) 
 #LDFLAGS= -Wall -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR) #-std=c11 -g -v -Ofast #-ansi
@@ -25,3 +25,4 @@ queries.o: queries.c queries.h
 # antes era rm -f main *.o
 clean: 
 	rm -rf *.o
+	rm main
