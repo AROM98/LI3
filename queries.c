@@ -71,6 +71,6 @@ void testa_brp(){
     //printf("cenas2\n");
     //imprime_ultimo(clientes);
     printf("cenas3\n");
-    existe(arrayTreeprod);
+    existe(TreeProd);
     printf("cenas4\n");
 }

@@ -56,9 +56,11 @@ Vendas ven[TAMVENDAS];
 int teste = 0;
 int validadas = 0;
 
-////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// ARVORES ////////////////////////////////////////////////
 
-GTree* arrayTreeprod[90];
+GTree* TreeProd[30];
+GTree* TreeClient[30];
+//GTree* TreeVendas[30];
 
 
 /**
@@ -70,61 +72,100 @@ GTree* arrayTreeprod[90];
  * @param user_data (contador - conta o numero de nodos que passou pela função)
  */
 void printelements(gpointer key, gpointer value , gpointer user_data){
-    char * str = (char*)key;
-    int * count = (int*) user_data;
+    char* str = (char*)key;
+    //int * count = (int*) user_data;
 
-    *count= *count + 1;
-
-    printf("%s -> i= %d\n",str,*count);
+    //*count= *count + 1;
+    g_printerr("%s\n", str);
+    //printf("%s ->\n",str);
+    //printf("%s -> i= %d\n",str,*count);
 }
 
-// A == 65
-
-gint comparechar(gconstpointer name1, gconstpointer name2){ //faz a mesma coisa que o strcmp!?
-    return (strcmp(name1,name2));
-}
-
+/**
+ * @brief Função que aloca espaço para cada arvore dentro do array.
+ * 
+ * @param arraytree Nome do Array.
+ */
 void initArrayTree(GTree** arraytree){
     int* count = g_malloc(sizeof(int));
     *count = 0;
 
     for(int i = 0 ; i<26 ; i++){
         arraytree[i] = g_tree_new(&strcmp);/* strcmp função que descrimina como comparar arguments*/
-        //g_tree_foreach(arraytree[i],printelements, count);
+        g_tree_foreach(arraytree[i],printelements, NULL);
     }
 }
 
-//poe cada produto na arvore certa, que por sua vez ja inserem o produto por por ordem.
-void placeProdinTree(char* produto,GTree** arraytree){
-    int pos = abs('A' - produto[0]);
+/**
+ * @brief Poe cada produto na arvore certa, que por sua vez ja inserem o produto por por ordem.
+ * 
+ * @param str linha de produto / cliente / venda.
+ * @param arraytree Array de arvores.
+ */
+void placeinTree(char* str,GTree** arraytree){
+    int pos = abs('A' - str[0]);
     //printf("ind -> %d\n", pos);
     //GTree* tree = arraytree[pos];
-    g_tree_insert(arraytree[pos], produto, produto);/* tem de ser especificada a chave e o valor*/
+    g_tree_insert(arraytree[pos], str, str);/* tem de ser especificada a chave e o valor*/
     //arraytree[pos] = tree;
 }
 
-void prodTree(char* fich){
-    FILE *fp;
+/**
+ * @brief Função que dado o nome de um ficheiro, preenche um array de arvores.
+ * Cada arvore é composta por elementos que começam por uma certa letra.
+ * 
+ * @param fich Nome do ficheiro.
+ * @param tree Nome da Arvore.
+ */
+void FiletoTree(char *fich, GTree** tree){
     char* pro;
-    int* count = g_malloc(sizeof(int));
-    *count = 0;
-    //if(fich != NULL) fp = fopen(fich, "r");  "Produtos.txt"
-    fp = fopen(fich, "r");
     char str[staAux];
-    initArrayTree(arrayTreeprod);
+    FILE *fp;
+    fp = fopen(fich, "r");
+    initArrayTree(tree);
     while(fgets(str, staAux, fp)){
         strtok(str, "\n\r");
         pro = strdup(str);
-        placeProdinTree(pro, arrayTreeprod);
+        placeinTree(pro, tree);
     }
-    fclose(fp);
+    fclose(fp); // nem é necessario porque quando o programa acaba o fich é automaticamente fechado.
+}
+
+/**
+ * @brief Preenche Uma AVL com produtos.
+ * 
+ * @param fich Nome do Ficheiro de Produtos.
+ */
+void prodTree(char* fich){
+    int* count = g_malloc(sizeof(int));
+    *count = 0;
+    FiletoTree(fich, TreeProd);
     for(int j = 0; j < 26; j++){
-        printf("%d\n",g_tree_nnodes (arrayTreeprod[j])); //imprime on nodos usados em casa avl.
-        g_tree_foreach(arrayTreeprod[j],printelements, count);
+        printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeProd[j])); //imprime on nodos usados em casa avl. g_tree_height
+        printf("altura[%d] ->%d\n", j, g_tree_height(TreeProd[j]));
+        //g_tree_foreach(TreeProd[j],printelements, NULL);
+    }
+    g_tree_foreach(TreeProd[0],printelements, NULL);
+}
+
+/**
+ * @brief Preenche Uma AVL com clientes.
+ * 
+ * @param fich Nome do ficheiro de Clientes.
+ */
+void ClienteTree(char* fich){
+    int* count = g_malloc(sizeof(int));
+    *count = 0;
+    FiletoTree(fich, TreeClient);
+    for(int j = 0; j < 26; j++){
+        printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeClient[j])); //imprime on nodos usados em casa avl. g_tree_height
+        printf("altura[%d] ->%d\n", j, g_tree_height(TreeClient[j]));
+        //g_tree_foreach(TreeProd[j],printelements, NULL);
     }
 }
 
 
+//////////////////////////////////// ARRAYS /////////////////////////////////////////////////
 /**
  * @brief Função que verifica se o Produto é válido.
  * Procura a venda dada como input no array de Produtos validos.

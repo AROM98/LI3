@@ -20,8 +20,10 @@
  */
 int initt(char* argv[]){
     //leitura de ficheiros e formaçao de structs.
-    
+    printf("->Produtos!\n");
     prodTree("Produtos.txt");
+    printf("->Clientes!\n");
+    ClienteTree("Clientes.txt");
     //prodtoArray(argv[1]);
     //clienttoArray(argv[2]);
     //validvendas(argv[3]);
