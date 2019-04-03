@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "valida.h"
 #include <glib.h>
 
 /**
@@ -29,6 +28,6 @@ int initt(char* argv[]){
     //validvendas(argv[3]);
 
     //Quueries..
-    testa_brp(); //ainda nao funciona nas arvores....
+    testa_brp(); 
     return 0;
 }

@@ -14,10 +14,10 @@
 #include <glib.h>
 
 //struct de vendas
-typedef struct vendas;
+typedef struct vendas *Vendas;
 
 //struct de querie
-typedef struct query;
+typedef struct query Query;
 
 //Defines para tamanhos de arrays.
 #define CAMPOSVENDA 7

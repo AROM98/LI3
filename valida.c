@@ -58,7 +58,6 @@ int validadas = 0;
 
 //////////////////////////////////////// ARVORES ////////////////////////////////////////////////
 
-GTree* TreeProd[30];
 GTree* TreeClient[30];
 //GTree* TreeVendas[30];
 
@@ -76,8 +75,8 @@ void printelements(gpointer key, gpointer value , gpointer user_data){
     //int * count = (int*) user_data;
 
     //*count= *count + 1;
-    g_printerr("%s\n", str);
-    //printf("%s ->\n",str);
+    //g_printerr("%s\n", str);
+    printf("%s ->\n",str);
     //printf("%s -> i= %d\n",str,*count);
 }
 
@@ -91,8 +90,8 @@ void initArrayTree(GTree** arraytree){
     *count = 0;
 
     for(int i = 0 ; i<26 ; i++){
-        arraytree[i] = g_tree_new(&strcmp);/* strcmp função que descrimina como comparar arguments*/
-        g_tree_foreach(arraytree[i],printelements, NULL);
+        arraytree[i] = g_tree_new(strcmp);/* strcmp função que descrimina como comparar arguments*/
+        //g_tree_foreach(arraytree[i],printelements, NULL);
     }
 }
 
@@ -145,7 +144,9 @@ void prodTree(char* fich){
         printf("altura[%d] ->%d\n", j, g_tree_height(TreeProd[j]));
         //g_tree_foreach(TreeProd[j],printelements, NULL);
     }
-    g_tree_foreach(TreeProd[0],printelements, NULL);
+    for(int i =0; i <26; i++){
+        g_tree_foreach(TreeProd[i],printelements, NULL);
+    }
 }
 
 /**
