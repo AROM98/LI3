@@ -126,7 +126,7 @@ void catprod(char* arryProd[],int paginaTotal){
 
 
 void initcatalogo(GTree** treeProd){
-    char lsearch = 'a';
+    char lsearch;
     int opcao,paginaTotal;
     int pos = 0;
     printf("1.Catalogo de Produtos\n2.Sair\n");
@@ -134,11 +134,8 @@ void initcatalogo(GTree** treeProd){
     if(opcao == 1){
         printf("Insira uma letra para ver o catalogo de Produtos comecados por essa letra\n");
 
-        scanf("%c",&lsearch);
-        printf("pos ->%d\n", pos);
-        toupper(lsearch);
-        pos = abs('A' - lsearch);
-        printf("pos ->%d\n", pos);
+        scanf("%s",&lsearch);
+        pos = abs('A' - toupper(lsearch));
         //int pos = 0;// meti isto porque nao ta a dar o scanf do char
         g_tree_foreach(treeProd[pos],treetoarray,NULL);
         paginaTotal = g_tree_nnodes(treeProd[pos]);
