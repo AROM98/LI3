@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include <time.h>
 #include <glib.h>
 #include <math.h>
@@ -125,26 +126,28 @@ void catprod(char* arryProd[],int paginaTotal){
 
 
 void initcatalogo(GTree** treeProd){
-    char lsearch;
+    char lsearch = 'a';
     int opcao,paginaTotal;
-    
+    int pos = 0;
     printf("1.Catalogo de Produtos\n2.Sair\n");
     scanf("%d",&opcao);
     if(opcao == 1){
         printf("Insira uma letra para ver o catalogo de Produtos comecados por essa letra\n");
-/*
-        scanf("%c\n",&lsearch);
-        int pos = 'A' - lsearch;
-*/
-        int pos = 0;// meti isto porque nao ta a dar o scanf do char
+
+        scanf("%c",&lsearch);
+        printf("pos ->%d\n", pos);
+        toupper(lsearch);
+        pos = abs('A' - lsearch);
+        printf("pos ->%d\n", pos);
+        //int pos = 0;// meti isto porque nao ta a dar o scanf do char
         g_tree_foreach(treeProd[pos],treetoarray,NULL);
         paginaTotal = g_tree_nnodes(treeProd[pos]);
-        printf("piginaTotal1 -> %d\n", paginaTotal);
+        //printf("piginaTotal1 -> %d\n", paginaTotal);
         paginaTotal = (paginaTotal/20);
-        printf("piginaTotal2 -> %d\n", paginaTotal); //ceil()
+        //printf("piginaTotal2 -> %d\n", paginaTotal); //ceil()
         catprod(arrayProd,paginaTotal);
     }
-    //else return;
+    return;
 }
 
 /**
