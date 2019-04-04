@@ -11,12 +11,12 @@ LDFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config --cflags glib-2.0` # -std=c11 
 #LDFLAGS= -Wall -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR) #-std=c11 -g -v -Ofast #-ansi
 #LIBS = `pkg-config --libs libxml-2.0` `pkg-config --libs glib-2.0`
 
-main: main.o init.o queries.o produtos.o clientes.o
-	$(CC) main.o init.o queries.o produtos.o clientes.o -o main $(CFLAGS)
+main: main.o init.o queries.o produtos.o clientes.o valida.o
+	$(CC) main.o init.o queries.o produtos.o clientes.o valida.o -o main $(CFLAGS)
 main.o: main.c 
 	$(CC) main.c -c -o main.o  $(LDFLAGS)
-#valida.o: valida.c valida.h 
-#	$(CC) valida.c -c -o valida.o  $(LDFLAGS)
+valida.o: valida.c valida.h 
+	$(CC) valida.c -c -o valida.o  $(LDFLAGS)
 init.o: init.c init.h
 	$(CC) init.c -c -o init.o  $(LDFLAGS)
 queries.o: queries.c queries.h

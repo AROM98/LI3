@@ -65,12 +65,12 @@ void existe(GTree** arraytree){
  * @brief Funçao de testes.
  * 
  */
-void testa_brp(){
+void testa_brp(GTree** treeProd){
     //printf("cenas1\n");
     //linha_mais_longa(venda);
     //printf("cenas2\n");
     //imprime_ultimo(clientes);
     printf("cenas3\n");
-    existe(TreeProd);
+    existe(treeProd);
     printf("cenas4\n");
 }

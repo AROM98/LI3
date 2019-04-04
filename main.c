@@ -33,7 +33,8 @@ int main (int argc, char* argv[]){
         printf("\tIndica os ficheiros de Produtos, Clientes e Vendas quando invocas o programa!\n");
         exit(-1);
     }
-    */initt(argv);
+    */
+    initt(argv);
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("CPU Time:%f\n", cpu_time_used );

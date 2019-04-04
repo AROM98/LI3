@@ -14,7 +14,6 @@
 
 #define staAux 50
 
-GTree* TreeProd[30];
 
 /**
  * @brief Função que imprime um elemento de um nodo de arvore.
@@ -24,14 +23,15 @@ GTree* TreeProd[30];
  * @param value (valor associado a chave)
  * @param user_data (contador - conta o numero de nodos que passou pela função)
  */
-void printProds(gpointer key, gpointer value , gpointer user_data){
+gboolean printProds(gpointer key, gpointer value , gpointer user_data){
     char* str = (char*)key;
     //int * count = (int*) user_data;
 
     //*count= *count + 1;
     //g_printerr("%s\n", str);
-    printf("%s ->\n",str);
+    printf("%s\n",str);
     //printf("%s -> i= %d\n",str,*count);
+    return FALSE;
 }
 
 /**
@@ -93,7 +93,7 @@ static int validProd(char produtos[]){
  * @param fich Nome do ficheiro.
  * @param tree Nome da Arvore.
  */
-static void FiletoProdTree(char *fich, GTree** tree){
+static void filetoProdTree(char *fich, GTree** tree){
     char* pro;
     char str[staAux];
     FILE *fp;
@@ -115,16 +115,13 @@ static void FiletoProdTree(char *fich, GTree** tree){
  * 
  * @param fich Nome do Ficheiro de Produtos.
  */
-void prodTree(char* fich){
+void prodTree(char* fich,GTree** TreeProd){
     int* count = g_malloc(sizeof(int));
     *count = 0;
-    FiletoProdTree(fich, TreeProd);
+    filetoProdTree(fich, TreeProd);
     for(int j = 0; j < 26; j++){
         printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeProd[j])); //imprime on nodos usados em casa avl. g_tree_height
         printf("altura[%d] ->%d\n", j, g_tree_height(TreeProd[j]));
         //g_tree_foreach(TreeProd[j],printProds, NULL);
-    }
-    for(int i =0; i <26; i++){
-        //g_tree_foreach(TreeProd[i],printProds, NULL);
     }
 }

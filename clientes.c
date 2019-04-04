@@ -14,7 +14,6 @@
 
 #define staAux 50
 
-GTree* TreeClient[30];
 
 /**
  * @brief Função que imprime um elemento de um nodo de arvore.
@@ -24,14 +23,15 @@ GTree* TreeClient[30];
  * @param value (valor associado a chave)
  * @param user_data (contador - conta o numero de nodos que passou pela função)
  */
-void printelements(gpointer key, gpointer value , gpointer user_data){
+gboolean printClientes(gpointer key, gpointer value , gpointer user_data){
     char* str = (char*)key;
     //int * count = (int*) user_data;
 
     //*count= *count + 1;
     //g_printerr("%s\n", str);
-    printf("%s ->\n",str);
+    printf("%s\n",str);
     //printf("%s -> i= %d\n",str,*count);
+    return FALSE;
 }
 
 /**
@@ -100,7 +100,7 @@ int validclient(char clientes[]){
  * @param fich Nome do ficheiro.
  * @param tree Nome da Arvore.
  */
-static void FiletoTree(char *fich, GTree** tree){
+static void filetoTree(char *fich, GTree** tree){
     char* cli;
     char str[staAux];
     FILE *fp;
@@ -122,13 +122,13 @@ static void FiletoTree(char *fich, GTree** tree){
  * 
  * @param fich Nome do ficheiro de Clientes.
  */
-void ClienteTree(char* fich){
-    int* count = g_malloc(sizeof(int));
-    *count = 0;
-    FiletoTree(fich, TreeClient);
+void clientTree(char* fich,GTree** TreeClient){
+    //int* count = g_malloc(sizeof(int));
+    //*count = 0;
+    filetoTree(fich, TreeClient);
     for(int j = 0; j < 26; j++){
         printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeClient[j])); //imprime on nodos usados em casa avl. g_tree_height
         printf("altura[%d] ->%d\n", j, g_tree_height(TreeClient[j]));
-        //g_tree_foreach(TreeProd[j],printelements, NULL);
+        //g_tree_foreach(TreeClient[j],printClientes, NULL);
     }
 }

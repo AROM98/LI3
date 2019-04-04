@@ -19,15 +19,20 @@
  */
 int initt(char* argv[]){
     //leitura de ficheiros e formaçao de structs.
+    GTree* treeProd[30];
+    GTree* treeClient[30];
+
     printf("->Produtos!\n");
-    prodTree("Produtos.txt");
+    prodTree("Produtos.txt",treeProd);
     printf("->Clientes!\n");
-    ClienteTree("Clientes.txt");
+    clientTree("Clientes.txt",treeClient);
+    printf("->Verificando Vendas!\n");
+    validvendas("Vendas_1M.txt",treeClient,treeProd);
     //prodtoArray(argv[1]);
     //clienttoArray(argv[2]);
     //validvendas(argv[3]);
 
     //Quueries..
-    testa_brp(); 
+    testa_brp(treeProd); 
     return 0;
 }

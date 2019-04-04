@@ -27,20 +27,16 @@ typedef struct query Query;
 #define staAux 50
 
 //Arrays e variaveis definidos globalmente para todas as funçoes.
-char* produtos[TAMPROD];
-char* clientes[TAMCLIENTES];
-char* venda[TAMVENDAS];
+//char* venda[TAMVENDAS];
 //Vendas ven[TAMVENDAS];
-//int teste = 0;
-//int validadas = 0;
 
-GTree* TreeProd[30];
-GTree* TreeClient[30];
+//GTree* TreeProd[30];
+//GTree* TreeClient[30];
 
 //Funcoes principais, mexem nos ficheiros, arrays, e structs.
-void validvendas(char* fich);
-void clienttoArray(char* fich);
-void prodtoArray(char* fich);
+//void clienttoArray(char* fich);
+//void prodtoArray(char* fich,char* venda);
+void validvendas(char* fich,GTree** TreeClient,GTree** TreeProd);
 int fazStruct (char* linhaVendaOk);
 void escreveArray(FILE *fp, char *array[]);
 
