@@ -73,35 +73,53 @@ gboolean treetoarray (gpointer key, gpointer value , gpointer user_data){
 }
 
 
-void catprod(char* arrayProd[],int paginaTotal){
+void catprod(char* arryProd[],int paginaTotal){
     int pagina,opcao=1;
     pagina = 0;
-    for(int i = 0;i<20;i+=2){
-        printf("%s   |   %s\n",arrayProd[i],arrayProd[i+1]);
+    for(int i = 0; i < 20; i+= 2){
+        printf("%s   |   %s\n",arryProd[i],arryProd[i+1]);
     }
     printf("Pagina 0 de %d\n\n",paginaTotal);
     printf("1.Pagina Seguinte\n2.Retroceder pagina\n3.Sair\n");
     
-    scanf("%d\n",opcao);
-    int val= 1;
-    while(val){
-        
-        if(opcao == 1){
+    scanf("%d",&opcao);
+    int v= 1;
+    while(v == 1){
+        if(opcao == 1 && pagina < paginaTotal){
             pagina++;
-            for(int i = pagina*20;i<(pagina*20+20);i+=2){
-                printf("%s   |   %s\n",arrayProd[i],arrayProd[i+1]);
+            for(int i = pagina*20; i < ((pagina*20)+20); i+= 2){
+                printf("%s   |   %s\n",arryProd[i],arryProd[i+1]);
             }
-        printf("Pagina %d de %d\n", pagina, paginaTotal);
+            printf("Pagina %d de %d\n", pagina, paginaTotal);
+            printf("1.Pagina Seguinte\n2.Retroceder pagina\n3.Sair\n");
+            scanf("%d",&opcao);
         }
-        if(opcao == 2){
+        if(opcao == 1 && pagina == paginaTotal){
+            for(int i = pagina*20; i < ((pagina*20)+20); i+= 2){
+                printf("%s   |   %s\n",arryProd[i],arryProd[i+1]);
+            }
+            printf("Pagina %d de %d\n", pagina, paginaTotal);
+            printf("1.Pagina Seguinte\n->Nao é possivel Avançar.\n3.Sair\n");
+            scanf("%d",&opcao);
+        }
+        if(opcao == 2 && pagina > 0){
             pagina--;
-            for(int i = pagina*20;i<(pagina*20+20);i+=2){
-                printf("%s   |   %s\n",arrayProd[i],arrayProd[i+1]);
+            for(int i = pagina*20; i < ((pagina*20)+20); i+=2){
+                printf("%s   |   %s\n",arryProd[i],arryProd[i+1]);
             }
-        printf("Pagina %d de %d\n", pagina, paginaTotal);
+            printf("Pagina %d de %d\n", pagina, paginaTotal);
+            printf("1.Pagina Seguinte\n2.Retroceder pagina\n3.Sair\n");
+            scanf("%d",&opcao);
         }
-        if(opcao == 3) val = 0;
-
+        if(opcao == 2 && pagina == 0){
+            for(int i = pagina*20; i < ((pagina*20)+20); i+=2){
+                printf("%s   |   %s\n",arryProd[i],arryProd[i+1]);
+            }
+            printf("Pagina %d de %d\n", pagina, paginaTotal);
+            printf("1.Pagina Seguinte\n->Nao é possivel retroceder.\n3.Sair\n");
+            scanf("%d",&opcao);
+        }
+        if(opcao == 3) v = 0;
     }
 }
 
@@ -118,14 +136,15 @@ void initcatalogo(GTree** treeProd){
         scanf("%c\n",&lsearch);
         int pos = 'A' - lsearch;
 */
-        int pos = 1;// meti isto porque nao ta a dar o scanf do char
+        int pos = 0;// meti isto porque nao ta a dar o scanf do char
         g_tree_foreach(treeProd[pos],treetoarray,NULL);
-
         paginaTotal = g_tree_nnodes(treeProd[pos]);
-        paginaTotal = ceil(paginaTotal/20);
+        printf("piginaTotal1 -> %d\n", paginaTotal);
+        paginaTotal = (paginaTotal/20);
+        printf("piginaTotal2 -> %d\n", paginaTotal); //ceil()
         catprod(arrayProd,paginaTotal);
     }
-    else return;
+    //else return;
 }
 
 /**
