@@ -10,6 +10,7 @@
 #include <string.h>
 #include <time.h>
 #include <glib.h>
+#include <math.h>
 #include "valida.h"
 
 
@@ -57,8 +58,74 @@ void existe(GTree** arraytree){
         j = g_tree_lookup(arraytree[i], test);
         if(j != NULL) break;
     }
-    //int j = (int) i; 
     printf("Este elemento esta na avl? -> %s\n", j);
+}
+/* /////////////////////////////////////////////////////////////////////////*/
+    
+    char* arrayProd[200000];
+    int arrayprodvar = 0;
+
+gboolean treetoarray (gpointer key, gpointer value , gpointer user_data){
+    arrayProd[arrayprodvar] = malloc(sizeof(strlen(key)));
+    arrayProd[arrayprodvar] = (char*) key;
+    arrayprodvar++;
+    return FALSE;
+}
+
+
+void catprod(char* arrayProd[],int paginaTotal){
+    int pagina,opcao=1;
+    pagina = 0;
+    for(int i = 0;i<20;i+=2){
+        printf("%s   |   %s\n",arrayProd[i],arrayProd[i+1]);
+    }
+    printf("Pagina 0 de %d\n\n",paginaTotal);
+    printf("1.Pagina Seguinte\n2.Retroceder pagina\n3.Sair\n");
+    
+    scanf("%d\n",opcao);
+    int val= 1;
+    while(val){
+        
+        if(opcao == 1){
+            pagina++;
+            for(int i = pagina*20;i<(pagina*20+20);i+=2){
+                printf("%s   |   %s\n",arrayProd[i],arrayProd[i+1]);
+            }
+        printf("Pagina %d de %d\n", pagina, paginaTotal);
+        }
+        if(opcao == 2){
+            pagina--;
+            for(int i = pagina*20;i<(pagina*20+20);i+=2){
+                printf("%s   |   %s\n",arrayProd[i],arrayProd[i+1]);
+            }
+        printf("Pagina %d de %d\n", pagina, paginaTotal);
+        }
+        if(opcao == 3) val = 0;
+
+    }
+}
+
+
+void initcatalogo(GTree** treeProd){
+    char lsearch;
+    int opcao,paginaTotal;
+    
+    printf("1.Catalogo de Produtos\n2.Sair\n");
+    scanf("%d",&opcao);
+    if(opcao == 1){
+        printf("Insira uma letra para ver o catalogo de Produtos comecados por essa letra\n");
+/*
+        scanf("%c\n",&lsearch);
+        int pos = 'A' - lsearch;
+*/
+        int pos = 1;// meti isto porque nao ta a dar o scanf do char
+        g_tree_foreach(treeProd[pos],treetoarray,NULL);
+
+        paginaTotal = g_tree_nnodes(treeProd[pos]);
+        paginaTotal = ceil(paginaTotal/20);
+        catprod(arrayProd,paginaTotal);
+    }
+    else return;
 }
 
 /**
@@ -66,11 +133,8 @@ void existe(GTree** arraytree){
  * 
  */
 void testa_brp(GTree** treeProd){
-    //printf("cenas1\n");
     //linha_mais_longa(venda);
-    //printf("cenas2\n");
     //imprime_ultimo(clientes);
-    printf("cenas3\n");
     existe(treeProd);
-    printf("cenas4\n");
+    initcatalogo(treeProd);
 }
