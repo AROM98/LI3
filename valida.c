@@ -176,7 +176,7 @@ int fazStruct (char* linhaVendaOk,GTree** treeClient,GTree** treeProd,int valida
  * @param fp 
  * @param array 
  */
-void escreveArray(FILE *fp, char* array){
+int escreveArray(FILE *fp, char* array){
     char str[staAux];
     int i = 0;
     while(fgets(str, staAux, fp)){
@@ -186,6 +186,7 @@ void escreveArray(FILE *fp, char* array){
         //strcpy(array[i], str);                    estas duas linhas, substituem o strdup.
         i++;
     }
+    return i;
 }
 
 
@@ -195,18 +196,19 @@ void escreveArray(FILE *fp, char* array){
  * @param fich 
  */
 void validvendas(char* fich,GTree** treeClient,GTree** treeProd){
-    int i ,validadas= 0;
+    int i ,validadas= 0, tam = 0;
     char* venda[TAMVENDAS];
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
-    escreveArray(fp, venda);
+    tam = escreveArray(fp, venda);
     fclose(fp);
 
     fp = fopen("Venda_confirmadas.txt","w");
 
-    while(venda[i]){
+    while(i<tam && venda[i]){
         if(fazStruct(venda[i],treeClient,treeProd,validadas)){
             fprintf(fp,"%s\n", venda[i]);
+            validadas++;
         }
         i++;
     }
