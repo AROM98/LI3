@@ -21,6 +21,7 @@ int initt(char* argv[]){
     //leitura de ficheiros e formaçao de structs.
     GTree* treeProd[30];
     GTree* treeClient[30];
+    GTree* treeFac[13];
 
     printf("->Produtos!\n");
     prodTree("Produtos.txt",treeProd);
