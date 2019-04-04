@@ -120,8 +120,9 @@ void prodTree(char* fich,GTree** TreeProd){
     *count = 0;
     filetoProdTree(fich, TreeProd);
     for(int j = 0; j < 26; j++){
-        printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeProd[j])); //imprime on nodos usados em casa avl. g_tree_height
-        printf("altura[%d] ->%d\n", j, g_tree_height(TreeProd[j]));
+        //printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeProd[j])); //imprime on nodos usados em casa avl. g_tree_height
+        //printf("altura[%d] ->%d\n", j, g_tree_height(TreeProd[j]));
         //g_tree_foreach(TreeProd[j],printProds, NULL);
     }
+    printf("produtos -> OK\n");
 }

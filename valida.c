@@ -12,6 +12,8 @@
 #include <time.h>
 #include <glib.h>
 
+validadas= 0;
+
 /**
  * @brief Struct de Venda.
  * 
@@ -35,6 +37,7 @@ typedef struct query{
     double precototal;
 }Query;
 
+
 /**
  * @brief Defines para tamanhos de arrays.
  * 
@@ -55,7 +58,10 @@ int verprod(char* campos,GTree** treeProd){
     int val = 0;
     //printf("%s\n",campos);
     int pos = abs('A' - campos[0]);
-    val = g_tree_lookup(treeProd[pos], campos);
+    gpointer v = g_tree_lookup(treeProd[pos], campos);
+    //printf("p-> Este elemento esta na avl? -> %s\n", v);
+    if(v !=  NULL)
+        val = 1;
     return val;
 }
 
@@ -68,7 +74,10 @@ int verprod(char* campos,GTree** treeProd){
 int verclien(char* campos,GTree** treeClient){
     int val = 0;
     int pos = abs('A' - campos[0]);
-    val = g_tree_lookup(treeClient[pos], campos);
+    gpointer v = g_tree_lookup(treeClient[pos], campos);
+    //printf("v-> Este elemento esta na avl? -> %s\n", v);
+    if(v !=  NULL)
+        val = 1;
     return val;
 }
 
@@ -134,7 +143,7 @@ int verfilial(int filial){
  * @param linhaVendaOk - uma linha do array de vendas.
  * @return int 
  */
-int fazStruct (char* linhaVendaOk,GTree** treeClient,GTree** treeProd,int validadas){//, char produtos[TamProd]){
+int fazStruct (char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
     //Vendas vendaAux;
     int val=0;
@@ -176,7 +185,7 @@ int fazStruct (char* linhaVendaOk,GTree** treeClient,GTree** treeProd,int valida
  * @param fp 
  * @param array 
  */
-int escreveArray(FILE *fp, char* array){
+int escreveArray(FILE *fp, char* array[]){
     char str[staAux];
     int i = 0;
     while(fgets(str, staAux, fp)){
@@ -186,6 +195,7 @@ int escreveArray(FILE *fp, char* array){
         //strcpy(array[i], str);                    estas duas linhas, substituem o strdup.
         i++;
     }
+    printf("i ->%d\n", i);
     return i;
 }
 
@@ -196,22 +206,25 @@ int escreveArray(FILE *fp, char* array){
  * @param fich 
  */
 void validvendas(char* fich,GTree** treeClient,GTree** treeProd){
-    int i ,validadas= 0, tam = 0;
+    int i= 0 , tam = 0;
     char* venda[TAMVENDAS];
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
+    printf("coisas1\n");
     tam = escreveArray(fp, venda);
+    printf("tam -> %d\n", tam);
     fclose(fp);
 
     fp = fopen("Venda_confirmadas.txt","w");
-
-    while(i<tam && venda[i]){
-        if(fazStruct(venda[i],treeClient,treeProd,validadas)){
+    printf("coisas3\n");
+    while(i < tam && venda[i]){
+        if(fazStruct(venda[i],treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);
-            validadas++;
         }
         i++;
     }
+    printf("coisas4\n");
+    //printf("venda[0]-> %s\n", venda[0]);
     printf("vendas validas: %d\n", validadas);
     fclose(fp);
 }
