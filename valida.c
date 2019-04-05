@@ -149,13 +149,11 @@ void addtostruct(Vendas structvendas, char* prod,double preco, int uni, int tipo
 int valvenda (Vendas* structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
     int val=0;
-    //vendaAux = malloc(sizeof(struct vendas));
     int index = 0;
     char* aux = strdup (linhaVendaOk);
     char* token = strtok(aux," ");
     while(!(token == NULL)) {
         campos[index] = strdup(token);
-        // printf(" %s\n", token);
         token = strtok(NULL," ");
         index++;
     }
@@ -207,7 +205,7 @@ int escreveArray(FILE *fp, char* array[]){
  * 
  * @param fich 
  */
-Vendas validvendas(char* fich,GTree** treeClient,GTree** treeProd,char** venda){
+Vendas* validvendas(char* fich,GTree** treeClient,GTree** treeProd,char** venda){
     Vendas* structvendas = malloc(TAMVENDAS*sizeof(struct vendas));
     int i= 0 , tam = 0;
     FILE *fp;

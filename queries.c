@@ -147,11 +147,16 @@ void initcatalogo(GTree** treeProd){
     return;
 }
 
+/*///////////////////////////////////////////////////////////////////////*/
+
+
+
+
 /**
  * @brief Funçao de testes.
  * 
  */
-void testa_brp(GTree** treeProd){
+void testa_brp(GTree** treeProd,GTree** treeClient){
     //linha_mais_longa(venda);
     //imprime_ultimo(clientes);
     existe(treeProd);

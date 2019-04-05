@@ -4,8 +4,8 @@ LDIR=lib
 OLDIR=$(ODIR)/lib
 
 CC=gcc
-CFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config --libs glib-2.0` # -std=c11 -g -v -Ofast
-LDFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config --cflags glib-2.0` # -std=c11 -g -v -Ofast
+CFLAGS = -Wall -std=c11 -g -v -Ofast  `pkg-config  --libs glib-2.0` # -std=c11 -g -v -Ofast
+LDFLAGS = -Wall -std=c11 -g -v -Ofast  `pkg-config  --cflags glib-2.0` # -std=c11 -g -v -Ofast
 #CFLAGS = -lglib-2.0  #-std=c11 -g -v -Ofast
 #CFLAGS = -Wall -ansi -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` `--pkg-config --cflags --libs gmodule-2.0` -I$(IDIR) 
 #LDFLAGS= -Wall -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR) #-std=c11 -g -v -Ofast #-ansi

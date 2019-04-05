@@ -10,6 +10,7 @@
 #include <string.h>
 #include <time.h>
 #include <glib.h>
+#include "valida.h"
 
 /**
  * @brief Função initt, chama todas as outras funções.
@@ -29,12 +30,10 @@ int initt(char* argv[]){
     printf("->Clientes!\n");
     clientTree("Clientes.txt",treeClient);
     printf("->Verificando Vendas!\n");
-    validvendas("Vendas_1M.txt",treeClient,treeProd,vendas);
-    //prodtoArray(argv[1]);
-    //clienttoArray(argv[2]);
-    //validvendas(argv[3]);
+    Vendas* vendasconfirmadas = validvendas("Vendas_1M.txt",treeClient,treeProd,vendas);
+    free(vendas);
 
     //Quueries..
-    testa_brp(treeProd); 
+    testa_brp(treeProd,treeClient); 
     return 0;
 }
