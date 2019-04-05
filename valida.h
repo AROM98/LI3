@@ -13,44 +13,17 @@
 #include <time.h>
 #include <glib.h>
 
-//struct de vendas
+/*struct de vendas*/
 typedef struct vendas *Vendas;
 
-//struct de querie
-typedef struct query Query;
-
-//Defines para tamanhos de arrays.
+/*Defines para tamanhos de arrays.*/
 #define CAMPOSVENDA 7
 #define TAMPROD 200000
 #define TAMCLIENTES 20000
 #define TAMVENDAS 1000000
 #define staAux 50
 
-//Arrays e variaveis definidos globalmente para todas as funçoes.
-//char* venda[TAMVENDAS];
-//Vendas ven[TAMVENDAS];
 
-//GTree* TreeProd[30];
-//GTree* TreeClient[30];
-
-//Funcoes principais, mexem nos ficheiros, arrays, e structs.
-//void clienttoArray(char* fich);
-//void prodtoArray(char* fich,char* venda);
 void validvendas(char* fich,GTree** TreeClient,GTree** TreeProd);
-int fazStruct (char* linhaVendaOk);
-void escreveArray(FILE *fp, char *array[]);
-
-//Funcoes de verificaçao.
-int verprod(char* campos);
-int verclien(char* campos);
-int verunidec(double unidec);
-int verunidadesvend(int unidades);
-int vertcompra(char* compra);
-int vermes(int mes);
-int verfilial(int filial);
-
-//validacao dos ficheiros.
-void validProd(char produtos[]);
-void validclient(char clientes[]);
 
 #endif

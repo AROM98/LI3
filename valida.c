@@ -29,16 +29,6 @@ typedef struct vendas{
 }*Vendas;
 
 /**
- * @brief Struct usada numa querie.
- * 
- *
-typedef struct query{
-    int unidcompradas;
-    double precototal;
-}Query;
-
-
-/**
  * @brief Defines para tamanhos de arrays.
  * 
  */
