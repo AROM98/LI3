@@ -10,6 +10,7 @@ Q2 -> Determinar a lista e o no total de produtos cujo código se inicia por um
     * apresentar lista ao utilizador e permitir ao mesmo navegar pagina a pagina.
     * lista apresentada por ordem alfabética;
     - SOLUÇAO: retirar da arvore, alfabeticamente e apresentar de bloco em bloco (10?) 
+    ||-FEITO-||
 
 Q3 -> Dado um mês e um código de produto, ambos válidos, determinar e apresentar:
     * o número total de vendas (nº de registos de venda) -- só procurar

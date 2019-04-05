@@ -22,13 +22,14 @@ int initt(char* argv[]){
     GTree* treeProd[30];
     GTree* treeClient[30];
     GTree* treeFac[13];
+    char** vendas = (char**)malloc(1000000*sizeof(char*));
 
     printf("->Produtos!\n");
     prodTree("Produtos.txt",treeProd);
     printf("->Clientes!\n");
     clientTree("Clientes.txt",treeClient);
     printf("->Verificando Vendas!\n");
-    validvendas("Vendas_1M.txt",treeClient,treeProd);
+    validvendas("Vendas_1M.txt",treeClient,treeProd,vendas);
     //prodtoArray(argv[1]);
     //clienttoArray(argv[2]);
     //validvendas(argv[3]);

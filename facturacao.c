@@ -11,6 +11,8 @@
 #include <time.h>
 #include <glib.h>
 
+#define CAMPOSVENDA 7
+
 typedef struct fac{
     char* produto;
     int N_vendas_N;
@@ -33,15 +35,15 @@ static void initTree(GTree** arraytree){
     *count = 0;
 
     for(int i = 0 ; i<13 ; i++){ // 12 meses + 1 para os produtos nao vendidos.
-        arraytree[i] = g_tree_new();//preciso fazer funçao de comparação
+        arraytree[i] = g_tree_new(strcmp);//preciso fazer funçao de comparação
         //g_tree_foreach(arraytree[i],printProds, NULL);
     }
 }
 
 //supondo que nao existe na avl, cria uma fac e insere.
-fac poeStruct (char* linhaVendaOk, GTree** tree){//, char produtos[TamProd]){
+Fac poeStruct (char* linhaVendaOk, GTree** tree){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
-    fac res;
+    Fac res;
     //vendaAux = malloc(sizeof(struct vendas));
     int index = 0;
     char* aux = strdup (linhaVendaOk);
@@ -52,22 +54,22 @@ fac poeStruct (char* linhaVendaOk, GTree** tree){//, char produtos[TamProd]){
         token = strtok(NULL," ");
         index++;
     }
-    res.produto = campos[0];
+    res->produto = campos[0];
     if(campos[3] == "P"){
-        res.N_vendas_N = 0;
-        res.N_vendas_P = campos[2]; //unidades compradas.
-        res.F_vendas_N = 0;
-        res.F_vendas_P = campos[1]; //preço da compra.
+        res->N_vendas_N = 0;
+        res->N_vendas_P = campos[2]; //unidades compradas.
+        res->F_vendas_N = 0;
+        res->F_vendas_P = campos[1]; //preço da compra.
     }
     /*
         printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
     }
     */
-    placeinProdTree(campos[5], res, tree);
+    placeinTree(campos[5], res, tree);
     return res;
 }
 
-static void placeinTree(int pos, fac vend, GTree** arraytree){
+void placeinTree(int pos, Fac vend, GTree** arraytree){
     //int pos = abs('A' - str[0]);
     //printf("ind -> %d\n", pos);
     //GTree* tree = arraytree[pos];
@@ -75,8 +77,8 @@ static void placeinTree(int pos, fac vend, GTree** arraytree){
     //arraytree[pos] = tree;
 }
 
-char* getprod(fac vend){
-    return vend.produto;   
+char* getprod(Fac vend){
+    return vend->produto;   
 }
 
 int exist(GTree** arraytree, char* str){
@@ -94,8 +96,9 @@ int exist(GTree** arraytree, char* str){
     printf("Este elemento esta na avl? -> %s\n", j);
 }
 
-void verifica(GTree** treeFac, GTree** treeProd, char* vendas){
+void verifica(GTree** treeFac, GTree** treeProd){
     int i = 0;
+    char* vendas[1];
     initTree(treeFac);
     while(vendas[i]){
         if(exist(treeFac, vendas[i]) == 1){

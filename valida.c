@@ -12,12 +12,12 @@
 #include <time.h>
 #include <glib.h>
 
-validadas= 0;
+int validadas= 0;
 
 /**
  * @brief Struct de Venda.
  * 
- *
+ */
 typedef struct vendas{
     char* prod;
     double preco;
@@ -143,9 +143,21 @@ int verfilial(int filial){
  * @param linhaVendaOk - uma linha do array de vendas.
  * @return int 
  */
-int fazStruct (char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
+
+void addtostruct(Vendas structvendas, char* prod,double preco, int uni, int tipocompra, char* cliente, int mes,int filial,int pos){
+    structvendas = malloc(sizeof(Vendas*));
+    structvendas->prod = prod;
+    structvendas->preco = preco;
+    structvendas->unidades = uni;
+    structvendas->tcompra = tipocompra;
+    structvendas->cliente = cliente;
+    structvendas->mes = mes;
+    structvendas->filial = filial;
+
+}
+
+int valvenda (Vendas* structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
-    //Vendas vendaAux;
     int val=0;
     //vendaAux = malloc(sizeof(struct vendas));
     int index = 0;
@@ -157,26 +169,26 @@ int fazStruct (char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, cha
         token = strtok(NULL," ");
         index++;
     }
+    double precoaux = atof(campos[1]);
+    int uniaux = atoi(campos[2]);
+    int mesaux = atoi(campos[5]);
+    int filialaux = atoi(campos[6]);
+
+
     int a = verprod(campos[0],treeProd);
     int b = verclien(campos[4],treeClient);
-    int c = verpreco(atof(campos[1])); 
-    int d = verunidadesvend(atoi(campos[2]));
+    int c = verpreco(precoaux); 
+    int d = verunidadesvend(uniaux);
     int e = vertcompra(campos[3]);
-    int f = vermes(atoi(campos[5]));
-    int g= verfilial(atoi(campos[6]));
-/*
-    if(!(a && b && c && d && e && f && g)){
-        printf("a=%d,b=%d,c=%d,d=%d,e=%d,f=%d,g=%d\n",a,b,c,d,e,f,g);
-        printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
-    }
-*/
+    int f = vermes(mesaux);
+    int g = verfilial(filialaux);
     if (a && b && c && d && e && f && g){
+        addtostruct(structvendas[validadas], campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux,validadas);
         validadas++;
         val = 1;
     }
     return val;
 }
-
 
 /**
  * @brief Função que dado um apontador para um ficheiro e um array de "strings" (vaziu),
@@ -205,26 +217,25 @@ int escreveArray(FILE *fp, char* array[]){
  * 
  * @param fich 
  */
-void validvendas(char* fich,GTree** treeClient,GTree** treeProd){
+Vendas validvendas(char* fich,GTree** treeClient,GTree** treeProd,char** venda){
+    Vendas* structvendas = malloc(TAMVENDAS*sizeof(struct vendas));
     int i= 0 , tam = 0;
-    char* venda[TAMVENDAS];
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
     printf("coisas1\n");
     tam = escreveArray(fp, venda);
-    printf("tam -> %d\n", tam);
     fclose(fp);
 
     fp = fopen("Venda_confirmadas.txt","w");
     printf("coisas3\n");
-    while(i < tam && venda[i]){
-        if(fazStruct(venda[i],treeClient,treeProd)){
+    while(i<tam && venda[i]){
+        if(valvenda(structvendas, venda[i],treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);
         }
         i++;
     }
     printf("coisas4\n");
-    //printf("venda[0]-> %s\n", venda[0]);
     printf("vendas validas: %d\n", validadas);
     fclose(fp);
+    return structvendas;
 }
