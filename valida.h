@@ -24,6 +24,6 @@ typedef struct vendas *Vendas;
 #define staAux 50
 
 
-Vendas* validvendas(char* fich,GTree** TreeClient,GTree** TreeProd,char** vendas);
+void validvendas(char* fich,Vendas* structvendas,GTree** TreeClient,GTree** TreeProd,char** vendas);
 
 #endif

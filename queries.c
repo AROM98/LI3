@@ -155,18 +155,18 @@ void initcatalogo(GTree** treeProd){
 
 /*///////////////////////////////////////////////////////////////////////*/
 
-char** cliente_filial(GTree** treeFilial, Vendas* vendasconfirmadas[]){
+char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     int i = 0, pos = 0, v =0, ind = 0;
     char* c, codigo_c;
     char* array[TAMCLIENTES];
     initTree(treeFilial);
     while(vendasconfirmadas[i]){
        // pos = vendasconfirmadas[i] -> filial;
-       // c = vendasconfirmadas[i] -> cliente;
+      //  c = vendasconfirmadas[i] -> cliente;
         placeinTree(pos, c, treeFilial);
     }
     while(vendasconfirmadas[i]){
-      //  c = vendasconfirmadas[i] -> cliente;
+        //c = vendasconfirmadas[i] -> cliente;
         for(int j = 0; j < 3; j++){
             if(existe(c, treeFilial[j]) == NULL){
                 v = 0;
@@ -189,9 +189,10 @@ char** cliente_filial(GTree** treeFilial, Vendas* vendasconfirmadas[]){
  * @brief Funçao de testes.
  * 
  */
-void testa_brp(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas* vendasconfirmadas[]){
+void testa_brp(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas vendasconfirmadas[]){
     //linha_mais_longa(venda);
     //imprime_ultimo(clientes);
+    printf("cliente_filial teste\n");
     cliente_filial(treeFilial, vendasconfirmadas);
     //existe(treeProd);
     initcatalogo(treeProd);
