@@ -9,9 +9,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include "valida.h"
 #include <glib.h>
 
 #define CAMPOSVENDA 7
+int e = 0;
 
 typedef struct fac{
     char* produto;
@@ -42,11 +44,7 @@ void initTree(GTree** arraytree){
 
 
 void placeFacinTree(int pos, Fac vend, GTree** arraytree){
-    //int pos = abs('A' - str[0]);
-    //printf("ind -> %d\n", pos);
-    //GTree* tree = arraytree[pos];
     g_tree_insert(arraytree[pos], vend, vend);/* tem de ser especificada a chave e o valor*/
-    //arraytree[pos] = tree;
 }
 
 //supondo que nao existe na avl, cria uma fac e insere.
@@ -70,10 +68,6 @@ Fac poeStruct (char* linhaVendaOk, GTree** tree){//, char produtos[TamProd]){
         res->F_vendas_N = 0;
         res->F_vendas_P = campos[1]; //preço da compra.
     }
-    /*
-        printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
-    }
-    */
     placeFacinTree(campos[5], res, tree);
     return res;
 }
@@ -98,17 +92,48 @@ int exist(GTree** arraytree, char* str){
     printf("Este elemento esta na avl? -> %s\n", j);
 }
 
-void verifica(GTree** treeFac, GTree** treeProd){
+gboolean comp(gpointer key, gpointer value , gpointer user_data){
+    Fac nodo = (Fac)key; //cada nodo da arvore.
+    char* str = (char*) user_data;
+    if(strcmp(nodo -> produto, str) == 0){
+        e = 1;
+        printf("%s ja existe\n",nodo -> produto);
+    }
+    //*count= *count + 1;
+    //g_printerr("%s\n", str);
+    //printf("%s ja existe\n",nodo -> produto);
+    //printf("%s -> i= %d\n",str,*count);
+    return FALSE;
+}
+
+int e_procura(GTree** arraytree, char* str){
+    gpointer j;
+    int r = 0;
+    //gpointer i = g_tree_search (arraytree[0], &strcmp, &test);
+    for(int i = 0; i < 13; i++){    
+        g_tree_foreach(arraytree[i], comp, str);
+        if(e == 1){
+            r = 1;
+            e = 0;
+            break;
+        }
+    }
+    return r;
+    printf("Este elemento esta na avl? -> %s\n", j);
+}
+
+
+void verifica(GTree** treeFac, GTree** treeProd, Vendas vendasconfirmadas[]){
     int i = 0;
-    char* vendas[1];
     initTree(treeFac);
-    while(vendas[i]){
-        if(exist(treeFac, vendas[i]) == 1){
+    while(vendasconfirmadas[i]){
+        if(exist(treeFac, vendasconfirmadas[i]) == 1){
             printf("o elemento %s, ja esta na tree\n");
         }
         else{
-            poeStruct(vendas[i], treeFac);
+            poeStruct(vendasconfirmadas[i], treeFac);
         }
+        i++;
     }
     //agora mete-se o resto dos produtos que nao foram vendidos.
     //como nao foram vendidos nao têm nenhum dos campos, pelo que os vamos por a null.

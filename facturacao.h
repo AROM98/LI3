@@ -13,6 +13,11 @@
 #include <time.h>
 #include <glib.h>
 
+typedef struct fac *Fac;
+
+typedef struct filial *Filial;
+
 void initTree(GTree** arraytree);
+void verifica(GTree** treeFac, GTree** treeProd, Vendas vendasconfirmadas[]);
 
 #endif

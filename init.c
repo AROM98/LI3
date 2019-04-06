@@ -47,6 +47,7 @@ int initt(char* argv[]){
     free(vendas);
     
     //facturaçcao -> nao sei se posso fazer isto...
+    printf("->Iniciar Facturacao!\n");
     verifica(treeFac, treeProd, structvendas);
 
     //Quueries..
