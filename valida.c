@@ -220,10 +220,16 @@ Vendas* validvendas(char* fich,GTree** treeClient,GTree** treeProd,char** venda)
             vval++;
 
             //AQUIIIII
-            printf("%s\n",structvendas[i]->prod);
+            
+            //printf("%s\n",structvendas[i]->prod);
            // printf("%s %d \n",structvendas[i]->prod,structvendas[i]->filial);
+        
         }
         i++;
+    }
+    i = 0;
+    while(structvendas[i]){
+        printf("%s\n",structvendas[i]->prod);
     }
     printf("coisas4\n");
     printf("vendas validas: %d\n", vval);
