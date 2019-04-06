@@ -142,7 +142,6 @@ Vendas addtostruct(Vendas structvendas, char* prod,double preco, int uni, char* 
     structvendas->cliente = cliente;
     structvendas->mes = mes;
     structvendas->filial = filial;
-  //  printf("%s %d\n",structvendas->prod,structvendas-> mes);
 return structvendas;
 }
 
@@ -189,11 +188,8 @@ int escreveArray(FILE *fp, char* array[]){
     while(fgets(str, staAux, fp)){
         strtok(str, "\n\r");
         array[i] = strdup(str);
-        //array[i] = malloc(sizeof(strlen(str)+1));
-        //strcpy(array[i], str);                    estas duas linhas, substituem o strdup.
         i++;
     }
-    printf("i ->%d\n", i);
     return i;
 }
 
@@ -204,24 +200,21 @@ int escreveArray(FILE *fp, char* array[]){
  * @param fich 
  */
 void validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeProd,char** venda){
-    int i= 0 , tam = 0; int vval=0;
+    int i= 0 , tam = 0; int vval=0; int index = 0;
+    char* aux; char* token;
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
-    printf("coisas1\n");
     tam = escreveArray(fp, venda);
     fclose(fp);
 
-    fp = fopen("Venda_confirmadas.txt","w");
-    printf("coisas3\n");
-    int si=0;
+    fp = fopen("Vendas_confirmadas.txt","w");
     char* campos[CAMPOSVENDA];
     while(i<tam && venda[i]){
         if(valvenda(structvendas[i], venda[i],treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);
-            vval++;
-            int index = 0;
-            char* aux = strdup (venda[i]);
-            char* token = strtok(aux," ");
+            index = 0;
+            aux = strdup (venda[i]);
+            token = strtok(aux," ");
             while(!(token == NULL)) {
                 campos[index] = strdup(token);
                 token = strtok(NULL," ");
@@ -233,19 +226,12 @@ void validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** tree
             int filialaux = atoi(campos[6]);
 
 
-            structvendas[si] = addtostruct(structvendas[si], campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux);
-            si++;
+            structvendas[vval] = addtostruct(structvendas[vval], campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux);
+            vval++;
         }
         i++;
     }
-    printf("%d\n",si);
-    si = 0;
-    while(si<10){
-    printf("%s %d \n",structvendas[si]->prod,structvendas[si]->filial);
-    si++;
-    }
-    printf("coisas4\n");
 
-    printf("vendas validas: %d\n", vval);
+    printf("Vendas validas: %d\n", vval);
     fclose(fp);
 }

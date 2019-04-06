@@ -161,7 +161,7 @@ char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     char* array[TAMCLIENTES];
     initTree(treeFilial);
     while(vendasconfirmadas[i]){
-       // pos = vendasconfirmadas[i] -> filial;
+        // pos = vendasconfirmadas[i] -> filial;
       //  c = vendasconfirmadas[i] -> cliente;
         placeinTree(pos, c, treeFilial);
     }
@@ -193,7 +193,7 @@ void testa_brp(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas v
     //linha_mais_longa(venda);
     //imprime_ultimo(clientes);
     printf("cliente_filial teste\n");
-    cliente_filial(treeFilial, vendasconfirmadas);
+    //cliente_filial(treeFilial, vendasconfirmadas);
     //existe(treeProd);
     initcatalogo(treeProd);
 }
