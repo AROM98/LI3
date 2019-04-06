@@ -55,7 +55,7 @@ static void initArrayTree(GTree** arraytree){
  * @param str linha de produto / cliente / venda.
  * @param arraytree Array de arvores.
  */
-static void placeinTree(char* str,GTree** arraytree){
+static void placeClienteinTree(char* str,GTree** arraytree){
     int pos = abs('A' - str[0]);
     //printf("ind -> %d\n", pos);
     //GTree* tree = arraytree[pos];
@@ -111,7 +111,7 @@ static void filetoTree(char *fich, GTree** tree){
         cli = strdup(str);
         if (validclient(cli) == 1){
             //printf("C valido -> %s\n", cli);
-            placeinTree(cli, tree);
+            placeClienteinTree(cli, tree);
         }
     }
     fclose(fp); // nem é necessario porque quando o programa acaba o fich é automaticamente fechado.

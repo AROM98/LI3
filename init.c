@@ -23,6 +23,7 @@ int initt(char* argv[]){
     GTree* treeProd[30];
     GTree* treeClient[30];
     GTree* treeFac[13];
+    GTree* treeFilial[3];
     char** vendas = (char**)malloc(1000000*sizeof(char*));
 
     printf("->Produtos!\n");
@@ -34,6 +35,6 @@ int initt(char* argv[]){
     free(vendas);
 
     //Quueries..
-    testa_brp(treeProd,treeClient); 
+    testa_brp(treeProd,treeClient, treeFilial, vendasconfirmadas); 
     return 0;
 }

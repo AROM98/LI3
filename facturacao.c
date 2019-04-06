@@ -40,6 +40,15 @@ static void initTree(GTree** arraytree){
     }
 }
 
+
+void placeFacinTree(int pos, Fac vend, GTree** arraytree){
+    //int pos = abs('A' - str[0]);
+    //printf("ind -> %d\n", pos);
+    //GTree* tree = arraytree[pos];
+    g_tree_insert(arraytree[pos], vend, vend);/* tem de ser especificada a chave e o valor*/
+    //arraytree[pos] = tree;
+}
+
 //supondo que nao existe na avl, cria uma fac e insere.
 Fac poeStruct (char* linhaVendaOk, GTree** tree){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
@@ -65,17 +74,10 @@ Fac poeStruct (char* linhaVendaOk, GTree** tree){//, char produtos[TamProd]){
         printf("%s %s %s %s %s %s %s\n",campos[0],campos[1],campos[2],campos[3],campos[4],campos[5],campos[6]);
     }
     */
-    placeinTree(campos[5], res, tree);
+    placeFacinTree(campos[5], res, tree);
     return res;
 }
 
-void placeinTree(int pos, Fac vend, GTree** arraytree){
-    //int pos = abs('A' - str[0]);
-    //printf("ind -> %d\n", pos);
-    //GTree* tree = arraytree[pos];
-    g_tree_insert(arraytree[pos], vend, vend);/* tem de ser especificada a chave e o valor*/
-    //arraytree[pos] = tree;
-}
 
 char* getprod(Fac vend){
     return vend->produto;   

@@ -50,21 +50,27 @@ void imprime_ultimo(char* array[]){
     printf("O ultimo cliente da lista é: %s\n", array[i]);
 }
 
-//se existir devolde o apontador, se nao existir deveolve 0 (NULL).
-void existe(GTree** arraytree){
-    char* test = "MN1980";
+//se existir devolve o apontador, se nao existir deveolve 0 (NULL).
+gpointer existe(char* cod, GTree* arraytree){
+    //char* test = "MN1980";
     gpointer j;
-    //gpointer i = g_tree_search (arraytree[0], &strcmp, &test);
-    for(int i = 0; i < 26; i++){    
-        j = g_tree_lookup(arraytree[i], test);
-        if(j != NULL) break;
-    }
-    printf("Este elemento esta na avl? -> %s\n", j);
+    //gpointer i = g_tree_search (arraytree[0], &strcmp, &test);  
+        j = g_tree_lookup(arraytree, cod);
+        //if(j != NULL) 
+        //break;        
+    //}
+    //printf("Este elemento esta na avl? -> %s\n", j);
+    return j;
 }
 /* /////////////////////////////////////////////////////////////////////////*/
     
     char* arrayProd[200000];
     int arrayprodvar = 0;
+
+void placeinTree(int pos, char* clien, GTree** arraytree){
+    g_tree_insert(arraytree[pos], clien, clien);/* tem de ser especificada a chave e o valor*/
+}
+
 
 gboolean treetoarray (gpointer key, gpointer value , gpointer user_data){
     arrayProd[arrayprodvar] = malloc(sizeof(strlen(key)));
@@ -149,16 +155,44 @@ void initcatalogo(GTree** treeProd){
 
 /*///////////////////////////////////////////////////////////////////////*/
 
-
-
+char** cliente_filial(GTree** treeFilial, Vendas* vendasconfirmadas[]){
+    int i = 0, pos = 0, v =0, ind = 0;
+    char* c, codigo_c;
+    char* array[TAMCLIENTES];
+    initTree(treeFilial);
+    while(vendasconfirmadas[i]){
+        pos = vendasconfirmadas[i] -> filial;
+        c = vendasconfirmadas[i] -> cliente;
+        placeinTree(pos, c, treeFilial);
+    }
+    while(vendasconfirmadas[i]){
+        c = vendasconfirmadas[i] -> cliente;
+        for(int j = 0; j < 3; j++){
+            if(existe(c, treeFilial[j]) == NULL){
+                v = 0;
+                break;
+            }
+            else{
+                v = 1;
+            }
+        }
+        if(v == 1){
+            array[ind] = c;
+            ind++;
+        }
+    }
+    //agora temos um array com todos os clientes que compraram nas 3 filiais.
+    return array;
+}
 
 /**
  * @brief Funçao de testes.
  * 
  */
-void testa_brp(GTree** treeProd,GTree** treeClient){
+void testa_brp(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas* vendasconfirmadas[]){
     //linha_mais_longa(venda);
     //imprime_ultimo(clientes);
-    existe(treeProd);
+    cliente_filial(treeFilial, vendasconfirmadas);
+    //existe(treeProd);
     initcatalogo(treeProd);
 }
