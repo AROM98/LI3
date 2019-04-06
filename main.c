@@ -25,7 +25,6 @@
  * @return int 
  */
 int main (int argc, char* argv[]){
-    //mediçao do tempo 
     clock_t start, end;
     double cpu_time_used;
     start = clock();

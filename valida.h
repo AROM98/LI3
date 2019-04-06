@@ -24,7 +24,7 @@ typedef struct vendas *Vendas;
 #define staAux 50
 
 
-void validvendas(char* fich,Vendas* structvendas,GTree** TreeClient,GTree** TreeProd,char** vendas);
+int validvendas(char* fich,Vendas* structvendas,GTree** TreeClient,GTree** TreeProd,char** vendas);
 int getFilial(Vendas ve);
 char* getCliente(Vendas ve);
 

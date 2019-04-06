@@ -12,8 +12,7 @@
 #include <time.h>
 #include <glib.h>
 
-#define staAux 50
-
+#define STRAUX 50
 
 /**
  * @brief Função que imprime um elemento de um nodo de arvore.
@@ -25,13 +24,19 @@
  */
 gboolean printClientes(gpointer key, gpointer value , gpointer user_data){
     char* str = (char*)key;
-    //int * count = (int*) user_data;
-
-    //*count= *count + 1;
-    //g_printerr("%s\n", str);
     printf("%s\n",str);
-    //printf("%s -> i= %d\n",str,*count);
+    /*int * count = (int*) user_data;
+    *count= *count + 1;
+    g_printerr("%s\n", str);*/
+
     return FALSE;
+}
+
+static gint my_compare(gconstpointer a,gconstpointer b){
+    const char *cha = a;
+    const char *chb = b;
+
+    return *cha - *chb;
 }
 
 /**
@@ -40,12 +45,13 @@ gboolean printClientes(gpointer key, gpointer value , gpointer user_data){
  * @param arraytree Nome do Array.
  */
 static void initArrayTree(GTree** arraytree){
+    int i;
     int* count = g_malloc(sizeof(int));
     *count = 0;
 
-    for(int i = 0 ; i<26 ; i++){
-        arraytree[i] = g_tree_new(strcmp);/* strcmp função que descrimina como comparar arguments*/
-        //g_tree_foreach(arraytree[i],printelements, NULL);
+    for(i = 0 ; i<26 ; i++){
+        arraytree[i] = g_tree_new(my_compare);/* strcmp função que descrimina como comparar arguments*/
+        /*g_tree_foreach(arraytree[i],printelements, NULL);*/
     }
 }
 
@@ -57,36 +63,34 @@ static void initArrayTree(GTree** arraytree){
  */
 static void placeClienteinTree(char* str,GTree** arraytree){
     int pos = abs('A' - str[0]);
-    //printf("ind -> %d\n", pos);
-    //GTree* tree = arraytree[pos];
-    g_tree_insert(arraytree[pos], str, str);/* tem de ser especificada a chave e o valor*/
-    //arraytree[pos] = tree;
+    g_tree_insert(arraytree[pos], str, str);
 }
 
 int validclient(char clientes[]){
     if(strlen(clientes) != 5){
-        //printf("nao é valido o cliente: %s\n", clientes);
+        /*printf("nao é valido o cliente: %s\n", clientes);*/
         return 0;
     }
     if(clientes[0]>='A' && clientes[0]<='Z'){
-       //printf("é valido o produto: %s", clientes[a]);
+       /*printf("é valido o produto: %s", clientes[a]);*/
     }
     else {
-        //printf("nao é valido o cliente: %s\n", clientes);
+        /*printf("nao é valido o cliente: %s\n", clientes);*/
         return 0;
     }
-    if(clientes[1] == '0'){ //verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido.
-       //printf("nao é valido o cliente: %s\n", clientes); 
+    /*verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido*/
+    if(clientes[1] == '0'){
+       /*printf("nao é valido o cliente: %s\n", clientes);*/
        return 0;
     }
     if(clientes[1] > '5') {
-        //printf("nao é valido o cliente: %s\n", clientes);
+        /*printf("nao é valido o cliente: %s\n", clientes);*/
         return 0;
     }
     if(clientes[1] == '5'){
-        if(clientes[2] == '0' && clientes[3] == '0' && clientes[4] == '0'){} //entao cliente é valido
+        if(clientes[2] == '0' && clientes[3] == '0' && clientes[4] == '0'){}
         else {
-            //printf("nao é valido o cliente: %s\n", clientes);
+            /*printf("nao é valido o cliente: %s\n", clientes);*/
             return 0;
         }
     }
@@ -102,19 +106,18 @@ int validclient(char clientes[]){
  */
 static void filetoTree(char *fich, GTree** tree){
     char* cli;
-    char str[staAux];
+    char str[STRAUX];
     FILE *fp;
     fp = fopen(fich, "r");
     initArrayTree(tree);
-    while(fgets(str, staAux, fp)){
+    while(fgets(str, STRAUX, fp)){
         strtok(str, "\n\r");
         cli = strdup(str);
         if (validclient(cli) == 1){
-            //printf("C valido -> %s\n", cli);
             placeClienteinTree(cli, tree);
         }
     }
-    fclose(fp); // nem é necessario porque quando o programa acaba o fich é automaticamente fechado.
+    fclose(fp);
 }
 
 /**
@@ -122,14 +125,14 @@ static void filetoTree(char *fich, GTree** tree){
  * 
  * @param fich Nome do ficheiro de Clientes.
  */
-void clientTree(char* fich,GTree** TreeClient){
-    //int* count = g_malloc(sizeof(int));
-    //*count = 0;
+void clienteTree(char* fich,GTree** TreeClient){
     filetoTree(fich, TreeClient);
+    /*int* count = g_malloc(sizeof(int));
+    *count = 0;
     for(int j = 0; j < 26; j++){
-        //printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeClient[j])); //imprime on nodos usados em casa avl. g_tree_height
-        //printf("altura[%d] ->%d\n", j, g_tree_height(TreeClient[j]));
-        //g_tree_foreach(TreeClient[j],printClientes, NULL);
-    }
+        printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeClient[j])); //imprime on nodos usados em casa avl. g_tree_height
+        printf("altura[%d] ->%d\n", j, g_tree_height(TreeClient[j]));
+        g_tree_foreach(TreeClient[j],printClientes, NULL);
+    }*/
     printf("clientes -> OK\n");
 }

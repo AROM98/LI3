@@ -13,9 +13,7 @@
 #include <time.h>
 #include <glib.h>
 
-//array de trees
-GTree* TreeProd[30];
-
-//funcçoes
+void clienteTree(char* fich,GTree** TreeClient);
 void printelements(gpointer key, gpointer value , gpointer user_data);
-void ClienteTree(char* fich);
+
+#endif

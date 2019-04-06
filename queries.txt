@@ -1,4 +1,4 @@
-QUERIES: -> O QUE SAO E O QUE É NECESSARIO FAZER <-
+ QUERIES: -> O QUE SAO E O QUE É NECESSARIO FAZER <-
 
 Q1 -> deverao ser lidos 3 ficheros, do qual o resultado terá que ser:
     * apresentaçao imediata ao utilizador do nome do ficheiro lido, 
@@ -30,7 +30,7 @@ Q6 -> Determinar:
     * o número de produtos que ninguém comprou.
 
 Q7 -> Dado um código de cliente, criar uma tabela com:
-    * o número total de produtos comprados (a soma das quantidades de todas as vendas do produto).
+    * o número total de produtos comprados (a soma das quantidades de todas as vendas do produto). 
     * mês a mês (para meses em que não comprou a entrada deverá ficar a 0).
     * A tabela deverá ser apresentada em ecrã organizada por filial.
 

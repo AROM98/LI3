@@ -13,10 +13,6 @@
 #include <time.h>
 #include <glib.h>
 
-
-//Funcoes para queries.
-void testa_brp();
-int linha_mais_longa(char* array[]);
-void imprime_ultimo(char* array[]);
+void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas* vendasconfirmadas);
 
 #endif

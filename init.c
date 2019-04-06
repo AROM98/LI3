@@ -11,13 +11,10 @@
 #include <time.h>
 #include <glib.h>
 #include "valida.h"
-
-/**
- * @brief Função initt, chama todas as outras funções.
- * 
- * @param argv Nomes do ficheiros de Produtos, Clientes e Vendas. por esta ordem.
- * @return int 
- */
+#include "produtos.h"
+#include "clientes.h"
+#include "queries.h"
+#include "facturacao.h"
 
 typedef struct vendas{
     char* prod;
@@ -29,28 +26,33 @@ typedef struct vendas{
     int filial;
 }*Vendas;
 
+/**
+ * @brief Função initt, chama todas as outras funções.
+ * 
+ * @param argv Nomes do ficheiros de Produtos, Clientes e Vendas. por esta ordem.
+ * @return int 
+ */
 int initt(char* argv[]){
-    //leitura de ficheiros e formaçao de structs.
+
     GTree* treeProd[30];
     GTree* treeClient[30];
     GTree* treeFac[13];
     GTree* treeFilial[3];
-    char** vendas = (char**)malloc(1000000*sizeof(char*));
+    char** vendas = (char**)malloc(TAMVENDAS*sizeof(char*));
     Vendas* structvendas = malloc(TAMVENDAS*sizeof(struct vendas));
 
-    printf("->Produtos!\n");
-    prodTree("Produtos.txt",treeProd);
-    printf("->Clientes!\n");
-    clientTree("Clientes.txt",treeClient);
-    printf("->Verificando Vendas!\n");
+    produtoTree("Produtos.txt",treeProd);
+
+    clienteTree("Clientes.txt",treeClient);
+
     validvendas("Vendas_1M.txt",structvendas,treeClient,treeProd,vendas);
     free(vendas);
     
-    //facturaçcao -> nao sei se posso fazer isto...
+    /*facturaçcao -> nao sei se posso fazer isto...*/
     printf("->Iniciar Facturacao!\n");
     verifica(treeFac, treeProd, structvendas);
 
-    //Quueries..
-    testa_brp(treeProd,treeClient, treeFilial, structvendas);
+    /*Queries*/
+    queriesmenu(treeProd,treeClient,treeFac,treeFilial, structvendas);
     return 0;
 }

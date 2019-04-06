@@ -27,7 +27,7 @@ typedef struct vendas{
     int filial;
 }*Vendas;
 
-//Métodos da struct, como é uma struct opaca, nao é possivel aceder ao membros fora deste ficheiro.
+/*Métodos da struct, como é uma struct opaca, nao é possivel aceder ao membros fora deste ficheiro*/
 int getFilial(Vendas ve){
     return ve -> filial;
 }
@@ -54,10 +54,8 @@ char* getCliente(Vendas ve){
  */
 int verprod(char* campos,GTree** treeProd){
     int val = 0;
-    //printf("%s\n",campos);
     int pos = abs('A' - campos[0]);
     gpointer v = g_tree_lookup(treeProd[pos], campos);
-    //printf("p-> Este elemento esta na avl? -> %s\n", v);
     if(v !=  NULL)
         val = 1;
     return val;
@@ -73,7 +71,6 @@ int verclien(char* campos,GTree** treeClient){
     int val = 0;
     int pos = abs('A' - campos[0]);
     gpointer v = g_tree_lookup(treeClient[pos], campos);
-    //printf("v-> Este elemento esta na avl? -> %s\n", v);
     if(v !=  NULL)
         val = 1;
     return val;
@@ -154,7 +151,7 @@ Vendas addtostruct(Vendas structvendas, char* prod,double preco, int uni, char* 
 return structvendas;
 }
 
-int valvenda (Vendas* structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
+int valvenda(Vendas structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){
     char* campos[CAMPOS];
     int val=0;
     int index = 0;
@@ -208,7 +205,7 @@ int escreveArray(FILE *fp, char* array[]){
  * 
  * @param fich 
  */
-void validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeProd,char** venda){
+int validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeProd,char** venda){
     int i= 0 , tam = 0; int vval=0; int index = 0;
     char* aux; char* token;
     FILE *fp;
@@ -240,7 +237,7 @@ void validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** tree
         }
         i++;
     }
-
-    printf("Vendas validas: %d\n", vval);
     fclose(fp);
+    
+    return vval;
 }
