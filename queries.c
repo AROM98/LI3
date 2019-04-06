@@ -124,10 +124,12 @@ void initcatalogo(GTree** treeProd){
 
 /*///////////////////////////////////////////////////////////////////////*/
 
-void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
-    int i = 0, pos = 0, v =0, ind = 0; int val = 0;
+char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
+    int i = 0, pos = 0, v =0, ind = 0;
     char* c;
-    char* array[TAMVENDAS];
+    char* array[TAMCLIENTES];
+    GTree* clii;
+    clii = g_tree_new(strcmp);
     printf("nnnnn1\n");
     initTree(treeFilial);
     printf("nnnnn2\n");
@@ -145,32 +147,31 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     printf("nnnnn4\n");
     while(vendasconfirmadas[i]){
         c = getCliente(vendasconfirmadas[i]);
-        for(int j = 0; j < 3; j++){
-            if(existe(c, treeFilial[j]) == NULL){
-                printf("%s nao presta\n", c);
-                v = 0;
-                break;
+        if(existe(c, clii) == NULL){
+            for(int j = 0; j < 3; j++){
+                if(existe(c, treeFilial[j]) == NULL){
+                    printf("%s nao presta\n", c);
+                    v = 0;
+                    break;
+                }
+                else{
+                    v++;
+                    //printf("%s comprou em %d filiais\n", c, v);
+                }
+                if(v == 3){
+                    array[ind] = c;
+                    ind++;
+                    v = 0;
+                    printf("%s posto no array[%d]\n", c, ind);
+                }
             }
-            else{
-                v++;
-                printf("%s comprou em %d filiais\n", c, v);
-            }
-            if(v == 3){
-            array[ind] = c;
-            ind++;
-            v = 0;
-            printf("%s posto no array[%d]\n", c, ind);
-            }
+            g_tree_insert(clii, c, c);
         }
         i++;
         v = 0;
-    }
-    printf("nao presta :(\n");
+    }        
     //agora temos um array com todos os clientes que compraram nas 3 filiais.
-    for(int z = 0; array[z]; z++){
-        printf("v -> %s\n", array[z]);
-    }
-    //return array;
+    return array;
 }
 
 void querry8(Vendas* vendasconfirmadas){
