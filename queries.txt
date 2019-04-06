@@ -35,7 +35,7 @@ Q7 -> Dado um código de cliente, criar uma tabela com:
     * A tabela deverá ser apresentada em ecrã organizada por filial.
 
 Q8 -> Dado um intervalo fechado de meses, por exemplo [1..3], determinar:
-    * o total de vendas (nº de registos de venda) registadas nesse intervalo e o total facturado.
+    * o total de vendas (nº de registos de venda) registadas nesse intervalo e o total facturado. ||-Feito-||
 
 Q9 -> Dado um código de produto e uma filial, determinar:
     * os códigos (e número total) dos clientes que o compraram, distinguindo entre compra N e compra P;

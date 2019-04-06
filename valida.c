@@ -40,7 +40,7 @@ char* getCliente(Vendas ve){
  * @brief Defines para tamanhos de arrays.
  * 
  */
-#define CAMPOSVENDA 7
+#define CAMPOS 7
 #define TAMPROD 200000
 #define TAMCLIENTES 20000
 #define TAMVENDAS 1000000
@@ -155,7 +155,7 @@ return structvendas;
 }
 
 int valvenda (Vendas* structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
-    char* campos[CAMPOSVENDA];
+    char* campos[CAMPOS];
     int val=0;
     int index = 0;
     char* aux = strdup (linhaVendaOk);
@@ -217,7 +217,7 @@ void validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** tree
     fclose(fp);
 
     fp = fopen("Vendas_confirmadas.txt","w");
-    char* campos[CAMPOSVENDA];
+    char* campos[CAMPOS];
     while(i<tam && venda[i]){
         if(valvenda(structvendas[i], venda[i],treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);

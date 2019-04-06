@@ -124,10 +124,10 @@ void initcatalogo(GTree** treeProd){
 
 /*///////////////////////////////////////////////////////////////////////*/
 
-char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
-    int i = 0, pos = 0, v =0, ind = 0;
+void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
+    int i = 0, pos = 0, v =0, ind = 0; int val = 0;
     char* c;
-    char* array[TAMCLIENTES];
+    char* array[TAMVENDAS];
     printf("nnnnn1\n");
     initTree(treeFilial);
     printf("nnnnn2\n");
@@ -153,7 +153,7 @@ char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
             }
             else{
                 v++;
-                //printf("%s comprou em %d filiais\n", c, v);
+                printf("%s comprou em %d filiais\n", c, v);
             }
             if(v == 3){
             array[ind] = c;
@@ -170,7 +170,7 @@ char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     for(int z = 0; array[z]; z++){
         printf("v -> %s\n", array[z]);
     }
-    return array;
+    //return array;
 }
 
 void querry8(Vendas* vendasconfirmadas){
@@ -187,7 +187,32 @@ void querry8(Vendas* vendasconfirmadas){
     
     printf("Numero total de vendas: %d unidades\nFaturacao total: %Lf euros\n\n\n", nvendas, totalfac);
 }
+typedef struct q9{
+    char* clientes;
+    char tcompra;
+}*Q9;
 
+void querry9(Vendas* vendasconfirmadas){
+    int filial,i;
+    int c = 0;
+    char produto[7];
+    Q9* q9array;
+    printf("Insira o produto:");
+    fgets(produto,7,stdin);
+    printf("Insira a filial\n");
+    scanf("%d",&filial);
+    for(i = 0;vendasconfirmadas[i];i++){
+        if(vendasconfirmadas[i]->filial == filial && strcmp(vendasconfirmadas[i]->prod,produto) == 0){
+            q9array[c] = (Q9)malloc(sizeof(struct q9));
+            q9array[c]->clientes = vendasconfirmadas[i]->cliente;
+            q9array[c]->tcompra = vendasconfirmadas[i]->tcompra;
+        }
+    }
+    int c1 = 0;
+    for(c1 = 0;c<c1;c1++){
+        printf("%s\n",q9array[c1]->clientes);
+    }
+}
 
 /**
  * @brief Funçao de testes.
@@ -197,14 +222,17 @@ void testa_brp(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas v
     int opcao;
     printf("Escolha uma querry:\n2.Catalogo de produtos\n8.Nº de vendas e faturacao total num intervalo de dois meses\n");
     printf("Opcao:");
-    scanf("%d",&opcao);
     while(1){
+        scanf("%d",&opcao);
         switch(opcao){
             case 2: initcatalogo(treeProd);break;
             case 5: cliente_filial(treeFilial, vendasconfirmadas);break;
             case 8: querry8(vendasconfirmadas);break;
+            case 9: querry9(vendasconfirmadas);break;
+            case 13: return;
         }
-
+        printf("Escolha uma querry:\n2.Catalogo de produtos\n8.Nº de vendas e faturacao total num intervalo de dois meses\n13.Sair\n");
+        printf("Opcao:");
         //cliente_filial(treeFilial, vendasconfirmadas);
         //existe(treeProd);
     }
