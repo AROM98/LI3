@@ -45,11 +45,7 @@ int initt(char* argv[]){
     printf("->Verificando Vendas!\n");
     validvendas("Vendas_1M.txt",structvendas,treeClient,treeProd,vendas);
     free(vendas);
-    int i =0;
-    while(structvendas[i] && i<10){
-        printf("%s %d\n",structvendas[i]->prod,structvendas[i]->filial);
-        i++;
-    }
+    
     //Quueries..
     testa_brp(treeProd,treeClient, treeFilial, structvendas);
     return 0;

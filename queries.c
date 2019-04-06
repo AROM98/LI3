@@ -18,54 +18,18 @@
 //QUERIES DO BRP1
 
 
-/**
- * @brief Função que descobre o tamanho da linha mais longa das vendas
- * 
- * @param array 
- * @return int 
- */
-int linha_mais_longa(char* array[]){
-    int tam = 0;
-    int linha  = 0;
-    for(int i = 0; array[i] && i < TAMVENDAS; i++){
-        if(strlen(array[i]) > tam){
-            tam = strlen(array[i]);
-            linha = i + 1;
-        }
-    }
-    printf("A linha %d é maior e tem tamanho de %d\n",linha, tam);
-    return tam;
-}
+typedef struct vendas{
+    char* prod;
+    double preco;
+    int unidades;
+    char* tcompra;
+    char* cliente;
+    int mes;
+    int filial;
+}*Vendas;
 
-/**
- * @brief Função que imprime ultimo cliente.
- * 
- * @param array 
- */
-void imprime_ultimo(char* array[]){
-    int i = 0;
-    while(array[i +1] && i < (TAMCLIENTES -1)){
-        i++;
-    }
-    printf("O ultimo cliente da lista é: %s\n", array[i]);
-}
-
-//se existir devolve o apontador, se nao existir deveolve 0 (NULL).
-gpointer existe(char* cod, GTree* arraytree){
-    //char* test = "MN1980";
-    gpointer j;
-    //gpointer i = g_tree_search (arraytree[0], &strcmp, &test);  
-        j = g_tree_lookup(arraytree, cod);
-        //if(j != NULL) 
-        //break;        
-    //}
-    //printf("Este elemento esta na avl? -> %s\n", j);
-    return j;
-}
-/* /////////////////////////////////////////////////////////////////////////*/
-    
-    char* arrayProd[200000];
-    int arrayprodvar = 0;
+char* arrayProd[200000];
+int arrayprodvar = 0;
 
 void placeinTree(int pos, char* clien, GTree** arraytree){
     g_tree_insert(arraytree[pos], clien, clien);/* tem de ser especificada a chave e o valor*/
@@ -185,15 +149,38 @@ char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     return array;
 }
 
+void querry8(Vendas* vendasconfirmadas){
+    int mesi, mesf; int i = 0; int nvendas = 0; long double totalfac = 0;
+    printf("Insira o mes inicial e o mes final:\n");
+    scanf("%d %d",&mesi,&mesf);
+    while(vendasconfirmadas[i]){
+        if(vendasconfirmadas[i]->mes >= mesi && vendasconfirmadas[i]->mes <= mesf){
+            nvendas += vendasconfirmadas[i]->unidades;
+            totalfac += (long double)(vendasconfirmadas[i]->unidades * vendasconfirmadas[i]->preco);
+        }
+        i++;
+    }
+    
+    printf("Numero total de vendas: %d unidades\nFaturacao total: %Lf euros\n\n\n", nvendas, totalfac);
+}
+
+
 /**
  * @brief Funçao de testes.
  * 
  */
 void testa_brp(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas vendasconfirmadas[]){
-    //linha_mais_longa(venda);
-    //imprime_ultimo(clientes);
-    printf("cliente_filial teste\n");
-    //cliente_filial(treeFilial, vendasconfirmadas);
-    //existe(treeProd);
-    initcatalogo(treeProd);
+    int opcao;
+    printf("Escolha uma querry:\n2.Catalogo de produtos\n8.Nº de vendas e faturacao total num intervalo de dois meses\n");
+    printf("Opcao:");
+    scanf("%d",&opcao);
+    while(1){
+        switch(opcao){
+            case 2: initcatalogo(treeProd);break;
+            case 8: querry8(vendasconfirmadas);break;
+        }
+
+        //cliente_filial(treeFilial, vendasconfirmadas);
+        //existe(treeProd);
+    }
 }
