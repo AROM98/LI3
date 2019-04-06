@@ -27,6 +27,15 @@ typedef struct vendas{
     int filial;
 }*Vendas;
 
+//Métodos da struct, como é uma struct opaca, nao é possivel aceder ao membros fora deste ficheiro.
+int getFilial(Vendas ve){
+    return ve -> filial;
+}
+
+char* getCliente(Vendas ve){
+    return ve -> cliente;
+}
+
 /**
  * @brief Defines para tamanhos de arrays.
  * 

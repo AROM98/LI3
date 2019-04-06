@@ -35,6 +35,11 @@ void placeinTree(int pos, char* clien, GTree** arraytree){
     g_tree_insert(arraytree[pos], clien, clien);/* tem de ser especificada a chave e o valor*/
 }
 
+gpointer existe(char* cod, GTree* arraytree){
+    gpointer j; 
+    j = g_tree_lookup(arraytree, cod);
+    return j;
+}
 
 gboolean treetoarray (gpointer key, gpointer value , gpointer user_data){
     arrayProd[arrayprodvar] = malloc(sizeof(strlen(key)));
@@ -121,31 +126,50 @@ void initcatalogo(GTree** treeProd){
 
 char** cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     int i = 0, pos = 0, v =0, ind = 0;
-    char* c, codigo_c;
+    char* c;
     char* array[TAMCLIENTES];
+    printf("nnnnn1\n");
     initTree(treeFilial);
+    printf("nnnnn2\n");
     while(vendasconfirmadas[i]){
-        // pos = vendasconfirmadas[i] -> filial;
-      //  c = vendasconfirmadas[i] -> cliente;
+        pos = (getFilial(vendasconfirmadas[i]) - 1);
+        c = getCliente(vendasconfirmadas[i]);
         placeinTree(pos, c, treeFilial);
+        i++;
     }
+    for(int z = 0; z < 3; z++){
+        //g_tree_foreach(treeFilial[z], printFilial, NULL);
+        printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
+    }
+    i = 0;
+    printf("nnnnn4\n");
     while(vendasconfirmadas[i]){
-        //c = vendasconfirmadas[i] -> cliente;
+        c = getCliente(vendasconfirmadas[i]);
         for(int j = 0; j < 3; j++){
             if(existe(c, treeFilial[j]) == NULL){
+                printf("%s nao presta\n", c);
                 v = 0;
                 break;
             }
             else{
-                v = 1;
+                v++;
+                //printf("%s comprou em %d filiais\n", c, v);
             }
-        }
-        if(v == 1){
+            if(v == 3){
             array[ind] = c;
             ind++;
+            v = 0;
+            printf("%s posto no array[%d]\n", c, ind);
+            }
         }
+        i++;
+        v = 0;
     }
+    printf("nao presta :(\n");
     //agora temos um array com todos os clientes que compraram nas 3 filiais.
+    for(int z = 0; array[z]; z++){
+        printf("v -> %s\n", array[z]);
+    }
     return array;
 }
 
@@ -177,6 +201,7 @@ void testa_brp(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas v
     while(1){
         switch(opcao){
             case 2: initcatalogo(treeProd);break;
+            case 5: cliente_filial(treeFilial, vendasconfirmadas);break;
             case 8: querry8(vendasconfirmadas);break;
         }
 

@@ -25,5 +25,7 @@ typedef struct vendas *Vendas;
 
 
 void validvendas(char* fich,Vendas* structvendas,GTree** TreeClient,GTree** TreeProd,char** vendas);
+int getFilial(Vendas ve);
+char* getCliente(Vendas ve);
 
 #endif
