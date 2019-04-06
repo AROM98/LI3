@@ -13,7 +13,7 @@
 #include <glib.h>
 #include <math.h>
 #include "valida.h"
-
+#include "facturacao.h"
 
 //QUERIES DO BRP1
 
@@ -161,12 +161,12 @@ char** cliente_filial(GTree** treeFilial, Vendas* vendasconfirmadas[]){
     char* array[TAMCLIENTES];
     initTree(treeFilial);
     while(vendasconfirmadas[i]){
-        pos = vendasconfirmadas[i] -> filial;
-        c = vendasconfirmadas[i] -> cliente;
+       // pos = vendasconfirmadas[i] -> filial;
+       // c = vendasconfirmadas[i] -> cliente;
         placeinTree(pos, c, treeFilial);
     }
     while(vendasconfirmadas[i]){
-        c = vendasconfirmadas[i] -> cliente;
+      //  c = vendasconfirmadas[i] -> cliente;
         for(int j = 0; j < 3; j++){
             if(existe(c, treeFilial[j]) == NULL){
                 v = 0;

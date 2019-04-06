@@ -13,5 +13,6 @@
 #include <time.h>
 #include <glib.h>
 
+void initTree(GTree** arraytree);
 
 #endif

@@ -12,7 +12,6 @@
 #include <time.h>
 #include <glib.h>
 
-int validadas= 0;
 
 /**
  * @brief Struct de Venda.
@@ -134,8 +133,8 @@ int verfilial(int filial){
  * @return int 
  */
 
-void addtostruct(Vendas structvendas, char* prod,double preco, int uni, int tipocompra, char* cliente, int mes,int filial,int pos){
-    structvendas = malloc(sizeof(Vendas*));
+void addtostruct(Vendas structvendas, char* prod,double preco, int uni, char* tipocompra, char* cliente, int mes,int filial){
+    structvendas = malloc(sizeof(struct vendas));
     structvendas->prod = prod;
     structvendas->preco = preco;
     structvendas->unidades = uni;
@@ -143,10 +142,10 @@ void addtostruct(Vendas structvendas, char* prod,double preco, int uni, int tipo
     structvendas->cliente = cliente;
     structvendas->mes = mes;
     structvendas->filial = filial;
-
+    printf("%s\n",structvendas->prod);
 }
 
-int valvenda (Vendas* structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
+int valvenda (Vendas structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){//, char produtos[TamProd]){
     char* campos[CAMPOSVENDA];
     int val=0;
     int index = 0;
@@ -171,8 +170,7 @@ int valvenda (Vendas* structvendas,char* linhaVendaOk, GTree** treeClient, GTree
     int f = vermes(mesaux);
     int g = verfilial(filialaux);
     if (a && b && c && d && e && f && g){
-        addtostruct(structvendas[validadas], campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux,validadas);
-        validadas++;
+        addtostruct(structvendas, campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux);
         val = 1;
     }
     return val;
@@ -207,7 +205,7 @@ int escreveArray(FILE *fp, char* array[]){
  */
 Vendas* validvendas(char* fich,GTree** treeClient,GTree** treeProd,char** venda){
     Vendas* structvendas = malloc(TAMVENDAS*sizeof(struct vendas));
-    int i= 0 , tam = 0;
+    int i= 0 , tam = 0; int vval=0;
     FILE *fp;
     fp = fopen("Vendas_1M.txt", "r");
     printf("coisas1\n");
@@ -217,13 +215,18 @@ Vendas* validvendas(char* fich,GTree** treeClient,GTree** treeProd,char** venda)
     fp = fopen("Venda_confirmadas.txt","w");
     printf("coisas3\n");
     while(i<tam && venda[i]){
-        if(valvenda(structvendas, venda[i],treeClient,treeProd)){
+        if(valvenda(structvendas[i], venda[i],treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);
+            vval++;
+
+            //AQUIIIII
+            printf("%s\n",structvendas[i]->prod);
+           // printf("%s %d \n",structvendas[i]->prod,structvendas[i]->filial);
         }
         i++;
     }
     printf("coisas4\n");
-    printf("vendas validas: %d\n", validadas);
+    printf("vendas validas: %d\n", vval);
     fclose(fp);
     return structvendas;
 }

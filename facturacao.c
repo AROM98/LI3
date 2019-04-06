@@ -30,7 +30,7 @@ typedef struct filial{
     int Fact_vendas_P;//lucros totais de cada filial.
 }*Filial;
 
-static void initTree(GTree** arraytree){
+void initTree(GTree** arraytree){
     int* count = g_malloc(sizeof(int));
     *count = 0;
 
