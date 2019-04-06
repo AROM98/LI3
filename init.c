@@ -46,6 +46,9 @@ int initt(char* argv[]){
     validvendas("Vendas_1M.txt",structvendas,treeClient,treeProd,vendas);
     free(vendas);
     
+    //facturaçcao -> nao sei se posso fazer isto...
+    verifica(treeFac, treeProd, structvendas);
+
     //Quueries..
     testa_brp(treeProd,treeClient, treeFilial, structvendas);
     return 0;
