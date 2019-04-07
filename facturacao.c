@@ -89,6 +89,18 @@ Fac poeStruct (Vendas structvendas, GTree** tree){
     return res;
 }
 
+Fac poeStructVazia (Vendas structvendas, GTree** tree){
+    Fac res = (Fac)malloc(sizeof(struct fac));
+    res->produto = getProduto(structvendas);
+    /*printf("%s", getTcompra(structvendas));*/
+    res->N_vendas_N = 0; /*unidades compradas*/
+    res->N_vendas_P = 0;
+    res->F_vendas_N = 0; /*preço da compra*/
+    res->F_vendas_P = 0;
+    placeFacinTree(getMes(structvendas), res, tree);
+    return res;
+}
+
 
 char* getprod(Fac vend){
     return vend->produto;
@@ -111,8 +123,8 @@ int exist(GTree** arraytree, Vendas str){
 
 gboolean comp(gpointer key, gpointer value , gpointer user_data){
     Fac nodo = (Fac)key; /*cada nodo da arvore*/
-    //printf("nodo -> produto:%s\n", nodo -> produto);
     char* str = (char*) user_data;
+    //printf("nodo -> produto:%s || str -> %s\n", nodo -> produto, str);
     if(strcmp(nodo -> produto, str) == 0){
         e = 1;
         printf("%s ja existe\n",nodo -> produto);
@@ -124,15 +136,18 @@ gboolean comp(gpointer key, gpointer value , gpointer user_data){
     return FALSE;
 }
 
-int e_procura(GTree** arraytree, char* str, int pos){
+int e_procura(GTree** arraytree, Vendas vendac, int pos){
     int r = 0;
-    /*gpointer i = g_tree_search (arraytree[0], &strcmp, &test);*/ 
+    /*gpointer i = g_tree_search (arraytree[0], &strcmp, &test);*/
+    char* str = getProduto(vendac);
     g_tree_foreach(arraytree[pos], comp, str);
     if(e == 1){
         r = 1;
         e = 0;
+        printf("ENTRA DENTRO DO IF\n");
+
     }
-    printf("procura em %d -> %d\n", pos, r);
+    //printf("procura em %d -> %d\n", pos, r);
     return r;
     /*printf("Este elemento esta na avl? -> %s\n", j);*/
 }
@@ -153,12 +168,16 @@ void verifica(GTree** treeFac, GTree** treeProd, Vendas vendasconfirmadas[]){
         }
         else{
             poeStruct(vendasconfirmadas[i], treeFac);
-            /*printf("%s\n",vendasconfirmadas[i]->prod);*/
+            //printf("%s\n",getProduto(vendasconfirmadas[i]));
         }
         i++;
     }
-    /*agora mete-se o resto dos produtos que nao foram vendidos.
-    como nao foram vendidos nao têm nenhum dos campos, pelo que os vamos por a null*/
+    /*
+    Para cada produto, 
+    */
+    /*for(i = 0; i < 26; i++){
+        g_tree_foreach(treeProd[i], coisas, treeFac);
+    }*/
     
 }
 
