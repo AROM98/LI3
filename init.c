@@ -45,7 +45,7 @@ int initt(char* argv[]){
 
     clienteTree("Clientes.txt",treeClient);
 
-    int vval = validvendas("Vendas_1M.txt",structvendas,treeClient,treeProd,vendas);
+    int vval = validvendas("Vendas_1M.txt", structvendas, treeClient, treeProd,vendas);
     free(vendas);
     printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n","Vendas_1M.txt",vval);
 

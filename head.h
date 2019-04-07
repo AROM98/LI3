@@ -32,7 +32,6 @@ typedef struct query{
 //Arrays e variaveis definidos globalmente para todas as funçoes.
 char* produtos[TAMPROD];
 char* clientes[TAMCLIENTES];
-char* venda[TAMVENDAS];
 Vendas ven[TAMVENDAS];
 //int teste = 0;
 //int validadas = 0;

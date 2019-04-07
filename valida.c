@@ -63,7 +63,7 @@ int getFilial(Vendas ve){
 #define CAMPOS 7
 #define TAMPROD 200000
 #define TAMCLIENTES 20000
-#define TAMVENDAS 1000000
+#define TAMVENDAS 1000
 #define staAux 50
 
 /**
@@ -211,11 +211,14 @@ int valvenda(char* linhaVendaOk, GTree** treeClient, GTree** treeProd){
  */
 int escreveArray(FILE *fp, char* array[]){
     char str[staAux];
-    int i = 0;
+    int i = 0, max = TAMVENDAS;
     while(fgets(str, staAux, fp)){
         strtok(str, "\n\r");
-        array[i] = strdup(str);
-        i++;
+        if(i >= max){
+            array = (char**) realloc(array, (2 * max * sizeof(char*)));
+            max *= 2; 
+        }
+        array[i++] = strdup(str);
     }
     return i;
 }

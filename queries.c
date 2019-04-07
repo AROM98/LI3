@@ -205,18 +205,16 @@ void querry3(Vendas* vendasconfirmadas){
     int opcao;
     char produto[7];
     Q3 totais[3];
-    int fa,fb,fc = 0;
+    int fa = 0,fb = 0,fc = 0;
     
     printf("\nInsira o mes:");
     if(scanf("%d",&mes) == 1){}else {}
     printf("Insira o produto:");
     if(scanf("%s", produto) == 1){}else {}
 
-    for(i=0;i<3;i++){
+    /*for(i=0;i<3;i++){
         totais[i] = (Q3)malloc(sizeof(struct q3));
-    }
-
-
+    }*/
     i=0;
     while(vendasconfirmadas[i]){
         if(getMes(vendasconfirmadas[i]) == mes){
@@ -227,14 +225,16 @@ void querry3(Vendas* vendasconfirmadas){
                     pos = fa;
                     fa++;
                 }
-                    else if(filialaux == 1){
+                else {
+                    if(filialaux == 1){
                         pos = fb;
                         fb++;
-                        }
-                        else {
-                            pos = fc;
-                            fc++;
-                        }
+                    }
+                    else {
+                        pos = fc;
+                        fc++;
+                    }
+                }
 
                 totais[filialaux]->lucro += (double)(uniaux * getPreco(vendasconfirmadas[i]));
                 totais[filialaux]->nvendas += uniaux;
@@ -247,7 +247,7 @@ void querry3(Vendas* vendasconfirmadas){
                 printf("\n");
             }
         }
-    i++;
+        i++;
     }
 
     printf("1.Resultado filial a filial\n2.Resultado global\n");
@@ -356,7 +356,7 @@ void querry10(Vendas* vendasconfirmadas){
 
     i = 0;
     for(i = 0; vendasconfirmadas[i];i++){
-        if(getMes(vendasconfirmadas[i] == mes)){
+        if(getMes(vendasconfirmadas[i]) == mes){
             if(strcmp(getCliente(vendasconfirmadas[i]),cliente) == 0){
                 /*if (existenatruct(getProduto(vendasconfirmadas[i]))){
 
