@@ -212,9 +212,9 @@ void querry8(Vendas* vendasconfirmadas){
         printf("Failed to read mes inicial e mes final\n");
     }
     while(vendasconfirmadas[i]){
-        if(vendasconfirmadas[i]->mes >= mesi && vendasconfirmadas[i]->mes <= mesf){
-            nvendas += vendasconfirmadas[i]->unidades;
-            totalfac += (long double)(vendasconfirmadas[i]->unidades * vendasconfirmadas[i]->preco);
+        if(getMes(vendasconfirmadas[i]) >= mesi && getMes(vendasconfirmadas[i]) <= mesf){
+            nvendas += getUnidades(vendasconfirmadas[i]);
+            totalfac += (long double)(getUnidades(vendasconfirmadas[i]) * getPreco(vendasconfirmadas[i]));
         }
         i++;
     }
