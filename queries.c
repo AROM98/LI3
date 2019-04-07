@@ -51,7 +51,7 @@ static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
     const char *chb = b;
 
-    return *cha - *chb;
+    return strcmp(cha,chb);
 }
 
 
@@ -148,7 +148,6 @@ void initcatalogo(GTree** treeProd){
 void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     int i = 0, pos = 0, v = 0, ind = 0, z = 0,j = 0;
     char* c;
-    /*char* array[TAMCLIENTES];*/
     GTree* clii;
     clii = g_tree_new(my_compare);
     printf("nnnnn1\n");
@@ -160,9 +159,7 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
         placeinTree(pos, c, treeFilial);
         i++;
     }
-    for(z = 0; z < 3; z++){
-        printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
-    }
+
     i = 0;
     printf("nnnnn4\n");
     while(vendasconfirmadas[i]){
@@ -189,13 +186,16 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
         }
         i++;
         v = 0;
-    }        
+    }
+    for(z = 0; z < 3; z++){
+    	printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
+	}
     /*agora temos um array com todos os clientes que compraram nas 3 filiais
     return array;*/
 }
 
 void querry8(Vendas* vendasconfirmadas){
-    int mesi, mesf; int i = 0; int nvendas = 0; long double totalfac = 0;
+    int mesi, mesf; int i = 0; int nvendas = 0; long long int totalfac = 0;
     printf("Insira o mes inicial e o mes final:\n");
     if(scanf("%d %d",&mesi,&mesf) == 1){}else {
         printf("Failed to read mes inicial e mes final\n");
@@ -203,7 +203,7 @@ void querry8(Vendas* vendasconfirmadas){
     while(vendasconfirmadas[i]){
         if(vendasconfirmadas[i]->mes >= mesi && vendasconfirmadas[i]->mes <= mesf){
             nvendas += vendasconfirmadas[i]->unidades;
-            totalfac += (long double)(vendasconfirmadas[i]->unidades * vendasconfirmadas[i]->preco);
+            totalfac += (long long int)(vendasconfirmadas[i]->unidades * vendasconfirmadas[i]->preco);
         }
         i++;
     }
