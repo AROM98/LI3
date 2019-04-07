@@ -239,8 +239,8 @@ void querry3(Vendas* vendasconfirmadas){
                 totais[filialaux]->lucro += (double)(uniaux * getPreco(vendasconfirmadas[i]));
                 totais[filialaux]->nvendas += uniaux;
                 printf("nnnn1\n");
-                totais[filialaux]->produto[pos] = (char*)malloc(7* sizeof(char*));
-                totais[filialaux]->tcompra[pos] = (char*)malloc(sizeof(char*));
+                totais[filialaux]->produto[pos] = (char*)malloc(7* sizeof(char));
+                totais[filialaux]->tcompra[pos] = (char*)malloc(sizeof(char));
                 totais[filialaux]->produto[pos] = getProduto(vendasconfirmadas[i]);
                 totais[filialaux]->tcompra[pos] = getTcompra(vendasconfirmadas[i]);
                 printf("nnnn2\n");
@@ -337,6 +337,34 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
         printf("Cliente: %s || Tipo de compra: %s\n",q9array[i]->clientes,q9array[i]->tcompra);
     }
     printf("\nNumero de total de clientes que compraram este produto: %d\n\n\n", c);
+}
+typedef struct q10{
+    char* produto;
+    int nvendas;
+}*Q10;
+
+
+void querry10(Vendas* vendasconfirmadas){
+    char cliente[5];
+    int mes,i, tamarray = 0;
+
+
+    printf("Clientes:\n");
+    if(scanf("%s",&cliente) == 1){} else {}
+    printf("Mes:\n");
+    if(scanf("%d",&mes) == 1){} else {}
+
+    i = 0;
+    for(i = 0; vendasconfirmadas[i];i++){
+        if(getMes(vendasconfirmadas[i] == mes)){
+            if(strcmp(getCliente(vendasconfirmadas[i]),cliente) == 0){
+                /*if (existenatruct(getProduto(vendasconfirmadas[i]))){
+
+
+                }
+            */}
+        }
+    }
 }
 
 /**
