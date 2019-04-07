@@ -205,16 +205,19 @@ void querry3(Vendas* vendasconfirmadas){
     int opcao;
     char produto[7];
     Q3 totais[3];
-    int fa = 0,fb = 0,fc = 0;
+    int fa,fb,fc;
+    fa = fb = fc = 0;
     
     printf("\nInsira o mes:");
     if(scanf("%d",&mes) == 1){}else {}
     printf("Insira o produto:");
     if(scanf("%s", produto) == 1){}else {}
 
-    /*for(i=0;i<3;i++){
+    for(i=0;i<3;i++){
         totais[i] = (Q3)malloc(sizeof(struct q3));
-    }*/
+    }
+
+
     i=0;
     while(vendasconfirmadas[i]){
         if(getMes(vendasconfirmadas[i]) == mes){
@@ -225,16 +228,14 @@ void querry3(Vendas* vendasconfirmadas){
                     pos = fa;
                     fa++;
                 }
-                else {
-                    if(filialaux == 1){
+                    else if(filialaux == 1){
                         pos = fb;
                         fb++;
-                    }
-                    else {
-                        pos = fc;
-                        fc++;
-                    }
-                }
+                        }
+                        else {
+                            pos = fc;
+                            fc++;
+                        }
 
                 totais[filialaux]->lucro += (double)(uniaux * getPreco(vendasconfirmadas[i]));
                 totais[filialaux]->nvendas += uniaux;
@@ -247,7 +248,7 @@ void querry3(Vendas* vendasconfirmadas){
                 printf("\n");
             }
         }
-        i++;
+    i++;
     }
 
     printf("1.Resultado filial a filial\n2.Resultado global\n");
@@ -343,27 +344,72 @@ typedef struct q10{
     int nvendas;
 }*Q10;
 
+int existenatruct(char* produto, Q10* str, int qtam){
+    int i,val = -1;
+    for(i = 0; str[i] && !val;i++){
+        if(strcmp(str[i]->produto,produto) == 0){
+            val = i;
+        }
+    }
+    return val;
+}
+
+void aditToStruct(char* produto, int unidades, Q10 str){
+    str->produto = produto;
+    str->nvendas = unidades;
+}
+
+void sorta(Q10* array){
+    int i,j,iaux=0;
+    int temp = 0;
+    Q10 auxq = (Q10)malloc(sizeof(struct q10));
+    for(i = 0;array[i];i++){
+        for(j = i;array[j];j++){
+            if(array[j]->nvendas >= temp){
+                iaux = j;
+                temp = array[j]->nvendas;
+            }
+        }
+        Q10 auxq = array[iaux];
+        array[iaux] = array[i];
+        array[i] = auxq;
+    }
+}
+
 
 void querry10(Vendas* vendasconfirmadas){
-    char cliente[5];
-    int mes,i, tamarray = 0;
+    char cliente[6];
+    int mes,i;
+    int qtam = 0;
+    Q10 q10array[100];
 
 
-    printf("Clientes:\n");
-    if(scanf("%s",&cliente) == 1){} else {}
     printf("Mes:\n");
     if(scanf("%d",&mes) == 1){} else {}
+    printf("Clientes:\n");
+    if(scanf("%s",&cliente) == 1){} else {}
 
     i = 0;
     for(i = 0; vendasconfirmadas[i];i++){
         if(getMes(vendasconfirmadas[i]) == mes){
             if(strcmp(getCliente(vendasconfirmadas[i]),cliente) == 0){
-                /*if (existenatruct(getProduto(vendasconfirmadas[i]))){
-
-
+                int aux = existenatruct(getProduto(vendasconfirmadas[i]),q10array,qtam);
+                if(aux>=0){
+                    q10array[aux]->nvendas += getUnidades(vendasconfirmadas[i]);
                 }
-            */}
+                else{
+                    q10array[qtam] = (Q10)malloc(sizeof(struct q10));
+                    aditToStruct(getProduto(vendasconfirmadas[i]), getUnidades(vendasconfirmadas[i]),q10array[qtam]);
+                    qtam++;
+                }
+            }
         }
+    }
+
+    sorta(q10array);
+    printf("got here\n");
+    for(i = 0;i<qtam;i++){
+        printf("%d\n",q10array[i]->nvendas);
     }
 }
 
@@ -373,7 +419,7 @@ void querry10(Vendas* vendasconfirmadas){
  */
 void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[]){
     int opcao;
-    printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n13.Sair\n");
+    printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
     printf("\n\nOpcao:");
     while(1){
         if(scanf("%d",&opcao) == 1){}else {
@@ -385,9 +431,10 @@ void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** t
             case 5: cliente_filial(treeFilial, vendasconfirmadas);break;
             case 8: querry8(vendasconfirmadas);break;
             case 9: querry9(vendasconfirmadas,treeFilial);break;
+            case 10: querry10(vendasconfirmadas);break;
             case 13: return;
         }
-        printf("Escolha uma querry:\n2.Catalogo de produtos\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n13.Sair\n");
+        printf("Escolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
         printf("\n\nOpcao:");
     }
 }
