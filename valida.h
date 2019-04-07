@@ -23,6 +23,15 @@ typedef struct vendas *Vendas;
 #define TAMVENDAS 1000000
 #define staAux 50
 
+/*funcoes de obtençao de elementos da struct.*/
+char* getProduto(Vendas ve);
+double getPreco(Vendas ve);
+int getUnidades(Vendas ve);
+char* getTcompra(Vendas ve);
+char* getCliente(Vendas ve);
+int getMes(Vendas ve);
+int getFilial(Vendas ve);
+
 
 int validvendas(char* fich,Vendas* structvendas,GTree** TreeClient,GTree** TreeProd,char** vendas);
 int getFilial(Vendas ve);

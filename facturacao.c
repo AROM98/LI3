@@ -15,20 +15,6 @@
 #define CAMPOSVENDA 7
 int e = 0;
 
-/**
- * @brief Struct de Venda.
- * 
- */
-typedef struct vendas{
-    char* prod;
-    double preco;
-    int unidades;
-    char* tcompra;
-    char* cliente;
-    int mes;
-    int filial;
-}*Vendas;
-
 typedef struct fac{
     char* produto;
     int N_vendas_N;
@@ -46,24 +32,38 @@ typedef struct filial{
     int Fact_vendas_P;/*lucros totais de cada filial*/
 }*Filial;
 
+/**
+ * @brief Função altenatica de comparaçao. Deste modo nao ha Warnings.
+ * 
+ * @param a 
+ * @param b 
+ * @return gint 
+ */
 static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
     const char *chb = b;
-
-    return *cha - *chb;
+    return strcmp(cha,chb);
 }
 
+/**
+ * @brief Inicia e aloca espaço para uma gtree
+ * 
+ * @param arraytree  GTree
+ */
 void initTree(GTree** arraytree){
     int i;
-    int* count = g_malloc(sizeof(int));
-    *count = 0;
-
     for(i = 0 ; i<13 ; i++){ /* 12 meses + 1 para os produtos nao vendidos*/
         arraytree[i] = g_tree_new(my_compare);/*preciso fazer funçao de comparação*/
     }
 }
 
-
+/**
+ * @brief Insere ama Struct Fac, numa GTree.
+ * 
+ * @param pos Mês.
+ * @param vend Struct Fac.
+ * @param arraytree GTree.
+ */
 void placeFacinTree(int pos, Fac vend, GTree** arraytree){
     g_tree_insert(arraytree[pos], vend, vend);/* tem de ser especificada a chave e o valor*/
 }
@@ -71,15 +71,21 @@ void placeFacinTree(int pos, Fac vend, GTree** arraytree){
 /*supondo que nao existe na avl, cria uma fac e insere*/
 Fac poeStruct (Vendas structvendas, GTree** tree){
     Fac res = (Fac)malloc(sizeof(struct fac));
-    res->produto = structvendas->prod;
-    printf("%s\n",structvendas->tcompra);
-    if(strcmp(structvendas->tcompra,"P")){
+    res->produto = getProduto(structvendas);
+    /*printf("%s", getTcompra(structvendas));*/
+    if(strcmp(getTcompra(structvendas),"P")){
         res->N_vendas_N = 0;
-        res->N_vendas_P = structvendas->unidades; /*unidades compradas*/
+        res->N_vendas_P = getUnidades(structvendas); /*unidades compradas*/
         res->F_vendas_N = 0;
-        res->F_vendas_P = structvendas->preco; /*preço da compra*/
+        res->F_vendas_P = getPreco(structvendas); /*preço da compra*/
     }
-    placeFacinTree(structvendas->mes, res, tree);
+    else{
+        res->N_vendas_N = getUnidades(structvendas); /*unidades compradas*/
+        res->N_vendas_P = 0;
+        res->F_vendas_N = getPreco(structvendas); /*preço da compra*/
+        res->F_vendas_P = 0;
+    }
+    placeFacinTree(getMes(structvendas), res, tree);
     return res;
 }
 
@@ -105,6 +111,7 @@ int exist(GTree** arraytree, Vendas str){
 
 gboolean comp(gpointer key, gpointer value , gpointer user_data){
     Fac nodo = (Fac)key; /*cada nodo da arvore*/
+    //printf("nodo -> produto:%s\n", nodo -> produto);
     char* str = (char*) user_data;
     if(strcmp(nodo -> produto, str) == 0){
         e = 1;
@@ -117,29 +124,32 @@ gboolean comp(gpointer key, gpointer value , gpointer user_data){
     return FALSE;
 }
 
-int e_procura(GTree** arraytree, char* str){
-    gpointer j;
-    int r = 0,i;
-    /*gpointer i = g_tree_search (arraytree[0], &strcmp, &test);*/
-    for(i = 0; i < 13; i++){    
-        g_tree_foreach(arraytree[i], comp, str);
-        if(e == 1){
-            r = 1;
-            e = 0;
-            break;
-        }
+int e_procura(GTree** arraytree, char* str, int pos){
+    int r = 0;
+    /*gpointer i = g_tree_search (arraytree[0], &strcmp, &test);*/ 
+    g_tree_foreach(arraytree[pos], comp, str);
+    if(e == 1){
+        r = 1;
+        e = 0;
     }
+    printf("procura em %d -> %d\n", pos, r);
     return r;
-    printf("Este elemento esta na avl? -> %s\n", j);
+    /*printf("Este elemento esta na avl? -> %s\n", j);*/
+}
+
+void atualiza(Vendas structvendas, GTree** tree){
+
 }
 
 
 void verifica(GTree** treeFac, GTree** treeProd, Vendas vendasconfirmadas[]){
-    int i = 0;
+    int i = 0, mes = 0;
     initTree(treeFac);
     while(vendasconfirmadas[i]){
-        if(exist(treeFac, vendasconfirmadas[i]) == 1){
+        mes = getMes(vendasconfirmadas[i]);
+        if(e_procura(treeFac, vendasconfirmadas[i], mes) == 1){
             /*printf("o elemento %s, ja esta na tree\n",vendasconfirmadas[i]->prod);*/
+            /*COMO ESTA NA ARVORE; AGORA TENHO QUE ATUALIZAR OS DADOS.*/
         }
         else{
             poeStruct(vendasconfirmadas[i], treeFac);

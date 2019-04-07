@@ -28,12 +28,32 @@ typedef struct vendas{
 }*Vendas;
 
 /*Métodos da struct, como é uma struct opaca, nao é possivel aceder ao membros fora deste ficheiro*/
-int getFilial(Vendas ve){
-    return ve -> filial;
+char* getProduto(Vendas ve){
+    return ve -> prod;
+}
+
+double getPreco(Vendas ve){
+    return ve -> preco;
+}
+
+int getUnidades(Vendas ve){
+    return ve -> unidades;
+}
+
+char* getTcompra(Vendas ve){
+    return ve -> tcompra;
 }
 
 char* getCliente(Vendas ve){
     return ve -> cliente;
+}
+
+int getMes(Vendas ve){
+    return ve -> mes;
+}
+
+int getFilial(Vendas ve){
+    return ve -> filial;
 }
 
 /**

@@ -4,8 +4,8 @@
  *
  * Contem coisas
  */
-#ifndef PRODUTOS_H
-#define PRODUTOS_H
+#ifndef CLIENTES_H
+#define CLIENTES_H
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
