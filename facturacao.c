@@ -15,6 +15,20 @@
 #define CAMPOSVENDA 7
 int e = 0;
 
+/**
+ * @brief Struct de Venda.
+ * 
+ */
+typedef struct vendas{
+    char* prod;
+    double preco;
+    int unidades;
+    char* tcompra;
+    char* cliente;
+    int mes;
+    int filial;
+}*Vendas;
+
 typedef struct fac{
     char* produto;
     int N_vendas_N;
@@ -55,38 +69,30 @@ void placeFacinTree(int pos, Fac vend, GTree** arraytree){
 }
 
 /*supondo que nao existe na avl, cria uma fac e insere*/
-Fac poeStruct (char* linhaVendaOk, GTree** tree){
-    char* campos[CAMPOSVENDA];
-    Fac res;
-    int index = 0;
-    char* aux = strdup (linhaVendaOk);
-    char* token = strtok(aux," ");
-    while(!(token == NULL)) {
-        campos[index] = strdup(token);
-        token = strtok(NULL," ");
-        index++;
-    }
-    res->produto = campos[0];
-    if(campos[3] == "P"){
+Fac poeStruct (Vendas structvendas, GTree** tree){
+    Fac res = (Fac)malloc(sizeof(struct fac));
+    res->produto = structvendas->prod;
+    printf("%s\n",structvendas->tcompra);
+    if(structvendas->tcompra == "P"){
         res->N_vendas_N = 0;
-        res->N_vendas_P = campos[2]; /*unidades compradas*/
+        res->N_vendas_P = structvendas->unidades; /*unidades compradas*/
         res->F_vendas_N = 0;
-        res->F_vendas_P = campos[1]; /*preço da compra*/
+        res->F_vendas_P = structvendas->preco; /*preço da compra*/
     }
-    placeFacinTree(campos[5], res, tree);
+    placeFacinTree(structvendas->mes, res, tree);
     return res;
 }
 
 
 char* getprod(Fac vend){
-    return vend->produto;   
+    return vend->produto;
 }
 
 int exist(GTree** arraytree, char* str){
     gpointer j;
     int r = 0,i;
     /*gpointer i = g_tree_search (arraytree[0], &strcmp, &test);*/
-    for(i = 0; i < 13; i++){    
+    for(i = 0; i < 13; i++){
         j = g_tree_lookup(arraytree[i], str);
         if(j != NULL){
             r = 1;
@@ -133,10 +139,11 @@ void verifica(GTree** treeFac, GTree** treeProd, Vendas vendasconfirmadas[]){
     initTree(treeFac);
     while(vendasconfirmadas[i]){
         if(exist(treeFac, vendasconfirmadas[i]) == 1){
-            printf("o elemento %s, ja esta na tree\n");
+            /*printf("o elemento %s, ja esta na tree\n",vendasconfirmadas[i]->prod);*/
         }
         else{
             poeStruct(vendasconfirmadas[i], treeFac);
+            /*printf("%s\n",vendasconfirmadas[i]->prod);*/
         }
         i++;
     }

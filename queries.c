@@ -27,7 +27,7 @@ typedef struct vendas{
     int filial;
 }*Vendas;
 
-char* arrayProd[200000];
+char* arrayProd[TAMPROD];
 int arrayprodvar = 0;
 
 void placeinTree(int pos, char* clien, GTree** arraytree){
