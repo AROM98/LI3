@@ -51,7 +51,7 @@ int initt(char* argv[]){
 
     /*facturaçcao -> nao sei se posso fazer isto...*/
     printf("->Iniciar Facturacao!\n");
-    verifica(treeFac, treeProd, structvendas);
+    //verifica(treeFac, treeProd, structvendas);
     printf("->Facturacao Feita!\n");
 
     /*Queries*/
