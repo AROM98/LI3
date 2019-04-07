@@ -30,6 +30,13 @@ typedef struct vendas{
 char* arrayProd[TAMPROD];
 int arrayprodvar = 0;
 
+static gint my_compare(gconstpointer a,gconstpointer b){
+    const char *cha = a;
+    const char *chb = b;
+
+    return strcmp(cha,chb);
+}
+
 void placeinTree(int pos, char* clien, GTree** arraytree){
     g_tree_insert(arraytree[pos], clien, clien);/* tem de ser especificada a chave e o valor*/
 }
@@ -37,7 +44,7 @@ void placeinTree(int pos, char* clien, GTree** arraytree){
 void initFTree(GTree** arraytree){
     int i;
     for(i = 0 ; i < 3; i++){ /* 12 meses + 1 para os produtos nao vendidos*/
-        arraytree[i] = g_tree_new(strcmp);/*preciso fazer funçao de comparação*/
+        arraytree[i] = g_tree_new(my_compare);/*preciso fazer funçao de comparação*/
     }
 }
 
@@ -52,13 +59,6 @@ gboolean treetoarray (gpointer key, gpointer value , gpointer user_data){
     arrayProd[arrayprodvar] = (char*) key;
     arrayprodvar++;
     return FALSE;
-}
-
-static gint my_compare(gconstpointer a,gconstpointer b){
-    const char *cha = a;
-    const char *chb = b;
-
-    return strcmp(cha,chb);
 }
 
 
@@ -189,7 +189,7 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
                     /*printf("%s posto no array[%d]\n", c, ind);*/
                     ind++;
                     v = 0;
-                    //printf("%s\n",array[ind]);
+                    /*printf("%s\n",array[ind]);*/
                 }
             }
             g_tree_insert(clii, c, c);
@@ -206,7 +206,7 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
 }
 
 void querry8(Vendas* vendasconfirmadas){
-    int mesi, mesf; int i = 0; int nvendas = 0; long long int totalfac = 0;
+    int mesi, mesf; int i = 0; int nvendas = 0; long double totalfac = 0;
     printf("Insira o mes inicial e o mes final:\n");
     if(scanf("%d %d",&mesi,&mesf) == 1){}else {
         printf("Failed to read mes inicial e mes final\n");
@@ -214,7 +214,7 @@ void querry8(Vendas* vendasconfirmadas){
     while(vendasconfirmadas[i]){
         if(vendasconfirmadas[i]->mes >= mesi && vendasconfirmadas[i]->mes <= mesf){
             nvendas += vendasconfirmadas[i]->unidades;
-            totalfac += (long long int)(vendasconfirmadas[i]->unidades * vendasconfirmadas[i]->preco);
+            totalfac += (long double)(vendasconfirmadas[i]->unidades * vendasconfirmadas[i]->preco);
         }
         i++;
     }
