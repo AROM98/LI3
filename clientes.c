@@ -23,11 +23,11 @@
  * @param user_data (contador - conta o numero de nodos que passou pela função)
  */
 gboolean printClientes(gpointer key, gpointer value , gpointer user_data){
+    /*int * count = (int*) user_data;
+    *count= *count + 1;*/
     char* str = (char*)key;
     printf("%s\n",str);
-    /*int * count = (int*) user_data;
-    *count= *count + 1;
-    g_printerr("%s\n", str);*/
+    /*g_printerr("%s\n", str);*/
 
     return FALSE;
 }
@@ -35,8 +35,7 @@ gboolean printClientes(gpointer key, gpointer value , gpointer user_data){
 static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
     const char *chb = b;
-
-    return *cha - *chb;
+    return strcmp(cha,chb);
 }
 
 /**
@@ -128,11 +127,12 @@ static void filetoTree(char *fich, GTree** tree){
 void clienteTree(char* fich,GTree** TreeClient){
     filetoTree(fich, TreeClient);
     /*int* count = g_malloc(sizeof(int));
-    *count = 0;
-    for(int j = 0; j < 26; j++){
+    *count = 0;*/
+    /*int j;
+    for( j = 0; j < 26; j++){
         printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeClient[j])); //imprime on nodos usados em casa avl. g_tree_height
         printf("altura[%d] ->%d\n", j, g_tree_height(TreeClient[j]));
-        g_tree_foreach(TreeClient[j],printClientes, NULL);
-    }*/
+    }
+    g_tree_foreach(TreeClient[0],printClientes, NULL);*/
     printf("clientes -> OK\n");
 }

@@ -73,7 +73,7 @@ Fac poeStruct (Vendas structvendas, GTree** tree){
     Fac res = (Fac)malloc(sizeof(struct fac));
     res->produto = structvendas->prod;
     printf("%s\n",structvendas->tcompra);
-    if(structvendas->tcompra == "P"){
+    if(strcmp(structvendas->tcompra,"P")){
         res->N_vendas_N = 0;
         res->N_vendas_P = structvendas->unidades; /*unidades compradas*/
         res->F_vendas_N = 0;
@@ -88,7 +88,7 @@ char* getprod(Fac vend){
     return vend->produto;
 }
 
-int exist(GTree** arraytree, char* str){
+int exist(GTree** arraytree, Vendas str){
     gpointer j;
     int r = 0,i;
     /*gpointer i = g_tree_search (arraytree[0], &strcmp, &test);*/
@@ -113,8 +113,8 @@ gboolean comp(gpointer key, gpointer value , gpointer user_data){
     /**count= *count + 1;
     g_printerr("%s\n", str);
     printf("%s ja existe\n",nodo -> produto);
-    printf("%s -> i= %d\n",str,*count);
-    return FALSE;*/
+    printf("%s -> i= %d\n",str,*count);*/
+    return FALSE;
 }
 
 int e_procura(GTree** arraytree, char* str){

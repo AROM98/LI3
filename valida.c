@@ -151,7 +151,7 @@ Vendas addtostruct(Vendas structvendas, char* prod,double preco, int uni, char* 
 return structvendas;
 }
 
-int valvenda(Vendas structvendas,char* linhaVendaOk, GTree** treeClient, GTree** treeProd){
+int valvenda(char* linhaVendaOk, GTree** treeClient, GTree** treeProd){
     char* campos[CAMPOS];
     int val=0;
     int index = 0;
@@ -183,7 +183,8 @@ int valvenda(Vendas structvendas,char* linhaVendaOk, GTree** treeClient, GTree**
 
 /**
  * @brief Função que dado um apontador para um ficheiro e um array de "strings" (vaziu),
- * preenche o array com o que esta no ficheiro
+ * preche o array com o que esta no ficheiro e na laux);
+ *
  * 
  * @param fp 
  * @param array 
@@ -216,7 +217,7 @@ int validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeP
     fp = fopen("Vendas_confirmadas.txt","w");
     char* campos[CAMPOS];
     while(i<tam && venda[i]){
-        if(valvenda(structvendas[i], venda[i],treeClient,treeProd)){
+        if(valvenda(venda[i],treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);
             index = 0;
             aux = strdup (venda[i]);
@@ -238,6 +239,6 @@ int validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeP
         i++;
     }
     fclose(fp);
-    
+
     return vval;
 }

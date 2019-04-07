@@ -45,9 +45,10 @@ int initt(char* argv[]){
 
     clienteTree("Clientes.txt",treeClient);
 
-    validvendas("Vendas_1M.txt",structvendas,treeClient,treeProd,vendas);
+    int vval = validvendas("Vendas_1M.txt",structvendas,treeClient,treeProd,vendas);
     free(vendas);
-    
+    printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n","Vendas_1M.txt",vval);
+
     /*facturaçcao -> nao sei se posso fazer isto...*/
     printf("->Iniciar Facturacao!\n");
     verifica(treeFac, treeProd, structvendas);

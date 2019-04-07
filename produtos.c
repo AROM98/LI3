@@ -34,7 +34,7 @@ static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
     const char *chb = b;
 
-    return *cha - *chb;
+    return strcmp(cha,chb);
 }
 
 /**
@@ -112,5 +112,6 @@ static void filetoProdTree(char *fich, GTree** tree){
  */
 void produtoTree(char* fich,GTree** TreeProd){
     filetoProdTree(fich, TreeProd);
+    /*g_tree_foreach(TreeProd[0],printProds,NULL);*/
     printf("produtos -> OK\n");
 }
