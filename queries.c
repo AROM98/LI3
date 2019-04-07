@@ -231,27 +231,31 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     int filial,i;
     int c = 0;
     char produto[7];
-    Q9* q9array = (Q9*)malloc(sizeof(struct q9));
-    printf("Insira a filial:");
-    if(scanf("%d",&filial) == 1){}else {
-        printf("Failed to read filial\n");
-    }
+    Q9 q9array[100];
+    
+    printf("\n\nInsira a filial:");
+    if(scanf("%d",&filial) == 1){}else {}
     printf("Insira o produto:");
-    if(scanf("%s", produto) == 1){}else {
-        printf("Failed to read produto\n");
-    }
-    for(i = 0;vendasconfirmadas[i];i++){    
-        if(vendasconfirmadas[i]->filial == filial && strcmp(vendasconfirmadas[i]->prod,produto) == 0){
-            /*q9array[c] = (Q9)malloc(sizeof(struct q9));*/
-            q9array[c]->clientes = vendasconfirmadas[i]->cliente;
-            q9array[c]->tcompra = vendasconfirmadas[i]->tcompra;
+    if(scanf("%s", produto) == 1){}else {}
+
+    for(i = 0;vendasconfirmadas[i];i++){
+        /*printf("%s\n",vendasconfirmadas[i]->prod);
+        printf("%d\n",strcmp(getProduto(vendasconfirmadas[i]) , produto));
+        printf("%d\n",getFilial(vendasconfirmadas[i]) == filial);*/
+        
+        if(getFilial(vendasconfirmadas[i]) == filial){
+            if((strcmp(getProduto(vendasconfirmadas[i]),produto)) == 0){
+            q9array[c] = (Q9)malloc(sizeof(struct q9));
+            q9array[c]->clientes = getCliente(vendasconfirmadas[i]);
+            q9array[c]->tcompra = getTcompra(vendasconfirmadas[i]);
+            c++;
+            }
         }
     }
-    int c1 = 0;
-    for(c1 = 0;c<c1;c1++){
-        printf("%s %s\n",q9array[c1]->clientes,q9array[c1]->tcompra);
+    for(i = 0;i<c;c++){
+        printf("Cliente: %s || Tipo de compra: %s\n\n\n",q9array[i]->clientes,q9array[i]->tcompra);
     }
-    printf("%d\n",c);
+    printf("Numero de total de clientes que compraram este produto: %d\n", c);
 }
 
 /**
