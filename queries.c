@@ -15,17 +15,10 @@
 #include "valida.h"
 #include "facturacao.h"
 
-
-
-typedef struct vendas{
-    char* prod;
-    double preco;
-    int unidades;
+typedef struct q9{
+    char* clientes;
     char* tcompra;
-    char* cliente;
-    int mes;
-    int filial;
-}*Vendas;
+}*Q9;
 
 char* arrayProd[TAMPROD];
 int arrayprodvar = 0;
@@ -158,20 +151,16 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     char* array[TAMCLIENTES];
     GTree* clii;
     clii = g_tree_new(my_compare);
-    printf("nnnnn1\n");
     initFTree(treeFilial);
-    printf("nnnnn2\n");
+
     while(vendasconfirmadas[i]){
         pos = (getFilial(vendasconfirmadas[i]) -1);
         c = getCliente(vendasconfirmadas[i]);
         placeinTree(pos, c, treeFilial);
         i++;
     }
-    /*for(z = 0; z < 3; z++){
-    	printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
-	}*/
+
     i = 0;
-    printf("nnnnn4\n");
     while(vendasconfirmadas[i]){
         c = getCliente(vendasconfirmadas[i]);
         if(existe(c, clii) == NULL){
@@ -201,8 +190,58 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     for(z = 0; treeFilial[z]; z++){
     	printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
 	}
-    /*agora temos um array com todos os clientes que compraram nas 3 filiais
-    return array;*/
+}
+
+typedef struct q3{
+    char** produto;
+    int nvendas;
+    double lucro;
+}*Q3;
+
+void querry3(Vendas* vendasconfirmadas){
+    int mes,i=0,p=0,n=0;
+    char produto[7];
+    Q3 totais[2];
+    
+    printf("\nInsira o mes:");
+    if(scanf("%d",&mes) == 1){}else {}
+    printf("Insira o produto:");
+    if(scanf("%s", produto) == 1){}else {}
+
+    /*Inicia a struct a 0*/
+    totais[0]->nvendas = totais[0]->lucro = totais[1]->nvendas = totais[1]->lucro = 0;
+
+    while(vendasconfirmadas[i]){
+        if(getMes(vendasconfirmadas[i]) == mes){
+            if(strcmp(getProduto(vendasconfirmadas[i]),produto)){
+                if(strcmp(getTcompra(vendasconfirmadas[i]),"P") == 0){
+                    totais[0]->nvendas += getUnidades(vendasconfirmadas[i]);
+                    totais[0]->lucro += (double)(getUnidades(vendasconfirmadas[i]) * getPreco(vendasconfirmadas[i]));
+                    totais[0]->produto[p] = (char*)malloc(sizeof(char*));
+                    totais[0]->produto[p] = getProduto(vendasconfirmadas[i]);
+                    p++;
+                }
+                else{
+                    totais[1]->nvendas += getUnidades(vendasconfirmadas[i]);
+                    totais[1]->lucro += (double)(getUnidades(vendasconfirmadas[i]) * getPreco(vendasconfirmadas[i]));
+                    totais[1]->produto[n] = (char*)malloc(sizeof(char*));
+                    totais[1]->produto[n] = getProduto(vendasconfirmadas[i]);
+                    n++;
+                }
+            }
+        }
+    i++;
+    }
+    printf("%d unidades vendidas em Promocao resultando num total de %f\n", totais[0]->nvendas, totais[0]->lucro);
+    for (i = 0;totais[0]->produto[i];i++){
+        printf("%s\n",totais[0]->produto[i]);
+    }
+    
+    printf("%d unidades normais vendidas resultando num total de %f\n", totais[1]->nvendas, totais[1]->lucro);
+    for (i = 0;totais[1]->produto[i];i++){
+        printf("%s\n",totais[1]->produto[i]);
+    
+    }
 }
 
 void querry8(Vendas* vendasconfirmadas){
@@ -221,11 +260,6 @@ void querry8(Vendas* vendasconfirmadas){
     
     printf("Numero total de vendas: %d unidades\nFaturacao total: %Lf euros\n\n\n", nvendas, totalfac);
 }
-
-typedef struct q9{
-    char* clientes;
-    char* tcompra;
-}*Q9;
 
 void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     int filial,i;
@@ -272,7 +306,7 @@ void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** t
         }
         switch(opcao){
             case 2: initcatalogo(treeProd);break;
-            /*case 3: querry3(treeFac);break;*/
+            case 3: querry3(vendasconfirmadas);break;
             case 5: cliente_filial(treeFilial, vendasconfirmadas);break;
             case 8: querry8(vendasconfirmadas);break;
             case 9: querry9(vendasconfirmadas,treeFilial);break;
