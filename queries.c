@@ -233,7 +233,7 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     char produto[7];
     Q9 q9array[100];
     
-    printf("\n\nInsira a filial:");
+    printf("\nInsira a filial:");
     if(scanf("%d",&filial) == 1){}else {}
     printf("Insira o produto:");
     if(scanf("%s", produto) == 1){}else {}
@@ -252,10 +252,10 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
             }
         }
     }
-    for(i = 0;i<c;c++){
-        printf("Cliente: %s || Tipo de compra: %s\n\n\n",q9array[i]->clientes,q9array[i]->tcompra);
+    for(i = 0;i<c;i++){
+        printf("Cliente: %s || Tipo de compra: %s\n",q9array[i]->clientes,q9array[i]->tcompra);
     }
-    printf("Numero de total de clientes que compraram este produto: %d\n", c);
+    printf("\nNumero de total de clientes que compraram este produto: %d\n\n\n", c);
 }
 
 /**
@@ -264,8 +264,8 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
  */
 void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[]){
     int opcao;
-    printf("Escolha uma querry:\n2.Catalogo de produtos\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.querry9\n13.Sair\n");
-    printf("Opcao:");
+    printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n13.Sair\n");
+    printf("\n\nOpcao:");
     while(1){
         if(scanf("%d",&opcao) == 1){}else {
             printf("Failed to read opcao\n");
@@ -278,7 +278,7 @@ void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** t
             case 9: querry9(vendasconfirmadas,treeFilial);break;
             case 13: return;
         }
-        printf("Escolha uma querry:\n2.Catalogo de produtos\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.querry9\n13.Sair\n");
-        printf("Opcao:");
+        printf("Escolha uma querry:\n2.Catalogo de produtos\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n13.Sair\n");
+        printf("\n\nOpcao:");
     }
 }
