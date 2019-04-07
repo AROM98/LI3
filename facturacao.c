@@ -111,7 +111,7 @@ int exist(GTree** arraytree, Vendas str){
 
 gboolean comp(gpointer key, gpointer value , gpointer user_data){
     Fac nodo = (Fac)key; /*cada nodo da arvore*/
-    //printf("nodo -> produto:%s\n", nodo -> produto);
+    /*printf("nodo -> produto:%s\n", nodo -> produto);*/
     char* str = (char*) user_data;
     if(strcmp(nodo -> produto, str) == 0){
         e = 1;
