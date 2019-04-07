@@ -34,6 +34,13 @@ void placeinTree(int pos, char* clien, GTree** arraytree){
     g_tree_insert(arraytree[pos], clien, clien);/* tem de ser especificada a chave e o valor*/
 }
 
+void initFTree(GTree** arraytree){
+    int i;
+    for(i = 0 ; i < 3; i++){ /* 12 meses + 1 para os produtos nao vendidos*/
+        arraytree[i] = g_tree_new(strcmp);/*preciso fazer funçao de comparação*/
+    }
+}
+
 gpointer existe(char* cod, GTree* arraytree){
     gpointer j; 
     j = g_tree_lookup(arraytree, cod);
@@ -148,18 +155,21 @@ void initcatalogo(GTree** treeProd){
 void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
     int i = 0, pos = 0, v = 0, ind = 0, z = 0,j = 0;
     char* c;
+    char* array[TAMCLIENTES];
     GTree* clii;
     clii = g_tree_new(my_compare);
     printf("nnnnn1\n");
-    initTree(treeFilial);
+    initFTree(treeFilial);
     printf("nnnnn2\n");
     while(vendasconfirmadas[i]){
-        pos = (getFilial(vendasconfirmadas[i]) - 1);
+        pos = (getFilial(vendasconfirmadas[i]) -1);
         c = getCliente(vendasconfirmadas[i]);
         placeinTree(pos, c, treeFilial);
         i++;
     }
-
+    /*for(z = 0; z < 3; z++){
+    	printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
+	}*/
     i = 0;
     printf("nnnnn4\n");
     while(vendasconfirmadas[i]){
@@ -175,11 +185,11 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
                     v++;
                 }
                 if(v == 3){
-                    /*array[ind] = c;
-                    printf("%s posto no array[%d]\n", c, ind);*/
+                    array[ind] = c;
+                    /*printf("%s posto no array[%d]\n", c, ind);*/
                     ind++;
                     v = 0;
-                    printf("%s\n",c);
+                    //printf("%s\n",array[ind]);
                 }
             }
             g_tree_insert(clii, c, c);
@@ -187,7 +197,8 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
         i++;
         v = 0;
     }
-    for(z = 0; z < 3; z++){
+    qsort(array, ind, sizeof(char*), my_compare);
+    for(z = 0; treeFilial[z]; z++){
     	printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
 	}
     /*agora temos um array com todos os clientes que compraram nas 3 filiais
