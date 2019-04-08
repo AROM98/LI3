@@ -11,8 +11,8 @@ LDFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config  --cflags glib-2.0` # -std=c11
 #LDFLAGS= -Wall -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR) #-std=c11 -g -v -Ofast #-ansi
 #LIBS = `pkg-config --libs libxml-2.0` `pkg-config --libs glib-2.0`
 
-main: main.o init.o queries.o produtos.o clientes.o valida.o facturacao.o
-	$(CC) main.o init.o queries.o produtos.o clientes.o valida.o facturacao.o -o main $(CFLAGS)
+main: main.o init.o queries.o produtos.o clientes.o valida.o
+	$(CC) main.o init.o queries.o produtos.o clientes.o valida.o -o main $(CFLAGS)
 main.o: main.c 
 	$(CC) main.c -c -o main.o  $(LDFLAGS)
 valida.o: valida.c valida.h 
@@ -25,8 +25,6 @@ produtos.o: produtos.c produtos.h
 	$(CC) produtos.c -c -o produtos.o  $(LDFLAGS)
 clientes.o: clientes.c clientes.h
 	$(CC) clientes.c -c -o clientes.o  $(LDFLAGS)
-facturacao.o: facturacao.c facturacao.h
-	$(CC) facturacao.c -c -o facturacao.o  $(LDFLAGS)
 
 # antes era rm -f main *.o
 clean: 

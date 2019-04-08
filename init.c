@@ -14,7 +14,6 @@
 #include "produtos.h"
 #include "clientes.h"
 #include "queries.h"
-#include "facturacao.h"
 
 typedef struct vendas{
     char* prod;
@@ -47,11 +46,6 @@ int initt(char* argv[]){
 
     int vval = validvendas(argv[3], structvendas, treeClient, treeProd,vendas);
     free(vendas);
-    //printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n","Vendas_1M.txt",vval);
-    //printf("Ficheiro de Produtos lido: %s || Produtos validados: %d\n","Produtos.txt",vval);
-    //printf("Ficheiro de Clientes lido: %s || Clientes validados: %d\n","Vendas_1M.txt",vval);
-
-    /*facturaçcao -> nao sei se posso fazer isto...*/
     printf("->Iniciar Facturacao!\n");
     //verifica(treeFac, treeProd, structvendas);
     printf("->Facturacao Feita!\n");

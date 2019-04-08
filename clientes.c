@@ -130,14 +130,6 @@ static int filetoTree(char *fich, GTree** tree){
 void clienteTree(char* fich,GTree** TreeClient){
     int vval = 0;
     vval = filetoTree(fich, TreeClient);
-    /*int* count = g_malloc(sizeof(int));
-    *count = 0;*/
-    /*int j;
-    for( j = 0; j < 26; j++){
-        printf("nodos[%d] ->%d\n", j, g_tree_nnodes (TreeClient[j])); //imprime on nodos usados em casa avl. g_tree_height
-        printf("altura[%d] ->%d\n", j, g_tree_height(TreeClient[j]));
-    }
-    g_tree_foreach(TreeClient[0],printClientes, NULL);*/
     printf("clientes -> OK\n");
     printf("Ficheiro de Clientes lido: %s || Clientes validados: %d\n", fich, vval);
 }

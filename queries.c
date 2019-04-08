@@ -13,9 +13,9 @@
 #include <glib.h>
 #include <math.h>
 #include "valida.h"
-#include "facturacao.h"
 #include "produtos.h"
 #include "clientes.h"
+
 
 typedef struct q3{
     char* produto[7];
@@ -166,6 +166,7 @@ void initcatalogo(GTree** treeProd){
 void querry5(GTree** treeFilial, Vendas vendasconfirmadas[]){
     int i = 0, pos = 0, v = 0, ind = 0, z = 0,j = 0;
     char* c;
+    char temp[20];
     char* array[TAMCLIENTES];
     GTree* clii;
     clii = g_tree_new(my_compare);
@@ -204,9 +205,20 @@ void querry5(GTree** treeFilial, Vendas vendasconfirmadas[]){
         i++;
         v = 0;
     }
-    qsort(array, ind, sizeof(char*), my_compare);
+    for (i = 0; array[i]; i++){
+        for (j = i+1; array[j]; j++){
+            if (strcmp (array[i], array[j]) > 0){
+                strcpy (temp, array[i]);
+                strcpy (array[i], array[j]);
+                strcpy (array[j], temp);
+            }
+        }
+    }
     for(z = 0; treeFilial[z]; z++){
     	printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
+	}
+    for(z = 0; array[z]; z++){
+    	printf("%s[%d]\n", array[z], z);
 	}
 }
 
@@ -543,7 +555,7 @@ void querry12(Vendas* vendasconfirmadas){
 
 void querie1(GTree** treeProd,GTree** treeClient, Vendas vendasconfirmadas[], char** vendas){
     int opcao = 0;
-    char* nome = NULL;
+    char nome[100];
     printf("1.Mudar ficheirdo de Produtos\n2.Mudar ficheirdo de Clientes\n3.Mudar ficheirdo de Vendas\n4.Sair\n");
     if(scanf("%d",&opcao) == 1){}else {
         printf("Failed to read opcao\n");
@@ -600,7 +612,7 @@ void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** t
             case 10: querry10(vendasconfirmadas);break;
             case 13: return;
         }
-        printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
+        printf("\n\nEscolha uma querry:\n1.Mudar de ficheiros\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
         printf("\n\nOpcao:");
     }
 }

@@ -116,7 +116,6 @@ static int filetoProdTree(char *fich, GTree** tree){
 void produtoTree(char* fich,GTree** TreeProd){
     int vval = 0;
     vval = filetoProdTree(fich, TreeProd);
-    /*g_tree_foreach(TreeProd[0],printProds,NULL);*/
     printf("produtos -> OK\n");
     printf("Ficheiro de Produtos lido: %s || Produtos validados: %d\n", fich, vval);
 }
