@@ -216,10 +216,12 @@ int escreveArray(FILE *fp, char* array[]){
         strtok(str, "\n\r");
         if(i >= max){
             array = (char**) realloc(array, (2 * max * sizeof(char*)));
-            max *= 2; 
+            max *= 2;
         }
-        array[i++] = strdup(str);
+        array[i] = strdup(str);
+        i++;
     }
+
     return i;
 }
 
@@ -233,13 +235,17 @@ int validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeP
     int i= 0 , tam = 0; int vval=0; int index = 0;
     char* aux; char* token;
     FILE *fp;
-    fp = fopen("Vendas_1M.txt", "r");
+    fp = fopen(fich, "r");
     tam = escreveArray(fp, venda);
     fclose(fp);
 
+    for(i=0;i<tam;i++){
+        printf("%s\n",venda[i]);
+    }
+
     fp = fopen("Vendas_confirmadas.txt","w");
     char* campos[CAMPOS];
-    while(i<tam && venda[i]){
+    while(i<tam){
         if(valvenda(venda[i],treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);
             index = 0;

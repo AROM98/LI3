@@ -49,11 +49,6 @@ int initt(char* argv[]){
     free(vendas);
     printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n","Vendas_1M.txt",vval);
 
-    /*facturaçcao -> nao sei se posso fazer isto...*/
-    printf("->Iniciar Facturacao!\n");
-    //verifica(treeFac, treeProd, structvendas);
-    printf("->Facturacao Feita!\n");
-
     /*Queries*/
     queriesmenu(treeProd,treeClient,treeFac,treeFilial, structvendas);
     return 0;

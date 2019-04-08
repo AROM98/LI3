@@ -20,6 +20,20 @@ typedef struct q9{
     char* tcompra;
 }*Q9;
 
+typedef struct q10{
+    char* produto;
+    int nvendas;
+}*Q10;
+
+typedef struct q3{
+    char** produto;
+    char** tcompra;
+    int nvendas;
+    double lucro;
+
+}*Q3;
+
+
 char* arrayProd[TAMPROD];
 int arrayprodvar = 0;
 
@@ -142,10 +156,9 @@ void initcatalogo(GTree** treeProd){
     return;
 }
 
-/*///////////////////////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////////////////////////////*/
 
-
-void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
+void querry5(GTree** treeFilial, Vendas vendasconfirmadas[]){
     int i = 0, pos = 0, v = 0, ind = 0, z = 0,j = 0;
     char* c;
     char* array[TAMCLIENTES];
@@ -192,13 +205,7 @@ void cliente_filial(GTree** treeFilial, Vendas vendasconfirmadas[]){
 	}
 }
 
-typedef struct q3{
-    char** produto;
-    char** tcompra;
-    int nvendas;
-    double lucro;
-
-}*Q3;
+/*/////////////////////////////////////////////////////////////////////*/
 
 void querry3(Vendas* vendasconfirmadas){
     int mes,i,pos = 0;
@@ -291,13 +298,109 @@ void querry3(Vendas* vendasconfirmadas){
     }
 
 }
+/*////////////////////////////////////////////////////////////////////////////*/
+
+void querry6(Vendas* vendasconfirmadas,GTree** treeProd,GTree** treeClient){
+    int i;
+    int nodescli = 0;
+    int nodesprod =0;
+    char* cli;
+    char* prod;
+    GTree* tcliaux = g_tree_new(my_compare);
+    GTree* tprodaux = g_tree_new(my_compare);
+
+    for(i = 0;vendasconfirmadas[i];i++){
+        cli = getCliente(vendasconfirmadas[i]);
+        if(g_tree_lookup(tcliaux,cli) == NULL){
+            g_tree_insert(tcliaux,cli,NULL);
+        }
+    }
+
+    for(i=0;i<26;i++){
+        nodescli+= g_tree_nnodes(treeClient[i]);
+    }
+    printf("Numero de clientes registados: %d\nNumero de clientes que compraram: %d\n",nodescli,g_tree_nnodes(tcliaux));
+    printf("Numero de clientes registados que nao realizaram compras: %d\n\n", nodescli - g_tree_nnodes(tcliaux));
+
+    for(i=0;vendasconfirmadas[i];i++){
+        prod = getProduto(vendasconfirmadas[i]);
+        if(g_tree_lookup(tprodaux,prod) == NULL){
+            g_tree_insert(tprodaux,prod,NULL);
+        }
+    }
+
+    for(i = 0;i<26;i++){
+        nodesprod+= g_tree_nnodes(treeProd[i]);
+    }
+    printf("Numero de produtos registados: %d\nNumero de produtos comprados: %d\n",nodesprod,g_tree_nnodes(tprodaux));
+    printf("Numero de produtos nunca comprados: %d\n", nodesprod - g_tree_nnodes(tprodaux));
+
+}
+
+/*////////////////////////////////////////////////////////////////////////////*/
+
+typedef struct q7{
+    int mes[12];
+}*Q7;
+
+void querry7(Vendas* vendasconfirmadas){
+    int i,j;
+    int nventotal = 0;
+    char cliente[6];
+    Q7 arrayfilial[3];
+
+    for (i = 0;i<3;i++){
+        arrayfilial[i] = (Q7)malloc(sizeof(struct q7));
+    }
+    for(i=0;i<3;i++){
+        for(j=0;j<12;j++){
+            arrayfilial[i]->mes[j] = 0;
+        }
+    }
+
+    printf("\nCliente: ");
+    if(scanf("%s",cliente) == 1){} else {}
+
+    i=0;
+    while(vendasconfirmadas[i]){
+        if(strcmp(getCliente(vendasconfirmadas[i]),cliente) == 0){
+            int nvendas = getUnidades(vendasconfirmadas[i]);
+            int nfilial = getFilial(vendasconfirmadas[i]);
+            arrayfilial[nfilial - 1]->mes[getMes(vendasconfirmadas[i]) - 1] += 1;
+            nventotal += nvendas;
+        }
+    i++;
+    }
+
+    for(i=1;i<4;i++){
+        printf("Filial %d:\n",i);
+        printf("| ");
+        for(j=1;j<13;j++){
+            printf("Mes %d: %d |",j,arrayfilial[i-1]->mes[j-1]);
+        }
+        printf("\n");
+    }
+
+    printf("Numero total de produtos comprados: %d\n\n", nventotal);
+
+    for(i=1;i<13;i++){
+        printf("Mes %d: ",i);
+        nventotal = 0;
+        for(j=1;j<4;j++){
+            nventotal+= arrayfilial[j-1]->mes[i-1];
+        }
+        printf("%d compras\n",nventotal);
+    }
+
+}
+
+/*////////////////////////////////////////////////////////////////////////////*/
 
 void querry8(Vendas* vendasconfirmadas){
     int mesi, mesf; int i = 0; int nvendas = 0; long double totalfac = 0;
-    printf("Insira o mes inicial e o mes final:\n");
-    if(scanf("%d %d",&mesi,&mesf) == 1){}else {
-        printf("Failed to read mes inicial e mes final\n");
-    }
+
+    printf("\nInsira o mes inicial e o mes final:\n");
+    if(scanf("%d %d",&mesi,&mesf) == 1){}else {}
     while(vendasconfirmadas[i]){
         if(getMes(vendasconfirmadas[i]) >= mesi && getMes(vendasconfirmadas[i]) <= mesf){
             nvendas += getUnidades(vendasconfirmadas[i]);
@@ -306,8 +409,10 @@ void querry8(Vendas* vendasconfirmadas){
         i++;
     }
     
-    printf("Numero total de vendas: %d unidades\nFaturacao total: %Lf euros\n\n\n", nvendas, totalfac);
+    printf("Numero total de vendas: %d unidades\nFaturacao total: %Lf euros\n", nvendas, totalfac);
 }
+
+/*///////////////////////////////////////////////////////////////////////////*/
 
 void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     int filial,i;
@@ -321,10 +426,6 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     if(scanf("%s", produto) == 1){}else {}
 
     for(i = 0;vendasconfirmadas[i];i++){
-        /*printf("%s\n",vendasconfirmadas[i]->prod);
-        printf("%d\n",strcmp(getProduto(vendasconfirmadas[i]) , produto));
-        printf("%d\n",getFilial(vendasconfirmadas[i]) == filial);*/
-        
         if(getFilial(vendasconfirmadas[i]) == filial){
             if((strcmp(getProduto(vendasconfirmadas[i]),produto)) == 0){
             q9array[c] = (Q9)malloc(sizeof(struct q9));
@@ -337,12 +438,10 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     for(i = 0;i<c;i++){
         printf("Cliente: %s || Tipo de compra: %s\n",q9array[i]->clientes,q9array[i]->tcompra);
     }
-    printf("\nNumero de total de clientes que compraram este produto: %d\n\n\n", c);
+    printf("\nNumero de total de clientes que compraram este produto: %d\n", c);
 }
-typedef struct q10{
-    char* produto;
-    int nvendas;
-}*Q10;
+
+/*////////////////////////////////////////////////////////////////////////////*/
 
 int existenatruct(char* produto, Q10* str, int qtam){
     int i,val = -1;
@@ -359,35 +458,18 @@ void aditToStruct(char* produto, int unidades, Q10 str){
     str->nvendas = unidades;
 }
 
-void sorta(Q10* array){
-    int i,j,iaux=0;
-    int temp = 0;
-    Q10 auxq = (Q10)malloc(sizeof(struct q10));
-    for(i = 0;array[i];i++){
-        for(j = i;array[j];j++){
-            if(array[j]->nvendas >= temp){
-                iaux = j;
-                temp = array[j]->nvendas;
-            }
-        }
-        Q10 auxq = array[iaux];
-        array[iaux] = array[i];
-        array[i] = auxq;
-    }
-}
-
-
 void querry10(Vendas* vendasconfirmadas){
     char cliente[6];
     int mes,i;
     int qtam = 0;
     Q10 q10array[100];
-
+    int j,maior,posmaior = 0;
 
     printf("Mes:\n");
     if(scanf("%d",&mes) == 1){} else {}
     printf("Clientes:\n");
-    if(scanf("%s",&cliente) == 1){} else {}
+    if(scanf("%s",cliente) == 1){} else {}
+    printf("\n");
 
     i = 0;
     for(i = 0; vendasconfirmadas[i];i++){
@@ -406,12 +488,49 @@ void querry10(Vendas* vendasconfirmadas){
         }
     }
 
-    sorta(q10array);
-    printf("got here\n");
     for(i = 0;i<qtam;i++){
-        printf("%d\n",q10array[i]->nvendas);
+        for(j=0;j<qtam;j++){
+            if(q10array[j]->nvendas >= maior){
+                posmaior = j;
+                maior = q10array[j]->nvendas;
+            }
+        }
+        printf("Cliente: %s || Numero de vendas: %d\n",q10array[posmaior]->produto,q10array[posmaior]->nvendas);
+        q10array[posmaior]->nvendas = -1;
+        q10array[posmaior]->produto = NULL;
+        maior = 0;
     }
 }
+
+/*/////////////////////////////////////////////////////////////////////////*/
+/*
+void querry12(Vendas* vendasconfirmadas){
+    int i;
+    char cliente[6];
+    gpointer spent;
+
+    if(scanf("%s",&cliente) == 1){} else {}
+    GTree* tree = g_tree_new(my_compare);
+
+    for(i=0;vendasconfirmadas[i];i++){
+        if(strcmp(getCliente(vendasconfirmadas[i]),cliente) == 0){
+            char* cli = getCliente(vendasconfirmadas[i]);
+            if(g_tree_lookup(tree,cli) != NULL){
+                spent = (getUnidades(vendasconfirmadas[i])*getPreco(vendasconfirmadas[i]));
+                g_tree_insert(tree,cli,spent);
+            }
+            else{
+                spent = (gdouble)g_tree_lookup(tree,cli);
+                g_tree_remove(tree,cli);
+                spent += getPreco(vendasconfirmadas[i])*getUnidades(vendasconfirmadas[i]);
+                gpointer g = (gpointer)spent;
+                g_tree_insert(tree,cli,g);
+            }
+        }
+    }
+}
+
+*/
 
 /**
  * @brief Funçao de testes.
@@ -419,7 +538,7 @@ void querry10(Vendas* vendasconfirmadas){
  */
 void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[]){
     int opcao;
-    printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
+    printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
     printf("\n\nOpcao:");
     while(1){
         if(scanf("%d",&opcao) == 1){}else {
@@ -428,13 +547,15 @@ void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** t
         switch(opcao){
             case 2: initcatalogo(treeProd);break;
             case 3: querry3(vendasconfirmadas);break;
-            case 5: cliente_filial(treeFilial, vendasconfirmadas);break;
+            case 5: querry5(treeFilial, vendasconfirmadas);break;
+            case 6: querry6(vendasconfirmadas,treeProd,treeClient);break;
+            case 7: querry7(vendasconfirmadas);break;
             case 8: querry8(vendasconfirmadas);break;
             case 9: querry9(vendasconfirmadas,treeFilial);break;
             case 10: querry10(vendasconfirmadas);break;
             case 13: return;
         }
-        printf("Escolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
+        printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
         printf("\n\nOpcao:");
     }
 }
