@@ -13,6 +13,6 @@
 #include <time.h>
 #include <glib.h>
 
-void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas* vendasconfirmadas);
+void qqueriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[], char** vendas);
 
 #endif

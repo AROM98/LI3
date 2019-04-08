@@ -103,10 +103,11 @@ int validclient(char clientes[]){
  * @param fich Nome do ficheiro.
  * @param tree Nome da Arvore.
  */
-static void filetoTree(char *fich, GTree** tree){
+static int filetoTree(char *fich, GTree** tree){
     char* cli;
     char str[STRAUX];
     FILE *fp;
+    int i = 0;
     fp = fopen(fich, "r");
     initArrayTree(tree);
     while(fgets(str, STRAUX, fp)){
@@ -114,9 +115,11 @@ static void filetoTree(char *fich, GTree** tree){
         cli = strdup(str);
         if (validclient(cli) == 1){
             placeClienteinTree(cli, tree);
+            i++;
         }
     }
     fclose(fp);
+    return i;
 }
 
 /**
@@ -125,7 +128,8 @@ static void filetoTree(char *fich, GTree** tree){
  * @param fich Nome do ficheiro de Clientes.
  */
 void clienteTree(char* fich,GTree** TreeClient){
-    filetoTree(fich, TreeClient);
+    int vval = 0;
+    vval = filetoTree(fich, TreeClient);
     /*int* count = g_malloc(sizeof(int));
     *count = 0;*/
     /*int j;
@@ -135,4 +139,5 @@ void clienteTree(char* fich,GTree** TreeClient){
     }
     g_tree_foreach(TreeClient[0],printClientes, NULL);*/
     printf("clientes -> OK\n");
+    printf("Ficheiro de Clientes lido: %s || Clientes validados: %d\n", fich, vval);
 }

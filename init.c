@@ -41,15 +41,22 @@ int initt(char* argv[]){
     char** vendas = (char**)malloc(TAMVENDAS*sizeof(char*));
     Vendas* structvendas = malloc(TAMVENDAS*sizeof(struct vendas));
 
-    produtoTree("Produtos.txt",treeProd);
+    produtoTree(argv[1],treeProd);
 
-    clienteTree("Clientes.txt",treeClient);
+    clienteTree(argv[2],treeClient);
 
-    int vval = validvendas("Vendas_1M.txt", structvendas, treeClient, treeProd,vendas);
+    int vval = validvendas(argv[3], structvendas, treeClient, treeProd,vendas);
     free(vendas);
-    printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n","Vendas_1M.txt",vval);
+    //printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n","Vendas_1M.txt",vval);
+    //printf("Ficheiro de Produtos lido: %s || Produtos validados: %d\n","Produtos.txt",vval);
+    //printf("Ficheiro de Clientes lido: %s || Clientes validados: %d\n","Vendas_1M.txt",vval);
+
+    /*facturaçcao -> nao sei se posso fazer isto...*/
+    printf("->Iniciar Facturacao!\n");
+    //verifica(treeFac, treeProd, structvendas);
+    printf("->Facturacao Feita!\n");
 
     /*Queries*/
-    queriesmenu(treeProd,treeClient,treeFac,treeFilial, structvendas);
+    queriesmenu(treeProd,treeClient,treeFac,treeFilial, structvendas, vendas);
     return 0;
 }

@@ -14,6 +14,8 @@
 #include <math.h>
 #include "valida.h"
 #include "facturacao.h"
+#include "produtos.h"
+#include "clientes.h"
 
 typedef struct q3{
     char* produto[7];
@@ -539,19 +541,55 @@ void querry12(Vendas* vendasconfirmadas){
 
 */
 
+void querie1(GTree** treeProd,GTree** treeClient, Vendas vendasconfirmadas[], char** vendas){
+    int opcao = 0;
+    char* nome = NULL;
+    printf("1.Mudar ficheirdo de Produtos\n2.Mudar ficheirdo de Clientes\n3.Mudar ficheirdo de Vendas\n4.Sair\n");
+    if(scanf("%d",&opcao) == 1){}else {
+        printf("Failed to read opcao\n");
+    }
+    if(opcao == 1){
+        printf("Insira o nome do novo ficheiro de Produtos (Ex: Nprod.txt):\n");
+
+        if(scanf("%s",nome) == 1){}else {
+            printf("Failed to read nome\n");
+        }
+        produtoTree(nome,treeProd);
+    }
+    if(opcao == 2){
+        printf("Insira o nome do novo ficheiro de Produtos (Ex: Ncliente.txt):\n");
+
+        if(scanf("%s",nome) == 1){}else {
+            printf("Failed to read nome\n");
+        }
+        clienteTree(nome,treeClient);
+    }
+    if(opcao == 3){
+        printf("Insira o nome do novo ficheiro de Produtos (Ex: Nprod.txt):\n");
+
+        if(scanf("%s",nome) == 1){}else {
+            printf("Failed to read nome\n");
+        }
+        validvendas(nome, vendasconfirmadas, treeClient, treeProd, vendas);
+    }
+    return;
+}
+
+
 /**
  * @brief Funçao de testes.
  * 
  */
-void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[]){
+void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[], char** vendas){
     int opcao;
-    printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
+    printf("\n\nEscolha uma querry:\n1.Mudar de ficheiros\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
     printf("\n\nOpcao:");
     while(1){
         if(scanf("%d",&opcao) == 1){}else {
             printf("Failed to read opcao\n");
         }
         switch(opcao){
+            case 1: querie1(treeProd, treeClient, vendasconfirmadas, vendas);break;
             case 2: initcatalogo(treeProd);break;
             case 3: querry3(vendasconfirmadas);break;
             case 5: querry5(treeFilial, vendasconfirmadas);break;

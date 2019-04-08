@@ -89,10 +89,11 @@ static int validProd(char produtos[]){
  * @param fich Nome do ficheiro.
  * @param tree Nome da Arvore.
  */
-static void filetoProdTree(char *fich, GTree** tree){
+static int filetoProdTree(char *fich, GTree** tree){
     char* pro;
     char str[STRAUX];
     FILE *fp;
+    int i = 0;
     fp = fopen(fich, "r");
     initProdTree(tree);
     while(fgets(str, STRAUX, fp)){
@@ -100,9 +101,11 @@ static void filetoProdTree(char *fich, GTree** tree){
         pro = strdup(str);
         if (validProd(pro) == 1){
             placeinProdTree(pro, tree);
+            i++;
         }
     }
     fclose(fp);
+    return i;
 }
 
 /**
@@ -111,7 +114,9 @@ static void filetoProdTree(char *fich, GTree** tree){
  * @param fich Nome do Ficheiro de Produtos.
  */
 void produtoTree(char* fich,GTree** TreeProd){
-    filetoProdTree(fich, TreeProd);
+    int vval = 0;
+    vval = filetoProdTree(fich, TreeProd);
     /*g_tree_foreach(TreeProd[0],printProds,NULL);*/
     printf("produtos -> OK\n");
+    printf("Ficheiro de Produtos lido: %s || Produtos validados: %d\n", fich, vval);
 }

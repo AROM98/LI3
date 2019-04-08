@@ -214,10 +214,10 @@ int escreveArray(FILE *fp, char* array[]){
     int i = 0, max = TAMVENDAS;
     while(fgets(str, staAux, fp)){
         strtok(str, "\n\r");
-        if(i >= max){
+        /*if(i >= max){
             array = (char**) realloc(array, (2 * max * sizeof(char*)));
             max *= 2;
-        }
+        }*/
         array[i] = strdup(str);
         i++;
     }
@@ -238,10 +238,10 @@ int validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeP
     fp = fopen(fich, "r");
     tam = escreveArray(fp, venda);
     fclose(fp);
-
+    /*
     for(i=0;i<tam;i++){
         printf("%s\n",venda[i]);
-    }
+    }*/
 
     fp = fopen("Vendas_confirmadas.txt","w");
     char* campos[CAMPOS];
@@ -268,6 +268,7 @@ int validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeP
         i++;
     }
     fclose(fp);
-
+    printf("vendas -> OK\n");
+    printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n", fich, vval);
     return vval;
 }
