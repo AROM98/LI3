@@ -15,6 +15,14 @@
 #include "valida.h"
 #include "facturacao.h"
 
+typedef struct q3{
+    char* produto[7];
+    char* tcompra[2];
+    int nvendas;
+    double lucro;
+
+}*Q3;
+
 typedef struct q9{
     char* clientes;
     char* tcompra;
@@ -25,17 +33,12 @@ typedef struct q10{
     int nvendas;
 }*Q10;
 
-typedef struct q3{
-    char** produto;
-    char** tcompra;
-    int nvendas;
-    double lucro;
-
-}*Q3;
 
 
+/*Variaveis globais para a initcatalogo*/
 char* arrayProd[TAMPROD];
 int arrayprodvar = 0;
+
 
 static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
@@ -210,7 +213,7 @@ void querry5(GTree** treeFilial, Vendas vendasconfirmadas[]){
 void querry3(Vendas* vendasconfirmadas){
     int mes,i,pos = 0;
     int opcao;
-    char produto[7];
+    char produto[10];
     Q3 totais[3];
     int fa,fb,fc;
     fa = fb = fc = 0;
@@ -222,65 +225,68 @@ void querry3(Vendas* vendasconfirmadas){
 
     for(i=0;i<3;i++){
         totais[i] = (Q3)malloc(sizeof(struct q3));
+        totais[i]->nvendas = 0;
+        totais[i]->lucro = 0;
     }
 
 
     i=0;
     while(vendasconfirmadas[i]){
         if(getMes(vendasconfirmadas[i]) == mes){
-            if(strcmp(getProduto(vendasconfirmadas[i]),produto)){
+            if(i==8) {printf("%s %s \n",getProduto(vendasconfirmadas[i]),produto);}
+            if(strcmp(getProduto(vendasconfirmadas[i]),produto) == 0){
                 int uniaux = getUnidades(vendasconfirmadas[i]);
                 int filialaux = getFilial(vendasconfirmadas[i])-1;
                 if(filialaux == 0){
+                    printf("fil was 1\n");
                     pos = fa;
                     fa++;
                 }
                     else if(filialaux == 1){
+                        printf("fil was 2\n");
                         pos = fb;
                         fb++;
                         }
                         else {
+                            printf("fil was 3\n");
                             pos = fc;
                             fc++;
                         }
 
+                printf("filial->%d\n",filialaux);
                 totais[filialaux]->lucro += (double)(uniaux * getPreco(vendasconfirmadas[i]));
                 totais[filialaux]->nvendas += uniaux;
-                printf("nnnn1\n");
                 totais[filialaux]->produto[pos] = (char*)malloc(7* sizeof(char));
-                totais[filialaux]->tcompra[pos] = (char*)malloc(sizeof(char));
                 totais[filialaux]->produto[pos] = getProduto(vendasconfirmadas[i]);
                 totais[filialaux]->tcompra[pos] = getTcompra(vendasconfirmadas[i]);
-                printf("nnnn2\n");
-                printf("\n");
             }
         }
     i++;
     }
 
-    printf("1.Resultado filial a filial\n2.Resultado global\n");
+    printf("1.Resultado filial a filial\n2.Resultado global\n\nOpcao: ");
     if(scanf("%d",&opcao) == 1){} else {}
 
     if(opcao == 1){
-        printf("filial 1: %f lucro || %d\n", totais[0]->lucro,totais[0]->nvendas);
+        printf("\nfilial 1: %f lucro || %d vendas\n", totais[0]->lucro,totais[0]->nvendas);
         for(i=0;i<fa;i++){
             printf("Produto %s do tipo %s\n", totais[0]->produto[i],totais[0]->tcompra[i]);
         }
 
-        printf("filial 2: %f lucro || %d\n", totais[1]->lucro,totais[0]->nvendas);
+        printf("\nfilial 2: %f lucro || %d vendas\n", totais[1]->lucro,totais[1]->nvendas);
         for(i=0;i<fb;i++){
             printf("Produto %s do tipo %s\n", totais[1]->produto[i],totais[1]->tcompra[i]);
         }
 
-        printf("filial 3: %f lucro || %d\n", totais[2]->lucro,totais[0]->nvendas);
+        printf("\nfilial 3: %f lucro || %d vendas\n", totais[2]->lucro,totais[2]->nvendas);
         for(i=0;i<fc;i++){
             printf("Produto %s do tipo %s\n", totais[2]->produto[i],totais[2]->tcompra[i]);
-        }    
+        }
     }
 
 
     if(opcao == 2){
-        printf("%f lucro\n", totais[0]->lucro + totais[1]->lucro + totais[2]->lucro);
+        printf("\n%f lucro\n", totais[0]->lucro + totais[1]->lucro + totais[2]->lucro);
         printf("%d vendas\n\n", totais[0]->nvendas + totais[1]->nvendas + totais[2]->nvendas);
         
         for(i=0;i<fa;i++){
@@ -296,6 +302,7 @@ void querry3(Vendas* vendasconfirmadas){
         }
 
     }
+    printf("\n");
 
 }
 /*////////////////////////////////////////////////////////////////////////////*/
