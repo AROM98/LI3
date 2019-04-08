@@ -27,6 +27,7 @@ typedef struct vendas{
     int filial;
 }*Vendas;
 
+
 /*Métodos da struct, como é uma struct opaca, nao é possivel aceder ao membros fora deste ficheiro*/
 char* getProduto(Vendas ve){
     return ve -> prod;
@@ -61,9 +62,7 @@ int getFilial(Vendas ve){
  * 
  */
 #define CAMPOS 7
-#define TAMPROD 200000
-#define TAMCLIENTES 20000
-#define TAMVENDAS 1000
+#define TAMVENDAS 1000000
 #define staAux 50
 
 /**
@@ -171,31 +170,24 @@ Vendas addtostruct(Vendas structvendas, char* prod,double preco, int uni, char* 
 return structvendas;
 }
 
-int valvenda(char* linhaVendaOk, GTree** treeClient, GTree** treeProd){
-    char* campos[CAMPOS];
-    int val=0;
-    int index = 0;
-    char* aux = strdup (linhaVendaOk);
-    char* token = strtok(aux," ");
-    while(!(token == NULL)) {
-        campos[index] = strdup(token);
-        token = strtok(NULL," ");
-        index++;
-    }
-    double precoaux = atof(campos[1]);
-    int uniaux = atoi(campos[2]);
-    int mesaux = atoi(campos[5]);
-    int filialaux = atoi(campos[6]);
-
-
-    int a = verprod(campos[0],treeProd);
-    int b = verclien(campos[4],treeClient);
-    int c = verpreco(precoaux);
-    int d = verunidadesvend(uniaux);
-    int e = vertcompra(campos[3]);
-    int f = vermes(mesaux);
-    int g = verfilial(filialaux);
-    if (a && b && c && d && e && f && g){
+/**
+ * @brief Verifica se a venda é valida.
+ * 
+ * @param prod 
+ * @param preco 
+ * @param uni 
+ * @param tipocompra 
+ * @param cli 
+ * @param mes 
+ * @param filial 
+ * @param treeClient 
+ * @param treeProd 
+ * @return int 
+ */
+int valvenda(char* prod,double preco,int uni,char* tipocompra,char* cli,int mes,int filial,GTree** treeClient, GTree** treeProd){
+	int val = 0;
+	
+    if (verprod(prod,treeProd) && verclien(cli,treeClient) && verpreco(preco) && verunidadesvend(uni) && vertcompra(tipocompra) && vermes(mes) && verfilial(filial)){
         val = 1;
     }
     return val;
@@ -211,17 +203,28 @@ int valvenda(char* linhaVendaOk, GTree** treeClient, GTree** treeProd){
  */
 int escreveArray(FILE *fp, char* array[]){
     char str[staAux];
-    int i = 0, max = TAMVENDAS;
+    int i = 0;
     while(fgets(str, staAux, fp)){
         strtok(str, "\n\r");
-        /*if(i >= max){
-            array = (char**) realloc(array, (2 * max * sizeof(char*)));
-            max *= 2;
-        }*/
         array[i] = strdup(str);
         i++;
     }
 
+    return i;
+}
+
+/**
+ * @brief determina o numero de linhas lidas do ficheiro.
+ * 
+ * @param fp 
+ * @return int 
+ */
+int TanArray(FILE *fp){
+    char str[staAux];
+    int i = 0;
+    while(fgets(str, staAux, fp)){
+        i++;
+    }
     return i;
 }
 
@@ -231,44 +234,42 @@ int escreveArray(FILE *fp, char* array[]){
  * 
  * @param fich 
  */
-int validvendas(char* fich,Vendas* structvendas,GTree** treeClient,GTree** treeProd,char** venda){
-    int i= 0 , tam = 0; int vval=0; int index = 0;
+Vendas* validvendas(char* fich, GTree** treeClient, GTree** treeProd){
+    int i= 0 , tam = 0; int vval=0; int index = 0, tan = 0;
     char* aux; char* token;
     FILE *fp;
     fp = fopen(fich, "r");
+    tan = TanArray(fp);
+    fclose(fp);
+    char** venda = (char**)malloc((tan + 100)*sizeof(char*));
+    Vendas* structven = malloc(tan*sizeof(struct vendas));
+    fp = fopen(fich, "r");
     tam = escreveArray(fp, venda);
     fclose(fp);
-    /*
-    for(i=0;i<tam;i++){
-        printf("%s\n",venda[i]);
-    }*/
-
-    fp = fopen("Vendas_confirmadas.txt","w");
+    fp = fopen("Vendas_Confirmadas.txt","w");
     char* campos[CAMPOS];
-    while(i<tam){
-        if(valvenda(venda[i],treeClient,treeProd)){
+    while(i<tam && venda[i]){
+        index = 0;
+        aux = strdup (venda[i]);
+        token = strtok(aux," ");
+        while(!(token == NULL)) {
+            campos[index] = strdup(token);
+            token = strtok(NULL," ");
+            index++;
+        }
+        double precoaux = atof(campos[1]);
+        int uniaux = atoi(campos[2]);
+        int mesaux = atoi(campos[5]);
+        int filialaux = atoi(campos[6]);            
+        if(valvenda(campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux,treeClient,treeProd)){
             fprintf(fp,"%s\n", venda[i]);
-            index = 0;
-            aux = strdup (venda[i]);
-            token = strtok(aux," ");
-            while(!(token == NULL)) {
-                campos[index] = strdup(token);
-                token = strtok(NULL," ");
-                index++;
-            }
-            double precoaux = atof(campos[1]);
-            int uniaux = atoi(campos[2]);
-            int mesaux = atoi(campos[5]);
-            int filialaux = atoi(campos[6]);
-
-
-            structvendas[vval] = addtostruct(structvendas[vval], campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux);
+            structven[vval] = addtostruct(structven[vval], campos[0],precoaux,uniaux,campos[3],campos[4],mesaux,filialaux);
             vval++;
         }
         i++;
     }
     fclose(fp);
-    printf("vendas -> OK\n");
+    free(venda);
     printf("Ficheiro de vendas lido: %s || Vendas validadas: %d\n", fich, vval);
-    return vval;
+    return structven;
 }

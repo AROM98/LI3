@@ -13,10 +13,13 @@
 #include <glib.h>
 #include <math.h>
 #include "valida.h"
-#include "facturacao.h"
 #include "produtos.h"
 #include "clientes.h"
 
+/**
+ * @brief Struct da querie 3
+ * 
+ */
 typedef struct q3{
     char* produto[7];
     char* tcompra[2];
@@ -25,11 +28,19 @@ typedef struct q3{
 
 }*Q3;
 
+/**
+ * @brief Struct da querie 9
+ * 
+ */
 typedef struct q9{
     char* clientes;
     char* tcompra;
 }*Q9;
 
+/**
+ * @brief Struct da querie 10
+ * 
+ */
 typedef struct q10{
     char* produto;
     int nvendas;
@@ -41,7 +52,13 @@ typedef struct q10{
 char* arrayProd[TAMPROD];
 int arrayprodvar = 0;
 
-
+/**
+ * @brief Função de Comparação que usa o strcmp().
+ * 
+ * @param a String a
+ * @param b String b
+ * @return gint 
+ */
 static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
     const char *chb = b;
@@ -49,10 +66,22 @@ static gint my_compare(gconstpointer a,gconstpointer b){
     return strcmp(cha,chb);
 }
 
+/**
+ * @brief Funçao de insere um clientes numa gtree.
+ * 
+ * @param pos 
+ * @param clien String Cliente
+ * @param arraytree 
+ */
 void placeinTree(int pos, char* clien, GTree** arraytree){
     g_tree_insert(arraytree[pos], clien, clien);/* tem de ser especificada a chave e o valor*/
 }
 
+/**
+ * @brief Função que aloca espaço para cada árvore dentro do array.
+ * 
+ * @param arraytree 
+ */
 void initFTree(GTree** arraytree){
     int i;
     for(i = 0 ; i < 3; i++){ /* 12 meses + 1 para os produtos nao vendidos*/
@@ -60,12 +89,28 @@ void initFTree(GTree** arraytree){
     }
 }
 
+/**
+ * @brief Funçao que procura se uma string, se encontra em algum nodo da gtree
+ * 
+ * @param cod String
+ * @param arraytree gtree
+ * @return gpointer 
+ */
 gpointer existe(char* cod, GTree* arraytree){
     gpointer j; 
     j = g_tree_lookup(arraytree, cod);
     return j;
 }
 
+/**
+ * @brief Funçao auxilair utilizada num g_tree_foreach().
+ * É alocado espaço e colocado no array.
+ * 
+ * @param key 
+ * @param value 
+ * @param user_data 
+ * @return gboolean 
+ */
 gboolean treetoarray (gpointer key, gpointer value , gpointer user_data){
     arrayProd[arrayprodvar] = malloc(sizeof(strlen(key)));
     arrayProd[arrayprodvar] = (char*) key;
@@ -73,7 +118,12 @@ gboolean treetoarray (gpointer key, gpointer value , gpointer user_data){
     return FALSE;
 }
 
-
+/**
+ * @brief Catalogo de Produtos
+ * 
+ * @param arryProd 
+ * @param paginaTotal 
+ */
 void catprod(char* arryProd[],int paginaTotal){
     int pagina,opcao=1,i=0;
     pagina = 0;
@@ -134,7 +184,11 @@ void catprod(char* arryProd[],int paginaTotal){
     }
 }
 
-
+/**
+ * @brief Funçao que inicializa o Catalogo
+ * 
+ * @param treeProd 
+ */
 void initcatalogo(GTree** treeProd){
     char lsearch;
     int opcao,paginaTotal;
@@ -161,17 +215,29 @@ void initcatalogo(GTree** treeProd){
     return;
 }
 
-/*/////////////////////////////////////////////////////////////////////////////*/
 
+/**
+ * @brief Imprime os elementos da gtree fornecida no input.
+ * 
+ * @param key 
+ * @param value 
+ * @param user_data 
+ * @return gboolean 
+ */
 gboolean printElem(gpointer key, gpointer value , gpointer user_data){
     char* str = (char*)key;
-
     printf("%s\n",str);
     return FALSE;
 }
 
+/**
+ * @brief Função da querie 5
+ * 
+ * @param treeFilial gtree de filiais
+ * @param vendasconfirmadas array de structs de vendas confirmadas
+ */
 void querry5(GTree** treeFilial, Vendas vendasconfirmadas[]){
-    int i = 0, pos = 0, v = 0, ind = 0, z = 0,j = 0;
+    int i = 0, pos = 0, v = 0, ind = 0,j = 0;
     char* c;
     GTree* tresfiliais;
     GTree* clii;
@@ -213,15 +279,14 @@ void querry5(GTree** treeFilial, Vendas vendasconfirmadas[]){
 	g_tree_foreach(tresfiliais,printElem,NULL);
 
 	printf("\n");
-    for(z = 0; treeFilial[z]; z++){
-    	printf("nodos[%d] ->%d\n", z, g_tree_nnodes(treeFilial[z]));
-	}
-
-
 }
 
-/*/////////////////////////////////////////////////////////////////////*/
 
+/**
+ * @brief Função da querie 3
+ * 
+ * @param vendasconfirmadas array de structs de vendas confirmadas
+ */
 void querry3(Vendas* vendasconfirmadas){
     int mes,i,pos = 0;
     int opcao;
@@ -250,22 +315,19 @@ void querry3(Vendas* vendasconfirmadas){
                 int uniaux = getUnidades(vendasconfirmadas[i]);
                 int filialaux = getFilial(vendasconfirmadas[i])-1;
                 if(filialaux == 0){
-                    printf("fil was 1\n");
                     pos = fa;
                     fa++;
                 }
-                    else if(filialaux == 1){
-                        printf("fil was 2\n");
+                else {
+                    if(filialaux == 1){
                         pos = fb;
                         fb++;
-                        }
-                        else {
-                            printf("fil was 3\n");
-                            pos = fc;
-                            fc++;
-                        }
-
-                printf("filial->%d\n",filialaux);
+                    }
+                    else{
+                        pos = fc;
+                        fc++;
+                    }
+                }    
                 totais[filialaux]->lucro += (double)(uniaux * getPreco(vendasconfirmadas[i]));
                 totais[filialaux]->nvendas += uniaux;
                 totais[filialaux]->produto[pos] = (char*)malloc(7* sizeof(char));
@@ -317,8 +379,14 @@ void querry3(Vendas* vendasconfirmadas){
     printf("\n");
 
 }
-/*////////////////////////////////////////////////////////////////////////////*/
 
+/**
+ * @brief Função da querie 6
+ * 
+ * @param vendasconfirmadas array de structs de vendas confirmadas
+ * @param treeProd gtree do produtos
+ * @param treeClient gtree dos clientes
+ */
 void querry6(Vendas* vendasconfirmadas,GTree** treeProd,GTree** treeClient){
     int i;
     int nodescli = 0;
@@ -356,12 +424,20 @@ void querry6(Vendas* vendasconfirmadas,GTree** treeProd,GTree** treeClient){
 
 }
 
-/*////////////////////////////////////////////////////////////////////////////*/
 
+/**
+ * @brief Struct da querie 7
+ * 
+ */
 typedef struct q7{
     int mes[12];
 }*Q7;
 
+/**
+ * @brief Função da querie 7
+ * 
+ * @param vendasconfirmadas array de structs de vendas confirmadas
+ */
 void querry7(Vendas* vendasconfirmadas){
     int i,j;
     int nventotal = 0;
@@ -413,8 +489,11 @@ void querry7(Vendas* vendasconfirmadas){
 
 }
 
-/*////////////////////////////////////////////////////////////////////////////*/
-
+/**
+ * @brief Função da querie 8
+ * 
+ * @param vendasconfirmadas array de structs de vendas confirmadas
+ */
 void querry8(Vendas* vendasconfirmadas){
     int mesi, mesf; int i = 0; int nvendas = 0; long double totalfac = 0;
 
@@ -431,8 +510,14 @@ void querry8(Vendas* vendasconfirmadas){
     printf("Numero total de vendas: %d unidades\nFaturacao total: %Lf euros\n", nvendas, totalfac);
 }
 
-/*///////////////////////////////////////////////////////////////////////////*/
 
+
+/**
+ * @brief Função da querie 9
+ * 
+ * @param vendasconfirmadas array de structs de vendas confirmadas
+ * @param treeFilial gtree de filiais
+ */
 void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     int filial,i;
     int c = 0;
@@ -460,8 +545,15 @@ void querry9(Vendas* vendasconfirmadas,GTree** treeFilial){
     printf("\nNumero de total de clientes que compraram este produto: %d\n", c);
 }
 
-/*////////////////////////////////////////////////////////////////////////////*/
 
+/**
+ * @brief Funçao que verifica que o produto existe na struct Q10.
+ * 
+ * @param produto String produto
+ * @param str Struct Q10
+ * @param qtam 
+ * @return int 
+ */
 int existenatruct(char* produto, Q10* str, int qtam){
     int i,val = -1;
     for(i = 0; str[i] && !val;i++){
@@ -472,11 +564,23 @@ int existenatruct(char* produto, Q10* str, int qtam){
     return val;
 }
 
+/**
+ * @brief  Funçao que adiciona Produto a struct Q10
+ * 
+ * @param produto 
+ * @param unidades 
+ * @param str 
+ */
 void aditToStruct(char* produto, int unidades, Q10 str){
     str->produto = produto;
     str->nvendas = unidades;
 }
 
+/**
+ * @brief Funcao da querie Q10
+ * 
+ * @param vendasconfirmadas 
+ */
 void querry10(Vendas* vendasconfirmadas){
     char cliente[6];
     int mes,i;
@@ -486,7 +590,7 @@ void querry10(Vendas* vendasconfirmadas){
 
     printf("Mes:\n");
     if(scanf("%d",&mes) == 1){} else {}
-    printf("Clientes:\n");
+    printf("Cliente:\n");
     if(scanf("%s",cliente) == 1){} else {}
     printf("\n");
 
@@ -514,46 +618,23 @@ void querry10(Vendas* vendasconfirmadas){
                 maior = q10array[j]->nvendas;
             }
         }
-        printf("Cliente: %s || Numero de vendas: %d\n",q10array[posmaior]->produto,q10array[posmaior]->nvendas);
+        printf("Produto: %s || Numero de vendas: %d\n",q10array[posmaior]->produto,q10array[posmaior]->nvendas);
         q10array[posmaior]->nvendas = -1;
         q10array[posmaior]->produto = NULL;
         maior = 0;
     }
 }
 
-/*/////////////////////////////////////////////////////////////////////////*/
-/*
-void querry12(Vendas* vendasconfirmadas){
-    int i;
-    char cliente[6];
-    gpointer spent;
-
-    if(scanf("%s",&cliente) == 1){} else {}
-    GTree* tree = g_tree_new(my_compare);
-
-    for(i=0;vendasconfirmadas[i];i++){
-        if(strcmp(getCliente(vendasconfirmadas[i]),cliente) == 0){
-            char* cli = getCliente(vendasconfirmadas[i]);
-            if(g_tree_lookup(tree,cli) != NULL){
-                spent = (getUnidades(vendasconfirmadas[i])*getPreco(vendasconfirmadas[i]));
-                g_tree_insert(tree,cli,spent);
-            }
-            else{
-                spent = (gdouble)g_tree_lookup(tree,cli);
-                g_tree_remove(tree,cli);
-                spent += getPreco(vendasconfirmadas[i])*getUnidades(vendasconfirmadas[i]);
-                gpointer g = (gpointer)spent;
-                g_tree_insert(tree,cli,g);
-            }
-        }
-    }
-}
-
-*/
-
-void querie1(GTree** treeProd,GTree** treeClient, Vendas vendasconfirmadas[], char** vendas){
+/**
+ * @brief Função da querie 1
+ * 
+ * @param treeProd 
+ * @param treeClient 
+ * @param vendasconfirmadas 
+ */
+void querie1(GTree** treeProd,GTree** treeClient, Vendas vendasconfirmadas[]){
     int opcao = 0;
-    char* nome = NULL;
+    char nome[100];
     printf("1.Mudar ficheirdo de Produtos\n2.Mudar ficheirdo de Clientes\n3.Mudar ficheirdo de Vendas\n4.Sair\n");
     if(scanf("%d",&opcao) == 1){}else {
         printf("Failed to read opcao\n");
@@ -580,17 +661,18 @@ void querie1(GTree** treeProd,GTree** treeClient, Vendas vendasconfirmadas[], ch
         if(scanf("%s",nome) == 1){}else {
             printf("Failed to read nome\n");
         }
-        validvendas(nome, vendasconfirmadas, treeClient, treeProd, vendas);
+        validvendas(nome, treeClient, treeProd);
     }
     return;
 }
 
 
 /**
- * @brief Funçao de testes.
+ * @brief Funçao do menu de queries.
+ * Aqui são chamadas todas as outras funções.
  * 
  */
-void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[], char** vendas){
+void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas vendasconfirmadas[]){
     int opcao;
     printf("\n\nEscolha uma querry:\n1.Mudar de ficheiros\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
     printf("\n\nOpcao:");
@@ -599,7 +681,7 @@ void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** t
             printf("Failed to read opcao\n");
         }
         switch(opcao){
-            case 1: querie1(treeProd, treeClient, vendasconfirmadas, vendas);break;
+            case 1: querie1(treeProd, treeClient, vendasconfirmadas);break;
             case 2: initcatalogo(treeProd);break;
             case 3: querry3(vendasconfirmadas);break;
             case 5: querry5(treeFilial, vendasconfirmadas);break;
@@ -610,7 +692,7 @@ void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** t
             case 10: querry10(vendasconfirmadas);break;
             case 13: return;
         }
-        printf("\n\nEscolha uma querry:\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
+        printf("\n\nEscolha uma querry:\n1.Mudar de ficheiros\n2.Catalogo de produtos\n3.Dando um mes e Produto e devolve vendas e faturacao\n5.Lista de clientes que compraram em todas as filiais\n6.Nº clientes que nao realizaram compras e produtos nao comprados\n7.Dado um cliente devolve uma tabela dos produtos comprados\n8.Nº de vendas e faturacao total num intervalo de dois meses\n9.Cliente e tipo de compra de acordo com um Produto e uma filial\n10.Dado cliente e mes, devolve lista de produtos\n13.Sair\n");
         printf("\n\nOpcao:");
     }
 }

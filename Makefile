@@ -4,12 +4,8 @@ LDIR=lib
 OLDIR=$(ODIR)/lib
 
 CC=gcc
-CFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config  --libs glib-2.0` # -std=c11 -g -v -Ofast
-LDFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config  --cflags glib-2.0` # -std=c11 -g -v -Ofast
-#CFLAGS = -lglib-2.0  #-std=c11 -g -v -Ofast
-#CFLAGS = -Wall -ansi -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` `--pkg-config --cflags --libs gmodule-2.0` -I$(IDIR) 
-#LDFLAGS= -Wall -std=c11 -g -v -Ofast `pkg-config --cflags libxml-2.0` `pkg-config --cflags glib-2.0` -I$(IDIR) #-std=c11 -g -v -Ofast #-ansi
-#LIBS = `pkg-config --libs libxml-2.0` `pkg-config --libs glib-2.0`
+CFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config  --libs glib-2.0`
+LDFLAGS = -Wall -std=c11 -g -v -Ofast `pkg-config  --cflags glib-2.0` 
 
 main: main.o init.o queries.o produtos.o clientes.o valida.o
 	$(CC) main.o init.o queries.o produtos.o clientes.o valida.o -o main $(CFLAGS)
@@ -26,7 +22,6 @@ produtos.o: produtos.c produtos.h
 clientes.o: clientes.c clientes.h
 	$(CC) clientes.c -c -o clientes.o  $(LDFLAGS)
 
-# antes era rm -f main *.o
 clean: 
 	rm -rf *.o
 	rm main

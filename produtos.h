@@ -1,8 +1,7 @@
 /**
  * @file produtos.h
- * \brief head de valida
+ * \brief head de produtos
  *
- * Contem as definiçoes de todas as funcoes unicas de valida.c
  */
 #ifndef PRODUTOS_H
 #define PRODUTOS_H

@@ -2,7 +2,6 @@
  * @file queries.h
  * \brief head de queries
  *
- * Contem as definiçoes de todas as funcoes unicas de queries.c
  */
 #ifndef QUERIES_H
 #define QUERIES_H
@@ -13,6 +12,6 @@
 #include <time.h>
 #include <glib.h>
 
-void qqueriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFac, GTree** treeFilial, Vendas vendasconfirmadas[], char** vendas);
+void queriesmenu(GTree** treeProd,GTree** treeClient, GTree** treeFilial, Vendas vendasconfirmadas[]);
 
 #endif

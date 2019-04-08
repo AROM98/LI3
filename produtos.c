@@ -25,15 +25,20 @@
  */
 gboolean printProds(gpointer key, gpointer value , gpointer user_data){
     char* str = (char*)key;
-
     printf("%s\n",str);
     return FALSE;
 }
 
+/**
+ * @brief Função de Comparação que usa o strcmp().
+ * 
+ * @param a String a
+ * @param b String b
+ * @return gint 
+ */
 static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
     const char *chb = b;
-
     return strcmp(cha,chb);
 }
 
@@ -44,9 +49,6 @@ static gint my_compare(gconstpointer a,gconstpointer b){
  */
 static void initProdTree(GTree** arraytree){
     int i;
-    int* count = g_malloc(sizeof(int));
-    *count = 0;
-
     for(i = 0 ; i<26 ; i++){
         arraytree[i] = g_tree_new(my_compare);
     }
@@ -63,8 +65,13 @@ static void placeinProdTree(char* str,GTree** arraytree){
     g_tree_insert(arraytree[pos], str, str);
 }
 
+/**
+ * @brief Função de Validação de Produtos.
+ * 
+ * @param produtos String produto.
+ * @return int 
+ */
 static int validProd(char produtos[]){
-
         if(strlen(produtos) != 6){
             return 0;
         }
@@ -74,7 +81,7 @@ static int validProd(char produtos[]){
             printf("nao é valido o produto1: %s\n", produtos);
             return 0;
         }
-        if(produtos[2] == '0'){ /*verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido*/
+        if(produtos[2] == '0'){
             printf("nao é valido o produto1: %s\n", produtos); 
             return 0;
         }
@@ -109,13 +116,12 @@ static int filetoProdTree(char *fich, GTree** tree){
 }
 
 /**
- * @brief Preenche Uma AVL com produtos ja validados.
+ * @brief Chama as funções que preenchem uma AVL com Produtos validos.
  * 
  * @param fich Nome do Ficheiro de Produtos.
  */
 void produtoTree(char* fich,GTree** TreeProd){
     int vval = 0;
     vval = filetoProdTree(fich, TreeProd);
-    printf("produtos -> OK\n");
     printf("Ficheiro de Produtos lido: %s || Produtos validados: %d\n", fich, vval);
 }

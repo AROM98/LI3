@@ -32,25 +32,11 @@ typedef struct vendas{
  * @return int 
  */
 int initt(char* argv[]){
-
     GTree* treeProd[30];
     GTree* treeClient[30];
-    GTree* treeFac[13];
     GTree* treeFilial[3];
-    char** vendas = (char**)malloc(TAMVENDAS*sizeof(char*));
-    Vendas* structvendas = malloc(TAMVENDAS*sizeof(struct vendas));
-
     produtoTree(argv[1],treeProd);
-
     clienteTree(argv[2],treeClient);
-
-    int vval = validvendas(argv[3], structvendas, treeClient, treeProd,vendas);
-    free(vendas);
-    printf("->Iniciar Facturacao!\n");
-    //verifica(treeFac, treeProd, structvendas);
-    printf("->Facturacao Feita!\n");
-
-    /*Queries*/
-    queriesmenu(treeProd,treeClient,treeFac,treeFilial, structvendas, vendas);
+    queriesmenu(treeProd, treeClient, treeFilial, validvendas(argv[3], treeClient, treeProd));
     return 0;
 }

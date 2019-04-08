@@ -13,9 +13,6 @@
 #include <glib.h>
 
 
-
-
-
 /**
  * @brief Função Main, onde a função initt é chamada; também é feita a contagem do tempo de
  * execução do programa.
@@ -29,7 +26,7 @@ int main (int argc, char* argv[]){
     double cpu_time_used;
     start = clock();
     if (argc < 3){
-        printf("\tIndica os ficheiros de Produtos, Clientes e Vendas quando invocas o programa!\n");
+        printf("\tIndique os ficheiros de Produtos, Clientes e Vendas ao invocar o programa!\n");
         exit(-1);
     }
     initt(argv);

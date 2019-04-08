@@ -2,8 +2,8 @@
  * @file clientes.c
  * \brief Modulo de Clientes
  *
- * Ficheiro onde é feito todas as validaaçoes de Clientes.
- * tambem é onde os Clientes sao colocados em avls.
+ * Ficheiro onde é feito todas as validaçoes de Clientes.
+ * É também onde os Clientes sao colocados em avls da glib (gtrees).
  */
 #define _GNU_SOURCE
 #include <stdlib.h>
@@ -15,23 +15,26 @@
 #define STRAUX 50
 
 /**
- * @brief Função que imprime um elemento de um nodo de arvore.
+ * @brief Função que imprime um elemento de um nodo de árvore.
  * Será usada com g_tree_foreach(), logo irá imprimir todos os nodos da árvore.
  * 
  * @param key (conteudo de cada nodo da árvore) 
  * @param value (valor associado a chave)
- * @param user_data (contador - conta o numero de nodos que passou pela função)
+ * @param user_data (outro valor passado a função).
  */
 gboolean printClientes(gpointer key, gpointer value , gpointer user_data){
-    /*int * count = (int*) user_data;
-    *count= *count + 1;*/
     char* str = (char*)key;
     printf("%s\n",str);
-    /*g_printerr("%s\n", str);*/
-
     return FALSE;
 }
 
+/**
+ * @brief Função de Comparação que usa o strcmp().
+ * 
+ * @param a String a
+ * @param b String b
+ * @return gint 
+ */
 static gint my_compare(gconstpointer a,gconstpointer b){
     const char *cha = a;
     const char *chb = b;
@@ -39,18 +42,14 @@ static gint my_compare(gconstpointer a,gconstpointer b){
 }
 
 /**
- * @brief Função que aloca espaço para cada arvore dentro do array.
+ * @brief Função que aloca espaço para cada árvore dentro do array.
  * 
- * @param arraytree Nome do Array.
+ * @param arraytree Nome do array que irá conter as árvores.
  */
 static void initArrayTree(GTree** arraytree){
     int i;
-    int* count = g_malloc(sizeof(int));
-    *count = 0;
-
     for(i = 0 ; i<26 ; i++){
         arraytree[i] = g_tree_new(my_compare);/* strcmp função que descrimina como comparar arguments*/
-        /*g_tree_foreach(arraytree[i],printelements, NULL);*/
     }
 }
 
@@ -65,31 +64,31 @@ static void placeClienteinTree(char* str,GTree** arraytree){
     g_tree_insert(arraytree[pos], str, str);
 }
 
+/**
+ * @brief Funão de Validação de Clientes.
+ * 
+ * @param clientes String de Cliente.
+ * @return int return de true(1) ou false(0).
+ */
 int validclient(char clientes[]){
     if(strlen(clientes) != 5){
-        /*printf("nao é valido o cliente: %s\n", clientes);*/
         return 0;
     }
     if(clientes[0]>='A' && clientes[0]<='Z'){
-       /*printf("é valido o produto: %s", clientes[a]);*/
     }
     else {
-        /*printf("nao é valido o cliente: %s\n", clientes);*/
         return 0;
     }
-    /*verifica numero -> basta o 1 algarismo ser diferente de 0, para ser valido*/
     if(clientes[1] == '0'){
-       /*printf("nao é valido o cliente: %s\n", clientes);*/
        return 0;
     }
     if(clientes[1] > '5') {
-        /*printf("nao é valido o cliente: %s\n", clientes);*/
         return 0;
     }
     if(clientes[1] == '5'){
         if(clientes[2] == '0' && clientes[3] == '0' && clientes[4] == '0'){}
         else {
-            /*printf("nao é valido o cliente: %s\n", clientes);*/
+
             return 0;
         }
     }
@@ -123,13 +122,12 @@ static int filetoTree(char *fich, GTree** tree){
 }
 
 /**
- * @brief Preenche Uma AVL com clientes.
+ * @brief Chama as funções que preenchem uma AVL com clientes.
  * 
  * @param fich Nome do ficheiro de Clientes.
  */
 void clienteTree(char* fich,GTree** TreeClient){
     int vval = 0;
     vval = filetoTree(fich, TreeClient);
-    printf("clientes -> OK\n");
     printf("Ficheiro de Clientes lido: %s || Clientes validados: %d\n", fich, vval);
 }
