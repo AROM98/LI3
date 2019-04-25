@@ -1,0 +1,52 @@
+ QUERIES: -> O QUE SAO E O QUE É NECESSARIO FAZER <-
+
+Q1 -> deverao ser lidos 3 ficheros, do qual o resultado terá que ser:
+    * apresentaçao imediata ao utilizador do nome do ficheiro lido, 
+    * o número total de linhas lidas e validadas
+    * ter opçao para ler de novo outros ficheiros...??? --é isto que pede o guiao?---
+    ||-QUASE FEITA-||
+
+Q2 -> Determinar a lista e o no total de produtos cujo código se inicia por uma dada letra (maiúscula)
+    * apresentar lista ao utilizador e permitir ao mesmo navegar pagina a pagina.
+    * lista apresentada por ordem alfabética;
+    - SOLUÇAO: retirar da arvore, alfabeticamente e apresentar de bloco em bloco (10?) 
+    ||-FEITO-||
+
+Q3 -> Dado um mês e um código de produto, ambos válidos, determinar e apresentar:
+    * o número total de vendas (nº de registos de venda) -- só procurar
+    * o total facturado com esse produto em tal mês -- somar o lucro
+    * distinguir os totais em modo N e os totais em modo P. 
+    * O utilizador deverá decidir se pretende o resultado global ou os resultados filial a filial para todas as 3 filiais.
+    - SOLUÇAO: 
+
+Q4 -> Determinar a lista ordenada dos códigos dos produtos que ninguém comprou:
+    * e o seu número total (de produtos)
+    * podendo o utilizador decidir se pretende valores totais ou divididos pelas filiais.
+
+Q5 -> Determinar a lista ordenada de códigos de clientes que realizaram compras em todas as filiais;
+
+Q6 -> Determinar:
+    * o número de clientes registados que não realizaram compras.
+    * o número de produtos que ninguém comprou.
+
+Q7 -> Dado um código de cliente, criar uma tabela com:
+    * o número total de produtos comprados (a soma das quantidades de todas as vendas do produto). 
+    * mês a mês (para meses em que não comprou a entrada deverá ficar a 0).
+    * A tabela deverá ser apresentada em ecrã organizada por filial.
+
+Q8 -> Dado um intervalo fechado de meses, por exemplo [1..3], determinar:
+    * o total de vendas (nº de registos de venda) registadas nesse intervalo e o total facturado. ||-Feito-||
+
+Q9 -> Dado um código de produto e uma filial, determinar:
+    * os códigos (e número total) dos clientes que o compraram, distinguindo entre compra N e compra P;
+
+Q10 ->  Dado um código de cliente e um mês, determinar:
+    * a lista de códigos de produtos que mais comprou por quantidade por ordem descendente;
+
+Q11 -> Criar uma lista dos N produtos mais vendidos em todo o ano, 
+    indicando o número total de clientes e o número de unidades vendidas, 
+    filial a filial;
+
+Q12 -> Dado um código de cliente determinar:
+    * quais os códigos dos 3 produtos em que mais gastou dinheiro durante o ano;
+

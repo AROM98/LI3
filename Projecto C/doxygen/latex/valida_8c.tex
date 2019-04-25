@@ -1,0 +1,396 @@
+\hypertarget{valida_8c}{}\section{valida.\+c File Reference}
+\label{valida_8c}\index{valida.c@{valida.c}}
+
+
+Ficheio valida.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$glib.\+h$>$}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structvendas}{vendas}}
+\begin{DoxyCompactList}\small\item\em Struct de Venda. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{valida_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\item 
+\#define \mbox{\hyperlink{valida_8c_a7d6b49fccb877abb06c359c31888c60c}{C\+A\+M\+P\+OS}}~7
+\begin{DoxyCompactList}\small\item\em Defines para tamanhos de arrays. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{valida_8c_ab807bb3f9717a2ffa08d5567ce004833}{T\+A\+M\+V\+E\+N\+D\+AS}}~1000000
+\item 
+\#define \mbox{\hyperlink{valida_8c_ae7a37b6a7cd7e76d531152025675c6e3}{sta\+Aux}}~50
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structvendas}{vendas}} $\ast$ \mbox{\hyperlink{valida_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}
+\begin{DoxyCompactList}\small\item\em Struct de Venda. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{valida_8c_ae305eeab2941ae6df5c12484f660960b}{get\+Produto}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+double \mbox{\hyperlink{valida_8c_a1c006a5e033c7c8bd91083a11c5d9655}{get\+Preco}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+int \mbox{\hyperlink{valida_8c_a8b50ed19c775c94a66f9e8778593a1e2}{get\+Unidades}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+char $\ast$ \mbox{\hyperlink{valida_8c_a4a813431cf426a2d061ad32247e9f958}{get\+Tcompra}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+char $\ast$ \mbox{\hyperlink{valida_8c_a448e7201e668e9fd0cc1466f48d62255}{get\+Cliente}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+int \mbox{\hyperlink{valida_8c_a30b2b7a9db4aa54d8840eedf41b77bcf}{get\+Mes}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+int \mbox{\hyperlink{valida_8c_abdeb06127269b351c94d8e3498008383}{get\+Filial}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+int \mbox{\hyperlink{valida_8c_a242deacfba1b2d730b390140ab94649e}{verprod}} (char $\ast$campos, G\+Tree $\ast$$\ast$tree\+Prod)
+\begin{DoxyCompactList}\small\item\em Função que verifica se o Produto é válido. Procura a venda dada como input no array de Produtos validos. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_af35f2745e46abe790ad20f66811abfca}{verclien}} (char $\ast$campos, G\+Tree $\ast$$\ast$tree\+Client)
+\begin{DoxyCompactList}\small\item\em Função que verifica se o Cliente é válido. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_a0d0c3d7dacae09e34a6f8f317dd70a2e}{verpreco}} (double unidec)
+\begin{DoxyCompactList}\small\item\em Função que verifica se Preço do Produto é válido. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_adbbe806d8343194dd71b1645916ab5a5}{verunidadesvend}} (int unidades)
+\begin{DoxyCompactList}\small\item\em Função que verifica se o número de unidades compradas é válido. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_a374451bf20de2e57dfeec81f295ae7bc}{vertcompra}} (char $\ast$compra)
+\begin{DoxyCompactList}\small\item\em Função que verifica se o tipo de compra é válido. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_a1bdaf6c3083b6cab01a165e62715fc13}{vermes}} (int mes)
+\begin{DoxyCompactList}\small\item\em Função que verifica se o mês da compra é válido. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_ad1be87da548326eadf227a6ae9952fd5}{verfilial}} (int filial)
+\begin{DoxyCompactList}\small\item\em Função que verifica se a filial é válida. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} \mbox{\hyperlink{valida_8c_a1bd9185fd3b2c9a5248b8987193742d5}{addtostruct}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} structvendas, char $\ast$prod, double preco, int uni, char $\ast$tipocompra, char $\ast$cliente, int mes, int filial)
+\begin{DoxyCompactList}\small\item\em Função que escreve cada linha do array de vendas num array de struct; também verifica se cada elemento da venda é valido. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_a20cc181df64da3748ae623cbbae29f2d}{valvenda}} (char $\ast$prod, double preco, int uni, char $\ast$tipocompra, char $\ast$cli, int mes, int filial, G\+Tree $\ast$$\ast$tree\+Client, G\+Tree $\ast$$\ast$tree\+Prod)
+\begin{DoxyCompactList}\small\item\em Verifica se a venda é valida. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_adaa1fb95271f80c6f0376eb3d6931bcb}{escreve\+Array}} (F\+I\+LE $\ast$fp, char $\ast$array\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Função que dado um apontador para um ficheiro e um array de \char`\"{}strings\char`\"{} (vaziu), preche o array com o que esta no ficheiro e na laux);. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{valida_8c_a330f2928365f47d572e18e635b943008}{Tan\+Array}} (F\+I\+LE $\ast$fp)
+\begin{DoxyCompactList}\small\item\em determina o numero de linhas lidas do ficheiro. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$ \mbox{\hyperlink{valida_8c_adcb0457870e88817a12cd4920daf2ab5}{validvendas}} (char $\ast$fich, G\+Tree $\ast$$\ast$tree\+Client, G\+Tree $\ast$$\ast$tree\+Prod)
+\begin{DoxyCompactList}\small\item\em Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ficheio valida. 
+
+Ficheiro onde é feito todas as validaaçoes de dados. tambem é onde se mexe nas estruturas. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{valida_8c_a369266c24eacffb87046522897a570d5}\label{valida_8c_a369266c24eacffb87046522897a570d5}} 
+\index{valida.c@{valida.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+\mbox{\Hypertarget{valida_8c_a7d6b49fccb877abb06c359c31888c60c}\label{valida_8c_a7d6b49fccb877abb06c359c31888c60c}} 
+\index{valida.c@{valida.c}!CAMPOS@{CAMPOS}}
+\index{CAMPOS@{CAMPOS}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{CAMPOS}{CAMPOS}}
+{\footnotesize\ttfamily \#define C\+A\+M\+P\+OS~7}
+
+
+
+Defines para tamanhos de arrays. 
+
+\mbox{\Hypertarget{valida_8c_ae7a37b6a7cd7e76d531152025675c6e3}\label{valida_8c_ae7a37b6a7cd7e76d531152025675c6e3}} 
+\index{valida.c@{valida.c}!staAux@{staAux}}
+\index{staAux@{staAux}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{staAux}{staAux}}
+{\footnotesize\ttfamily \#define sta\+Aux~50}
+
+\mbox{\Hypertarget{valida_8c_ab807bb3f9717a2ffa08d5567ce004833}\label{valida_8c_ab807bb3f9717a2ffa08d5567ce004833}} 
+\index{valida.c@{valida.c}!TAMVENDAS@{TAMVENDAS}}
+\index{TAMVENDAS@{TAMVENDAS}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{TAMVENDAS}{TAMVENDAS}}
+{\footnotesize\ttfamily \#define T\+A\+M\+V\+E\+N\+D\+AS~1000000}
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{valida_8c_a8ba32818746b947b5435069ffaa02658}\label{valida_8c_a8ba32818746b947b5435069ffaa02658}} 
+\index{valida.c@{valida.c}!Vendas@{Vendas}}
+\index{Vendas@{Vendas}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{Vendas}{Vendas}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structvendas}{vendas}}$\ast$ \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}
+
+
+
+Struct de Venda. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{valida_8c_a1bd9185fd3b2c9a5248b8987193742d5}\label{valida_8c_a1bd9185fd3b2c9a5248b8987193742d5}} 
+\index{valida.c@{valida.c}!addtostruct@{addtostruct}}
+\index{addtostruct@{addtostruct}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{addtostruct()}{addtostruct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} addtostruct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{structvendas,  }\item[{char $\ast$}]{prod,  }\item[{double}]{preco,  }\item[{int}]{uni,  }\item[{char $\ast$}]{tipocompra,  }\item[{char $\ast$}]{cliente,  }\item[{int}]{mes,  }\item[{int}]{filial }\end{DoxyParamCaption})}
+
+
+
+Função que escreve cada linha do array de vendas num array de struct; também verifica se cada elemento da venda é valido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em linha\+Venda\+Ok} & -\/ uma linha do array de vendas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_adaa1fb95271f80c6f0376eb3d6931bcb}\label{valida_8c_adaa1fb95271f80c6f0376eb3d6931bcb}} 
+\index{valida.c@{valida.c}!escreveArray@{escreveArray}}
+\index{escreveArray@{escreveArray}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{escreveArray()}{escreveArray()}}
+{\footnotesize\ttfamily int escreve\+Array (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{char $\ast$}]{array\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Função que dado um apontador para um ficheiro e um array de \char`\"{}strings\char`\"{} (vaziu), preche o array com o que esta no ficheiro e na laux);. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & \\
+\hline
+{\em array} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{valida_8c_a448e7201e668e9fd0cc1466f48d62255}\label{valida_8c_a448e7201e668e9fd0cc1466f48d62255}} 
+\index{valida.c@{valida.c}!getCliente@{getCliente}}
+\index{getCliente@{getCliente}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{getCliente()}{getCliente()}}
+{\footnotesize\ttfamily char$\ast$ get\+Cliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8c_abdeb06127269b351c94d8e3498008383}\label{valida_8c_abdeb06127269b351c94d8e3498008383}} 
+\index{valida.c@{valida.c}!getFilial@{getFilial}}
+\index{getFilial@{getFilial}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{getFilial()}{getFilial()}}
+{\footnotesize\ttfamily int get\+Filial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8c_a30b2b7a9db4aa54d8840eedf41b77bcf}\label{valida_8c_a30b2b7a9db4aa54d8840eedf41b77bcf}} 
+\index{valida.c@{valida.c}!getMes@{getMes}}
+\index{getMes@{getMes}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{getMes()}{getMes()}}
+{\footnotesize\ttfamily int get\+Mes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8c_a1c006a5e033c7c8bd91083a11c5d9655}\label{valida_8c_a1c006a5e033c7c8bd91083a11c5d9655}} 
+\index{valida.c@{valida.c}!getPreco@{getPreco}}
+\index{getPreco@{getPreco}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{getPreco()}{getPreco()}}
+{\footnotesize\ttfamily double get\+Preco (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8c_ae305eeab2941ae6df5c12484f660960b}\label{valida_8c_ae305eeab2941ae6df5c12484f660960b}} 
+\index{valida.c@{valida.c}!getProduto@{getProduto}}
+\index{getProduto@{getProduto}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{getProduto()}{getProduto()}}
+{\footnotesize\ttfamily char$\ast$ get\+Produto (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8c_a4a813431cf426a2d061ad32247e9f958}\label{valida_8c_a4a813431cf426a2d061ad32247e9f958}} 
+\index{valida.c@{valida.c}!getTcompra@{getTcompra}}
+\index{getTcompra@{getTcompra}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{getTcompra()}{getTcompra()}}
+{\footnotesize\ttfamily char$\ast$ get\+Tcompra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8c_a8b50ed19c775c94a66f9e8778593a1e2}\label{valida_8c_a8b50ed19c775c94a66f9e8778593a1e2}} 
+\index{valida.c@{valida.c}!getUnidades@{getUnidades}}
+\index{getUnidades@{getUnidades}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{getUnidades()}{getUnidades()}}
+{\footnotesize\ttfamily int get\+Unidades (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8c_a330f2928365f47d572e18e635b943008}\label{valida_8c_a330f2928365f47d572e18e635b943008}} 
+\index{valida.c@{valida.c}!TanArray@{TanArray}}
+\index{TanArray@{TanArray}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{TanArray()}{TanArray()}}
+{\footnotesize\ttfamily int Tan\+Array (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+
+
+determina o numero de linhas lidas do ficheiro. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_adcb0457870e88817a12cd4920daf2ab5}\label{valida_8c_adcb0457870e88817a12cd4920daf2ab5}} 
+\index{valida.c@{valida.c}!validvendas@{validvendas}}
+\index{validvendas@{validvendas}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{validvendas()}{validvendas()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}$\ast$ validvendas (\begin{DoxyParamCaption}\item[{char $\ast$}]{fich,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Client,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod }\end{DoxyParamCaption})}
+
+
+
+Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fich} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{valida_8c_a20cc181df64da3748ae623cbbae29f2d}\label{valida_8c_a20cc181df64da3748ae623cbbae29f2d}} 
+\index{valida.c@{valida.c}!valvenda@{valvenda}}
+\index{valvenda@{valvenda}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{valvenda()}{valvenda()}}
+{\footnotesize\ttfamily int valvenda (\begin{DoxyParamCaption}\item[{char $\ast$}]{prod,  }\item[{double}]{preco,  }\item[{int}]{uni,  }\item[{char $\ast$}]{tipocompra,  }\item[{char $\ast$}]{cli,  }\item[{int}]{mes,  }\item[{int}]{filial,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Client,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod }\end{DoxyParamCaption})}
+
+
+
+Verifica se a venda é valida. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prod} & \\
+\hline
+{\em preco} & \\
+\hline
+{\em uni} & \\
+\hline
+{\em tipocompra} & \\
+\hline
+{\em cli} & \\
+\hline
+{\em mes} & \\
+\hline
+{\em filial} & \\
+\hline
+{\em tree\+Client} & \\
+\hline
+{\em tree\+Prod} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_af35f2745e46abe790ad20f66811abfca}\label{valida_8c_af35f2745e46abe790ad20f66811abfca}} 
+\index{valida.c@{valida.c}!verclien@{verclien}}
+\index{verclien@{verclien}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{verclien()}{verclien()}}
+{\footnotesize\ttfamily int verclien (\begin{DoxyParamCaption}\item[{char $\ast$}]{campos,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Client }\end{DoxyParamCaption})}
+
+
+
+Função que verifica se o Cliente é válido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em campos} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_ad1be87da548326eadf227a6ae9952fd5}\label{valida_8c_ad1be87da548326eadf227a6ae9952fd5}} 
+\index{valida.c@{valida.c}!verfilial@{verfilial}}
+\index{verfilial@{verfilial}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{verfilial()}{verfilial()}}
+{\footnotesize\ttfamily int verfilial (\begin{DoxyParamCaption}\item[{int}]{filial }\end{DoxyParamCaption})}
+
+
+
+Função que verifica se a filial é válida. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filial} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_a1bdaf6c3083b6cab01a165e62715fc13}\label{valida_8c_a1bdaf6c3083b6cab01a165e62715fc13}} 
+\index{valida.c@{valida.c}!vermes@{vermes}}
+\index{vermes@{vermes}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{vermes()}{vermes()}}
+{\footnotesize\ttfamily int vermes (\begin{DoxyParamCaption}\item[{int}]{mes }\end{DoxyParamCaption})}
+
+
+
+Função que verifica se o mês da compra é válido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mes} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_a0d0c3d7dacae09e34a6f8f317dd70a2e}\label{valida_8c_a0d0c3d7dacae09e34a6f8f317dd70a2e}} 
+\index{valida.c@{valida.c}!verpreco@{verpreco}}
+\index{verpreco@{verpreco}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{verpreco()}{verpreco()}}
+{\footnotesize\ttfamily int verpreco (\begin{DoxyParamCaption}\item[{double}]{unidec }\end{DoxyParamCaption})}
+
+
+
+Função que verifica se Preço do Produto é válido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em unidec} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_a242deacfba1b2d730b390140ab94649e}\label{valida_8c_a242deacfba1b2d730b390140ab94649e}} 
+\index{valida.c@{valida.c}!verprod@{verprod}}
+\index{verprod@{verprod}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{verprod()}{verprod()}}
+{\footnotesize\ttfamily int verprod (\begin{DoxyParamCaption}\item[{char $\ast$}]{campos,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod }\end{DoxyParamCaption})}
+
+
+
+Função que verifica se o Produto é válido. Procura a venda dada como input no array de Produtos validos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em campos} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_a374451bf20de2e57dfeec81f295ae7bc}\label{valida_8c_a374451bf20de2e57dfeec81f295ae7bc}} 
+\index{valida.c@{valida.c}!vertcompra@{vertcompra}}
+\index{vertcompra@{vertcompra}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{vertcompra()}{vertcompra()}}
+{\footnotesize\ttfamily int vertcompra (\begin{DoxyParamCaption}\item[{char $\ast$}]{compra }\end{DoxyParamCaption})}
+
+
+
+Função que verifica se o tipo de compra é válido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compra} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{valida_8c_adbbe806d8343194dd71b1645916ab5a5}\label{valida_8c_adbbe806d8343194dd71b1645916ab5a5}} 
+\index{valida.c@{valida.c}!verunidadesvend@{verunidadesvend}}
+\index{verunidadesvend@{verunidadesvend}!valida.c@{valida.c}}
+\subsubsection{\texorpdfstring{verunidadesvend()}{verunidadesvend()}}
+{\footnotesize\ttfamily int verunidadesvend (\begin{DoxyParamCaption}\item[{int}]{unidades }\end{DoxyParamCaption})}
+
+
+
+Função que verifica se o número de unidades compradas é válido. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em unidades} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}

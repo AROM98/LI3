@@ -1,0 +1,164 @@
+\hypertarget{valida_8h}{}\section{valida.\+h File Reference}
+\label{valida_8h}\index{valida.h@{valida.h}}
+
+
+head de valida  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$glib.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{valida_8h_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\item 
+\#define \mbox{\hyperlink{valida_8h_aed4109e3c1b8c6912403533e570f80a7}{C\+A\+M\+P\+O\+S\+V\+E\+N\+DA}}~7
+\item 
+\#define \mbox{\hyperlink{valida_8h_adf262ee87f34cbe874e21a1a481885e5}{T\+A\+M\+P\+R\+OD}}~200000
+\item 
+\#define \mbox{\hyperlink{valida_8h_aadad68e4e5fb43ccb9f6d127fdf1582f}{T\+A\+M\+C\+L\+I\+E\+N\+T\+ES}}~20000
+\item 
+\#define \mbox{\hyperlink{valida_8h_ab807bb3f9717a2ffa08d5567ce004833}{T\+A\+M\+V\+E\+N\+D\+AS}}~1000000
+\item 
+\#define \mbox{\hyperlink{valida_8h_ae7a37b6a7cd7e76d531152025675c6e3}{sta\+Aux}}~50
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structvendas}{vendas}} $\ast$ \mbox{\hyperlink{valida_8h_a8ba32818746b947b5435069ffaa02658}{Vendas}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{valida_8h_ae305eeab2941ae6df5c12484f660960b}{get\+Produto}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+double \mbox{\hyperlink{valida_8h_a1c006a5e033c7c8bd91083a11c5d9655}{get\+Preco}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+int \mbox{\hyperlink{valida_8h_a8b50ed19c775c94a66f9e8778593a1e2}{get\+Unidades}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+char $\ast$ \mbox{\hyperlink{valida_8h_a4a813431cf426a2d061ad32247e9f958}{get\+Tcompra}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+char $\ast$ \mbox{\hyperlink{valida_8h_a448e7201e668e9fd0cc1466f48d62255}{get\+Cliente}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+int \mbox{\hyperlink{valida_8h_a30b2b7a9db4aa54d8840eedf41b77bcf}{get\+Mes}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+int \mbox{\hyperlink{valida_8h_abdeb06127269b351c94d8e3498008383}{get\+Filial}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} ve)
+\item 
+\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$ \mbox{\hyperlink{valida_8h_a1e8f280e5718b1fac337c2ec9b637fb6}{validvendas}} (char $\ast$fich, G\+Tree $\ast$$\ast$Tree\+Client, G\+Tree $\ast$$\ast$Tree\+Prod)
+\begin{DoxyCompactList}\small\item\em Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+head de valida 
+
+Contem as definiçoes de todas as funcoes unicas de \mbox{\hyperlink{valida_8c}{valida.\+c}} 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{valida_8h_a369266c24eacffb87046522897a570d5}\label{valida_8h_a369266c24eacffb87046522897a570d5}} 
+\index{valida.h@{valida.h}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+\mbox{\Hypertarget{valida_8h_aed4109e3c1b8c6912403533e570f80a7}\label{valida_8h_aed4109e3c1b8c6912403533e570f80a7}} 
+\index{valida.h@{valida.h}!CAMPOSVENDA@{CAMPOSVENDA}}
+\index{CAMPOSVENDA@{CAMPOSVENDA}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{CAMPOSVENDA}{CAMPOSVENDA}}
+{\footnotesize\ttfamily \#define C\+A\+M\+P\+O\+S\+V\+E\+N\+DA~7}
+
+\mbox{\Hypertarget{valida_8h_ae7a37b6a7cd7e76d531152025675c6e3}\label{valida_8h_ae7a37b6a7cd7e76d531152025675c6e3}} 
+\index{valida.h@{valida.h}!staAux@{staAux}}
+\index{staAux@{staAux}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{staAux}{staAux}}
+{\footnotesize\ttfamily \#define sta\+Aux~50}
+
+\mbox{\Hypertarget{valida_8h_aadad68e4e5fb43ccb9f6d127fdf1582f}\label{valida_8h_aadad68e4e5fb43ccb9f6d127fdf1582f}} 
+\index{valida.h@{valida.h}!TAMCLIENTES@{TAMCLIENTES}}
+\index{TAMCLIENTES@{TAMCLIENTES}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{TAMCLIENTES}{TAMCLIENTES}}
+{\footnotesize\ttfamily \#define T\+A\+M\+C\+L\+I\+E\+N\+T\+ES~20000}
+
+\mbox{\Hypertarget{valida_8h_adf262ee87f34cbe874e21a1a481885e5}\label{valida_8h_adf262ee87f34cbe874e21a1a481885e5}} 
+\index{valida.h@{valida.h}!TAMPROD@{TAMPROD}}
+\index{TAMPROD@{TAMPROD}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{TAMPROD}{TAMPROD}}
+{\footnotesize\ttfamily \#define T\+A\+M\+P\+R\+OD~200000}
+
+\mbox{\Hypertarget{valida_8h_ab807bb3f9717a2ffa08d5567ce004833}\label{valida_8h_ab807bb3f9717a2ffa08d5567ce004833}} 
+\index{valida.h@{valida.h}!TAMVENDAS@{TAMVENDAS}}
+\index{TAMVENDAS@{TAMVENDAS}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{TAMVENDAS}{TAMVENDAS}}
+{\footnotesize\ttfamily \#define T\+A\+M\+V\+E\+N\+D\+AS~1000000}
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{valida_8h_a8ba32818746b947b5435069ffaa02658}\label{valida_8h_a8ba32818746b947b5435069ffaa02658}} 
+\index{valida.h@{valida.h}!Vendas@{Vendas}}
+\index{Vendas@{Vendas}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{Vendas}{Vendas}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structvendas}{vendas}}$\ast$ \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{valida_8h_a448e7201e668e9fd0cc1466f48d62255}\label{valida_8h_a448e7201e668e9fd0cc1466f48d62255}} 
+\index{valida.h@{valida.h}!getCliente@{getCliente}}
+\index{getCliente@{getCliente}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{getCliente()}{getCliente()}}
+{\footnotesize\ttfamily char$\ast$ get\+Cliente (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8h_abdeb06127269b351c94d8e3498008383}\label{valida_8h_abdeb06127269b351c94d8e3498008383}} 
+\index{valida.h@{valida.h}!getFilial@{getFilial}}
+\index{getFilial@{getFilial}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{getFilial()}{getFilial()}}
+{\footnotesize\ttfamily int get\+Filial (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8h_a30b2b7a9db4aa54d8840eedf41b77bcf}\label{valida_8h_a30b2b7a9db4aa54d8840eedf41b77bcf}} 
+\index{valida.h@{valida.h}!getMes@{getMes}}
+\index{getMes@{getMes}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{getMes()}{getMes()}}
+{\footnotesize\ttfamily int get\+Mes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8h_a1c006a5e033c7c8bd91083a11c5d9655}\label{valida_8h_a1c006a5e033c7c8bd91083a11c5d9655}} 
+\index{valida.h@{valida.h}!getPreco@{getPreco}}
+\index{getPreco@{getPreco}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{getPreco()}{getPreco()}}
+{\footnotesize\ttfamily double get\+Preco (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8h_ae305eeab2941ae6df5c12484f660960b}\label{valida_8h_ae305eeab2941ae6df5c12484f660960b}} 
+\index{valida.h@{valida.h}!getProduto@{getProduto}}
+\index{getProduto@{getProduto}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{getProduto()}{getProduto()}}
+{\footnotesize\ttfamily char$\ast$ get\+Produto (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8h_a4a813431cf426a2d061ad32247e9f958}\label{valida_8h_a4a813431cf426a2d061ad32247e9f958}} 
+\index{valida.h@{valida.h}!getTcompra@{getTcompra}}
+\index{getTcompra@{getTcompra}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{getTcompra()}{getTcompra()}}
+{\footnotesize\ttfamily char$\ast$ get\+Tcompra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8h_a8b50ed19c775c94a66f9e8778593a1e2}\label{valida_8h_a8b50ed19c775c94a66f9e8778593a1e2}} 
+\index{valida.h@{valida.h}!getUnidades@{getUnidades}}
+\index{getUnidades@{getUnidades}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{getUnidades()}{getUnidades()}}
+{\footnotesize\ttfamily int get\+Unidades (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{ve }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{valida_8h_a1e8f280e5718b1fac337c2ec9b637fb6}\label{valida_8h_a1e8f280e5718b1fac337c2ec9b637fb6}} 
+\index{valida.h@{valida.h}!validvendas@{validvendas}}
+\index{validvendas@{validvendas}!valida.h@{valida.h}}
+\subsubsection{\texorpdfstring{validvendas()}{validvendas()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}$\ast$ validvendas (\begin{DoxyParamCaption}\item[{char $\ast$}]{fich,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Client,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod }\end{DoxyParamCaption})}
+
+
+
+Função que lê as vendas do ficheiro e as poes num array de strings. Tambem faz a validação. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fich} & \\
+\hline
+\end{DoxyParams}

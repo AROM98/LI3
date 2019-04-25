@@ -1,0 +1,83 @@
+\hypertarget{produtos_8c}{}\section{produtos.\+c File Reference}
+\label{produtos_8c}\index{produtos.c@{produtos.c}}
+
+
+Modulo de Produtos.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$glib.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{produtos_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\item 
+\#define \mbox{\hyperlink{produtos_8c_a18f8525685f50bf3e04803ee1c374294}{S\+T\+R\+A\+UX}}~50
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+gboolean \mbox{\hyperlink{produtos_8c_a87c77baec81886d59b5e69febc812f25}{print\+Prods}} (gpointer key, gpointer value, gpointer user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Função que imprime um elemento de um nodo de arvore. Será usada com g\+\_\+tree\+\_\+foreach(), logo irá imprimir todos os nodos da árvore. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{produtos_8c_a485d218351dee0fb935d64a8a294db28}{produto\+Tree}} (char $\ast$fich, G\+Tree $\ast$$\ast$Tree\+Prod)
+\begin{DoxyCompactList}\small\item\em Chama as funções que preenchem uma A\+VL com Produtos validos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Modulo de Produtos. 
+
+Ficheiro onde é feito todas as validaaçoes de Produtos. tambem é onde os produtos sao colocados em avls. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{produtos_8c_a369266c24eacffb87046522897a570d5}\label{produtos_8c_a369266c24eacffb87046522897a570d5}} 
+\index{produtos.c@{produtos.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!produtos.c@{produtos.c}}
+\subsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+\mbox{\Hypertarget{produtos_8c_a18f8525685f50bf3e04803ee1c374294}\label{produtos_8c_a18f8525685f50bf3e04803ee1c374294}} 
+\index{produtos.c@{produtos.c}!STRAUX@{STRAUX}}
+\index{STRAUX@{STRAUX}!produtos.c@{produtos.c}}
+\subsubsection{\texorpdfstring{STRAUX}{STRAUX}}
+{\footnotesize\ttfamily \#define S\+T\+R\+A\+UX~50}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{produtos_8c_a87c77baec81886d59b5e69febc812f25}\label{produtos_8c_a87c77baec81886d59b5e69febc812f25}} 
+\index{produtos.c@{produtos.c}!printProds@{printProds}}
+\index{printProds@{printProds}!produtos.c@{produtos.c}}
+\subsubsection{\texorpdfstring{printProds()}{printProds()}}
+{\footnotesize\ttfamily gboolean print\+Prods (\begin{DoxyParamCaption}\item[{gpointer}]{key,  }\item[{gpointer}]{value,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Função que imprime um elemento de um nodo de arvore. Será usada com g\+\_\+tree\+\_\+foreach(), logo irá imprimir todos os nodos da árvore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & (conteudo de cada nodo da árvore) \\
+\hline
+{\em value} & (valor associado a chave) \\
+\hline
+{\em user\+\_\+data} & (contador -\/ conta o numero de nodos que passou pela função) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{produtos_8c_a485d218351dee0fb935d64a8a294db28}\label{produtos_8c_a485d218351dee0fb935d64a8a294db28}} 
+\index{produtos.c@{produtos.c}!produtoTree@{produtoTree}}
+\index{produtoTree@{produtoTree}!produtos.c@{produtos.c}}
+\subsubsection{\texorpdfstring{produtoTree()}{produtoTree()}}
+{\footnotesize\ttfamily void produto\+Tree (\begin{DoxyParamCaption}\item[{char $\ast$}]{fich,  }\item[{G\+Tree $\ast$$\ast$}]{Tree\+Prod }\end{DoxyParamCaption})}
+
+
+
+Chama as funções que preenchem uma A\+VL com Produtos validos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fich} & Nome do Ficheiro de Produtos. \\
+\hline
+\end{DoxyParams}

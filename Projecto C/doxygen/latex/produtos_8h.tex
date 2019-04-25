@@ -1,0 +1,75 @@
+\hypertarget{produtos_8h}{}\section{produtos.\+h File Reference}
+\label{produtos_8h}\index{produtos.h@{produtos.h}}
+
+
+head de produtos  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$glib.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{produtos_8h_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{produtos_8h_a485d218351dee0fb935d64a8a294db28}{produto\+Tree}} (char $\ast$fich, G\+Tree $\ast$$\ast$Tree\+Prod)
+\begin{DoxyCompactList}\small\item\em Chama as funções que preenchem uma A\+VL com Produtos validos. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{produtos_8h_a064d8987062d792351e23610c494547c}{print\+Prods}} (gpointer key, gpointer value, gpointer user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Função que imprime um elemento de um nodo de arvore. Será usada com g\+\_\+tree\+\_\+foreach(), logo irá imprimir todos os nodos da árvore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+head de produtos 
+
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{produtos_8h_a369266c24eacffb87046522897a570d5}\label{produtos_8h_a369266c24eacffb87046522897a570d5}} 
+\index{produtos.h@{produtos.h}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!produtos.h@{produtos.h}}
+\subsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{produtos_8h_a064d8987062d792351e23610c494547c}\label{produtos_8h_a064d8987062d792351e23610c494547c}} 
+\index{produtos.h@{produtos.h}!printProds@{printProds}}
+\index{printProds@{printProds}!produtos.h@{produtos.h}}
+\subsubsection{\texorpdfstring{printProds()}{printProds()}}
+{\footnotesize\ttfamily void print\+Prods (\begin{DoxyParamCaption}\item[{gpointer}]{key,  }\item[{gpointer}]{value,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Função que imprime um elemento de um nodo de arvore. Será usada com g\+\_\+tree\+\_\+foreach(), logo irá imprimir todos os nodos da árvore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & (conteudo de cada nodo da árvore) \\
+\hline
+{\em value} & (valor associado a chave) \\
+\hline
+{\em user\+\_\+data} & (contador -\/ conta o numero de nodos que passou pela função) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{produtos_8h_a485d218351dee0fb935d64a8a294db28}\label{produtos_8h_a485d218351dee0fb935d64a8a294db28}} 
+\index{produtos.h@{produtos.h}!produtoTree@{produtoTree}}
+\index{produtoTree@{produtoTree}!produtos.h@{produtos.h}}
+\subsubsection{\texorpdfstring{produtoTree()}{produtoTree()}}
+{\footnotesize\ttfamily void produto\+Tree (\begin{DoxyParamCaption}\item[{char $\ast$}]{fich,  }\item[{G\+Tree $\ast$$\ast$}]{Tree\+Prod }\end{DoxyParamCaption})}
+
+
+
+Chama as funções que preenchem uma A\+VL com Produtos validos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fich} & Nome do Ficheiro de Produtos. \\
+\hline
+\end{DoxyParams}

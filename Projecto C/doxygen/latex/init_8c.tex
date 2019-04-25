@@ -1,0 +1,80 @@
+\hypertarget{init_8c}{}\section{init.\+c File Reference}
+\label{init_8c}\index{init.c@{init.c}}
+
+
+Ficheio init.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$glib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}valida.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}produtos.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}clientes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}queries.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structvendas}{vendas}}
+\begin{DoxyCompactList}\small\item\em Struct de Venda. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{init_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structvendas}{vendas}} $\ast$ \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{init_8c_a49622838b3fea6856b846f7743cf8e97}{initt}} (char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Função initt, chama todas as outras funções. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ficheio init. 
+
+Ficheiro onde é chamada todas as outras funções. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{init_8c_a369266c24eacffb87046522897a570d5}\label{init_8c_a369266c24eacffb87046522897a570d5}} 
+\index{init.c@{init.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!init.c@{init.c}}
+\subsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{init_8c_a8ba32818746b947b5435069ffaa02658}\label{init_8c_a8ba32818746b947b5435069ffaa02658}} 
+\index{init.c@{init.c}!Vendas@{Vendas}}
+\index{Vendas@{Vendas}!init.c@{init.c}}
+\subsubsection{\texorpdfstring{Vendas}{Vendas}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structvendas}{vendas}}$\ast$ \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{init_8c_a49622838b3fea6856b846f7743cf8e97}\label{init_8c_a49622838b3fea6856b846f7743cf8e97}} 
+\index{init.c@{init.c}!initt@{initt}}
+\index{initt@{initt}!init.c@{init.c}}
+\subsubsection{\texorpdfstring{initt()}{initt()}}
+{\footnotesize\ttfamily int initt (\begin{DoxyParamCaption}\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Função initt, chama todas as outras funções. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argv} & Nomes do ficheiros de Produtos, Clientes e Vendas. por esta ordem. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}

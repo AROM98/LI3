@@ -1,0 +1,259 @@
+\begin{theindex}
+
+  \item {\_GNU\_SOURCE}
+    \subitem {init.c}, \hyperpage{11}
+    \subitem {init.h}, \hyperpage{13}
+    \subitem {main.c}, \hyperpage{14}
+    \subitem {queries.c}, \hyperpage{15}
+    \subitem {queries.h}, \hyperpage{17}
+    \subitem {valida.c}, \hyperpage{20}
+    \subitem {valida.h}, \hyperpage{28}
+
+  \indexspace
+
+  \item {arrayprod}
+    \subitem {valida.c}, \hyperpage{26}
+
+  \indexspace
+
+  \item {CAMPOSVENDA}
+    \subitem {valida.c}, \hyperpage{20}
+    \subitem {valida.h}, \hyperpage{29}
+  \item {cliente}
+    \subitem {vendas}, \hyperpage{8}
+  \item {clientes}
+    \subitem {valida.c}, \hyperpage{26}
+    \subitem {valida.h}, \hyperpage{34}
+  \item {clienttoArray}
+    \subitem {valida.c}, \hyperpage{21}
+    \subitem {valida.h}, \hyperpage{29}
+
+  \indexspace
+
+  \item {escreveArray}
+    \subitem {valida.c}, \hyperpage{21}
+    \subitem {valida.h}, \hyperpage{30}
+
+  \indexspace
+
+  \item {fazStruct}
+    \subitem {valida.c}, \hyperpage{22}
+    \subitem {valida.h}, \hyperpage{30}
+  \item {filial}
+    \subitem {vendas}, \hyperpage{8}
+
+  \indexspace
+
+  \item {imprime\_ultimo}
+    \subitem {queries.c}, \hyperpage{15}
+    \subitem {queries.h}, \hyperpage{17}
+  \item {init.c}, \hyperpage{11}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{11}
+    \subitem {initt}, \hyperpage{12}
+  \item {init.h}, \hyperpage{12}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{13}
+    \subitem {initt}, \hyperpage{13}
+  \item {initArrayTree}
+    \subitem {valida.c}, \hyperpage{22}
+  \item {initt}
+    \subitem {init.c}, \hyperpage{12}
+    \subitem {init.h}, \hyperpage{13}
+
+  \indexspace
+
+  \item {linha\_mais\_longa}
+    \subitem {queries.c}, \hyperpage{15}
+    \subitem {queries.h}, \hyperpage{17}
+
+  \indexspace
+
+  \item {main}
+    \subitem {main.c}, \hyperpage{14}
+  \item {main.c}, \hyperpage{13}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{14}
+    \subitem {main}, \hyperpage{14}
+  \item {mes}
+    \subitem {vendas}, \hyperpage{8}
+
+  \indexspace
+
+  \item {preco}
+    \subitem {vendas}, \hyperpage{8}
+  \item {precototal}
+    \subitem {query}, \hyperpage{7}
+  \item {printelements}
+    \subitem {valida.c}, \hyperpage{22}
+  \item {prod}
+    \subitem {vendas}, \hyperpage{8}
+  \item {prodtoArray}
+    \subitem {valida.c}, \hyperpage{22}
+    \subitem {valida.h}, \hyperpage{30}
+  \item {prodToTree}
+    \subitem {valida.c}, \hyperpage{23}
+  \item {produtos}
+    \subitem {valida.c}, \hyperpage{26}
+    \subitem {valida.h}, \hyperpage{34}
+
+  \indexspace
+
+  \item {queries.c}, \hyperpage{14}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{15}
+    \subitem {imprime\_ultimo}, \hyperpage{15}
+    \subitem {linha\_mais\_longa}, \hyperpage{15}
+    \subitem {testa\_brp}, \hyperpage{16}
+  \item {queries.h}, \hyperpage{16}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{17}
+    \subitem {imprime\_ultimo}, \hyperpage{17}
+    \subitem {linha\_mais\_longa}, \hyperpage{17}
+    \subitem {testa\_brp}, \hyperpage{17}
+  \item {Query}
+    \subitem {valida.c}, \hyperpage{21}
+  \item {query}, \hyperpage{7}
+    \subitem {precototal}, \hyperpage{7}
+    \subitem {unidcompradas}, \hyperpage{7}
+
+  \indexspace
+
+  \item {README.md}, \hyperpage{18}
+
+  \indexspace
+
+  \item {staAux}
+    \subitem {valida.c}, \hyperpage{20}
+    \subitem {valida.h}, \hyperpage{29}
+
+  \indexspace
+
+  \item {TAMCLIENTES}
+    \subitem {valida.c}, \hyperpage{20}
+    \subitem {valida.h}, \hyperpage{29}
+  \item {TAMPROD}
+    \subitem {valida.c}, \hyperpage{20}
+    \subitem {valida.h}, \hyperpage{29}
+  \item {TAMVENDAS}
+    \subitem {valida.c}, \hyperpage{20}
+    \subitem {valida.h}, \hyperpage{29}
+  \item {tcompra}
+    \subitem {vendas}, \hyperpage{9}
+  \item {testa\_brp}
+    \subitem {queries.c}, \hyperpage{16}
+    \subitem {queries.h}, \hyperpage{17}
+  \item {teste}
+    \subitem {valida.c}, \hyperpage{26}
+
+  \indexspace
+
+  \item {unidades}
+    \subitem {vendas}, \hyperpage{9}
+  \item {unidcompradas}
+    \subitem {query}, \hyperpage{7}
+
+  \indexspace
+
+  \item {valida.c}, \hyperpage{18}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{20}
+    \subitem {arrayprod}, \hyperpage{26}
+    \subitem {CAMPOSVENDA}, \hyperpage{20}
+    \subitem {clientes}, \hyperpage{26}
+    \subitem {clienttoArray}, \hyperpage{21}
+    \subitem {escreveArray}, \hyperpage{21}
+    \subitem {fazStruct}, \hyperpage{22}
+    \subitem {initArrayTree}, \hyperpage{22}
+    \subitem {printelements}, \hyperpage{22}
+    \subitem {prodtoArray}, \hyperpage{22}
+    \subitem {prodToTree}, \hyperpage{23}
+    \subitem {produtos}, \hyperpage{26}
+    \subitem {Query}, \hyperpage{21}
+    \subitem {staAux}, \hyperpage{20}
+    \subitem {TAMCLIENTES}, \hyperpage{20}
+    \subitem {TAMPROD}, \hyperpage{20}
+    \subitem {TAMVENDAS}, \hyperpage{20}
+    \subitem {teste}, \hyperpage{26}
+    \subitem {validadas}, \hyperpage{27}
+    \subitem {validclient}, \hyperpage{23}
+    \subitem {validProd}, \hyperpage{23}
+    \subitem {validvendas}, \hyperpage{23}
+    \subitem {ven}, \hyperpage{27}
+    \subitem {venda}, \hyperpage{27}
+    \subitem {Vendas}, \hyperpage{21}
+    \subitem {verclien}, \hyperpage{24}
+    \subitem {verfilial}, \hyperpage{24}
+    \subitem {vermes}, \hyperpage{24}
+    \subitem {verpreco}, \hyperpage{25}
+    \subitem {verprod}, \hyperpage{25}
+    \subitem {vertcompra}, \hyperpage{25}
+    \subitem {verunidadesvend}, \hyperpage{26}
+  \item {valida.h}, \hyperpage{27}
+    \subitem {\_GNU\_SOURCE}, \hyperpage{28}
+    \subitem {CAMPOSVENDA}, \hyperpage{29}
+    \subitem {clientes}, \hyperpage{34}
+    \subitem {clienttoArray}, \hyperpage{29}
+    \subitem {escreveArray}, \hyperpage{30}
+    \subitem {fazStruct}, \hyperpage{30}
+    \subitem {prodtoArray}, \hyperpage{30}
+    \subitem {produtos}, \hyperpage{34}
+    \subitem {staAux}, \hyperpage{29}
+    \subitem {TAMCLIENTES}, \hyperpage{29}
+    \subitem {TAMPROD}, \hyperpage{29}
+    \subitem {TAMVENDAS}, \hyperpage{29}
+    \subitem {validclient}, \hyperpage{31}
+    \subitem {validProd}, \hyperpage{31}
+    \subitem {validvendas}, \hyperpage{31}
+    \subitem {venda}, \hyperpage{34}
+    \subitem {verclien}, \hyperpage{31}
+    \subitem {verfilial}, \hyperpage{32}
+    \subitem {vermes}, \hyperpage{32}
+    \subitem {verprod}, \hyperpage{32}
+    \subitem {vertcompra}, \hyperpage{33}
+    \subitem {verunidadesvend}, \hyperpage{33}
+    \subitem {verunidec}, \hyperpage{33}
+  \item {validadas}
+    \subitem {valida.c}, \hyperpage{27}
+  \item {validclient}
+    \subitem {valida.c}, \hyperpage{23}
+    \subitem {valida.h}, \hyperpage{31}
+  \item {validProd}
+    \subitem {valida.c}, \hyperpage{23}
+    \subitem {valida.h}, \hyperpage{31}
+  \item {validvendas}
+    \subitem {valida.c}, \hyperpage{23}
+    \subitem {valida.h}, \hyperpage{31}
+  \item {ven}
+    \subitem {valida.c}, \hyperpage{27}
+  \item {venda}
+    \subitem {valida.c}, \hyperpage{27}
+    \subitem {valida.h}, \hyperpage{34}
+  \item {Vendas}
+    \subitem {valida.c}, \hyperpage{21}
+  \item {vendas}, \hyperpage{8}
+    \subitem {cliente}, \hyperpage{8}
+    \subitem {filial}, \hyperpage{8}
+    \subitem {mes}, \hyperpage{8}
+    \subitem {preco}, \hyperpage{8}
+    \subitem {prod}, \hyperpage{8}
+    \subitem {tcompra}, \hyperpage{9}
+    \subitem {unidades}, \hyperpage{9}
+  \item {verclien}
+    \subitem {valida.c}, \hyperpage{24}
+    \subitem {valida.h}, \hyperpage{31}
+  \item {verfilial}
+    \subitem {valida.c}, \hyperpage{24}
+    \subitem {valida.h}, \hyperpage{32}
+  \item {vermes}
+    \subitem {valida.c}, \hyperpage{24}
+    \subitem {valida.h}, \hyperpage{32}
+  \item {verpreco}
+    \subitem {valida.c}, \hyperpage{25}
+  \item {verprod}
+    \subitem {valida.c}, \hyperpage{25}
+    \subitem {valida.h}, \hyperpage{32}
+  \item {vertcompra}
+    \subitem {valida.c}, \hyperpage{25}
+    \subitem {valida.h}, \hyperpage{33}
+  \item {verunidadesvend}
+    \subitem {valida.c}, \hyperpage{26}
+    \subitem {valida.h}, \hyperpage{33}
+  \item {verunidec}
+    \subitem {valida.h}, \hyperpage{33}
+
+\end{theindex}

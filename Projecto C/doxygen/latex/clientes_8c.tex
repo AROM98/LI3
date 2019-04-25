@@ -1,0 +1,103 @@
+\hypertarget{clientes_8c}{}\section{clientes.\+c File Reference}
+\label{clientes_8c}\index{clientes.c@{clientes.c}}
+
+
+Modulo de Clientes.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$glib.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{clientes_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\item 
+\#define \mbox{\hyperlink{clientes_8c_a18f8525685f50bf3e04803ee1c374294}{S\+T\+R\+A\+UX}}~50
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+gboolean \mbox{\hyperlink{clientes_8c_a32436a5b1e6f7e827596f66fa6ed681a}{print\+Clientes}} (gpointer key, gpointer value, gpointer user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Função que imprime um elemento de um nodo de árvore. Será usada com g\+\_\+tree\+\_\+foreach(), logo irá imprimir todos os nodos da árvore. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{clientes_8c_aec365848ba460ad956bd15e14e39ec18}{validclient}} (char clientes\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Funão de Validação de Clientes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{clientes_8c_a4452f881de33ef975ba0fed767f0160c}{cliente\+Tree}} (char $\ast$fich, G\+Tree $\ast$$\ast$Tree\+Client)
+\begin{DoxyCompactList}\small\item\em Chama as funções que preenchem uma A\+VL com clientes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Modulo de Clientes. 
+
+Ficheiro onde é feito todas as validaçoes de Clientes. É também onde os Clientes sao colocados em avls da glib (gtrees). 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{clientes_8c_a369266c24eacffb87046522897a570d5}\label{clientes_8c_a369266c24eacffb87046522897a570d5}} 
+\index{clientes.c@{clientes.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!clientes.c@{clientes.c}}
+\subsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+\mbox{\Hypertarget{clientes_8c_a18f8525685f50bf3e04803ee1c374294}\label{clientes_8c_a18f8525685f50bf3e04803ee1c374294}} 
+\index{clientes.c@{clientes.c}!STRAUX@{STRAUX}}
+\index{STRAUX@{STRAUX}!clientes.c@{clientes.c}}
+\subsubsection{\texorpdfstring{STRAUX}{STRAUX}}
+{\footnotesize\ttfamily \#define S\+T\+R\+A\+UX~50}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{clientes_8c_a4452f881de33ef975ba0fed767f0160c}\label{clientes_8c_a4452f881de33ef975ba0fed767f0160c}} 
+\index{clientes.c@{clientes.c}!clienteTree@{clienteTree}}
+\index{clienteTree@{clienteTree}!clientes.c@{clientes.c}}
+\subsubsection{\texorpdfstring{clienteTree()}{clienteTree()}}
+{\footnotesize\ttfamily void cliente\+Tree (\begin{DoxyParamCaption}\item[{char $\ast$}]{fich,  }\item[{G\+Tree $\ast$$\ast$}]{Tree\+Client }\end{DoxyParamCaption})}
+
+
+
+Chama as funções que preenchem uma A\+VL com clientes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fich} & Nome do ficheiro de Clientes. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{clientes_8c_a32436a5b1e6f7e827596f66fa6ed681a}\label{clientes_8c_a32436a5b1e6f7e827596f66fa6ed681a}} 
+\index{clientes.c@{clientes.c}!printClientes@{printClientes}}
+\index{printClientes@{printClientes}!clientes.c@{clientes.c}}
+\subsubsection{\texorpdfstring{printClientes()}{printClientes()}}
+{\footnotesize\ttfamily gboolean print\+Clientes (\begin{DoxyParamCaption}\item[{gpointer}]{key,  }\item[{gpointer}]{value,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Função que imprime um elemento de um nodo de árvore. Será usada com g\+\_\+tree\+\_\+foreach(), logo irá imprimir todos os nodos da árvore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & (conteudo de cada nodo da árvore) \\
+\hline
+{\em value} & (valor associado a chave) \\
+\hline
+{\em user\+\_\+data} & (outro valor passado a função). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{clientes_8c_aec365848ba460ad956bd15e14e39ec18}\label{clientes_8c_aec365848ba460ad956bd15e14e39ec18}} 
+\index{clientes.c@{clientes.c}!validclient@{validclient}}
+\index{validclient@{validclient}!clientes.c@{clientes.c}}
+\subsubsection{\texorpdfstring{validclient()}{validclient()}}
+{\footnotesize\ttfamily int validclient (\begin{DoxyParamCaption}\item[{char}]{clientes\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Funão de Validação de Clientes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em clientes} & String de Cliente. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int return de true(1) ou false(0). 
+\end{DoxyReturn}

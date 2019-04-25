@@ -1,0 +1,478 @@
+\hypertarget{queries_8c}{}\section{queries.\+c File Reference}
+\label{queries_8c}\index{queries.c@{queries.c}}
+
+
+Ficheio queries.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$glib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}valida.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}produtos.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}clientes.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structq3}{q3}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 3. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structq9}{q9}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 9. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structq10}{q10}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 10. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structq7}{q7}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 7. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{queries_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structq3}{q3}} $\ast$ \mbox{\hyperlink{queries_8c_a2120beb083796ca942854ec1be82887e}{Q3}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 3. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structq9}{q9}} $\ast$ \mbox{\hyperlink{queries_8c_a5f60c6c7a5801bd0058673af6f9da129}{Q9}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 9. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structq10}{q10}} $\ast$ \mbox{\hyperlink{queries_8c_ad2059253e18910fc9b5e9606045fbec6}{Q10}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 10. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structq7}{q7}} $\ast$ \mbox{\hyperlink{queries_8c_ab33726278756540992a5253e916c84d2}{Q7}}
+\begin{DoxyCompactList}\small\item\em Struct da querie 7. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{queries_8c_abb2c96caa8d2971f5c0feea6c2c07161}{placein\+Tree}} (int pos, char $\ast$clien, G\+Tree $\ast$$\ast$arraytree)
+\begin{DoxyCompactList}\small\item\em Funçao de insere um clientes numa gtree. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a07d832e62863e5a02aff4d82502ff460}{init\+F\+Tree}} (G\+Tree $\ast$$\ast$arraytree)
+\begin{DoxyCompactList}\small\item\em Função que aloca espaço para cada árvore dentro do array. \end{DoxyCompactList}\item 
+gpointer \mbox{\hyperlink{queries_8c_a82fe93714b99f3f5e3e3f4fc9efab9cd}{existe}} (char $\ast$cod, G\+Tree $\ast$arraytree)
+\begin{DoxyCompactList}\small\item\em Funçao que procura se uma string, se encontra em algum nodo da gtree. \end{DoxyCompactList}\item 
+gboolean \mbox{\hyperlink{queries_8c_a9f549e9bd61fb60fd1e56a0003cd1529}{treetoarray}} (gpointer key, gpointer value, gpointer user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Funçao auxilair utilizada num g\+\_\+tree\+\_\+foreach(). É alocado espaço e colocado no array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_ac6f5b4a76593c256f929f8fb7ce6c02b}{catprod}} (char $\ast$arry\+Prod\mbox{[}$\,$\mbox{]}, int pagina\+Total)
+\begin{DoxyCompactList}\small\item\em Catalogo de Produtos. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a7962a3459d14832faf8e766d63a6206f}{initcatalogo}} (G\+Tree $\ast$$\ast$tree\+Prod)
+\begin{DoxyCompactList}\small\item\em Funçao que inicializa o Catalogo. \end{DoxyCompactList}\item 
+gboolean \mbox{\hyperlink{queries_8c_a234c75ca5b1a0e62453ada2ec8fc176b}{print\+Elem}} (gpointer key, gpointer value, gpointer user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Imprime os elementos da gtree fornecida no input. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a3ce2a95e86c53bb696c0e66cb0d1e620}{querry5}} (G\+Tree $\ast$$\ast$tree\+Filial, \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} vendasconfirmadas\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Função da querie 5. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a995a450e136f144770a99312c57162e5}{querry3}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$vendasconfirmadas)
+\begin{DoxyCompactList}\small\item\em Função da querie 3. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_ab8b7c32193558b2de0c441e18c90cbcd}{querry6}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$vendasconfirmadas, G\+Tree $\ast$$\ast$tree\+Prod, G\+Tree $\ast$$\ast$tree\+Client)
+\begin{DoxyCompactList}\small\item\em Função da querie 6. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a5dd9ac154fb0f147ac3ffe75a14dd73a}{querry7}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$vendasconfirmadas)
+\begin{DoxyCompactList}\small\item\em Função da querie 7. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_abde95063abb29a81d6ac4ccfa812c2c8}{querry8}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$vendasconfirmadas)
+\begin{DoxyCompactList}\small\item\em Função da querie 8. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a8bd463e239a35a25d65ca78a442c2326}{querry9}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$vendasconfirmadas, G\+Tree $\ast$$\ast$tree\+Filial)
+\begin{DoxyCompactList}\small\item\em Função da querie 9. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{queries_8c_accbb24e50844d755aed33750f96c12ef}{existenatruct}} (char $\ast$produto, \mbox{\hyperlink{queries_8c_ad2059253e18910fc9b5e9606045fbec6}{Q10}} $\ast$str, int qtam)
+\begin{DoxyCompactList}\small\item\em Funçao que verifica que o produto existe na struct Q10. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a41d723b94b03c4ea032ee0d32f1e01c3}{adit\+To\+Struct}} (char $\ast$produto, int unidades, \mbox{\hyperlink{queries_8c_ad2059253e18910fc9b5e9606045fbec6}{Q10}} str)
+\begin{DoxyCompactList}\small\item\em Funçao que adiciona Produto a struct Q10. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a86ff75c3cfb8a6ed3043ede837ea3ffa}{querry10}} (\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$vendasconfirmadas)
+\begin{DoxyCompactList}\small\item\em Funcao da querie Q10. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_af6c016492adebbd42dc1350e060e21dc}{querie1}} (G\+Tree $\ast$$\ast$tree\+Prod, G\+Tree $\ast$$\ast$tree\+Client, \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} vendasconfirmadas\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Função da querie 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{queries_8c_a62d2a596b862d1bf4073a16a3b1706a6}{queriesmenu}} (G\+Tree $\ast$$\ast$tree\+Prod, G\+Tree $\ast$$\ast$tree\+Client, G\+Tree $\ast$$\ast$tree\+Filial, \mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} vendasconfirmadas\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Funçao do menu de queries. Aqui são chamadas todas as outras funções. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{queries_8c_a711f32e9bc4158350ee339dab9f00c9b}{array\+Prod}} \mbox{[}\mbox{\hyperlink{valida_8h_adf262ee87f34cbe874e21a1a481885e5}{T\+A\+M\+P\+R\+OD}}\mbox{]}
+\item 
+int \mbox{\hyperlink{queries_8c_a9c49b3e20cc6d0b861ef50a0550d6be0}{arrayprodvar}} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ficheio queries. 
+
+Ficheiro onde é feitos as queries do trabalho. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{queries_8c_a369266c24eacffb87046522897a570d5}\label{queries_8c_a369266c24eacffb87046522897a570d5}} 
+\index{queries.c@{queries.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+G\+N\+U\+\_\+\+S\+O\+U\+R\+CE}
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{queries_8c_ad2059253e18910fc9b5e9606045fbec6}\label{queries_8c_ad2059253e18910fc9b5e9606045fbec6}} 
+\index{queries.c@{queries.c}!Q10@{Q10}}
+\index{Q10@{Q10}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{Q10}{Q10}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structq10}{q10}}$\ast$ \mbox{\hyperlink{queries_8c_ad2059253e18910fc9b5e9606045fbec6}{Q10}}}
+
+
+
+Struct da querie 10. 
+
+\mbox{\Hypertarget{queries_8c_a2120beb083796ca942854ec1be82887e}\label{queries_8c_a2120beb083796ca942854ec1be82887e}} 
+\index{queries.c@{queries.c}!Q3@{Q3}}
+\index{Q3@{Q3}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{Q3}{Q3}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structq3}{q3}}$\ast$ \mbox{\hyperlink{queries_8c_a2120beb083796ca942854ec1be82887e}{Q3}}}
+
+
+
+Struct da querie 3. 
+
+\mbox{\Hypertarget{queries_8c_ab33726278756540992a5253e916c84d2}\label{queries_8c_ab33726278756540992a5253e916c84d2}} 
+\index{queries.c@{queries.c}!Q7@{Q7}}
+\index{Q7@{Q7}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{Q7}{Q7}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structq7}{q7}}$\ast$ \mbox{\hyperlink{queries_8c_ab33726278756540992a5253e916c84d2}{Q7}}}
+
+
+
+Struct da querie 7. 
+
+\mbox{\Hypertarget{queries_8c_a5f60c6c7a5801bd0058673af6f9da129}\label{queries_8c_a5f60c6c7a5801bd0058673af6f9da129}} 
+\index{queries.c@{queries.c}!Q9@{Q9}}
+\index{Q9@{Q9}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{Q9}{Q9}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structq9}{q9}}$\ast$ \mbox{\hyperlink{queries_8c_a5f60c6c7a5801bd0058673af6f9da129}{Q9}}}
+
+
+
+Struct da querie 9. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{queries_8c_a41d723b94b03c4ea032ee0d32f1e01c3}\label{queries_8c_a41d723b94b03c4ea032ee0d32f1e01c3}} 
+\index{queries.c@{queries.c}!aditToStruct@{aditToStruct}}
+\index{aditToStruct@{aditToStruct}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{aditToStruct()}{aditToStruct()}}
+{\footnotesize\ttfamily void adit\+To\+Struct (\begin{DoxyParamCaption}\item[{char $\ast$}]{produto,  }\item[{int}]{unidades,  }\item[{\mbox{\hyperlink{queries_8c_ad2059253e18910fc9b5e9606045fbec6}{Q10}}}]{str }\end{DoxyParamCaption})}
+
+
+
+Funçao que adiciona Produto a struct Q10. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em produto} & \\
+\hline
+{\em unidades} & \\
+\hline
+{\em str} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_ac6f5b4a76593c256f929f8fb7ce6c02b}\label{queries_8c_ac6f5b4a76593c256f929f8fb7ce6c02b}} 
+\index{queries.c@{queries.c}!catprod@{catprod}}
+\index{catprod@{catprod}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{catprod()}{catprod()}}
+{\footnotesize\ttfamily void catprod (\begin{DoxyParamCaption}\item[{char $\ast$}]{arry\+Prod\mbox{[}$\,$\mbox{]},  }\item[{int}]{pagina\+Total }\end{DoxyParamCaption})}
+
+
+
+Catalogo de Produtos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arry\+Prod} & \\
+\hline
+{\em pagina\+Total} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a82fe93714b99f3f5e3e3f4fc9efab9cd}\label{queries_8c_a82fe93714b99f3f5e3e3f4fc9efab9cd}} 
+\index{queries.c@{queries.c}!existe@{existe}}
+\index{existe@{existe}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{existe()}{existe()}}
+{\footnotesize\ttfamily gpointer existe (\begin{DoxyParamCaption}\item[{char $\ast$}]{cod,  }\item[{G\+Tree $\ast$}]{arraytree }\end{DoxyParamCaption})}
+
+
+
+Funçao que procura se uma string, se encontra em algum nodo da gtree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cod} & String \\
+\hline
+{\em arraytree} & gtree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gpointer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{queries_8c_accbb24e50844d755aed33750f96c12ef}\label{queries_8c_accbb24e50844d755aed33750f96c12ef}} 
+\index{queries.c@{queries.c}!existenatruct@{existenatruct}}
+\index{existenatruct@{existenatruct}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{existenatruct()}{existenatruct()}}
+{\footnotesize\ttfamily int existenatruct (\begin{DoxyParamCaption}\item[{char $\ast$}]{produto,  }\item[{\mbox{\hyperlink{queries_8c_ad2059253e18910fc9b5e9606045fbec6}{Q10}} $\ast$}]{str,  }\item[{int}]{qtam }\end{DoxyParamCaption})}
+
+
+
+Funçao que verifica que o produto existe na struct Q10. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em produto} & String produto \\
+\hline
+{\em str} & Struct Q10 \\
+\hline
+{\em qtam} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{queries_8c_a7962a3459d14832faf8e766d63a6206f}\label{queries_8c_a7962a3459d14832faf8e766d63a6206f}} 
+\index{queries.c@{queries.c}!initcatalogo@{initcatalogo}}
+\index{initcatalogo@{initcatalogo}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{initcatalogo()}{initcatalogo()}}
+{\footnotesize\ttfamily void initcatalogo (\begin{DoxyParamCaption}\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod }\end{DoxyParamCaption})}
+
+
+
+Funçao que inicializa o Catalogo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tree\+Prod} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a07d832e62863e5a02aff4d82502ff460}\label{queries_8c_a07d832e62863e5a02aff4d82502ff460}} 
+\index{queries.c@{queries.c}!initFTree@{initFTree}}
+\index{initFTree@{initFTree}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{initFTree()}{initFTree()}}
+{\footnotesize\ttfamily void init\+F\+Tree (\begin{DoxyParamCaption}\item[{G\+Tree $\ast$$\ast$}]{arraytree }\end{DoxyParamCaption})}
+
+
+
+Função que aloca espaço para cada árvore dentro do array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arraytree} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_abb2c96caa8d2971f5c0feea6c2c07161}\label{queries_8c_abb2c96caa8d2971f5c0feea6c2c07161}} 
+\index{queries.c@{queries.c}!placeinTree@{placeinTree}}
+\index{placeinTree@{placeinTree}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{placeinTree()}{placeinTree()}}
+{\footnotesize\ttfamily void placein\+Tree (\begin{DoxyParamCaption}\item[{int}]{pos,  }\item[{char $\ast$}]{clien,  }\item[{G\+Tree $\ast$$\ast$}]{arraytree }\end{DoxyParamCaption})}
+
+
+
+Funçao de insere um clientes numa gtree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & \\
+\hline
+{\em clien} & String Cliente \\
+\hline
+{\em arraytree} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a234c75ca5b1a0e62453ada2ec8fc176b}\label{queries_8c_a234c75ca5b1a0e62453ada2ec8fc176b}} 
+\index{queries.c@{queries.c}!printElem@{printElem}}
+\index{printElem@{printElem}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{printElem()}{printElem()}}
+{\footnotesize\ttfamily gboolean print\+Elem (\begin{DoxyParamCaption}\item[{gpointer}]{key,  }\item[{gpointer}]{value,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Imprime os elementos da gtree fornecida no input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \\
+\hline
+{\em value} & \\
+\hline
+{\em user\+\_\+data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gboolean 
+\end{DoxyReturn}
+\mbox{\Hypertarget{queries_8c_af6c016492adebbd42dc1350e060e21dc}\label{queries_8c_af6c016492adebbd42dc1350e060e21dc}} 
+\index{queries.c@{queries.c}!querie1@{querie1}}
+\index{querie1@{querie1}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querie1()}{querie1()}}
+{\footnotesize\ttfamily void querie1 (\begin{DoxyParamCaption}\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Client,  }\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{vendasconfirmadas\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Função da querie 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tree\+Prod} & \\
+\hline
+{\em tree\+Client} & \\
+\hline
+{\em vendasconfirmadas} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a62d2a596b862d1bf4073a16a3b1706a6}\label{queries_8c_a62d2a596b862d1bf4073a16a3b1706a6}} 
+\index{queries.c@{queries.c}!queriesmenu@{queriesmenu}}
+\index{queriesmenu@{queriesmenu}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{queriesmenu()}{queriesmenu()}}
+{\footnotesize\ttfamily void queriesmenu (\begin{DoxyParamCaption}\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Client,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Filial,  }\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{vendasconfirmadas\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Funçao do menu de queries. Aqui são chamadas todas as outras funções. 
+
+\mbox{\Hypertarget{queries_8c_a86ff75c3cfb8a6ed3043ede837ea3ffa}\label{queries_8c_a86ff75c3cfb8a6ed3043ede837ea3ffa}} 
+\index{queries.c@{queries.c}!querry10@{querry10}}
+\index{querry10@{querry10}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querry10()}{querry10()}}
+{\footnotesize\ttfamily void querry10 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$}]{vendasconfirmadas }\end{DoxyParamCaption})}
+
+
+
+Funcao da querie Q10. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vendasconfirmadas} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a995a450e136f144770a99312c57162e5}\label{queries_8c_a995a450e136f144770a99312c57162e5}} 
+\index{queries.c@{queries.c}!querry3@{querry3}}
+\index{querry3@{querry3}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querry3()}{querry3()}}
+{\footnotesize\ttfamily void querry3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$}]{vendasconfirmadas }\end{DoxyParamCaption})}
+
+
+
+Função da querie 3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vendasconfirmadas} & array de structs de vendas confirmadas \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a3ce2a95e86c53bb696c0e66cb0d1e620}\label{queries_8c_a3ce2a95e86c53bb696c0e66cb0d1e620}} 
+\index{queries.c@{queries.c}!querry5@{querry5}}
+\index{querry5@{querry5}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querry5()}{querry5()}}
+{\footnotesize\ttfamily void querry5 (\begin{DoxyParamCaption}\item[{G\+Tree $\ast$$\ast$}]{tree\+Filial,  }\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}}}]{vendasconfirmadas\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Função da querie 5. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tree\+Filial} & gtree de filiais \\
+\hline
+{\em vendasconfirmadas} & array de structs de vendas confirmadas \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_ab8b7c32193558b2de0c441e18c90cbcd}\label{queries_8c_ab8b7c32193558b2de0c441e18c90cbcd}} 
+\index{queries.c@{queries.c}!querry6@{querry6}}
+\index{querry6@{querry6}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querry6()}{querry6()}}
+{\footnotesize\ttfamily void querry6 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$}]{vendasconfirmadas,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Prod,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Client }\end{DoxyParamCaption})}
+
+
+
+Função da querie 6. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vendasconfirmadas} & array de structs de vendas confirmadas \\
+\hline
+{\em tree\+Prod} & gtree do produtos \\
+\hline
+{\em tree\+Client} & gtree dos clientes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a5dd9ac154fb0f147ac3ffe75a14dd73a}\label{queries_8c_a5dd9ac154fb0f147ac3ffe75a14dd73a}} 
+\index{queries.c@{queries.c}!querry7@{querry7}}
+\index{querry7@{querry7}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querry7()}{querry7()}}
+{\footnotesize\ttfamily void querry7 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$}]{vendasconfirmadas }\end{DoxyParamCaption})}
+
+
+
+Função da querie 7. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vendasconfirmadas} & array de structs de vendas confirmadas \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_abde95063abb29a81d6ac4ccfa812c2c8}\label{queries_8c_abde95063abb29a81d6ac4ccfa812c2c8}} 
+\index{queries.c@{queries.c}!querry8@{querry8}}
+\index{querry8@{querry8}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querry8()}{querry8()}}
+{\footnotesize\ttfamily void querry8 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$}]{vendasconfirmadas }\end{DoxyParamCaption})}
+
+
+
+Função da querie 8. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vendasconfirmadas} & array de structs de vendas confirmadas \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a8bd463e239a35a25d65ca78a442c2326}\label{queries_8c_a8bd463e239a35a25d65ca78a442c2326}} 
+\index{queries.c@{queries.c}!querry9@{querry9}}
+\index{querry9@{querry9}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{querry9()}{querry9()}}
+{\footnotesize\ttfamily void querry9 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{init_8c_a8ba32818746b947b5435069ffaa02658}{Vendas}} $\ast$}]{vendasconfirmadas,  }\item[{G\+Tree $\ast$$\ast$}]{tree\+Filial }\end{DoxyParamCaption})}
+
+
+
+Função da querie 9. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vendasconfirmadas} & array de structs de vendas confirmadas \\
+\hline
+{\em tree\+Filial} & gtree de filiais \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{queries_8c_a9f549e9bd61fb60fd1e56a0003cd1529}\label{queries_8c_a9f549e9bd61fb60fd1e56a0003cd1529}} 
+\index{queries.c@{queries.c}!treetoarray@{treetoarray}}
+\index{treetoarray@{treetoarray}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{treetoarray()}{treetoarray()}}
+{\footnotesize\ttfamily gboolean treetoarray (\begin{DoxyParamCaption}\item[{gpointer}]{key,  }\item[{gpointer}]{value,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Funçao auxilair utilizada num g\+\_\+tree\+\_\+foreach(). É alocado espaço e colocado no array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \\
+\hline
+{\em value} & \\
+\hline
+{\em user\+\_\+data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+gboolean 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{queries_8c_a711f32e9bc4158350ee339dab9f00c9b}\label{queries_8c_a711f32e9bc4158350ee339dab9f00c9b}} 
+\index{queries.c@{queries.c}!arrayProd@{arrayProd}}
+\index{arrayProd@{arrayProd}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{arrayProd}{arrayProd}}
+{\footnotesize\ttfamily char$\ast$ array\+Prod\mbox{[}\mbox{\hyperlink{valida_8h_adf262ee87f34cbe874e21a1a481885e5}{T\+A\+M\+P\+R\+OD}}\mbox{]}}
+
+\mbox{\Hypertarget{queries_8c_a9c49b3e20cc6d0b861ef50a0550d6be0}\label{queries_8c_a9c49b3e20cc6d0b861ef50a0550d6be0}} 
+\index{queries.c@{queries.c}!arrayprodvar@{arrayprodvar}}
+\index{arrayprodvar@{arrayprodvar}!queries.c@{queries.c}}
+\subsubsection{\texorpdfstring{arrayprodvar}{arrayprodvar}}
+{\footnotesize\ttfamily int arrayprodvar = 0}
+

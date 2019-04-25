@@ -1,0 +1,125 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}L\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}I3}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Data Structure Index}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Data Structures}{3}{section.2.1}
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}
+\contentsline {chapter}{\numberline {4}Data Structure Documentation}{7}{chapter.4}
+\contentsline {section}{\numberline {4.1}query Struct Reference}{7}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Detailed Description}{7}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Field Documentation}{7}{subsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.2.1}precototal}{7}{subsubsection.4.1.2.1}
+\contentsline {subsubsection}{\numberline {4.1.2.2}unidcompradas}{7}{subsubsection.4.1.2.2}
+\contentsline {section}{\numberline {4.2}vendas Struct Reference}{8}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Detailed Description}{8}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Field Documentation}{8}{subsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.2.1}cliente}{8}{subsubsection.4.2.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2.2}filial}{8}{subsubsection.4.2.2.2}
+\contentsline {subsubsection}{\numberline {4.2.2.3}mes}{8}{subsubsection.4.2.2.3}
+\contentsline {subsubsection}{\numberline {4.2.2.4}preco}{8}{subsubsection.4.2.2.4}
+\contentsline {subsubsection}{\numberline {4.2.2.5}prod}{9}{subsubsection.4.2.2.5}
+\contentsline {subsubsection}{\numberline {4.2.2.6}tcompra}{9}{subsubsection.4.2.2.6}
+\contentsline {subsubsection}{\numberline {4.2.2.7}unidades}{9}{subsubsection.4.2.2.7}
+\contentsline {chapter}{\numberline {5}File Documentation}{11}{chapter.5}
+\contentsline {section}{\numberline {5.1}init.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{11}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Detailed Description}{11}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Macro Definition Documentation}{11}{subsection.5.1.2}
+\contentsline {subsubsection}{\numberline {5.1.2.1}\_GNU\_SOURCE}{12}{subsubsection.5.1.2.1}
+\contentsline {subsection}{\numberline {5.1.3}Function Documentation}{12}{subsection.5.1.3}
+\contentsline {subsubsection}{\numberline {5.1.3.1}initt()}{12}{subsubsection.5.1.3.1}
+\contentsline {section}{\numberline {5.2}init.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{12}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{12}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Macro Definition Documentation}{13}{subsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.2.1}\_GNU\_SOURCE}{13}{subsubsection.5.2.2.1}
+\contentsline {subsection}{\numberline {5.2.3}Function Documentation}{13}{subsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.3.1}initt()}{13}{subsubsection.5.2.3.1}
+\contentsline {section}{\numberline {5.3}main.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{13}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Detailed Description}{14}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Macro Definition Documentation}{14}{subsection.5.3.2}
+\contentsline {subsubsection}{\numberline {5.3.2.1}\_GNU\_SOURCE}{14}{subsubsection.5.3.2.1}
+\contentsline {subsection}{\numberline {5.3.3}Function Documentation}{14}{subsection.5.3.3}
+\contentsline {subsubsection}{\numberline {5.3.3.1}main()}{14}{subsubsection.5.3.3.1}
+\contentsline {section}{\numberline {5.4}queries.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{14}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{15}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Macro Definition Documentation}{15}{subsection.5.4.2}
+\contentsline {subsubsection}{\numberline {5.4.2.1}\_GNU\_SOURCE}{15}{subsubsection.5.4.2.1}
+\contentsline {subsection}{\numberline {5.4.3}Function Documentation}{15}{subsection.5.4.3}
+\contentsline {subsubsection}{\numberline {5.4.3.1}imprime\_ultimo()}{15}{subsubsection.5.4.3.1}
+\contentsline {subsubsection}{\numberline {5.4.3.2}linha\_mais\_longa()}{16}{subsubsection.5.4.3.2}
+\contentsline {subsubsection}{\numberline {5.4.3.3}testa\_brp()}{16}{subsubsection.5.4.3.3}
+\contentsline {section}{\numberline {5.5}queries.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{16}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{17}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Macro Definition Documentation}{17}{subsection.5.5.2}
+\contentsline {subsubsection}{\numberline {5.5.2.1}\_GNU\_SOURCE}{17}{subsubsection.5.5.2.1}
+\contentsline {subsection}{\numberline {5.5.3}Function Documentation}{17}{subsection.5.5.3}
+\contentsline {subsubsection}{\numberline {5.5.3.1}imprime\_ultimo()}{17}{subsubsection.5.5.3.1}
+\contentsline {subsubsection}{\numberline {5.5.3.2}linha\_mais\_longa()}{17}{subsubsection.5.5.3.2}
+\contentsline {subsubsection}{\numberline {5.5.3.3}testa\_brp()}{18}{subsubsection.5.5.3.3}
+\contentsline {section}{\numberline {5.6}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}md File Reference}{18}{section.5.6}
+\contentsline {section}{\numberline {5.7}valida.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{18}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{20}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Macro Definition Documentation}{20}{subsection.5.7.2}
+\contentsline {subsubsection}{\numberline {5.7.2.1}\_GNU\_SOURCE}{20}{subsubsection.5.7.2.1}
+\contentsline {subsubsection}{\numberline {5.7.2.2}CAMPOSVENDA}{20}{subsubsection.5.7.2.2}
+\contentsline {subsubsection}{\numberline {5.7.2.3}staAux}{20}{subsubsection.5.7.2.3}
+\contentsline {subsubsection}{\numberline {5.7.2.4}TAMCLIENTES}{20}{subsubsection.5.7.2.4}
+\contentsline {subsubsection}{\numberline {5.7.2.5}TAMPROD}{20}{subsubsection.5.7.2.5}
+\contentsline {subsubsection}{\numberline {5.7.2.6}TAMVENDAS}{20}{subsubsection.5.7.2.6}
+\contentsline {subsection}{\numberline {5.7.3}Typedef Documentation}{21}{subsection.5.7.3}
+\contentsline {subsubsection}{\numberline {5.7.3.1}Query}{21}{subsubsection.5.7.3.1}
+\contentsline {subsubsection}{\numberline {5.7.3.2}Vendas}{21}{subsubsection.5.7.3.2}
+\contentsline {subsection}{\numberline {5.7.4}Function Documentation}{21}{subsection.5.7.4}
+\contentsline {subsubsection}{\numberline {5.7.4.1}clienttoArray()}{21}{subsubsection.5.7.4.1}
+\contentsline {subsubsection}{\numberline {5.7.4.2}escreveArray()}{21}{subsubsection.5.7.4.2}
+\contentsline {subsubsection}{\numberline {5.7.4.3}fazStruct()}{22}{subsubsection.5.7.4.3}
+\contentsline {subsubsection}{\numberline {5.7.4.4}initArrayTree()}{22}{subsubsection.5.7.4.4}
+\contentsline {subsubsection}{\numberline {5.7.4.5}printelements()}{22}{subsubsection.5.7.4.5}
+\contentsline {subsubsection}{\numberline {5.7.4.6}prodtoArray()}{22}{subsubsection.5.7.4.6}
+\contentsline {subsubsection}{\numberline {5.7.4.7}prodToTree()}{23}{subsubsection.5.7.4.7}
+\contentsline {subsubsection}{\numberline {5.7.4.8}validclient()}{23}{subsubsection.5.7.4.8}
+\contentsline {subsubsection}{\numberline {5.7.4.9}validProd()}{23}{subsubsection.5.7.4.9}
+\contentsline {subsubsection}{\numberline {5.7.4.10}validvendas()}{23}{subsubsection.5.7.4.10}
+\contentsline {subsubsection}{\numberline {5.7.4.11}verclien()}{24}{subsubsection.5.7.4.11}
+\contentsline {subsubsection}{\numberline {5.7.4.12}verfilial()}{24}{subsubsection.5.7.4.12}
+\contentsline {subsubsection}{\numberline {5.7.4.13}vermes()}{24}{subsubsection.5.7.4.13}
+\contentsline {subsubsection}{\numberline {5.7.4.14}verpreco()}{25}{subsubsection.5.7.4.14}
+\contentsline {subsubsection}{\numberline {5.7.4.15}verprod()}{25}{subsubsection.5.7.4.15}
+\contentsline {subsubsection}{\numberline {5.7.4.16}vertcompra()}{25}{subsubsection.5.7.4.16}
+\contentsline {subsubsection}{\numberline {5.7.4.17}verunidadesvend()}{26}{subsubsection.5.7.4.17}
+\contentsline {subsection}{\numberline {5.7.5}Variable Documentation}{26}{subsection.5.7.5}
+\contentsline {subsubsection}{\numberline {5.7.5.1}arrayprod}{26}{subsubsection.5.7.5.1}
+\contentsline {subsubsection}{\numberline {5.7.5.2}clientes}{26}{subsubsection.5.7.5.2}
+\contentsline {subsubsection}{\numberline {5.7.5.3}produtos}{26}{subsubsection.5.7.5.3}
+\contentsline {subsubsection}{\numberline {5.7.5.4}teste}{27}{subsubsection.5.7.5.4}
+\contentsline {subsubsection}{\numberline {5.7.5.5}validadas}{27}{subsubsection.5.7.5.5}
+\contentsline {subsubsection}{\numberline {5.7.5.6}ven}{27}{subsubsection.5.7.5.6}
+\contentsline {subsubsection}{\numberline {5.7.5.7}venda}{27}{subsubsection.5.7.5.7}
+\contentsline {section}{\numberline {5.8}valida.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}h File Reference}{27}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Detailed Description}{28}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Macro Definition Documentation}{28}{subsection.5.8.2}
+\contentsline {subsubsection}{\numberline {5.8.2.1}\_GNU\_SOURCE}{29}{subsubsection.5.8.2.1}
+\contentsline {subsubsection}{\numberline {5.8.2.2}CAMPOSVENDA}{29}{subsubsection.5.8.2.2}
+\contentsline {subsubsection}{\numberline {5.8.2.3}staAux}{29}{subsubsection.5.8.2.3}
+\contentsline {subsubsection}{\numberline {5.8.2.4}TAMCLIENTES}{29}{subsubsection.5.8.2.4}
+\contentsline {subsubsection}{\numberline {5.8.2.5}TAMPROD}{29}{subsubsection.5.8.2.5}
+\contentsline {subsubsection}{\numberline {5.8.2.6}TAMVENDAS}{29}{subsubsection.5.8.2.6}
+\contentsline {subsection}{\numberline {5.8.3}Function Documentation}{29}{subsection.5.8.3}
+\contentsline {subsubsection}{\numberline {5.8.3.1}clienttoArray()}{29}{subsubsection.5.8.3.1}
+\contentsline {subsubsection}{\numberline {5.8.3.2}escreveArray()}{30}{subsubsection.5.8.3.2}
+\contentsline {subsubsection}{\numberline {5.8.3.3}fazStruct()}{30}{subsubsection.5.8.3.3}
+\contentsline {subsubsection}{\numberline {5.8.3.4}prodtoArray()}{30}{subsubsection.5.8.3.4}
+\contentsline {subsubsection}{\numberline {5.8.3.5}validclient()}{31}{subsubsection.5.8.3.5}
+\contentsline {subsubsection}{\numberline {5.8.3.6}validProd()}{31}{subsubsection.5.8.3.6}
+\contentsline {subsubsection}{\numberline {5.8.3.7}validvendas()}{31}{subsubsection.5.8.3.7}
+\contentsline {subsubsection}{\numberline {5.8.3.8}verclien()}{31}{subsubsection.5.8.3.8}
+\contentsline {subsubsection}{\numberline {5.8.3.9}verfilial()}{32}{subsubsection.5.8.3.9}
+\contentsline {subsubsection}{\numberline {5.8.3.10}vermes()}{32}{subsubsection.5.8.3.10}
+\contentsline {subsubsection}{\numberline {5.8.3.11}verprod()}{32}{subsubsection.5.8.3.11}
+\contentsline {subsubsection}{\numberline {5.8.3.12}vertcompra()}{33}{subsubsection.5.8.3.12}
+\contentsline {subsubsection}{\numberline {5.8.3.13}verunidadesvend()}{33}{subsubsection.5.8.3.13}
+\contentsline {subsubsection}{\numberline {5.8.3.14}verunidec()}{33}{subsubsection.5.8.3.14}
+\contentsline {subsection}{\numberline {5.8.4}Variable Documentation}{34}{subsection.5.8.4}
+\contentsline {subsubsection}{\numberline {5.8.4.1}clientes}{34}{subsubsection.5.8.4.1}
+\contentsline {subsubsection}{\numberline {5.8.4.2}produtos}{34}{subsubsection.5.8.4.2}
+\contentsline {subsubsection}{\numberline {5.8.4.3}venda}{34}{subsubsection.5.8.4.3}
+\contentsline {chapter}{Index}{35}{section*.21}
