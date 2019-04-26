@@ -8,7 +8,7 @@ import java.util.List;
 public class GestVendas {
 
     public static void main(String[] args) throws Exception{
-        String filePath = "GestVendasAppMVC/Ficheiros/Vendas_1M.txt";
+        String filePath = "Ficheiros/Vendas_1M.txt";
         File fich = new File(filePath);
         FileReader fr = new FileReader(fich);
         //BufferedReader br = new BufferedReader(fr);
