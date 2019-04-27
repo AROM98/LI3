@@ -7,29 +7,18 @@ import java.util.List;
 
 public class GestVendas {
 
-    public static void main(String[] args) throws Exception{
-        String filePath = "Ficheiros/Vendas_1M.txt";
-        File fich = new File(filePath);
-        FileReader fr = new FileReader(fich);
-        //BufferedReader br = new BufferedReader(fr);
-        //String fich = "Vendas_1M.txt";
-        List<String> linhas = new ArrayList<>();
-        BufferedReader inStream;
-        String linha;
-        try {
-            inStream = new BufferedReader(new FileReader(fich));
-            while ((linha = inStream.readLine()) != null) {
-                linhas.add(linha);
-            }
-        }
-        catch (IOException e) {
-            System.out.println(e);
-        }
-        int i = 0;
-        for (String c : linhas){
-            System.out.println(c+"----->"+"["+i+"]");
-            i++;
-        }
-        System.out.println("ESTA A FUNCIONAR!...");
+    public static void main(String[] args) throws Exception {
+        String filePathVendas = "Ficheiros/Vendas_1M.txt";
+        String filePathClientes = "Ficheiros/Clientes.txt";
+        String filePathProdutos = "Ficheiros/Produtos.txt";
+        //Vendas vendas = new Vendas();
+        Vendas vendas2 = new Vendas("KR1583", 77.72, 128, 'P', "L4891", 2, 1);
+        //vendas.leFicheiro(filePathVendas);
+        Produtos produtos = new Produtos("AA1001");
+        produtos.leFicheiro(filePathProdutos);
+
+        //Clientes clientes = new Clientes();
+        //clientes.leFicheiro(filePathClientes);
+        System.out.println(vendas2.toString());
     }
 }
