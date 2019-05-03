@@ -8,17 +8,22 @@ import java.util.List;
 public class GestVendas {
 
     public static void main(String[] args) throws Exception {
+        double time;
+
+        Crono.start();
         String filePathVendas = "Ficheiros/Vendas_1M.txt";
-        String filePathClientes = "Ficheiros/Clientes.txt";
-        String filePathProdutos = "Ficheiros/Produtos.txt";
-        //Vendas vendas = new Vendas();
-        Vendas vendas2 = new Vendas("KR1583", 77.72, 128, 'P', "L4891", 2, 1);
-        //vendas.leFicheiro(filePathVendas);
-        Produtos produtos = new Produtos();
-        produtos.leFicheiro(filePathProdutos);
+        //String filePathClientes = "Ficheiros/Clientes.txt";
+        //String filePathProdutos = "Ficheiros/Produtos.txt";
+        Vendas vendas = new Vendas();
+        vendas.leFicheiro(filePathVendas);
+        //Produtos produtos = new Produtos();
+        //produtos.leFicheiro(filePathProdutos);
+        time = Crono.stop();
+        System.out.println(time);
+
 
         //Clientes clientes = new Clientes();
         //clientes.leFicheiro(filePathClientes);
-        System.out.println(vendas2.toString());
+        //System.out.println(vendas2.toString());
     }
 }

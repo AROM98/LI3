@@ -1,5 +1,9 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class Vendas {
@@ -11,7 +15,7 @@ public class Vendas {
     private String produto; //tipo Produtos ou basta uma String.
     private double preco;
     private int uniCompradas;
-    private char Tcompra;
+    private String Tcompra;
     private String cliente; //tipo Clientes ou basta uma String.
     private int mes;
     private int filial;
@@ -22,13 +26,13 @@ public class Vendas {
      */
 
     /**
-     * Constutor vaziu?
+     * Constutor vazio
      */
     public Vendas() {
         this.produto = "";
         this.preco = 0.0;
         this.uniCompradas = 0;
-        Tcompra = 'N'; //deve ser alterado
+        Tcompra = "N"; //deve ser alterado
         this.cliente = "";
         this.mes = 0;
         this.filial = 0;
@@ -37,7 +41,7 @@ public class Vendas {
     /**
      * Construtor parameterizado
      */
-    public Vendas(String produto, double preco, int uniCompradas, char tcompra, String cliente, int mes, int filial) {
+    public Vendas(String produto, double preco, int uniCompradas, String tcompra, String cliente, int mes, int filial) {
         this.produto = produto;
         this.preco = preco;
         this.uniCompradas = uniCompradas;
@@ -76,7 +80,7 @@ public class Vendas {
         return this.uniCompradas;
     }
 
-    public char getTcompra() {
+    public String getTcompra() {
         return this.Tcompra;
     }
 
@@ -108,7 +112,7 @@ public class Vendas {
         this.uniCompradas = uniCompradas;
     }
 
-    public void setTcompra(char tcompra) {
+    public void setTcompra(String tcompra) {
         Tcompra = tcompra;
     }
 
@@ -152,7 +156,7 @@ public class Vendas {
         return this.produto.equals(aux.getProduto())
                 && this.preco == aux.getPreco()
                 && this.uniCompradas == aux.getUniCompradas()
-                && this.Tcompra == aux.getTcompra()
+                && this.Tcompra.equals(aux.getTcompra())
                 && this.cliente.equals(aux.getCliente())
                 && this.mes == aux.getMes()
                 && this.filial == aux.getFilial();
@@ -166,7 +170,8 @@ public class Vendas {
         try {
             File fich = new File(filePath);
             FileReader fr = new FileReader(fich);
-            poeList(fr);
+            //poeList(fr);
+            poeListNIO(filePath);
         }
         catch (FileNotFoundException e){
             System.out.println(e);
@@ -192,13 +197,25 @@ public class Vendas {
         catch (IOException e) {
             System.out.println(e);
         }
+        /*
         int i = 0;
         for (String c : linhas){
             System.out.println(c+"----->"+"["+i+"]");
             i++;
         }
         System.out.println("ESTA A FUNCIONAR!...");
-        return linhas;
+        */return linhas;
+    }
+
+    public List<String> poeListNIO(String fich){
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(Paths.get(fich), StandardCharsets.UTF_8);
+        }
+        catch(IOException exc){
+            System.out.println(exc.getMessage());
+        }
+        return lines;
     }
 
     /**
@@ -207,7 +224,45 @@ public class Vendas {
      *      -> para cada venda é chamado o valida.
      *      . se for valida insere na lista
      */
-    public void parsing(){
+    public Vendas parsing(String linhavenda){
+        Vendas ret = new Vendas();
+        String[] campos;
+        String cliente, produto;
+        int unidades = 0; int mes = 0; int filial = 0;
+        double preco = 0;
+
+        campos = linhavenda.split(" ");
+        produto = campos[0];
+
+        try {
+            preco = Double.parseDouble(campos[1]);
+        }
+        catch(InputMismatchException e) {return null;}
+        catch(NumberFormatException e) {return null;}
+
+        try {
+            unidades = Integer.parseInt(campos[2]);
+        }
+        catch(InputMismatchException e) {return null;}
+        catch(NumberFormatException e) {return null;}
+
+        Tcompra = campos[3];
+        if(!(Tcompra.equals("N") || Tcompra.equals("P"))) return null;
+
+        cliente = campos[4];
+
+        try {
+            mes = Integer.parseInt(campos[5]);
+        }
+        catch (InputMismatchException e) {return null;}
+        catch (NumberFormatException e) {return null;}
+
+        try {
+            filial = Integer.parseInt(campos[6]);
+        }
+        catch (InputMismatchException e) {return null;}
+        catch (NumberFormatException e) {return null;}
+        return null;
 
     }
 
