@@ -14,7 +14,7 @@ public class GestVendas {
         //Vendas vendas = new Vendas();
         Vendas vendas2 = new Vendas("KR1583", 77.72, 128, 'P', "L4891", 2, 1);
         //vendas.leFicheiro(filePathVendas);
-        Produtos produtos = new Produtos("AA1001");
+        Produtos produtos = new Produtos();
         produtos.leFicheiro(filePathProdutos);
 
         //Clientes clientes = new Clientes();

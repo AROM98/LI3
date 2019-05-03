@@ -4,29 +4,29 @@ import java.util.List;
 
 public class Produtos {
 
-    private String produto;
+    private List<String> produtos;
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
     public Produtos(){
-        this.produto = "";
+        this.produtos = new ArrayList<String>();
     }
 
     public Produtos(String produto){
-        this.produto = produto;
+        this.produtos = produtos;
     }
 
     public Produtos(Produtos produtos){
-        this.produto = produtos.getProduto();
+        this.produtos = new Produtos();
     }
 
     /**
      * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
-    public String getProduto() {
-        return produto;
+    public List<String> getProduto() {
+        return this.produtos;
     }
 
     /**
@@ -121,8 +121,6 @@ public class Produtos {
      * Valida Produto
      *
      * string de produtos ou mesmo Produtos??
-     *
-     *
      */
     public boolean valida(String produtos){
         if(produtos.length() != 6){
