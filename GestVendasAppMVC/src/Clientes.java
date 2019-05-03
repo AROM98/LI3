@@ -86,31 +86,61 @@ public class Clientes {
      * @return ArrayList de Strings que contem as Clientes.
      */
     public List<String> poeList(FileReader fr){
+        int invalidas = 0, validas = 0;
         List<String> linhas = new ArrayList<>();
         BufferedReader inStream;
         String linha;
         try {
             inStream = new BufferedReader(fr);
             while ((linha = inStream.readLine()) != null) {
-                linhas.add(linha);
+                if(valida(linha)){
+                    linhas.add(linha);
+                    validas++;
+                }
+                else {
+                    invalidas++;
+                }
             }
         }
         catch (IOException e) {
             System.out.println(e);
         }
         int i = 0;
+        /*
         for (String c : linhas){
             System.out.println(c+"----->"+"["+i+"]");
             i++;
         }
-        System.out.println("ESTA A FUNCIONAR!...");
+        */
+        System.out.println("Clientes validos: "+validas);
+        System.out.println("Clientes invalidos: "+invalidas);
         return linhas;
     }
 
     /**
-     * Valida Produto
+     * Valida Cliente
      */
     public boolean valida(String cliente){
+        if(cliente.length() != 5){
+            return false;
+        }
+        if(cliente.charAt(0) >= 'A' && cliente.charAt(0) <= 'Z'){
+        }
+        else {
+            return false;
+        }
+        if(cliente.charAt(1) == '0'){
+            return false;
+        }
+        if(cliente.charAt(1) > '5'){
+            return false;
+        }
+        if(cliente.charAt(1) == '5'){
+            if(cliente.charAt(2) == '0' && cliente.charAt(3) == '0' && cliente.charAt(4) == '0'){}
+            else {
+                return false;
+            }
+        }
         return true;
     }
 

@@ -12,18 +12,21 @@ public class GestVendas {
 
         Crono.start();
         String filePathVendas = "Ficheiros/Vendas_1M.txt";
-        //String filePathClientes = "Ficheiros/Clientes.txt";
-        //String filePathProdutos = "Ficheiros/Produtos.txt";
+        String filePathClientes = "Ficheiros/Clientes.txt";
+        String filePathProdutos = "Ficheiros/Produtos.txt";
+
         Vendas vendas = new Vendas();
         vendas.leFicheiro(filePathVendas);
-        //Produtos produtos = new Produtos();
-        //produtos.leFicheiro(filePathProdutos);
+
+        Produtos produtos = new Produtos();
+        produtos.leFicheiro(filePathProdutos);
+
+        Clientes clientes = new Clientes();
+        clientes.leFicheiro(filePathClientes);
+
         time = Crono.stop();
         System.out.println(time);
 
 
-        //Clientes clientes = new Clientes();
-        //clientes.leFicheiro(filePathClientes);
-        //System.out.println(vendas2.toString());
     }
 }

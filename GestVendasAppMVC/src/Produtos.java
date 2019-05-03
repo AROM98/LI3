@@ -4,28 +4,28 @@ import java.util.List;
 
 public class Produtos {
 
-    private List<String> produtos;
+    private String produtos;
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
     public Produtos(){
-        this.produtos = new ArrayList<String>();
+        this.produtos = "";
     }
 
     public Produtos(String produto){
-        this.produtos = produtos;
+        this.produtos = produto;
     }
 
-    public Produtos(Produtos produtos){
-        this.produtos = new Produtos();
+    public Produtos(Produtos produto){
+        this.produtos = produto.getProduto();
     }
 
     /**
      * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
-    public List<String> getProduto() {
+    public String getProduto() {
         return this.produtos;
     }
 
@@ -33,7 +33,7 @@ public class Produtos {
      * Sets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
     public void setProduto(String produto) {
-        this.produto = produto;
+        this.produtos = produto;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Produtos {
             return false;
         }
         Vendas aux = (Vendas) o;
-        return this.produto.equals(aux.getProduto());
+        return this.produtos.equals(aux.getProduto());
     }
 
     /**
@@ -107,11 +107,12 @@ public class Produtos {
             System.out.println(e);
         }
         int i = 0;
+        /*
         for (String c : linhas){
             System.out.println(c+"----->"+"["+i+"]");
             i++;
         }
-        System.out.println("ESTA A FUNCIONAR!...");
+        */
         System.out.println("Produtos validos: "+validas);
         System.out.println("Produtos invalidos: "+invalidas);
         return linhas;
@@ -126,7 +127,7 @@ public class Produtos {
         if(produtos.length() != 6){
             return false;
         }
-        if(produtos.charAt(0) >='A' && produtos.charAt(0) <='z' && produtos.charAt(1) >='A' && produtos.charAt(1) <='z'){
+        if(produtos.charAt(0) >='A' && produtos.charAt(0) <='Z' && produtos.charAt(1) >='A' && produtos.charAt(1) <='z'){
         }
         else {
             System.out.println("nao é valido o produto: "+produtos);

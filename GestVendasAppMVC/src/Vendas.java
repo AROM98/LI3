@@ -199,12 +199,14 @@ public class Vendas {
         }
         /*
         int i = 0;
+        /*
         for (String c : linhas){
             System.out.println(c+"----->"+"["+i+"]");
             i++;
         }
+        */
         System.out.println("ESTA A FUNCIONAR!...");
-        */return linhas;
+        return linhas;
     }
 
     public List<String> poeListNIO(String fich){
@@ -215,6 +217,7 @@ public class Vendas {
         catch(IOException exc){
             System.out.println(exc.getMessage());
         }
+        System.out.println("ESTA A FUNCIONAR!...");
         return lines;
     }
 
