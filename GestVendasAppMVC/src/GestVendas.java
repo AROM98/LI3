@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GestVendas {
 
@@ -11,15 +5,15 @@ public class GestVendas {
         double time;
 
         Crono.start();
-        String filePathVendas = "Ficheiros/Vendas_1M.txt";
+        String filePathVendas = "Ficheiros/Vendas_5M.txt";
         String filePathClientes = "Ficheiros/Clientes.txt";
         String filePathProdutos = "Ficheiros/Produtos.txt";
 
         Vendas vendas = new Vendas();
         vendas.leFicheiro(filePathVendas);
 
-        Produtos produtos = new Produtos();
-        produtos.leFicheiro(filePathProdutos);
+        CatProd catProd = new CatProd();
+        catProd.leFicheiro(filePathProdutos);
 
         Clientes clientes = new Clientes();
         clientes.leFicheiro(filePathClientes);

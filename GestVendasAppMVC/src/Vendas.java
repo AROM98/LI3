@@ -170,8 +170,8 @@ public class Vendas {
         try {
             File fich = new File(filePath);
             FileReader fr = new FileReader(fich);
-            //poeList(fr);
-            poeListNIO(filePath);
+            poeList(fr);
+            //poeListNIO(filePath);
         }
         catch (FileNotFoundException e){
             System.out.println(e);
@@ -184,39 +184,60 @@ public class Vendas {
      * @param fr Ficheiro de Vendas
      * @return ArrayList de Strings que contem as vendas.
      */
-    public List<String> poeList(FileReader fr){
-        List<String> linhas = new ArrayList<>();
+    public List<Vendas> poeList(FileReader fr){
+        //List<String> linhas = new ArrayList<>();
+        List<Vendas> vendasvalidadas = new ArrayList<>();
+        int vval = 0;
         BufferedReader inStream;
         String linha;
+        Vendas vendatemp = null;
         try {
             inStream = new BufferedReader(fr);
             while ((linha = inStream.readLine()) != null) {
-                linhas.add(linha);
+                //linhas.add(linha);
+                 vendatemp = parsing(linha);
+                 if(valida(vendatemp)){
+                     vval++;
+                     vendasvalidadas.add(vendatemp);
+                 }
             }
         }
         catch (IOException e) {
             System.out.println(e);
         }
+/*
+            for (String v: linhas) {
+                vendatemp = parsing(v);
+                if (valida(vendatemp)){
+                    vval++;
+                    vendasvalidadas.add(vendatemp);
+                }
+            }
+*/
+
         /*
         int i = 0;
-        /*
+
         for (String c : linhas){
             System.out.println(c+"----->"+"["+i+"]");
             i++;
-        }
-        */
+        }*/
+        System.out.println(vval);
         System.out.println("ESTA A FUNCIONAR!...");
-        return linhas;
+        return vendasvalidadas;
     }
 
     public List<String> poeListNIO(String fich){
         List<String> lines = null;
+        List<String> vendaval = null;
         try {
             lines = Files.readAllLines(Paths.get(fich), StandardCharsets.UTF_8);
         }
         catch(IOException exc){
             System.out.println(exc.getMessage());
         }
+
+        System.out.println(lines.size());
         System.out.println("ESTA A FUNCIONAR!...");
         return lines;
     }
@@ -228,9 +249,9 @@ public class Vendas {
      *      . se for valida insere na lista
      */
     public Vendas parsing(String linhavenda){
-        Vendas ret = new Vendas();
+        Vendas vendares = new Vendas();
         String[] campos;
-        String cliente, produto;
+        String cliente, produto,tcompra;
         int unidades = 0; int mes = 0; int filial = 0;
         double preco = 0;
 
@@ -249,8 +270,8 @@ public class Vendas {
         catch(InputMismatchException e) {return null;}
         catch(NumberFormatException e) {return null;}
 
-        Tcompra = campos[3];
-        if(!(Tcompra.equals("N") || Tcompra.equals("P"))) return null;
+        tcompra = campos[3];
+        if(!(tcompra.equals("N") || tcompra.equals("P"))) return null;
 
         cliente = campos[4];
 
@@ -265,15 +286,37 @@ public class Vendas {
         }
         catch (InputMismatchException e) {return null;}
         catch (NumberFormatException e) {return null;}
-        return null;
+
+        vendares.setCliente(cliente);
+        vendares.setFilial(filial);
+        vendares.setMes(mes);
+        vendares.setPreco(preco);
+        vendares.setProduto(produto);
+        vendares.setTcompra(tcompra);
+        vendares.setUniCompradas(unidades);
+
+        return vendares;
 
     }
 
     /**
      * Valida venda
      */
-    public boolean valida(String vendas){
-        return true;
+    public boolean valida(Vendas venda){
+        if(CatProd.existeProd(venda.getProduto())){
+            if (venda.getPreco() >= 0.0 && venda.getPreco() <= 999.99) {
+                if (venda.getUniCompradas() >= 1 && venda.getUniCompradas() <= 200) {
+                    if (venda.getMes() >= 1 && venda.getMes() <= 12) {
+                        if (venda.getFilial() >= 1 && venda.getFilial() <= 3) {
+                            if (venda.getTcompra().equals("N") || venda.getTcompra().equals("P")) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**

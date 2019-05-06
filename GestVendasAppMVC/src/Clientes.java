@@ -105,6 +105,7 @@ public class Clientes {
         catch (IOException e) {
             System.out.println(e);
         }
+
         int i = 0;
         /*
         for (String c : linhas){
