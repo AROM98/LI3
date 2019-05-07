@@ -1,35 +1,35 @@
-public class Produtos {
+public class Produto {
 
-    private String produtos;
+    private String produto;
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
-    public Produtos(){
-        this.produtos = "";
+    public Produto(){
+        this.produto = "";
     }
 
-    public Produtos(String produto){
-        this.produtos = produto;
+    public Produto(String produto){
+        this.produto = produto;
     }
 
-    public Produtos(Produtos produto){
-        this.produtos = produto.getProduto();
+    public Produto(Produto produto){
+        this.produto = produto.getProduto();
     }
 
     /**
      * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
     public String getProduto() {
-        return this.produtos;
+        return this.produto;
     }
 
     /**
      * Sets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
     public void setProduto(String produto) {
-        this.produtos = produto;
+        this.produto = produto;
     }
 
     /**
@@ -40,8 +40,8 @@ public class Produtos {
      * Metodo clone
      * @return
      */
-    public Produtos clone(){
-        return new Produtos(this);
+    public Produto clone(){
+        return new Produto(this);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Produtos {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        Vendas aux = (Vendas) o;
-        return this.produtos.equals(aux.getProduto());
+        Venda aux = (Venda) o;
+        return this.produto.equals(aux.getProduto());
     }
 }

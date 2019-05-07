@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Clientes {
+public class Cliente {
 
     private String cliente;
 
@@ -10,16 +10,16 @@ public class Clientes {
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
-    public Clientes(){
+    public Cliente(){
         this.cliente = "";
     }
 
-    public Clientes(String cliente){
+    public Cliente(String cliente){
         this.cliente = cliente;
     }
 
-    public Clientes(Clientes clientes){
-        this.cliente = clientes.getCliente();
+    public Cliente(Cliente cliente){
+        this.cliente = cliente.getCliente();
     }
 
     /**
@@ -44,8 +44,8 @@ public class Clientes {
      * Metodo clone
      * @return
      */
-    public Clientes clone(){
-        return new Clientes(this);
+    public Cliente clone(){
+        return new Cliente(this);
     }
 
     /**
@@ -60,13 +60,13 @@ public class Clientes {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        Clientes aux = (Clientes) o;
+        Cliente aux = (Cliente) o;
         return this.cliente.equals(aux.getCliente());
     }
 
     /**
      *
-     * @param filePath localização do ficheiro de Clientes a utilizar.
+     * @param filePath localização do ficheiro de Cliente a utilizar.
      */
     public void leFicheiro(String filePath){
         try {
@@ -82,8 +82,8 @@ public class Clientes {
 
     /**
      *
-     * @param fr Ficheiro de Clientes
-     * @return ArrayList de Strings que contem as Clientes.
+     * @param fr Ficheiro de Cliente
+     * @return ArrayList de Strings que contem as Cliente.
      */
     public List<String> poeList(FileReader fr){
         int invalidas = 0, validas = 0;
@@ -105,16 +105,15 @@ public class Clientes {
         catch (IOException e) {
             System.out.println(e);
         }
-
-        int i = 0;
         /*
+        int i = 0;
         for (String c : linhas){
             System.out.println(c+"----->"+"["+i+"]");
             i++;
         }
         */
-        System.out.println("Clientes validos: "+validas);
-        System.out.println("Clientes invalidos: "+invalidas);
+        System.out.println("Cliente validos: "+validas);
+        System.out.println("Cliente invalidos: "+invalidas);
         return linhas;
     }
 

@@ -6,19 +6,21 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class Vendas {
+public class Venda {
 
     /**
      *  Variaveis de instancia
-     *  (cada campo de Vendas) ??
+     *  (cada campo de Venda) ??
      */
-    private String produto; //tipo Produtos ou basta uma String.
+    private String produto; //tipo Produto ou basta uma String.
     private double preco;
     private int uniCompradas;
     private String Tcompra;
-    private String cliente; //tipo Clientes ou basta uma String.
+    private String cliente; //tipo Cliente ou basta uma String.
     private int mes;
     private int filial;
+
+
 
 
     /**
@@ -28,7 +30,7 @@ public class Vendas {
     /**
      * Constutor vazio
      */
-    public Vendas() {
+    public Venda() {
         this.produto = "";
         this.preco = 0.0;
         this.uniCompradas = 0;
@@ -41,7 +43,7 @@ public class Vendas {
     /**
      * Construtor parameterizado
      */
-    public Vendas(String produto, double preco, int uniCompradas, String tcompra, String cliente, int mes, int filial) {
+    public Venda(String produto, double preco, int uniCompradas, String tcompra, String cliente, int mes, int filial) {
         this.produto = produto;
         this.preco = preco;
         this.uniCompradas = uniCompradas;
@@ -54,14 +56,14 @@ public class Vendas {
     /**
      * Construtor de cópia
      */
-    public Vendas(Vendas vendas){
-        this.produto = vendas.getProduto();
-        this.preco = vendas.getPreco();
-        this.uniCompradas = vendas.getUniCompradas();
-        this.Tcompra = vendas.getTcompra();
-        this.cliente = vendas.getCliente();
-        this.mes = vendas.getMes();
-        this.filial = vendas.getFilial();
+    public Venda(Venda venda){
+        this.produto = venda.getProduto();
+        this.preco = venda.getPreco();
+        this.uniCompradas = venda.getUniCompradas();
+        this.Tcompra = venda.getTcompra();
+        this.cliente = venda.getCliente();
+        this.mes = venda.getMes();
+        this.filial = venda.getFilial();
     }
 
     /**
@@ -98,7 +100,7 @@ public class Vendas {
 
     /**
      * Sets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     * acho que nao sao necessarios...
+     *
      */
     public void setProduto(String produto) {
         this.produto = produto;
@@ -136,8 +138,8 @@ public class Vendas {
      * Metodo clone
      * @return
      */
-    public Vendas clone(){
-        return new Vendas(this);
+    public Venda clone(){
+        return new Venda(this);
     }
 
     /**
@@ -152,7 +154,7 @@ public class Vendas {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        Vendas aux = (Vendas) o;
+        Venda aux = (Venda) o;
         return this.produto.equals(aux.getProduto())
                 && this.preco == aux.getPreco()
                 && this.uniCompradas == aux.getUniCompradas()
@@ -164,13 +166,13 @@ public class Vendas {
 
     /**
      *
-     * @param filePath localização do ficheiro de Vendas a utilizar.
+     * @param filePath localização do ficheiro de Venda a utilizar.
      */
-    public void leFicheiro(String filePath){
+    public void leFicheiro(String filePath, CatProd catProd){
         try {
             File fich = new File(filePath);
             FileReader fr = new FileReader(fich);
-            poeList(fr);
+            poeList(fr, catProd);
             //poeListNIO(filePath);
         }
         catch (FileNotFoundException e){
@@ -181,22 +183,22 @@ public class Vendas {
 
     /**
      *
-     * @param fr Ficheiro de Vendas
+     * @param fr Ficheiro de Venda
      * @return ArrayList de Strings que contem as vendas.
      */
-    public List<Vendas> poeList(FileReader fr){
+    public List<Venda> poeList(FileReader fr, CatProd catProd){
         //List<String> linhas = new ArrayList<>();
-        List<Vendas> vendasvalidadas = new ArrayList<>();
+        List<Venda> vendasvalidadas = new ArrayList<>();
         int vval = 0;
         BufferedReader inStream;
         String linha;
-        Vendas vendatemp = null;
+        Venda vendatemp = null;
         try {
             inStream = new BufferedReader(fr);
             while ((linha = inStream.readLine()) != null) {
                 //linhas.add(linha);
                  vendatemp = parsing(linha);
-                 if(valida(vendatemp)){
+                 if(valida(vendatemp, catProd)){
                      vval++;
                      vendasvalidadas.add(vendatemp);
                  }
@@ -243,16 +245,16 @@ public class Vendas {
     }
 
     /**
-     *  Para cada linha de venda, é feito o parsing e inserido num ArrayList<Vendas>
+     *  Para cada linha de venda, é feito o parsing e inserido num ArrayList<Venda>
      *      cada variavel no seu sitio.(array de vendas)
      *      -> para cada venda é chamado o valida.
      *      . se for valida insere na lista
      */
-    public Vendas parsing(String linhavenda){
-        Vendas vendares = new Vendas();
+    public Venda parsing(String linhavenda){
+        Venda vendares = new Venda();
         String[] campos;
         String cliente, produto,tcompra;
-        int unidades = 0; int mes = 0; int filial = 0;
+        int unidades = 0, mes = 0, filial = 0;
         double preco = 0;
 
         campos = linhavenda.split(" ");
@@ -302,8 +304,8 @@ public class Vendas {
     /**
      * Valida venda
      */
-    public boolean valida(Vendas venda){
-        if(CatProd.existeProd(venda.getProduto())){
+    public boolean valida(Venda venda, CatProd catProd){
+        if(catProd.existeProd(venda.getProduto())){
             if (venda.getPreco() >= 0.0 && venda.getPreco() <= 999.99) {
                 if (venda.getUniCompradas() >= 1 && venda.getUniCompradas() <= 200) {
                     if (venda.getMes() >= 1 && venda.getMes() <= 12) {

@@ -4,24 +4,39 @@ import java.util.Set;
 
 public class CatProd {
 
-    private Set<Produtos> catProd;
+    private Set<Produto> catProd;
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
+    /**
+     * Construtor vazio
+     */
     public CatProd(){
-        this.catProd = new HashSet<Produtos>();
+        this.catProd = new HashSet<Produto>();
     }
 
+    /**
+     * Construtor parameterizado
+     * @param catProd
+     */
+    public CatProd(Set<Produto> catProd){
+        this.catProd = new HashSet<>(catProd);
+    }
+
+    /**
+     * Construtor de copia
+     * acho que isto esta mal.
+     */
     public CatProd(CatProd p){
-        this.catProd = p.getCatProd();
+        this.catProd = new HashSet<>(p.getCatProd());
     }
 
     /**
      * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
-    public Set<Produtos> getCatProd() {
+    public Set<Produto> getCatProd() {
         return this.catProd;
     }
 
@@ -50,15 +65,14 @@ public class CatProd {
             return false;
         }
         CatProd c = (CatProd) o;
-        return this.catProd.equals(c.catProd);
+        return this.catProd.equals(c.getCatProd());
     }
-
 
     /**
      *
-     * @param filePath localização do ficheiro de Produtos a utilizar.
+     * @param filePath localização do ficheiro de Produto a utilizar.
      */
-    public void leFicheiro(String filePath){
+    public Set<Produto> leFicheiro(String filePath){
         try {
             File fich = new File(filePath);
             FileReader fr = new FileReader(fich);
@@ -67,26 +81,27 @@ public class CatProd {
         catch (FileNotFoundException e){
             System.out.println(e);
         }
+        return catProd;
     }
 
     /**
      *
-     * @param fr Ficheiro de Vendas
-     * @return ArrayList de Strings que contem as Produtos.
+     * @param fr Ficheiro de Venda
+     * @return ArrayList de Strings que contem as Produto.
      * adiciona apena as validas
      */
-    private Set<Produtos> poeList(FileReader fr){
+    private Set<Produto> poeList(FileReader fr){
         int invalidas = 0, validas = 0;
-        Set<Produtos> linhas = new HashSet<>();
+        //Set<Produto> linhas = new HashSet<>();
         BufferedReader inStream;
         String linha;
-        Produtos p = new Produtos();
+        Produto p = new Produto();
         try {
             inStream = new BufferedReader(fr);
             while ((linha = inStream.readLine()) != null) {
                 if(valida(linha)){
                     p.setProduto(linha);
-                    linhas.add(p);
+                    this.catProd.add(p);
                     validas++;
                 }
                 else {
@@ -104,15 +119,15 @@ public class CatProd {
             i++;
         }
         */
-        System.out.println("Produtos validos: "+validas);
-        System.out.println("Produtos invalidos: "+invalidas);
-        return linhas;
+        System.out.println("Produto validos: "+validas);
+        System.out.println("Produto invalidos: "+invalidas);
+        return catProd;
     }
 
     /**
      * Valida Produto
      *
-     * string de produtos ou mesmo Produtos??
+     * string de produtos ou mesmo Produto??
      */
     private boolean valida(String produtos){
         if(produtos.length() != 6){
@@ -131,6 +146,7 @@ public class CatProd {
         return true;
 
     }
+
     /**
      * Existe Produto
      *
@@ -139,6 +155,5 @@ public class CatProd {
     public boolean existeProd(String p){
         return catProd.contains(p);
     }
-
 
 }
