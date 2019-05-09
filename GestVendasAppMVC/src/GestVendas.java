@@ -1,4 +1,4 @@
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GestVendas {
@@ -7,19 +7,23 @@ public class GestVendas {
         double time;
 
         Crono.start();
-        String filePathVendas = "Ficheiros/Vendas_1M.txt";
-        String filePathClientes = "Ficheiros/Clientes.txt";
-        String filePathProdutos = "Ficheiros/Produtos.txt";
+        String filePathVendas = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Vendas_5M.txt";
+        String filePathClientes = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Clientes.txt";
+        String filePathProdutos = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Produtos.txt";
 
         CatProd catProd = new CatProd();
-        CatProd pord = new CatProd(catProd.leFicheiro(filePathProdutos));
-        System.out.println(pord.getCatProd().iterator().next().getProduto());
+        catProd.leFicheiro(filePathProdutos);
 
-        Venda venda = new Venda();
-        venda.leFicheiro(filePathVendas, pord);
+        /*Set<Produto> cp = catProd.getCatProd();
+        for (Produto p: cp){
+            System.out.println(p.getProduto());
+        }*/
 
-        Cliente cliente = new Cliente();
-        cliente.leFicheiro(filePathClientes);
+        CatClient catClient = new CatClient();
+        catClient.leFicheiro(filePathClientes);
+
+        Venda vendas = new Venda();
+        vendas.leFicheiro(filePathVendas,catProd,catClient);
 
         time = Crono.stop();
         System.out.println(time);

@@ -1,4 +1,4 @@
-public class Produto {
+public class Produto implements Comparable<Produto>{
 
     private String produto;
 
@@ -33,10 +33,6 @@ public class Produto {
     }
 
     /**
-     * Metodos -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-     */
-
-    /**
      * Metodo clone
      * @return
      */
@@ -49,14 +45,19 @@ public class Produto {
      * @param o
      * @return
      */
-    public boolean equals(Object o){
-        if(this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        Venda aux = (Venda) o;
+        Produto aux = (Produto) o;
         return this.produto.equals(aux.getProduto());
+    }
+
+    @Override
+    public int compareTo(Produto o) {
+        return this.produto.compareTo(o.getProduto());
     }
 }

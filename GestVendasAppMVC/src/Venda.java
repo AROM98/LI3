@@ -21,8 +21,6 @@ public class Venda {
     private int filial;
 
 
-
-
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
@@ -34,7 +32,7 @@ public class Venda {
         this.produto = "";
         this.preco = 0.0;
         this.uniCompradas = 0;
-        Tcompra = "N"; //deve ser alterado
+        this.Tcompra = "N"; //deve ser alterado
         this.cliente = "";
         this.mes = 0;
         this.filial = 0;
@@ -168,11 +166,11 @@ public class Venda {
      *
      * @param filePath localização do ficheiro de Venda a utilizar.
      */
-    public void leFicheiro(String filePath, CatProd catProd){
+    public void leFicheiro(String filePath, CatProd cp, CatClient cc){
         try {
             File fich = new File(filePath);
             FileReader fr = new FileReader(fich);
-            poeList(fr, catProd);
+            poeList(fr,cp,cc);
             //poeListNIO(filePath);
         }
         catch (FileNotFoundException e){
@@ -186,7 +184,7 @@ public class Venda {
      * @param fr Ficheiro de Venda
      * @return ArrayList de Strings que contem as vendas.
      */
-    public List<Venda> poeList(FileReader fr, CatProd catProd){
+    private List<Venda> poeList(FileReader fr, CatProd cp, CatClient cc){
         //List<String> linhas = new ArrayList<>();
         List<Venda> vendasvalidadas = new ArrayList<>();
         int vval = 0;
@@ -198,7 +196,7 @@ public class Venda {
             while ((linha = inStream.readLine()) != null) {
                 //linhas.add(linha);
                  vendatemp = parsing(linha);
-                 if(valida(vendatemp, catProd)){
+                 if(valida(vendatemp, cp, cc)){
                      vval++;
                      vendasvalidadas.add(vendatemp);
                  }
@@ -207,15 +205,6 @@ public class Venda {
         catch (IOException e) {
             System.out.println(e);
         }
-/*
-            for (String v: linhas) {
-                vendatemp = parsing(v);
-                if (valida(vendatemp)){
-                    vval++;
-                    vendasvalidadas.add(vendatemp);
-                }
-            }
-*/
 
         /*
         int i = 0;
@@ -224,8 +213,7 @@ public class Venda {
             System.out.println(c+"----->"+"["+i+"]");
             i++;
         }*/
-        System.out.println(vval);
-        System.out.println("ESTA A FUNCIONAR!...");
+        System.out.println("Vendas validadas:" + vval);
         return vendasvalidadas;
     }
 
@@ -250,7 +238,7 @@ public class Venda {
      *      -> para cada venda é chamado o valida.
      *      . se for valida insere na lista
      */
-    public Venda parsing(String linhavenda){
+    private Venda parsing(String linhavenda){
         Venda vendares = new Venda();
         String[] campos;
         String cliente, produto,tcompra;
@@ -304,14 +292,14 @@ public class Venda {
     /**
      * Valida venda
      */
-    public boolean valida(Venda venda, CatProd catProd){
-        if(catProd.existeProd(venda.getProduto())){
-            if (venda.getPreco() >= 0.0 && venda.getPreco() <= 999.99) {
-                if (venda.getUniCompradas() >= 1 && venda.getUniCompradas() <= 200) {
-                    if (venda.getMes() >= 1 && venda.getMes() <= 12) {
-                        if (venda.getFilial() >= 1 && venda.getFilial() <= 3) {
-                            if (venda.getTcompra().equals("N") || venda.getTcompra().equals("P")) {
-                                return true;
+    private boolean valida(Venda venda, CatProd cp, CatClient cc){
+        if(cp.existeProd(venda.getProduto())){
+            if(cc.existeClient(venda.getCliente())) {
+                if (venda.getPreco() >= 0.0 && venda.getPreco() <= 999.99) {
+                    if (venda.getUniCompradas() >= 1 && venda.getUniCompradas() <= 200) {
+                        if (venda.getMes() >= 1 && venda.getMes() <= 12) {
+                            if (venda.getFilial() >= 1 && venda.getFilial() <= 3) {
+                                return venda.getTcompra().equals("N") || venda.getTcompra().equals("P");
                             }
                         }
                     }
