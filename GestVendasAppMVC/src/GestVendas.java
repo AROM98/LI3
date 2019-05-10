@@ -7,6 +7,7 @@ public class GestVendas {
         double time;
 
         Crono.start();
+//private static
         String filePathVendas = "Ficheiros/Vendas_1M.txt";
         String filePathClientes = "Ficheiros/Clientes.txt";
         String filePathProdutos = "Ficheiros/Produtos.txt";
@@ -31,3 +32,4 @@ public class GestVendas {
 
     }
 }
+

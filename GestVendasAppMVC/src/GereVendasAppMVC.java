@@ -1,4 +1,4 @@
-public class GereVendasAppMVC {
+/*public class GereVendasAppMVC {
 
     public static void main(String[] args) {
 
@@ -13,4 +13,4 @@ public class GereVendasAppMVC {
         System.exit(0);
     }
 
-}
+}*/
