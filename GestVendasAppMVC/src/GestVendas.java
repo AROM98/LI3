@@ -7,7 +7,7 @@ public class GestVendas {
         double time;
 
         Crono.start();
-        String filePathVendas = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Vendas_5M.txt";
+        String filePathVendas = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Vendas_1M.txt";
         String filePathClientes = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Clientes.txt";
         String filePathProdutos = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Produtos.txt";
 
@@ -22,8 +22,8 @@ public class GestVendas {
         CatClient catClient = new CatClient();
         catClient.leFicheiro(filePathClientes);
 
-        Venda vendas = new Venda();
-        vendas.leFicheiro(filePathVendas,catProd,catClient);
+        CatVenda catVenda = new CatVenda();
+        catVenda.leFicheiro(filePathVendas,catProd,catClient);
 
         time = Crono.stop();
         System.out.println(time);
