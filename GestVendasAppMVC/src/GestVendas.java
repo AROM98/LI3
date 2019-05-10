@@ -7,9 +7,9 @@ public class GestVendas {
         double time;
 
         Crono.start();
-        String filePathVendas = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Vendas_1M.txt";
-        String filePathClientes = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Clientes.txt";
-        String filePathProdutos = "/home/mcmaia/LI3java/GestVendasAppMVC/Ficheiros/Produtos.txt";
+        String filePathVendas = "Ficheiros/Vendas_1M.txt";
+        String filePathClientes = "Ficheiros/Clientes.txt";
+        String filePathProdutos = "Ficheiros/Produtos.txt";
 
         CatProd catProd = new CatProd();
         catProd.leFicheiro(filePathProdutos);

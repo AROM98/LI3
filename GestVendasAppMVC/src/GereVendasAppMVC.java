@@ -12,4 +12,5 @@ public class GereVendasAppMVC {
         control.startController();
         System.exit(0);
     }
+
 }
