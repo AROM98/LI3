@@ -10,7 +10,7 @@ public class CatClient {
      */
 
     public CatClient(){
-        this.catClient = new TreeSet<>();
+        this.catClient = new TreeSet<Cliente>(new ComparadorCliente());
     }
 
     public CatClient(CatClient c){

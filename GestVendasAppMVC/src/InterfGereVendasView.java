@@ -1,2 +1,3 @@
 public interface InterfGereVendasView {
+    //ja nao me lembro...
 }

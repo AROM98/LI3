@@ -56,7 +56,6 @@ public class Cliente implements Comparable<Cliente>{
         return this.cliente.equals(aux.getCliente());
     }
 
-    @Override
     public int compareTo(Cliente o) {
         if(this.cliente.equals(o.getCliente())){
             return 0;

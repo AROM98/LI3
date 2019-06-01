@@ -186,7 +186,6 @@ public class Venda implements Comparable<Venda>{
         return sb.toString();
     }
 
-    @Override
     public int compareTo(Venda o) {
         if(this.produto.equals(o.getProduto())){
             if(preco>= o.getPreco()){
@@ -197,7 +196,7 @@ public class Venda implements Comparable<Venda>{
         return this.produto.compareTo(o.getProduto());
     }
 
-    @Override
+    //isto é preciso para alguma coisa???
     public int hashCode() {
         return 0;
     }

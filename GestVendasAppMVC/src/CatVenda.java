@@ -79,7 +79,7 @@ public class CatVenda {
      */
     private void poeList(FileReader fr, CatProd cp, CatClient cc){
         //List<Venda> vendasvalidadas = new ArrayList<>();
-        int vval = 0;
+        int vval = 0, vfal = 0;
         BufferedReader inStream;
         String linha;
         Venda vendatemp = null;
@@ -93,6 +93,9 @@ public class CatVenda {
                         //vendasvalidadas.add(vendatemp);
                         catVenda.add(vendatemp);
                     }
+                    else {
+                       vfal++;
+                    }
             }
         }
         catch (IOException e) {
@@ -104,6 +107,7 @@ public class CatVenda {
         }
 */
         System.out.println("Vendas validadas:" + vval);
+        System.out.println("Vendas invalidas:" + vfal);
     }
 
 /*

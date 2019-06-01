@@ -56,15 +56,12 @@ public class Produto implements Comparable<Produto>{
         return this.produto.equals(aux.getProduto());
     }
 
-    @Override
     public int compareTo(Produto o) {
         if(this.produto.equals(o.getProduto())){
             return 0;
         }
         return this.produto.compareTo(o.getProduto());
     }
-
-    @Override
 
     public int hashCode() {
         char r = produto.charAt(0);

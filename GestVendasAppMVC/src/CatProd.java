@@ -10,7 +10,7 @@ public class CatProd {
      */
 
     public CatProd(){
-        this.catProd = new TreeSet<>();
+        this.catProd = new TreeSet<Produto>(new ComparadorProduto());
     }
 
     public CatProd(CatProd p){
