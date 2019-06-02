@@ -1,9 +1,9 @@
-/*
 public class GereVendasController {
 
     private InterfGereVendasModel model;
     private InterfGereVendasView view;
 
+    /*
     public GereVendasController(){
         this.model = new InterfGereVendasModel();
     }
@@ -23,6 +23,6 @@ public class GereVendasController {
     public void Start(){
 
     }
+    */
 
 }
-*/

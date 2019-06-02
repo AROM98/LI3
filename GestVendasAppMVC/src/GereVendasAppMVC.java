@@ -1,6 +1,6 @@
-/*public class GereVendasAppMVC {
+public class GereVendasAppMVC {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         InterfGereVendasModel model = new GereVendasModel();
         model.createData();
@@ -11,6 +11,6 @@
         control.setView(view);
         control.startController();
         System.exit(0);
-    }
+    }*/
 
-}*/
+}
