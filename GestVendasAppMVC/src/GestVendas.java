@@ -9,7 +9,7 @@ public class GestVendas {
 
         Crono.start();
 //private static
-        String filePathVendas = "Ficheiros/Vendas_1M.txt";
+        String filePathVendas = "Ficheiros/Vendas_5M.txt";
         String filePathClientes = "Ficheiros/Clientes.txt";
         String filePathProdutos = "Ficheiros/Produtos.txt";
 
@@ -23,9 +23,6 @@ public class GestVendas {
 
         CatClient catClient = new CatClient();
         catClient.leFicheiro(filePathClientes);
-
-        CatVenda catVenda = new CatVenda();
-        catVenda.leFicheiro(filePathVendas,catProd,catClient);
 
         time = Crono.stop();
         System.out.println(time);

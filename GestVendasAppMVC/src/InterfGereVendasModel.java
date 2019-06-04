@@ -1,3 +1,3 @@
 public interface InterfGereVendasModel {
-    //ja nao me lembro...
+    public void createData();
 }
