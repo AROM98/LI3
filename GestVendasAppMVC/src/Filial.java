@@ -107,6 +107,6 @@ public class Filial {
      * Função que verifica se existe um produto
      */
     public boolean mycontains(Produto p){
-        return filial.containsKey(p);
+        return filial.containsKey(p.getProduto());
     }
 }
