@@ -43,14 +43,13 @@ public class Filial {
      * nao estamos a fazer o add nesta filial, mas sim na copia que pedimos.
      */
     public void myadd(Venda v) {
-        System.out.println(v.getProduto());
+
         if (filial.get(v.getFilial()).containsKey(v.getProduto())) {
             filial.get(v.getFilial()).get(v.getProduto()).add(v);
         } else {
             ArrayList<Venda> newv = new ArrayList<>();
             newv.add(v);
             filial.get(v.getFilial()).put(v.getProduto(), newv);
-            System.out.println("ADICIONEI: "+ v.getProduto());
         }
     }
 

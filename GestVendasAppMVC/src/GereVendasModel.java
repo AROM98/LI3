@@ -159,6 +159,7 @@ public class GereVendasModel implements InterfGereVendasModel{
                 Venda v = parsing(linha);
                 if (this.valida(v)) {
                     filial.myadd(v);
+                    facturacao.myadd(v);
                 }
             }
         }
