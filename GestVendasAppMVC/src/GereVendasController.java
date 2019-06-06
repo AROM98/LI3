@@ -36,7 +36,8 @@ public class GereVendasController implements InterfGereVendasController{
             switch (input) {
                 case 1:
                     ret = model.query1();
-                    view.querie1(ret);
+                    //view.querie1(ret);
+                    view.navegador(ret);
                 case 11:
                     System.exit(0);
             }

@@ -6,4 +6,5 @@ public interface InterfGereVendasView {
 
     public void MenuQueries();
     public void querie1(List<String> ret);
+    public void navegador(List<String> ret);
 }
