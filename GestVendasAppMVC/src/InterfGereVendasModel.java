@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface InterfGereVendasModel {
     public void createData();
 
@@ -14,6 +16,7 @@ public interface InterfGereVendasModel {
     public Filial getFilial2();
     public Filial getFilial3();
     public Facturacao getFacturacao();
+    public List<String> query1();
 
 
 }

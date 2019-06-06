@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Filial {
 
@@ -8,7 +10,7 @@ public class Filial {
     private CatProd produtos;
 
     //Filiais -> contem registo de compras realizadas em cada filial, por quem e quando.
-    private List<Venda> filial; //agora contem vendas, mas é provavel que haja alteraçoes.
+    private Map<String,Venda> filial; //agora contem vendas, mas é provavel que haja alteraçoes.
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -16,11 +18,11 @@ public class Filial {
 
     public Filial(){
         this.produtos = new CatProd();
-        this.filial = new ArrayList<Venda>();
+        this.filial = new HashMap<>();
         this.num_filial = 0;
     }
 
-    public Filial(CatProd prod, List<Venda> filial, int num_filial){
+    public Filial(CatProd prod, Map<String,Venda> filial, int num_filial){
         this.produtos = prod;
         this.filial = filial;
         this.num_filial = num_filial;
@@ -40,7 +42,7 @@ public class Filial {
         return this.produtos;
     }
 
-    public List<Venda> getFilial() {
+    public Map<String,Venda> getFilial() {
         return filial;
     }
 
@@ -56,7 +58,7 @@ public class Filial {
         this.produtos = produtos;
     }
 
-    public void setFilial(List<Venda> filial) {
+    public void setFilial(Map<String,Venda> filial) {
         this.filial = filial;
     }
 
@@ -98,6 +100,13 @@ public class Filial {
      * nao estamos a fazer o add nesta filial, mas sim na copia que pedimos.
      */
     public void myadd(Venda v){
-        this.filial.add(v);
+        this.filial.put(v.getProduto(),v);
+    }
+
+    /**
+     * Função que verifica se existe um produto
+     */
+    public boolean mycontains(Produto p){
+        return filial.containsKey(p);
     }
 }

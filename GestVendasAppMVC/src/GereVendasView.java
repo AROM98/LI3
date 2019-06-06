@@ -19,7 +19,9 @@ public class GereVendasView implements  InterfGereVendasView{
                 "7.Determina para cada filial, a lista dos 3 maiores compradores.\n" +
                 "8.Determina, segundo um numero dade, os clientes que comprar mais produtos diferentes.\n" +
                 "9.Dado um produto, determina, segundo um numero dado, os clientes que mais compraram e o seu valor gasto.\n" +
-                "10.Determinar mes a mes, e para cada mes, filial a filial, a faturacao total de cada produto.\n");
+                "10.Determinar mes a mes, e para cada mes, filial a filial, a faturacao total de cada produto.\n" +
+                "11.Sair" +
+                "\n\nOpção: ");
     }
 
 

@@ -1,5 +1,7 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 public class GereVendasModel implements InterfGereVendasModel{
 
@@ -194,9 +196,34 @@ public class GereVendasModel implements InterfGereVendasModel{
         }
     }
 
-    public void printa(Filial f){
-        for(Venda v : f.getFilial()){
-            System.out.println(v);
-        }
+    public List<String> query1(){
+        boolean found;
+        List<String> ret = new ArrayList<>();
+        int lmao = 0;
+        for (Produto p : catProd.getCatProd()) {
+            if(lmao<20) {
+                System.out.println(p.getProduto());
+                found = false;
+                if (filial1.mycontains(p)) {
+                    System.out.println("filial1:" + filial1.mycontains(p));
+                    found = true;
+                } else if (filial2.mycontains(p)) {
+                    System.out.println("filial2:" + filial2.mycontains(p));
+                    found = true;
+                } else if (filial3.mycontains(p)) {
+                    System.out.println("filial3:" + filial3.mycontains(p));
+                    found = true;
+                }
+                if (!found) {
+                    ret.add(p.getProduto());
+                }
+                lmao++;
+            }
+        }/*
+        for (String s: ret) {
+            System.out.println(s);
+        }*/
+        return ret;
     }
+
 }

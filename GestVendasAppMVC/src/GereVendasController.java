@@ -22,13 +22,21 @@ public class GereVendasController implements InterfGereVendasController{
     //menu e prints
     public void startController(){
         view.printFichProd(model.getFilePathProdutos(), model.getCatProd().getPinvalidos(), model.getCatProd().getPvaliados());
-
+        this.menu();
     }
 
     //chama prints que estao no view.
-    public void menu(){
+    private void menu(){
         view.MenuQueries();
-        //faz coisas (Switch and case)
+        while(true) {
+            int input = Input.lerInt();
+            switch (input) {
+                case 1:
+                    model.query1();
+                case 11:
+                    System.exit(0);
+            }
+        }
     }
 
     /**
