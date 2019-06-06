@@ -8,7 +8,9 @@ public class GereVendasView implements  InterfGereVendasView{
     }
 
     public void MenuQueries() {
-        System.out.println("Menu Queries\n\nEscolha uma query:\n1.Lista de Produtos nunca comprados.\n" +
+        System.out.println("Menu Queries\n\n" +
+                "Escolha uma query:\n" +
+                "1.Lista de Produtos nunca comprados.\n" +
                 "2.Dando um mes ou filial, determina vendas e o total de clientes que as fizeram.\n" +
                 "3.Dado um cliente, determina mes a mes, total de compras,produtos distintos e quanto gastou.\n" +
                 "4.Dado um produto, determina mes a mes, total de vezes comprado, clientes distintos, e total faturado.\n" +
