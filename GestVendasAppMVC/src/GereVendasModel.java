@@ -1,20 +1,72 @@
 import java.io.*;
 import java.util.InputMismatchException;
 
-public class GereVendasModel {
+public class GereVendasModel implements InterfGereVendasModel{
+
+    private String filePathVendas = "Ficheiros/Vendas_1M.txt";
+    private String filePathClientes = "Ficheiros/Clientes.txt";
+    private String filePathProdutos = "Ficheiros/Produtos.txt";
 
     private CatProd catProd;
     private CatClient catClient;
-    private Filial filial;
+    private Filial filial1;
+    private Filial filial2;
+    private Filial filial3;
     private Facturacao facturacao;
 
 
-    GereVendasModel(){
+    public GereVendasModel(){
         catProd = new CatProd();
         catClient = new CatClient();
-        filial = new Filial();
+        filial1 = new Filial();
+        filial2 = new Filial();
+        filial3 = new Filial();
         facturacao = new Facturacao();
     }
+
+
+    /**
+     * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
+    public String getFilePathProdutos() {
+        return filePathProdutos;
+    }
+
+    public String getFilePathClientes() {
+        return filePathClientes;
+    }
+
+    public String getFilePathVendas() {
+        return filePathVendas;
+    }
+
+    public CatClient getCatClient() {
+        return catClient;
+    }
+
+    public CatProd getCatProd() {
+        return catProd;
+    }
+
+    public Filial getFilial1() {
+        return filial1;
+    }
+
+    public Filial getFilial2() {
+        return filial2;
+    }
+
+    public Filial getFilial3() {
+        return filial3;
+    }
+
+    public Facturacao getFacturacao() {
+        return facturacao;
+    }
+
+    /**
+     * Métodos -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     */
 
     /**
      *  Para cada linha de venda, é feito o parsing e inserido num ArrayList<Venda>
@@ -95,9 +147,9 @@ public class GereVendasModel {
 
 
     public void createData(){
-        String filePathVendas = "Ficheiros/Vendas_1M.txt";
-        String filePathClientes = "Ficheiros/Clientes.txt";
-        String filePathProdutos = "Ficheiros/Produtos.txt";
+        //String filePathVendas = "Ficheiros/Vendas_1M.txt";
+        //String filePathClientes = "Ficheiros/Clientes.txt";
+        //String filePathProdutos = "Ficheiros/Produtos.txt";
 
         catProd.leFicheiro(filePathProdutos);
         catClient.leFicheiro(filePathClientes);
@@ -110,7 +162,9 @@ public class GereVendasModel {
         catch (FileNotFoundException e) {
             System.out.println(e);
         }
-
+        //printa(filial1);
+        //printa(filial2);
+        //printa(filial3);
         /* QUERIES */
     }
 
@@ -119,6 +173,9 @@ public class GereVendasModel {
      * adiciona ao Set apena os Clientes validas
      */
     private void poeList(FileReader fr){
+        this.filial1.setNum_filial(1);
+        this.filial2.setNum_filial(2);
+        this.filial3.setNum_filial(3);
         BufferedReader inStream;
         String linha;
         try {
@@ -126,14 +183,20 @@ public class GereVendasModel {
             while ((linha = inStream.readLine()) != null) {
                 Venda v = parsing(linha);
                 if (this.valida(v)) {
-                    filial.preencheFilialais(v);
+                    filial1.preencheFilial(v);
+                    filial2.preencheFilial(v);
+                    filial3.preencheFilial(v);
                 }
             }
-            filial.printa();
         }
         catch (IOException e) {
             System.out.println(e);
         }
+    }
 
+    public void printa(Filial f){
+        for(Venda v : f.getFilial()){
+            System.out.println(v);
+        }
     }
 }

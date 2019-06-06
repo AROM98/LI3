@@ -1,3 +1,8 @@
 public interface InterfGereVendasController {
-    //ja nao me lembro...
+
+    void setView(InterfGereVendasView view);
+
+    void setModel(InterfGereVendasModel model);
+
+    void startController();
 }

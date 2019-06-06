@@ -1,3 +1,4 @@
 public interface InterfGereVendasView {
-    //ja nao me lembro...
+
+    public void printFichProd(String path, int invalidos, int validos);
 }

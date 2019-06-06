@@ -3,11 +3,12 @@ import java.util.List;
 
 public class Filial {
 
+    private int num_filial;
     //penso que nao vai ser preciso usar estas variaveis, basta gazer get() de fora.
     private CatProd produtos;
 
     //Filiais -> contem registo de compras realizadas em cada filial, por quem e quando.
-    private List<Venda> filial[]; //agora contem vendas, mas é provavel que haja alteraçoes.
+    private List<Venda> filial; //agora contem vendas, mas é provavel que haja alteraçoes.
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -15,44 +16,36 @@ public class Filial {
 
     public Filial(){
         this.produtos = new CatProd();
-        for(int i=0;i<3;i++)
-        this.filial[i] = new ArrayList<Venda>();
-     /*   this.filial2 = new ArrayList<Venda>();
-        this.filial3 = new ArrayList<Venda>();*/
+        this.filial = new ArrayList<Venda>();
+        this.num_filial = 0;
     }
 
-    public Filial(CatProd prod, List<Venda> filial1, List<Venda> filial2, List<Venda> filial3){
+    public Filial(CatProd prod, List<Venda> filial, int num_filial){
         this.produtos = prod;
-        this.filial[0] = filial1;
-        this.filial[1] = filial2;
-        this.filial[2] = filial3;
+        this.filial = filial;
+        this.num_filial = num_filial;
     }
-/*
-    public Filial(Filial f){
+
+    public Filial(Filial f) {
         this.produtos = f.getProdutos();
-        this.filial1 = f.getFilial1();
-        this.filial2 = f.getFilial2();
-        this.filial3 = f.getFilial3();
-    }*/
+        this.filial = f.getFilial();
+        this.num_filial = f.getNum_filial();
+    }
 
     /**
      * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
     public CatProd getProdutos() {
-        return produtos;
+        return this.produtos;
     }
 
-    public List<Venda> getFilial1() {
-        return filial[0];
+    public List<Venda> getFilial() {
+        return filial;
     }
 
-    public List<Venda> getFilial2() {
-        return filial[1];
-    }
-
-    public List<Venda> getFilial3() {
-        return filial[2];
+    public int getNum_filial() {
+        return num_filial;
     }
 
     /**
@@ -63,18 +56,13 @@ public class Filial {
         this.produtos = produtos;
     }
 
-    public void setFilial1(List<Venda> filial1) {
-        this.filial[0] = filial1;
+    public void setFilial(List<Venda> filial) {
+        this.filial = filial;
     }
 
-    public void setFilial2(List<Venda> filial2) {
-        this.filial[1] = filial2;
+    public void setNum_filial(int num_filial) {
+        this.num_filial = num_filial;
     }
-
-    public void setFilial3(List<Venda> filial3) {
-        this.filial[2] = filial3;
-    }
-
 
     /**
      * Metodos -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -93,37 +81,23 @@ public class Filial {
         }
         Filial aux = (Filial) obj;
         return this.produtos.equals(aux.getProdutos())
-                && this.filial[0].equals(aux.getFilial1())
-                && this.filial[1].equals(aux.getFilial2())
-                && this.filial[2].equals(aux.getFilial3());
+                && this.filial.equals(aux.getFilial());
     }
 
     /**
      * vendas sao sepradas para cada array de Filial
      */
-    public void preencheFilialais(Venda v){
-        /*if(v.getFilial() == 1){
-            this.filial[0].add(v);
+    public void preencheFilial(Venda v){
+        if(v.getFilial() == this.getNum_filial()){
+            this.myadd(v);
         }
-        if(v.getFilial() == 2){
-            this.filial2.add(v);
-        }
-        if(v.getFilial() == 3){
-            this.filial3.add(v);
-        }*/
-        this.filial[v.getFilial()-1].add(v);
     }
 
-    public void printa(){
-        for(int i = 0;i<3;i++)
-            for(Venda v : filial[i]){
-                System.out.println(v);
-        }/*
-        for(Venda v : filial2){
-            System.out.println(v);
-        }
-        for(Venda v : filial3){
-            System.out.println(v);
-        }*/
+    /**
+     * Função que faz add, porque se fizermos o get e depois o add,
+     * nao estamos a fazer o add nesta filial, mas sim na copia que pedimos.
+     */
+    public void myadd(Venda v){
+        this.filial.add(v);
     }
 }

@@ -4,6 +4,8 @@ import java.util.*;
 public class CatProd {
 
     private Set<Produto> catProd;
+    private int Pvaliados;
+    private int Pinvalidos;
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -11,10 +13,14 @@ public class CatProd {
 
     public CatProd(){
         this.catProd = new TreeSet<Produto>(new ComparadorProduto());
+        this.Pvaliados = 0;
+        this.Pinvalidos = 0;
     }
 
     public CatProd(CatProd p){
         this.catProd = p.getCatProd();
+        this.Pvaliados = p.getPvaliados();
+        this.Pinvalidos = p.getPinvalidos();
     }
 
     /**
@@ -22,6 +28,14 @@ public class CatProd {
      */
     public Set<Produto> getCatProd() {
         return this.catProd;
+    }
+
+    public int getPvaliados() {
+        return Pvaliados;
+    }
+
+    public int getPinvalidos() {
+        return Pinvalidos;
     }
 
     /**
@@ -71,6 +85,7 @@ public class CatProd {
         }
         if (produto.charAt(2) == '0') {
             System.out.println("nao é valido o produto: " + produto);
+
             return false;
         }
         return true;
@@ -106,7 +121,6 @@ public class CatProd {
      * adiciona ao Set apena os Clientes validas
      */
     private void poeList(FileReader fr) {
-        int invalidas = 0, validas = 0;
         BufferedReader inStream;
         String linha;
         try {
@@ -115,23 +129,17 @@ public class CatProd {
                 if (valida(linha)) {
                     Produto p = new Produto(linha);
                     catProd.add(p);
-                    validas++;
-                } else {
-                    invalidas++;
+                    this.Pvaliados++;
+                }
+                else {
+                    this.Pinvalidos++;
                 }
             }
         }
         catch (IOException e) {
             System.out.println(e);
         }
-/*
-        int i = 0;
-        for (Produto c : catProd){
-            System.out.println(c.getProduto()+"----->"+"["+i+"]");
-            i++;
-        }
-*/
-        System.out.println("Produtos validos: " + validas);
-        System.out.println("Produtos invalidos: " + invalidas);
+        //System.out.println("Produtos validos: " + this.Pvaliados);
+        //System.out.println("Produtos invalidos: " + this.Pinvalidos);
     }
 }
