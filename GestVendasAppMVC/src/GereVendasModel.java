@@ -218,14 +218,6 @@ public class GereVendasModel implements InterfGereVendasModel{
                 retq++;
             }
         }
-
-        System.out.println("TOTAL DE VENDAS NO MAP: "+ (filial1.getFilial().size()+filial2.getFilial().size()+filial3.getFilial().size()));
-
-/*
-        for (String s: ret) {
-            System.out.println(s);
-        }*/
-        System.out.println("Produtos nunca comprados:" + retq);
         return ret;
     }
 }

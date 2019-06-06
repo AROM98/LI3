@@ -1,3 +1,7 @@
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class GereVendasView implements  InterfGereVendasView{
     //todos os prints do programa devem estar aqui.
 
@@ -22,6 +26,12 @@ public class GereVendasView implements  InterfGereVendasView{
                 "10.Determinar mes a mes, e para cada mes, filial a filial, a faturacao total de cada produto.\n" +
                 "11.Sair" +
                 "\n\nOpção: ");
+    }
+
+    public void querie1(List<String> ret){
+        Collections.sort(ret);
+        System.out.println(ret);
+        System.out.println("Produtos nunca comprados: " + ret.size());
     }
 
 
