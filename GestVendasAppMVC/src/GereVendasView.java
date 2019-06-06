@@ -48,7 +48,7 @@ public class GereVendasView implements  InterfGereVendasView{
     public void navegador(List<String> ret){
         int paginatotal = ret.size()/20;
         int pagina = 0, opcao = 0, i = 0, v = 1;
-
+        System.out.println("Produtos nunca comprados: " + ret.size());
         for(i = 0; i < 20; i+= 2){
             System.out.println(ret.get(i)+"    |    "+ret.get(i+1));
         }

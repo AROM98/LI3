@@ -285,11 +285,15 @@ public class GereVendasModel implements InterfGereVendasModel{
         double xd = Crono.stop();
 
         System.out.println(xd);
-/*
+
         for (String s: ret.keySet()) {
             System.out.println("Key: " + s + "|| Gasto: "+ ret.get(s));
-        }*/
+        }
 
         return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
+    }
+
+    public void q7(){
+
     }
 }
