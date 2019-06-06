@@ -10,9 +10,6 @@ public class GereVendasModel implements InterfGereVendasModel{
     private CatProd catProd;
     private CatClient catClient;
     private Filial filial;
-    /*private Filial filial1;
-    private Filial filial2;
-    private Filial filial3;*/
     private Facturacao facturacao;
 
 
@@ -20,9 +17,6 @@ public class GereVendasModel implements InterfGereVendasModel{
         catProd = new CatProd();
         catClient = new CatClient();
         filial = new Filial();
-     /*   filial1 = new Filial();
-        filial2 = new Filial();
-        filial3 = new Filial();*/
         facturacao = new Facturacao();
     }
 
@@ -49,19 +43,7 @@ public class GereVendasModel implements InterfGereVendasModel{
     public CatProd getCatProd() {
         return catProd;
     }
-/*
-    public Filial getFilial1() {
-        return filial[0];
-    }
 
-    public Filial getFilial2() {
-        return filial[1];
-    }
-
-    public Filial getFilial3() {
-        return filial[2];
-    }
-*/
     public Facturacao getFacturacao() {
         return facturacao;
     }
@@ -149,9 +131,6 @@ public class GereVendasModel implements InterfGereVendasModel{
 
 
     public void createData(){
-        //String filePathVendas = "Ficheiros/Vendas_1M.txt";
-        //String filePathClientes = "Ficheiros/Clientes.txt";
-        //String filePathProdutos = "Ficheiros/Produtos.txt";
 
         catProd.leFicheiro(filePathProdutos);
         catClient.leFicheiro(filePathClientes);
@@ -164,10 +143,6 @@ public class GereVendasModel implements InterfGereVendasModel{
         catch (FileNotFoundException e) {
             System.out.println(e);
         }
-        //printa(filial1);
-        //printa(filial2);
-        //printa(filial3);
-        /* QUERIES */
     }
 
     /**
@@ -175,9 +150,7 @@ public class GereVendasModel implements InterfGereVendasModel{
      * adiciona ao Set apena os Clientes validas
      */
     private void poeList(FileReader fr){
-       /* this.filial1.setNum_filial(1);
-        this.filial2.setNum_filial(2);
-        this.filial3.setNum_filial(3);*/
+
         BufferedReader inStream;
         String linha;
         try {
@@ -186,10 +159,7 @@ public class GereVendasModel implements InterfGereVendasModel{
                 Venda v = parsing(linha);
                 if (this.valida(v)) {
                     filial.myadd(v);
-                    /*filial1.preencheFilial(v);
-                    filial2.preencheFilial(v);
-                    filial3.preencheFilial(v);
-                */}
+                }
             }
         }
         catch (IOException e) {
@@ -202,24 +172,9 @@ public class GereVendasModel implements InterfGereVendasModel{
         List<String> ret = new ArrayList<>();
 
         for (Produto p : catProd.getCatProd()) {
-            //   System.out.println(p.getProduto());
             if(!filial.mycontains(p)){
                 ret.add(p.getProduto());
             }
-                /*
-            if (filial1.mycontains(p)) {
-                //  System.out.println("filial1:" + filial1.mycontains(p));
-                found = true;
-            } else if (filial2.mycontains(p)) {
-                //    System.out.println("filial2:" + filial2.mycontains(p));
-                found = true;
-            } else if (filial3.mycontains(p)) {
-                //     System.out.println("filial3:" + filial3.mycontains(p));
-                found = true;
-            }
-            if (!found) {
-                ret.add(p.getProduto());
-            }*/
         }
         return ret;
     }

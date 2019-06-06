@@ -26,10 +26,6 @@ public class Filial {
     /**
      * Metodos -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
-/*
-    public Filial clone(){
-        return new Filial(this);
-    }*/
 
     public boolean equals(Object obj) {
         if(this == obj){
@@ -62,9 +58,13 @@ public class Filial {
      * Função que verifica se existe um produto
      */
     public boolean mycontains(Produto p){
+        boolean ret = false;
         for (Map<String,List<Venda>> f: filial) {
-            if (f.containsKey(p.getProduto())) break;
+            if (f.containsKey(p.getProduto())) {
+                ret = true;
+                break;
+            }
         }
-        return false;
+        return ret;
     }
 }
