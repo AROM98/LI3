@@ -9,18 +9,20 @@ public class GereVendasModel implements InterfGereVendasModel{
 
     private CatProd catProd;
     private CatClient catClient;
-    private Filial filial1;
+    private Filial filial;
+    /*private Filial filial1;
     private Filial filial2;
-    private Filial filial3;
+    private Filial filial3;*/
     private Facturacao facturacao;
 
 
     public GereVendasModel(){
         catProd = new CatProd();
         catClient = new CatClient();
-        filial1 = new Filial();
+        filial = new Filial();
+     /*   filial1 = new Filial();
         filial2 = new Filial();
-        filial3 = new Filial();
+        filial3 = new Filial();*/
         facturacao = new Facturacao();
     }
 
@@ -47,19 +49,19 @@ public class GereVendasModel implements InterfGereVendasModel{
     public CatProd getCatProd() {
         return catProd;
     }
-
+/*
     public Filial getFilial1() {
-        return filial1;
+        return filial[0];
     }
 
     public Filial getFilial2() {
-        return filial2;
+        return filial[1];
     }
 
     public Filial getFilial3() {
-        return filial3;
+        return filial[2];
     }
-
+*/
     public Facturacao getFacturacao() {
         return facturacao;
     }
@@ -173,9 +175,9 @@ public class GereVendasModel implements InterfGereVendasModel{
      * adiciona ao Set apena os Clientes validas
      */
     private void poeList(FileReader fr){
-        this.filial1.setNum_filial(1);
+       /* this.filial1.setNum_filial(1);
         this.filial2.setNum_filial(2);
-        this.filial3.setNum_filial(3);
+        this.filial3.setNum_filial(3);*/
         BufferedReader inStream;
         String linha;
         try {
@@ -183,10 +185,11 @@ public class GereVendasModel implements InterfGereVendasModel{
             while ((linha = inStream.readLine()) != null) {
                 Venda v = parsing(linha);
                 if (this.valida(v)) {
-                    filial1.preencheFilial(v);
+                    filial.myadd(v);
+                    /*filial1.preencheFilial(v);
                     filial2.preencheFilial(v);
                     filial3.preencheFilial(v);
-                }
+                */}
             }
         }
         catch (IOException e) {
@@ -195,12 +198,15 @@ public class GereVendasModel implements InterfGereVendasModel{
     }
 
     public List<String> query1(){
-        boolean found;
+
         List<String> ret = new ArrayList<>();
-        int retq = 0;
+
         for (Produto p : catProd.getCatProd()) {
             //   System.out.println(p.getProduto());
-            found = false;
+            if(!filial.mycontains(p)){
+                ret.add(p.getProduto());
+            }
+                /*
             if (filial1.mycontains(p)) {
                 //  System.out.println("filial1:" + filial1.mycontains(p));
                 found = true;
@@ -213,7 +219,7 @@ public class GereVendasModel implements InterfGereVendasModel{
             }
             if (!found) {
                 ret.add(p.getProduto());
-            }
+            }*/
         }
         return ret;
     }
@@ -253,7 +259,7 @@ public class GereVendasModel implements InterfGereVendasModel{
         HashMap<String, Double> ret = new HashMap<>();
         HashMap<String, Double> ret2 = new HashMap<>();
         HashMap<String, Double> ret3 = new HashMap<>();
-
+/*
         for (Venda v: filial1.getFilial().values()) {
             if (ret.containsKey(v.getCliente())) {
                 ret.put(v.getCliente(), ret.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
@@ -279,7 +285,7 @@ public class GereVendasModel implements InterfGereVendasModel{
         ret = sortHashMapByValues(ret);
         ret2 = sortHashMapByValues(ret2);
         ret3 = sortHashMapByValues(ret3);
-
+*/
 
 
         double xd = Crono.stop();
@@ -290,6 +296,7 @@ public class GereVendasModel implements InterfGereVendasModel{
             System.out.println("Key: " + s + "|| Gasto: "+ ret.get(s));
         }
 
+        System.out.println(xd);
         return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
     }
 

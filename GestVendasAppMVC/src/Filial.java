@@ -1,69 +1,26 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Filial {
 
-    private int num_filial;
-    //penso que nao vai ser preciso usar estas variaveis, basta gazer get() de fora.
-    private CatProd produtos;
-
     //Filiais -> contem registo de compras realizadas em cada filial, por quem e quando.
-    private Map<String,Venda> filial; //agora contem vendas, mas é provavel que haja alteraçoes.
+    private List<Map<String,List<Venda>>> filial; //agora contem vendas, mas é provavel que haja alteraçoes.
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
     public Filial(){
-        this.produtos = new CatProd();
-        this.filial = new HashMap<>();
-        this.num_filial = 0;
-    }
-
-    public Filial(CatProd prod, Map<String,Venda> filial, int num_filial){
-        this.produtos = prod;
-        this.filial = filial;
-        this.num_filial = num_filial;
-    }
-
-    public Filial(Filial f) {
-        this.produtos = f.getProdutos();
-        this.filial = f.getFilial();
-        this.num_filial = f.getNum_filial();
+        filial =  new ArrayList<>();
+        for(int i = 0;i<4;i++)
+            filial.add(new HashMap<>());
     }
 
     /**
      * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
 
-    public CatProd getProdutos() {
-        return this.produtos;
-    }
-
-    public Map<String,Venda> getFilial() {
+    public List<Map<String,List<Venda>>> getFilial() {
         return filial;
-    }
-
-    public int getNum_filial() {
-        return num_filial;
-    }
-
-    /**
-     * Sets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     */
-
-    public void setProdutos(CatProd produtos) {
-        this.produtos = produtos;
-    }
-
-    public void setFilial(Map<String,Venda> filial) {
-        this.filial = filial;
-    }
-
-    public void setNum_filial(int num_filial) {
-        this.num_filial = num_filial;
     }
 
     /**
@@ -82,31 +39,32 @@ public class Filial {
             return false;
         }
         Filial aux = (Filial) obj;
-        return this.produtos.equals(aux.getProdutos())
-                && this.filial.equals(aux.getFilial());
-    }
-
-    /**
-     * vendas sao sepradas para cada array de Filial
-     */
-    public void preencheFilial(Venda v){
-        if(v.getFilial() == this.getNum_filial()){
-            this.myadd(v);
-        }
+        return this.filial.equals(aux.getFilial());
     }
 
     /**
      * Função que faz add, porque se fizermos o get e depois o add,
      * nao estamos a fazer o add nesta filial, mas sim na copia que pedimos.
      */
-    public void myadd(Venda v){
-        this.filial.put(v.getProduto(),v);
+    public void myadd(Venda v) {
+        System.out.println(v.getProduto());
+        if (filial.get(v.getFilial()).containsKey(v.getProduto())) {
+            filial.get(v.getFilial()).get(v.getProduto()).add(v);
+        } else {
+            ArrayList<Venda> newv = new ArrayList<>();
+            newv.add(v);
+            filial.get(v.getFilial()).put(v.getProduto(), newv);
+            System.out.println("ADICIONEI: "+ v.getProduto());
+        }
     }
 
     /**
      * Função que verifica se existe um produto
      */
     public boolean mycontains(Produto p){
-        return filial.containsKey(p.getProduto());
+        for (Map<String,List<Venda>> f: filial) {
+            if (f.containsKey(p.getProduto())) break;
+        }
+        return false;
     }
 }
