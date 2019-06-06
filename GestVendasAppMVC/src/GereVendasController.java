@@ -32,16 +32,18 @@ public class GereVendasController implements InterfGereVendasController{
     private void menu(){
         List<String> ret;
         Map<String,Double> ret7;
-        view.MenuQueries();
         while(true) {
+            view.MenuQueries();
             int input = Input.lerInt();
             switch (input) {
                 case 1:
                     ret = model.query1();
                     view.navegador(ret);
+                    break;
                 case 7:
                     ret7 = model.query7();
-                    case 11:
+                    break;
+                case 11:
                     System.exit(0);
             }
         }
