@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 public interface InterfGereVendasModel {
     public void createData();
@@ -17,6 +18,7 @@ public interface InterfGereVendasModel {
     public Filial getFilial3();
     public Facturacao getFacturacao();
     public List<String> query1();
+    public Map<String,Double> query7();
 
 
 }

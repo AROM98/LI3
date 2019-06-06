@@ -1,6 +1,7 @@
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class GereVendasView implements  InterfGereVendasView{
     //todos os prints do programa devem estar aqui.
@@ -30,10 +31,19 @@ public class GereVendasView implements  InterfGereVendasView{
 
     public void querie1(List<String> ret){
         Collections.sort(ret);
-        System.out.println(ret);
+       // System.out.println(ret);
+        for (int i = 0; i < ret.size(); i++) {
+            System.out.println(ret.get(i));
+        }
         System.out.println("Produtos nunca comprados: " + ret.size());
     }
 
+    public void query7(Map<String,Double> ret){
+        int i;
+        for(i = 0;i<3;i++){
+            System.out.println("not finished");
+        }
+    }
 
     public void navegador(List<String> ret){
         int paginatotal = ret.size()/20;

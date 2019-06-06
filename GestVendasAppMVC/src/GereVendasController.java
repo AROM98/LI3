@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GereVendasController implements InterfGereVendasController{
 
@@ -30,15 +31,17 @@ public class GereVendasController implements InterfGereVendasController{
     //chama prints que estao no view.
     private void menu(){
         List<String> ret;
+        Map<String,Double> ret7;
         view.MenuQueries();
         while(true) {
             int input = Input.lerInt();
             switch (input) {
                 case 1:
                     ret = model.query1();
-                    //view.querie1(ret);
                     view.navegador(ret);
-                case 11:
+                case 7:
+                    ret7 = model.query7();
+                    case 11:
                     System.exit(0);
             }
         }

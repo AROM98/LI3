@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
+import java.util.*;
 
 public class GereVendasModel implements InterfGereVendasModel{
 
@@ -215,9 +213,83 @@ public class GereVendasModel implements InterfGereVendasModel{
             }
             if (!found) {
                 ret.add(p.getProduto());
-                retq++;
             }
         }
         return ret;
+    }
+
+    public LinkedHashMap<String, Double> sortHashMapByValues(HashMap<String, Double> passedMap) {
+        List<String> mapKeys = new ArrayList<>(passedMap.keySet());
+        List<Double> mapValues = new ArrayList<>(passedMap.values());
+        Collections.sort(mapValues);
+        Collections.sort(mapKeys);
+
+        LinkedHashMap<String, Double> sortedMap =
+                new LinkedHashMap<>();
+
+        Iterator<Double> valueIt = mapValues.iterator();
+        while (valueIt.hasNext()) {
+            Double val = valueIt.next();
+            Iterator<String> keyIt = mapKeys.iterator();
+
+            while (keyIt.hasNext()) {
+                String key = keyIt.next();
+                Double comp1 = passedMap.get(key);
+                Double comp2 = val;
+
+                if (comp1.equals(comp2)) {
+                    keyIt.remove();
+                    sortedMap.put(key, val);
+                    break;
+                }
+            }
+        }
+        return sortedMap;
+    }
+
+    public Map<String,Double> query7(){
+
+        Crono.start();
+        HashMap<String, Double> ret = new HashMap<>();
+        HashMap<String, Double> ret2 = new HashMap<>();
+        HashMap<String, Double> ret3 = new HashMap<>();
+
+        for (Venda v: filial1.getFilial().values()) {
+            if (ret.containsKey(v.getCliente())) {
+                ret.put(v.getCliente(), ret.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
+            } else {
+                ret.put(v.getCliente(), v.getPreco() * v.getUniCompradas());
+            }
+        }
+        for (Venda v: filial2.getFilial().values()) {
+            if (ret2.containsKey(v.getCliente())) {
+                ret2.put(v.getCliente(), ret2.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
+            } else {
+                ret2.put(v.getCliente(), v.getPreco() * v.getUniCompradas());
+            }
+        }
+        for (Venda v: filial3.getFilial().values()) {
+            if (ret3.containsKey(v.getCliente())) {
+                ret3.put(v.getCliente(), ret3.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
+            } else {
+                ret3.put(v.getCliente(), v.getPreco() * v.getUniCompradas());
+            }
+        }
+
+        ret = sortHashMapByValues(ret);
+        ret2 = sortHashMapByValues(ret2);
+        ret3 = sortHashMapByValues(ret3);
+
+
+
+        double xd = Crono.stop();
+
+        System.out.println(xd);
+/*
+        for (String s: ret.keySet()) {
+            System.out.println("Key: " + s + "|| Gasto: "+ ret.get(s));
+        }*/
+
+        return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
     }
 }
