@@ -180,6 +180,32 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
+    public Map<Integer,List<String>> query2(){
+
+        Map<Integer,List<String>> ret = new HashMap<>();
+        List<String> aux = new ArrayList<>();
+        int auxint = 0;
+
+        System.out.println("MES: ");
+        int mes = Input.lerInt(); //ler um mes
+        if(mes > 0 && mes < 13){
+            Map<String,List<Venda>> m = facturacao.retornaListaMes(mes);
+            for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
+                for(Venda v : entry.getValue()){
+                    aux.add(v.getCliente());
+                    auxint += v.getUniCompradas();
+                }
+            }
+        }
+        System.out.println(aux);
+        System.out.println(auxint);
+
+        ret.put(auxint,aux);
+        return ret;
+    }
+
+
+
     public LinkedHashMap<String, Double> sortHashMapByValues(HashMap<String, Double> passedMap) {
         List<String> mapKeys = new ArrayList<>(passedMap.keySet());
         List<Double> mapValues = new ArrayList<>(passedMap.values());
@@ -211,11 +237,11 @@ public class GereVendasModel implements InterfGereVendasModel{
 
     public Map<String,Double> query7(){
 
-        Crono.start();
+        //Crono.start();
         HashMap<String, Double> ret = new HashMap<>();
-        HashMap<String, Double> ret2 = new HashMap<>();
+       /* HashMap<String, Double> ret2 = new HashMap<>();
         HashMap<String, Double> ret3 = new HashMap<>();
-/*
+
         for (Venda v: filial1.getFilial().values()) {
             if (ret.containsKey(v.getCliente())) {
                 ret.put(v.getCliente(), ret.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
@@ -243,7 +269,7 @@ public class GereVendasModel implements InterfGereVendasModel{
         ret3 = sortHashMapByValues(ret3);
 */
 
-
+/*
         double xd = Crono.stop();
 
         System.out.println(xd);
@@ -252,7 +278,7 @@ public class GereVendasModel implements InterfGereVendasModel{
             System.out.println("Key: " + s + "|| Gasto: "+ ret.get(s));
         }
 
-        System.out.println(xd);
+        System.out.println(xd);*/
         return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
     }
 

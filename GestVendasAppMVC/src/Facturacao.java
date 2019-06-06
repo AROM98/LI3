@@ -52,4 +52,9 @@ public class Facturacao {
         }
         return ret;
     }
+
+    public Map<String, List<Venda>> retornaListaMes(int mes){
+        return faturacao.get(mes);
+    }
+
 }
