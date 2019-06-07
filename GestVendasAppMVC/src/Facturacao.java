@@ -16,10 +16,18 @@ public class Facturacao implements Serializable {
         }
     }
 
+    public Facturacao(Facturacao f){
+        this.faturacao = f.getFaturacao();
+    }
+
     public List<Map<String, List<Venda>>> getFaturacao() {
         return faturacao;
     }
 
+
+    public Facturacao clone(){
+        return new Facturacao(this);
+    }
 
     public boolean equals(Object obj) {
         if (this == obj) {

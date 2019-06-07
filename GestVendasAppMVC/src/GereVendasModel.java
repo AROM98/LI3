@@ -131,6 +131,11 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return false;
     }
 
+    /**
+     * Função usada para ler o ficheiro Filepath onde estao descritos os ficheiros a utilizar no programa.
+     * Pela seguinte ordem: Produtos, Clientes, Vendas.
+     * @param filepathgeral
+     */
     public void sortFiles(String filepathgeral){
         File fich;
         FileReader fr;
@@ -160,6 +165,10 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         }
     }
 
+    /**
+     * Função que lê os ficheiros e preenche as estruturas
+     * @param filepathgeral
+     */
     public void createData(String filepathgeral){
        //coisas
         sortFiles(filepathgeral);
@@ -179,7 +188,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
     /**
      * @param fr Ficheiro de Vendas
-     * adiciona ao Set apena os Clientes validas
+     * adiciona vendas as estruturas de Filias e de Factura
      */
     private void poeList(FileReader fr){
 
@@ -199,7 +208,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             System.out.println(e);
         }
     }
-
+    /*
     public List<String> query1(){
 
         List<String> ret = new ArrayList<>();
@@ -210,7 +219,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             }
         }
         return ret;
-    }
+    }*/
 
     public List<Map<Integer,Integer>> query2(int mes){
 
@@ -335,6 +344,81 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return ret;
     }
 
+    public void query5(String cliente){
+        Map<String, Integer> prodNUm = new TreeMap<>();
+        for(Venda v : filial.retornaListaFilial(1).get(cliente)){
+            if(prodNUm.containsKey(v.getProduto())){
+                prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
+            }
+            else {
+                prodNUm.put(v.getProduto(), v.getUniCompradas());
+            }
+        }
+
+        for(Venda v : filial.retornaListaFilial(2).get(cliente)){
+            if(prodNUm.containsKey(v.getProduto())){
+                prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
+            }
+            else {
+                prodNUm.put(v.getProduto(), v.getUniCompradas());
+            }
+        }
+        for(Venda v : filial.retornaListaFilial(3).get(cliente)){
+            if(prodNUm.containsKey(v.getProduto())){
+                prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
+            }
+            else {
+                prodNUm.put(v.getProduto(), v.getUniCompradas());
+            }
+        }
+        for (String s : prodNUm.keySet()){
+            System.out.println(s+"--->"+prodNUm.get(s));
+        }
+
+    }
+
+    public void query6(){
+
+    }
+
+    /*
+    public List<Map<String,Double>> query7(){
+
+        List<Map<String, Double>> ret= new ArrayList<>(3);
+
+        for(int fil = 0;fil<3;fil++) {
+            Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
+            for (Map.Entry<String, List<Venda>> entry : m.entrySet()) {
+                for (Venda v : entry.getValue()) {
+                    if(ret.get(v.getFilial()).containsKey(v.getCliente())){
+                        ret.get(v.getFilial()).put(v.getCliente(),ret.get(v.getFilial()).get(v.getCliente() + v.getUniCompradas() * v.getPreco()));
+                    }
+                }
+
+            }
+        }
+        String stringtemp;
+        Double doubletemp;
+
+        for(int i = 0;i<3;i++) {
+            Map<String, List<Venda>> m = filial.retornaListaFilial(i);
+            Map.Entry<String, Double> entryprep = ret.entrySet().iterator().next();
+            stringtemp = entryprep.getKey();
+            doubletemp = entryprep.getValue();
+
+            for (Map.Entry<String, Double> entry : ret.get(i).entrySet()) {
+                if (entry.getValue() >= doubletemp && !ret.get(i).containsKey(entry.getKey())) {
+                    stringtemp = entry.getKey();
+                    doubletemp = entry.getValue();
+                }
+            }
+        }
+            maxEntry.put(stringtemp,tuplotemp);
+
+        return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
+   }
+*/
+
     public void query9(String produto, int quant){
 
         //weird shit JN1306
@@ -416,43 +500,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         }
     }*/
 
-/*
-    public List<Map<String,Double>> query7(){
 
-        List<Map<String, Double>> ret= new ArrayList<>(3);
-
-        for(int fil = 0;fil<3;fil++) {
-            Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
-            for (Map.Entry<String, List<Venda>> entry : m.entrySet()) {
-                for (Venda v : entry.getValue()) {
-                    if(ret.get(v.getFilial()).containsKey(v.getCliente())){
-                        ret.get(v.getFilial()).put(v.getCliente(),ret.get(v.getFilial()).get(v.getCliente() + v.getUniCompradas() * v.getPreco()));
-                    }
-                }
-
-            }
-        }
-        String stringtemp;
-        Double doubletemp;
-
-        for(int i = 0;i<3;i++) {
-            Map<String, List<Venda>> m = filial.retornaListaFilial(i);
-            Map.Entry<String, Double> entryprep = ret.entrySet().iterator().next();
-            stringtemp = entryprep.getKey();
-            doubletemp = entryprep.getValue();
-
-            for (Map.Entry<String, Double> entry : ret.get(i).entrySet()) {
-                if (entry.getValue() >= doubletemp && !ret.get(i).containsKey(entry.getKey())) {
-                    stringtemp = entry.getKey();
-                    doubletemp = entry.getValue();
-                }
-            }
-        }
-            maxEntry.put(stringtemp,tuplotemp);
-
-        return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
-   }
-*/
     /**
      *  Guarda estado do objecto que é pedido (this.gravar())
      *  a ser usada como opçao no menu
