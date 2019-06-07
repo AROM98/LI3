@@ -31,7 +31,7 @@ public class GereVendasController implements InterfGereVendasController{
     //chama prints que estao no view.
     private void menu(){
         List<String> ret;
-        List<Map<Integer,Integer>> ret2;
+        Map<Integer,Integer> ret2;
         List<Query4aux> ret4;
         while(true) {
             view.MenuQueries();
@@ -42,7 +42,9 @@ public class GereVendasController implements InterfGereVendasController{
                     view.navegador(ret);
                     break;
                 case 2:
-                    ret2 = model.query2();
+                    view.imprime("Mês: ");
+                    int mes = Input.lerInt(); //ler um mes
+                    ret2 = model.query2(mes);
                     break;
                 case 4:
                     ret4 = model.query4();

@@ -6,4 +6,6 @@ public interface InterfGereVendasView {
 
     public void MenuQueries();
     public void navegador(List<String> ret);
+
+    public void imprime(String s);
 }

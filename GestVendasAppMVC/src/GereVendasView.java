@@ -139,4 +139,8 @@ public class GereVendasView implements  InterfGereVendasView{
         }
     }
 
+    public void imprime(String s){
+        System.out.println(s);
+    }
+
 }
