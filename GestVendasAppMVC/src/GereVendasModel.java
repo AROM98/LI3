@@ -194,7 +194,7 @@ public class GereVendasModel implements InterfGereVendasModel{
             for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
                 for(Venda v : entry.getValue()){
                     aux.add(v.getCliente());
-                    auxint += v.getUniCompradas();
+                    auxint += 1;
                 }
             }
         }
