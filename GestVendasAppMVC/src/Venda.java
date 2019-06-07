@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Venda implements Comparable<Venda>{
+public class Venda implements Comparable<Venda>, Serializable{
 
     /**
      *  Variaveis de instancia

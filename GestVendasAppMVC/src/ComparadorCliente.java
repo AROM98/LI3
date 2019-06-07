@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class ComparadorCliente implements Comparator<Cliente> {
+public class ComparadorCliente implements Comparator<Cliente>, Serializable {
     /**
      *  Compare Product names
      *  Returns: < 0 if p1 is smaller than p2

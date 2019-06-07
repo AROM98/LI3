@@ -2,17 +2,16 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
 import java.util.*;
 
-public class GereVendasModel implements InterfGereVendasModel{
+public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
-    private String filePathVendas = "Ficheiros/Vendas_1M.txt";
-    private String filePathClientes = "Ficheiros/Clientes.txt";
-    private String filePathProdutos = "Ficheiros/Produtos.txt";
+    private String filePathVendas; //= "Ficheiros/Vendas_1M.txt"
+    private String filePathClientes; // "Ficheiros/Clientes.txt"
+    private String filePathProdutos; // = "Ficheiros/Produtos.txt"
 
     private CatProd catProd;
     private CatClient catClient;
     private Filial filial;
     private Facturacao facturacao;
-
 
     public GereVendasModel(){
         catProd = new CatProd();
@@ -130,8 +129,42 @@ public class GereVendasModel implements InterfGereVendasModel{
         return false;
     }
 
+    public void sortFiles(String filepathgeral){
+        File fich;
+        FileReader fr;
+        BufferedReader inStream;
+        String linha;
+        //int i = 1;
+        try {
+            int i = 1;
+            fich = new File(filepathgeral);
+            fr = new FileReader(fich);
+            inStream = new BufferedReader(fr);
+            while ((linha = inStream.readLine()) != null) {
+                if(i == 1){
+                    i++;
+                    this.filePathProdutos = "Ficheiros/"+linha;
+                }
+                if (i == 2){
+                    i++;
+                    this.filePathClientes = "Ficheiros/"+linha;
+                }
+                if(i == 3){
+                    i++;
+                    this.filePathVendas = "Ficheiros/"+linha;
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        System.out.println(filePathProdutos);
+        System.out.println(filePathClientes);
+        System.out.println(filePathVendas);
+    }
 
-    public void createData(){
+    public void createData(String filepathgeral){
+        sortFiles(filepathgeral);
 
         catProd.leFicheiro(filePathProdutos);
         catClient.leFicheiro(filePathClientes);
@@ -223,9 +256,7 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret; // auxint vendas realizadas aux.size() compradores distintos
     }
 
-    public List<Query4aux> query4(){
-
-        String produto = Input.lerString(); //LER O PRODUTO
+    public List<Query4aux> query4(String produto){
 
         List<String> clientes = new ArrayList<>(12);
         List<Query4aux> ret = new ArrayList<>();
@@ -258,7 +289,8 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
-    public void query9(){
+    /*
+    public void query9(String produto){
 
         String produto = Input.lerString();
 
@@ -272,6 +304,7 @@ public class GereVendasModel implements InterfGereVendasModel{
             }
         }
     }
+    */
 
 /*
     public List<List<Map<String,Double>>> query10(){
@@ -371,5 +404,34 @@ public class GereVendasModel implements InterfGereVendasModel{
 
     public void q7(){
 
+    }
+
+    /**
+     *  Guarda estado do objecto que é pedido (this.gravar())
+     *  a ser usada como opçao no menu
+     * @param filename
+     * @throws IOException
+     */
+    public void gravarEstado(String filename) throws IOException {
+        ObjectOutputStream oout = new ObjectOutputStream(new FileOutputStream(filename));
+        oout.writeObject(this);
+        oout.flush();
+        oout.close();
+    }
+
+    /**
+     * Recupera o estado gravado anteriormente
+     *
+     * @param filename
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public GereVendasModel recuperarEstado(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(filename);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        GereVendasModel gest = (GereVendasModel) ois.readObject();
+        ois.close();
+        return gest;
     }
 }

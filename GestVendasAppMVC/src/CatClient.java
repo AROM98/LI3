@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CatClient {
+public class CatClient implements Serializable{
 
     private Set<Cliente> catClient;
 
@@ -98,6 +98,7 @@ public class CatClient {
      */
     public void leFicheiro(String filePath){
         try {
+            System.out.println(filePath);
             File fich = new File(filePath);
             FileReader fr = new FileReader(fich);
             poeList(fr);

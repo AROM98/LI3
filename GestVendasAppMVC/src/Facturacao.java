@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Facturacao {
+public class Facturacao implements Serializable {
 
     //penso que nao vai ser preciso usar estas variaveis, basta gazer get() de fora.
     private List<Map<String, List<Venda>>> faturacao;

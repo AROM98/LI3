@@ -1,4 +1,6 @@
-public class Cliente implements Comparable<Cliente>{
+import java.io.Serializable;
+
+public class Cliente implements Comparable<Cliente>, Serializable {
 
     private String cliente;
 

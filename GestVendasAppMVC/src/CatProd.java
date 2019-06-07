@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CatProd {
+public class CatProd implements Serializable{
 
     private Set<Produto> catProd;
     private int Pvaliados;

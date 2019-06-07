@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Filial {
+public class Filial implements Serializable {
 
     //Filiais -> contem registo de compras realizadas em cada filial, por quem e quando.
     private List<Map<String,List<Venda>>> filial; //agora contem vendas, mas é provavel que haja alteraçoes.

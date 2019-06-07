@@ -1,4 +1,6 @@
-public class Produto implements Comparable<Produto>{
+import java.io.Serializable;
+
+public class Produto implements Comparable<Produto>, Serializable {
 
     private String produto;
 

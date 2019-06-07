@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class GereVendasView implements  InterfGereVendasView{
+public class GereVendasView implements  InterfGereVendasView, Serializable {
     //todos os prints do programa devem estar aqui.
 
     public void printFichProd(String path, int invalidos, int validos){
@@ -25,7 +26,9 @@ public class GereVendasView implements  InterfGereVendasView{
                 "8.Determina, segundo um numero dade, os clientes que comprar mais produtos diferentes.\n" +
                 "9.Dado um produto, determina, segundo um numero dado, os clientes que mais compraram e o seu valor gasto.\n" +
                 "10.Determinar mes a mes, e para cada mes, filial a filial, a faturacao total de cada produto.\n" +
-                "11.Sair" +
+                "11.Gravar estado do programa\n" +
+                "12.Recuperar estado anterior\n" +
+                "13.Sair\n"+
                 "\n\nOpção: ");
     }
 
@@ -45,102 +48,77 @@ public class GereVendasView implements  InterfGereVendasView{
         }
     }
 
-    public void navegador(List<String> ret){
+    public void navegador(List<String> ret) throws Exception{
         int paginatotal = ret.size()/20;
         int pagina = 0, opcao = 0, i = 0, v = 1;
         System.out.println("Produtos nunca comprados: " + ret.size());
         for(i = 0; i < 20; i+= 2){
-            System.out.println(ret.get(i)+"    |    "+ret.get(i+1));
+            imprime(ret.get(i)+"    |    "+ret.get(i+1));
         }
 
         System.out.println("Página 0 de "+paginatotal+"\n\n");
         System.out.println("1.Página seguinte\n" +
                 "2.Retroceder\n" +
                 "3.Sair\n");
-
-        try {
-            opcao = Input.lerInt();
-        }
-        catch (Exception e){
-            System.out.println("Nao é um numero inteiro nem uma das opçoes!");
-        }
+        opcao = Input.lerInt();
 
         while (v == 1){
             if(opcao == 1 && pagina < paginatotal){
                 pagina++;
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    System.out.println(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("1.Página seguinte\n" +
                         "2.Retroceder\n" +
                         "3.Sair\n");
-
-                try {
-                    opcao = Input.lerInt();
-                }
-                catch (Exception e){
-                    System.out.println("Nao é um numero inteiro nem uma das opçoes!");
-                }
+                opcao = Input.lerInt();
             }
 
             if(opcao == 1 && pagina == paginatotal){
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    System.out.println(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("-> Não é possivel avançar\n" +
                         "2.Retroceder\n" +
                         "3.Sair\n");
-
-                try {
-                    opcao = Input.lerInt();
-                }
-                catch (Exception e){
-                    System.out.println("Nao é um numero inteiro nem uma das opçoes!");
-                }
+                opcao = Input.lerInt();
             }
 
             if(opcao == 2 && pagina > 0){
                 pagina--;
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    System.out.println(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("1.Página seguinte\n" +
                         "2.Retroceder pagina\n" +
                         "3.Sair\n");
-
-                try {
-                    opcao = Input.lerInt();
-                }
-                catch (Exception e){
-                    System.out.println("Nao é um numero inteiro nem uma das opçoes!");
-                }
+                opcao = Input.lerInt();
             }
 
             if(opcao == 2 && pagina == 0){
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    System.out.println(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("1.Página seguinte\n" +
                         "-> Não é possivel retroceder\n" +
                         "3.Sair\n");
-
-                try {
-                    opcao = Input.lerInt();
-                }
-                catch (Exception e){
-                    System.out.println("Nao é um numero inteiro nem uma das opçoes!");
-                }
+                opcao = Input.lerInt();
             }
             if(opcao == 3) v = 0;
         }
     }
 
     public void imprime(String s){
-        System.out.println(s);
+        try{
+            System.out.println(s);
+        }
+        catch (Exception e){
+            System.out.println("erro: "+e);
+        }
     }
 
 }

@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.Comparator;
 
 //deste modo é possivel inserir os produtos numa tree, ordenados pelo seu código
-public class ComparadorProduto implements Comparator<Produto>{
+public class ComparadorProduto implements Comparator<Produto>, Serializable {
     /**
      *  Compare Product names
      *  Returns: < 0 if p1 is smaller than p2

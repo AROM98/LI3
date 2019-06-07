@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class ComparadorVendaFac implements Comparator<Venda> {
+public class ComparadorVendaFac implements Comparator<Venda>, Serializable {
 
     public int compare(Venda v1, Venda v2){
 
