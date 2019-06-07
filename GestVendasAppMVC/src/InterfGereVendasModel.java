@@ -19,6 +19,7 @@ public interface InterfGereVendasModel {
     public List<Query4aux> query4(String produto);
     public void query5(String cliente);
     public List<Map<String,Double>> query7();
+    public Map<String,Integer> query8(int quant);
     public void query9(String produto,int quant);
 
     public void gravarEstado(String filename) throws IOException;

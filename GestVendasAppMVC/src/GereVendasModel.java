@@ -409,7 +409,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         Double doubletemp = 0.0;
         for(int j = 0;j<3;j++)
             for(int i = 0;i<3;i++) {
-                Map<String, Double> m = retaux.get(i);//j
+                Map<String, Double> m = retaux.get(i);
                 for (Map.Entry<String,Double> entry : m.entrySet()) {
 
                     if (entry.getValue() >= doubletemp) {
@@ -433,6 +433,45 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return ret;
    }
 
+   public Map<String,Integer> query8(int quant) {
+       Map<String, Set<String>> aux = new HashMap<>();
+
+       for (int fil = 0; fil < 3; fil++) {
+           Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
+
+           for (Map.Entry<String, List<Venda>> entry : m.entrySet()) {
+               for (Venda v : entry.getValue()) {
+                   if (aux.containsKey(entry.getKey())) {
+                       aux.get(entry.getKey()).add(v.getProduto());
+                   } else {
+                       Set<String> t = new TreeSet<>();
+                       t.add(v.getProduto());
+                       aux.put(entry.getKey(), t);
+                   }
+               }
+           }
+       }
+       int tamaux;
+       String clienteaux;
+       Map<String, Integer> ret = new HashMap<>();
+       for (int i = 0; i < quant; i++) {
+           tamaux = 0;
+           clienteaux = null;
+           for (Map.Entry<String, Set<String>> entry : aux.entrySet()) {
+                if(entry.getValue().size() >= tamaux){
+                    tamaux = entry.getValue().size();
+                    clienteaux = entry.getKey();
+                }
+           }
+           aux.remove(clienteaux);
+           ret.put(clienteaux,tamaux);
+       }
+       for(Map.Entry<String,Integer> entry : ret.entrySet())
+       System.out.println(entry.getKey() + " " + entry.getValue());
+
+       return ret;
+   }
+
 
     public void query9(String produto, int quant){
 
@@ -440,12 +479,12 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         Map<String,Tuplo> aux = new HashMap<>();
 
         for(int mes = 0;mes<12;mes++) {
-            System.out.println("MES: " + (mes + 1));
+            //System.out.println("MES: " + (mes + 1));
             Map<String, List<Venda>> m = facturacao.retornaListaMes(mes);
 
             if (m.containsKey(produto))
                 for (Venda v : m.get(produto)) {
-                    System.out.println(v);
+                   // System.out.println(v);
                     if (aux.containsKey(v.getCliente())) {
                         double segtuplo = (Double) aux.get(v.getCliente()).getO2() + v.getPreco() * v.getUniCompradas(); //total gasto
                         int prituplo = (int) aux.get(v.getCliente()).getO1() + 1; //vezes que comprou o produto
