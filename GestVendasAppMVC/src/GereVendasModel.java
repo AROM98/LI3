@@ -1,3 +1,4 @@
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
 import java.util.*;
 
@@ -204,7 +205,59 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
+    public List<Query4aux> query4(){
 
+        String produto = Input.lerString(); //LER O PRODUTO
+
+        List<String> clientes = new ArrayList<>(12);
+        List<Query4aux> ret = new ArrayList<>();
+        for(int i = 0;i<13;i++){
+            ret.add(new Query4aux());
+        }
+
+        for(int mes = 0; mes <12;mes++){
+            clientes.clear();
+            Map <String,List<Venda>> m = facturacao.retornaListaMes(mes);
+            Query4aux str = new Query4aux();
+
+            if(m.containsKey(produto)){
+                for(Venda v : m.get(produto)){
+                    str.setTotalfaturado(str.getTotalfaturado()+ v.getPreco()*v.getUniCompradas());
+                    clientes.add(v.getCliente());
+                    str.setNvendas(str.getNvendas()+v.getUniCompradas());
+                }
+            }
+
+            str.setNcompradoresdistintos(clientes.size());
+           // System.out.println("STR: " + str);
+            ret.add(mes,str);
+        }
+
+        for (Query4aux q: ret
+        ) {
+            System.out.println(q);
+        }
+        return ret;
+    }
+
+    public List<List<Map<String,Double>>> query10(){
+        double factotal = 0;
+
+        for(int mes = 0; mes <12;mes++) {
+            Map<String,Double> mapret = new HashMap<>();
+            List<Map<String,Double>> listafiliais = new ArrayList<>(3);
+            Map<String, List<Venda>> m = facturacao.retornaListaMes(mes);
+
+            for(Map.Entry<String,List<Venda>> entry : m.entrySet()) {
+
+                for (Venda v: entry.getValue()) {
+                    listafiliais.get(v.getFilial()-1);
+                    factotal += v.getPreco()*v.getUniCompradas();
+                }
+                mapret.put(entry.getKey(),factotal);
+            }
+        }
+    }
 
     public LinkedHashMap<String, Double> sortHashMapByValues(HashMap<String, Double> passedMap) {
         List<String> mapKeys = new ArrayList<>(passedMap.keySet());

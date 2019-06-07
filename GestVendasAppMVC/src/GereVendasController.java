@@ -32,6 +32,7 @@ public class GereVendasController implements InterfGereVendasController{
     private void menu(){
         List<String> ret;
         Map<Integer,List<String>> ret2;
+        List<Query4aux> ret4;
         while(true) {
             view.MenuQueries();
             int input = Input.lerInt();
@@ -43,7 +44,10 @@ public class GereVendasController implements InterfGereVendasController{
                 case 2:
                     ret2 = model.query2();
                     break;
-                case 7:
+                case 4:
+                    ret4 = model.query4();
+                    break;
+                    case 7:
                     //ret7 = model.query7();
                     break;
                 case 11:

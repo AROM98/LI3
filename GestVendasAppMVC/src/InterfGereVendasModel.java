@@ -19,6 +19,7 @@ public interface InterfGereVendasModel {
     public Facturacao getFacturacao();
     public List<String> query1();
     public Map<Integer,List<String >> query2();
+    public List<Query4aux> query4();
     public Map<String,Double> query7();
 
 
