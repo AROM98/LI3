@@ -1,6 +1,7 @@
 import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
 import java.util.*;
+import java.util.function.DoublePredicate;
 
 public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
@@ -252,6 +253,24 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return ret; // auxint vendas realizadas aux.size() compradores distintos
     }
 
+    public Map<String,Triplo> quer3(String cliente){
+        Map<String,Triplo> ret = new HashMap<>(3);
+
+        for(int mes = 0;mes<12;mes++) {
+            Map<String, List<Venda>> m = facturacao.retornaListaMes(mes);
+            for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
+                for (Venda v: entry.getValue()) {
+                    if(v.getCliente().equals(cliente)){
+                        Triplo t = new Triplo();
+                        ret.put(v.getCliente(),t);
+                    }
+                }
+            }
+            }
+
+        return ret;
+    }
+
     public List<Query4aux> query4(String produto){
 
         List<String> clientes = new ArrayList<>(12);
@@ -312,7 +331,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
         Map<String,Tuplo> maxEntry = new HashMap<>(quant);
         String stringtemp;
-        Tuplo tuplotemp = new Tuplo();
+        Tuplo tuplotemp;
 
         for(int i = 0;i<quant;i++){
             Map.Entry<String,Tuplo> entryprep = aux.entrySet().iterator().next();
@@ -320,26 +339,20 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             tuplotemp = entryprep.getValue();
 
             for(Map.Entry<String,Tuplo> entry : aux.entrySet()){
-                if (maxEntry == null){
-                    Tuplo t = new Tuplo(entry.getValue().getO1(),entry.getValue().getO2());
-                    maxEntry.put(entry.getKey(),t);
-                }
-                else {
-                    int temp1 = (int) entry.getValue().getO1();
-                    int temp2 = (int) tuplotemp.getO1();
-                    if(temp1 > temp2){
-                        stringtemp = entry.getKey();
-                        tuplotemp = entry.getValue();
-                    }else{
-                        double temp3 = (double) entry.getValue().getO2();
-                        double temp4 = (double) tuplotemp.getO2();
-                        if(temp1 == temp2)
-                            if(temp3 > temp4){
-                                stringtemp = entry.getKey();
-                                tuplotemp = entry.getValue();
-                            }
+                int temp1 = (int) entry.getValue().getO1();
+                int temp2 = (int) tuplotemp.getO1();
+                if(temp1 > temp2){
+                    stringtemp = entry.getKey();
+                    tuplotemp = entry.getValue();
+                }else{
+                    double temp3 = (double) entry.getValue().getO2();
+                    double temp4 = (double) tuplotemp.getO2();
+                    if(temp1 == temp2)
+                        if(temp3 > temp4){
+                            stringtemp = entry.getKey();
+                            tuplotemp = entry.getValue();
+                        }
                     }
-                }
             }
             maxEntry.put(stringtemp,tuplotemp);
         }
@@ -370,82 +383,43 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         }
     }*/
 
-    public LinkedHashMap<String, Double> sortHashMapByValues(HashMap<String, Double> passedMap) {
-        List<String> mapKeys = new ArrayList<>(passedMap.keySet());
-        List<Double> mapValues = new ArrayList<>(passedMap.values());
-        Collections.sort(mapValues);
-        Collections.sort(mapKeys);
+/*
+    public List<Map<String,Double>> query7(){
 
-        LinkedHashMap<String, Double> sortedMap =
-                new LinkedHashMap<>();
+        List<Map<String, Double>> ret= new ArrayList<>(3);
 
-        Iterator<Double> valueIt = mapValues.iterator();
-        while (valueIt.hasNext()) {
-            Double val = valueIt.next();
-            Iterator<String> keyIt = mapKeys.iterator();
+        for(int fil = 0;fil<3;fil++) {
+            Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
+            for (Map.Entry<String, List<Venda>> entry : m.entrySet()) {
+                for (Venda v : entry.getValue()) {
+                    if(ret.get(v.getFilial()).containsKey(v.getCliente())){
+                        ret.get(v.getFilial()).put(v.getCliente(),ret.get(v.getFilial()).get(v.getCliente() + v.getUniCompradas() * v.getPreco()));
+                    }
+                }
 
-            while (keyIt.hasNext()) {
-                String key = keyIt.next();
-                Double comp1 = passedMap.get(key);
-                Double comp2 = val;
+            }
+        }
+        String stringtemp;
+        Double doubletemp;
 
-                if (comp1.equals(comp2)) {
-                    keyIt.remove();
-                    sortedMap.put(key, val);
-                    break;
+        for(int i = 0;i<3;i++) {
+            Map<String, List<Venda>> m = filial.retornaListaFilial(i);
+            Map.Entry<String, Double> entryprep = ret.entrySet().iterator().next();
+            stringtemp = entryprep.getKey();
+            doubletemp = entryprep.getValue();
+
+            for (Map.Entry<String, Double> entry : ret.get(i).entrySet()) {
+                if (entry.getValue() >= doubletemp && !ret.get(i).containsKey(entry.getKey())) {
+                    stringtemp = entry.getKey();
+                    doubletemp = entry.getValue();
                 }
             }
         }
-        return sortedMap;
-    }
-/*
-    public Map<String,Double> query7(){
+            maxEntry.put(stringtemp,tuplotemp);
 
-        //Crono.start();
-        HashMap<String, Double> ret = new HashMap<>();
-       /* HashMap<String, Double> ret2 = new HashMap<>();
-        HashMap<String, Double> ret3 = new HashMap<>();
-
-        for (Venda v: filial1.getFilial().values()) {
-            if (ret.containsKey(v.getCliente())) {
-                ret.put(v.getCliente(), ret.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
-            } else {
-                ret.put(v.getCliente(), v.getPreco() * v.getUniCompradas());
-            }
-        }
-        for (Venda v: filial2.getFilial().values()) {
-            if (ret2.containsKey(v.getCliente())) {
-                ret2.put(v.getCliente(), ret2.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
-            } else {
-                ret2.put(v.getCliente(), v.getPreco() * v.getUniCompradas());
-            }
-        }
-        for (Venda v: filial3.getFilial().values()) {
-            if (ret3.containsKey(v.getCliente())) {
-                ret3.put(v.getCliente(), ret3.get(v.getCliente()) + v.getUniCompradas() * v.getPreco());
-            } else {
-                ret3.put(v.getCliente(), v.getPreco() * v.getUniCompradas());
-            }
-        }
-
-        ret = sortHashMapByValues(ret);
-        ret2 = sortHashMapByValues(ret2);
-        ret3 = sortHashMapByValues(ret3);
-
-
-
-        double xd = Crono.stop();
-
-        System.out.println(xd);
-
-        for (String s: ret.keySet()) {
-            System.out.println("Key: " + s + "|| Gasto: "+ ret.get(s));
-        }
-
-        System.out.println(xd);*/
-  //      return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
-//    }
-
+        return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
+   }
+*/
     /**
      *  Guarda estado do objecto que é pedido (this.gravar())
      *  a ser usada como opçao no menu
