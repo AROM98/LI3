@@ -263,6 +263,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                     if(v.getCliente().equals(cliente)){
                         Triplo t = new Triplo();
                         ret.put(v.getCliente(),t);
+                        System.out.println("FART");
                     }
                 }
             }
