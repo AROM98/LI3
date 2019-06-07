@@ -18,7 +18,7 @@ public interface InterfGereVendasModel {
     public Filial getFilial3();*/
     public Facturacao getFacturacao();
     public List<String> query1();
-    public List<Map<Integer,Integer>> query2();
+    public List<Map<Integer,Integer>> query2(int mes);
     public List<Query4aux> query4();
     //public Map<String,Double> query7();
 

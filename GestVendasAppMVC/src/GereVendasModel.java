@@ -181,14 +181,12 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
-    public List<Map<Integer,Integer>> query2(){
+    public List<Map<Integer,Integer>> query2(int mes){
 
         List<Map<Integer,Integer>> ret = new ArrayList<>(4);
         Set<String> aux = new TreeSet<>();
         int auxint = 0;
 
-        System.out.println("MES: ");
-        int mes = Input.lerInt(); //ler um mes
         if(mes > 0 && mes < 13){
             Map<String,List<Venda>> m = facturacao.retornaListaMes(mes);
             for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
