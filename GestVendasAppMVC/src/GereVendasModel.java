@@ -181,10 +181,10 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
-    public Map<Integer,Integer> query2(){
+    public List<Map<Integer,Integer>> query2(){
 
-        Map<Integer,Integer> ret = new HashMap<>();
-        List<String> aux = new ArrayList<>();
+        List<Map<Integer,Integer>> ret = new ArrayList<>(4);
+        Set<String> aux = new TreeSet<>();
         int auxint = 0;
 
         System.out.println("MES: ");
@@ -200,8 +200,28 @@ public class GereVendasModel implements InterfGereVendasModel{
         }
         System.out.println(aux.size());
         System.out.println(auxint);
+        Map<Integer,Integer> mapret = new HashMap<>();
+        mapret.put(auxint,aux.size());
+        ret.add(0,mapret);
+        aux.clear();
 
-        ret.put(auxint,aux.size());
+        for(int fil = 0;fil<3;fil++){
+            Map<String,List<Venda>> m = filial.retornaListaFilial(fil);
+            auxint = 0;
+            for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
+                for(Venda v : entry.getValue()){
+                    aux.add(v.getCliente());
+                    auxint += 1;
+                }
+            }
+            Map<Integer,Integer> mapfil = new HashMap<>();
+            mapfil.put(auxint,aux.size());
+            System.out.println(aux.size());
+            System.out.println(auxint);
+            ret.add(fil+1,mapfil);
+            aux.clear();
+        }
+
         return ret; // auxint vendas realizadas aux.size() compradores distintos
     }
 
@@ -217,7 +237,7 @@ public class GereVendasModel implements InterfGereVendasModel{
 
         for(int mes = 0; mes <12;mes++){
             clientes.clear();
-            Map <String,List<Venda>> m = facturacao.retornaListaMes(mes);
+            Map <String,List<Venda>> m = facturacao.retornaListaMes(mes-1);
             Query4aux str = new Query4aux();
 
             if(m.containsKey(produto)){
@@ -240,6 +260,22 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
+    public void query9(){
+
+        String produto = Input.lerString();
+
+        Map<String,Tuple2<Integer,Double>> aux = new HashMap<>();
+        for(int fil = 0;fil<3;fil++) {
+            Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
+            for (Venda v: m.get(produto)) {
+                if(aux.containsKey(v.getCliente())){
+                    aux.put(v.getCliente(),aux.get(v.getCliente()).
+                }
+            }
+        }
+    }
+
+/*
     public List<List<Map<String,Double>>> query10(){
         double factotal = 0;
 
@@ -257,7 +293,7 @@ public class GereVendasModel implements InterfGereVendasModel{
                 mapret.put(entry.getKey(),factotal);
             }
         }
-    }
+    }*/
 
     public LinkedHashMap<String, Double> sortHashMapByValues(HashMap<String, Double> passedMap) {
         List<String> mapKeys = new ArrayList<>(passedMap.keySet());
@@ -287,7 +323,7 @@ public class GereVendasModel implements InterfGereVendasModel{
         }
         return sortedMap;
     }
-
+/*
     public Map<String,Double> query7(){
 
         //Crono.start();
@@ -320,9 +356,9 @@ public class GereVendasModel implements InterfGereVendasModel{
         ret = sortHashMapByValues(ret);
         ret2 = sortHashMapByValues(ret2);
         ret3 = sortHashMapByValues(ret3);
-*/
 
-/*
+
+
         double xd = Crono.stop();
 
         System.out.println(xd);
@@ -332,8 +368,8 @@ public class GereVendasModel implements InterfGereVendasModel{
         }
 
         System.out.println(xd);*/
-        return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
-    }
+  //      return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
+//    }
 
     public void q7(){
 

@@ -44,12 +44,12 @@ public class Filial {
      */
     public void myadd(Venda v) {
 
-        if (filial.get(v.getFilial()).containsKey(v.getProduto())) {
-            filial.get(v.getFilial()).get(v.getProduto()).add(v);
+        if (filial.get(v.getFilial()-1).containsKey(v.getProduto())) {
+            filial.get(v.getFilial()-1).get(v.getProduto()).add(v);
         } else {
             ArrayList<Venda> newv = new ArrayList<>();
             newv.add(v);
-            filial.get(v.getFilial()).put(v.getProduto(), newv);
+            filial.get(v.getFilial()-1).put(v.getProduto(), newv);
         }
     }
 
@@ -66,4 +66,9 @@ public class Filial {
         }
         return ret;
     }
+
+    public Map<String, List<Venda>> retornaListaFilial(int fil){
+        return filial.get(fil);
+    }
+
 }

@@ -31,7 +31,7 @@ public class GereVendasController implements InterfGereVendasController{
     //chama prints que estao no view.
     private void menu(){
         List<String> ret;
-        Map<Integer,List<String>> ret2;
+        List<Map<Integer,Integer>> ret2;
         List<Query4aux> ret4;
         while(true) {
             view.MenuQueries();
