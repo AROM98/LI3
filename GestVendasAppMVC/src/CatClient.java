@@ -4,6 +4,8 @@ import java.util.*;
 public class CatClient implements Serializable{
 
     private Set<Cliente> catClient;
+    private int Cvaliados;
+    private int Cinvalidos;
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -22,6 +24,14 @@ public class CatClient implements Serializable{
      */
     public Set<Cliente> getCatClient() {
         return this.catClient;
+    }
+
+    public int getCvaliados() {
+        return Cvaliados;
+    }
+
+    public int getCinvalidos() {
+        return Cinvalidos;
     }
 
     /**
@@ -98,7 +108,6 @@ public class CatClient implements Serializable{
      */
     public void leFicheiro(String filePath){
         try {
-            System.out.println(filePath);
             File fich = new File(filePath);
             FileReader fr = new FileReader(fich);
             poeList(fr);
@@ -122,24 +131,17 @@ public class CatClient implements Serializable{
                 if(valida(linha)){
                     Cliente c = new Cliente(linha);
                     catClient.add(c);
-                    validas++;
+                    this.Cvaliados++;
                 }
                 else {
-                    invalidas++;
+                    this.Cinvalidos++;
                 }
             }
         }
         catch (IOException e) {
             System.out.println(e);
         }
-/*
-        int i = 0;
-        for (Cliente c : catClient){
-            System.out.println(c.getCliente()+"----->"+"["+i+"]");
-            i++;
-        }
-*/
-        System.out.println("Cliente validos: "+validas);
-        System.out.println("Cliente invalidos: "+invalidas);
+        //System.out.println("Cliente validos: "+validas);
+        //System.out.println("Cliente invalidos: "+invalidas);
     }
 }

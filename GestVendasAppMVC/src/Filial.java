@@ -16,6 +16,10 @@ public class Filial implements Serializable {
             filial.add(new HashMap<>());
     }
 
+    public Filial(Filial f){
+        this.filial = f.getFilial();
+    }
+
     /**
      * Gets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
@@ -27,6 +31,10 @@ public class Filial implements Serializable {
     /**
      * Metodos -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      */
+
+    public Filial clone(){
+        return new Filial(this);
+    }
 
     public boolean equals(Object obj) {
         if(this == obj){

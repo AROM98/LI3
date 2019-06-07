@@ -18,9 +18,11 @@ public interface InterfGereVendasModel {
     public Filial getFilial2();
     public Filial getFilial3();*/
     public Facturacao getFacturacao();
-    public List<String> query1();
+    //public List<String> query1();
     public List<Map<Integer,Integer>> query2(int mes);
+    public Map<String,Triplo> quer3(String cliente);
     public List<Query4aux> query4(String produto);
+    public void query5(String cliente);
     public void query9(String produto,int quant);
     //public Map<String,Double> query7();
     //public void query9(String produto);

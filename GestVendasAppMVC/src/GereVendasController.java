@@ -25,13 +25,14 @@ public class GereVendasController implements InterfGereVendasController, Seriali
     //menu e prints
     public void startController(){
         view.printFichProd(model.getFilePathProdutos(), model.getCatProd().getPinvalidos(), model.getCatProd().getPvaliados());
+        view.printFichClient(model.getFilePathClientes(), model.getCatClient().getCinvalidos(), model.getCatClient().getCvaliados());
         this.menu();
     }
 
     //chama prints que estao no view.
     private void menu(){
         int inteiro;
-        String produto;
+        String produto, cliente;
         List<String> ret;
         List<Map<Integer,Integer>> ret2;
         List<Query4aux> ret4;
@@ -40,14 +41,14 @@ public class GereVendasController implements InterfGereVendasController, Seriali
             int input = Input.lerInt();
             switch (input) {
                 case 1:
-                    ret = model.query1();
+                    /*ret = model.query1();
                     try{
                         view.navegador(ret);
                     }
                     catch (Exception e){
                         view.imprime("erro: "+e);
                     }
-                    //view.navegador(ret);
+                    //view.navegador(ret);*/
                     break;
                 case 2:
                     view.imprime("Mês: ");
@@ -56,6 +57,9 @@ public class GereVendasController implements InterfGereVendasController, Seriali
 
                     break;
                 case 3:
+                    view.imprime("Cliente: ");
+                     cliente = Input.lerString(); //ler um mes
+                    model.quer3(cliente);
                     break;
                 case 4:
                     view.imprime("Produto: ");
@@ -63,6 +67,8 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                     ret4 = model.query4(produto);
                     break;
                 case 5:
+                    cliente = "E4717";
+                    model.query5(cliente);
                     break;
                 case 6:
                     break;

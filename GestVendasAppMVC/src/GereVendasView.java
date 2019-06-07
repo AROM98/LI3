@@ -13,6 +13,12 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
         System.out.println("Produtos invalidos: "+invalidos);
     }
 
+    public void printFichClient(String path, int invalidos, int validos){
+        System.out.println("Ficheiro lido: "+path);
+        System.out.println("Clientes validos: "+validos);
+        System.out.println("Clientes invalidos: "+invalidos);
+    }
+
     public void MenuQueries() {
         System.out.println("Menu Queries\n\n" +
                 "Escolha uma query:\n" +

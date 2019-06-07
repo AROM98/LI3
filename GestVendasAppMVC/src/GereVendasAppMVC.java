@@ -1,5 +1,9 @@
 public class GereVendasAppMVC {
 
+    /**
+     * Função Main. Chama todas as funçoes precisas para a execução do programa.
+     * @param args
+     */
     public static void main(String[] args) {
 
         InterfGereVendasModel model = new GereVendasModel();
