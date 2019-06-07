@@ -142,25 +142,20 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             inStream = new BufferedReader(fr);
             while ((linha = inStream.readLine()) != null) {
                 if(i == 1){
-                    i++;
                     this.filePathProdutos = "Ficheiros/"+linha;
                 }
                 if (i == 2){
-                    i++;
                     this.filePathClientes = "Ficheiros/"+linha;
                 }
                 if(i == 3){
-                    i++;
                     this.filePathVendas = "Ficheiros/"+linha;
                 }
+                i++;
             }
         }
         catch (Exception e){
             System.out.println(e);
         }
-        System.out.println(filePathProdutos);
-        System.out.println(filePathClientes);
-        System.out.println(filePathVendas);
     }
 
     public void createData(String filepathgeral){
