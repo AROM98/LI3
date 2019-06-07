@@ -208,7 +208,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             System.out.println(e);
         }
     }
-    /*
+
     public List<String> query1(){
 
         List<String> ret = new ArrayList<>();
@@ -219,7 +219,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             }
         }
         return ret;
-    }*/
+    }
 
     public List<Map<Integer,Integer>> query2(int mes){
 
@@ -228,7 +228,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         int auxint = 0;
 
         if(mes > 0 && mes < 13){
-            Map<String,List<Venda>> m = facturacao.retornaListaMes(mes);
+            Map<String,List<Venda>> m = facturacao.retornaListaMes(mes-1);
             for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
                 for(Venda v : entry.getValue()){
                     aux.add(v.getCliente());
@@ -259,7 +259,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             ret.add(fil+1,mapfil);
             aux.clear();
         }
-
+        System.out.println("CHEGUEI AQUI");
         return ret; // auxint vendas realizadas aux.size() compradores distintos
     }
 
@@ -277,19 +277,19 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             if (m.containsKey(cliente))
                 for (Venda v : m.get(cliente)) {
                     System.out.println(v);
-                    produtos.get(v.getMes()).add(v.getProduto());
-                    if (ret.get(v.getMes()).containsKey(cliente)) {
-                        produtos.get(v.getMes()).add(v.getProduto());
-                        Triplo t = ret.get(v.getMes()).get(cliente);
+                    produtos.get(v.getMes()-1).add(v.getProduto());
+                    if (ret.get(v.getMes()-1).containsKey(cliente)) {
+                        produtos.get(v.getMes()-1).add(v.getProduto());
+                        Triplo t = ret.get(v.getMes()-1).get(cliente);
                         int i = (int) t.getO1() + 1;
                         double d = (double) t.getO3() + v.getUniCompradas() * v.getPreco();
                         t.setO1(i + 1);
                         t.setO3(d);
-                        ret.get(v.getMes()).put(cliente, t);
+                        ret.get(v.getMes()-1).put(cliente, t);
                     } else {
                         double d = v.getPreco() * v.getUniCompradas();
                         Triplo t = new Triplo(1, 0, d);
-                        ret.get(v.getMes()).put(cliente, t);
+                        ret.get(v.getMes()-1).put(cliente, t);
                     }
                 }
         }
@@ -302,10 +302,10 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
         for(int i = 0;i<12;i++){
             if(ret.get(i).containsKey(cliente)) {
-                System.out.println("MES: " + i);
-                System.out.println(ret.get(i).get(cliente).getO1());
-                System.out.println(ret.get(i).get(cliente).getO2());
-                System.out.println(ret.get(i).get(cliente).getO3());
+                System.out.println("MES: " + i+1);
+                System.out.println("" + ret.get(i).get(cliente).getO1());
+                System.out.println("Compras Feitas:  " + ret.get(i).get(cliente).getO2());
+                System.out.println("Total gasto; " + ret.get(i).get(cliente).getO3());
             }
         }
 
