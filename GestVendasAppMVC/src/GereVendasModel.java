@@ -181,9 +181,9 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
-    public Map<Integer,List<String>> query2(){
+    public Map<Integer,Integer> query2(){
 
-        Map<Integer,List<String>> ret = new HashMap<>();
+        Map<Integer,Integer> ret = new HashMap<>();
         List<String> aux = new ArrayList<>();
         int auxint = 0;
 
@@ -198,11 +198,11 @@ public class GereVendasModel implements InterfGereVendasModel{
                 }
             }
         }
-        System.out.println(aux);
+        System.out.println(aux.size());
         System.out.println(auxint);
 
-        ret.put(auxint,aux);
-        return ret;
+        ret.put(auxint,aux.size());
+        return ret; // auxint vendas realizadas aux.size() compradores distintos
     }
 
     public List<Query4aux> query4(){
