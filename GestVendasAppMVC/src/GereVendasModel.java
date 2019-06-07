@@ -181,14 +181,11 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
-    public Map<Integer,Integer> query2(){
+    public Map<Integer,Integer> query2(int mes){
 
         Map<Integer,Integer> ret = new HashMap<>();
         List<String> aux = new ArrayList<>();
         int auxint = 0;
-
-        System.out.println("MES: ");
-        int mes = Input.lerInt(); //ler um mes
         if(mes > 0 && mes < 13){
             Map<String,List<Venda>> m = facturacao.retornaListaMes(mes);
             for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
@@ -240,6 +237,7 @@ public class GereVendasModel implements InterfGereVendasModel{
         return ret;
     }
 
+    /*
     public List<List<Map<String,Double>>> query10(){
         double factotal = 0;
 
@@ -257,7 +255,9 @@ public class GereVendasModel implements InterfGereVendasModel{
                 mapret.put(entry.getKey(),factotal);
             }
         }
+
     }
+    */
 
     public LinkedHashMap<String, Double> sortHashMapByValues(HashMap<String, Double> passedMap) {
         List<String> mapKeys = new ArrayList<>(passedMap.keySet());
