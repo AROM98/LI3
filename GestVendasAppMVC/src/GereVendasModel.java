@@ -405,7 +405,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         Double doubletemp = 0.0;
         for(int j = 0;j<3;j++)
             for(int i = 0;i<3;i++) {
-                Map<String, Double> m = retaux.get(j);
+                Map<String, Double> m = retaux.get(i);//j
                 for (Map.Entry<String,Double> entry : m.entrySet()) {
 
                     if (entry.getValue() >= doubletemp) {
@@ -433,15 +433,15 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
     public void query9(String produto, int quant){
 
         //weird shit JN1306
-
         Map<String,Tuplo> aux = new HashMap<>();
-        for(int fil = 0;fil<3;fil++) {
-            System.out.println("FIL: " + (fil + 1));
-            Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
-            if(m.containsKey(produto))
-            for (Venda v: m.get(produto)) {
-                System.out.println(v);
-                if (v.getProduto().equals(produto)) {
+
+        for(int mes = 0;mes<12;mes++) {
+            System.out.println("MES: " + (mes + 1));
+            Map<String, List<Venda>> m = facturacao.retornaListaMes(mes);
+
+            if (m.containsKey(produto))
+                for (Venda v : m.get(produto)) {
+                    System.out.println(v);
                     if (aux.containsKey(v.getCliente())) {
                         double segtuplo = (Double) aux.get(v.getCliente()).getO2() + v.getPreco() * v.getUniCompradas(); //total gasto
                         int prituplo = (int) aux.get(v.getCliente()).getO1() + 1; //vezes que comprou o produto
@@ -452,7 +452,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                         aux.put(v.getCliente(), t);
                     }
                 }
-            }
         }
 
         Map<String,Tuplo> maxEntry = new HashMap<>(quant);
@@ -460,10 +459,8 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         Tuplo tuplotemp;
 
         for(int i = 0;i<quant;i++){
-            Map.Entry<String,Tuplo> entryprep = aux.entrySet().iterator().next();
-            stringtemp = entryprep.getKey();
-            tuplotemp = entryprep.getValue();
-
+            stringtemp = null;
+            tuplotemp = new Tuplo(0,0);
             for(Map.Entry<String,Tuplo> entry : aux.entrySet()){
                 int temp1 = (int) entry.getValue().getO1();
                 int temp2 = (int) tuplotemp.getO1();
@@ -481,10 +478,13 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                     }
             }
             maxEntry.put(stringtemp,tuplotemp);
+            aux.remove(stringtemp);
         }
 
-        for(Map.Entry<String,Tuplo> entry : aux.entrySet()){
-            System.out.println(entry.getKey() + entry.getValue());
+        for(Map.Entry<String,Tuplo> entry : maxEntry.entrySet()){
+            int vezcomprouprod = (int) entry.getValue().getO1();
+            double totalgasto = (double) entry.getValue().getO2();
+            System.out.println("Cliente: " + entry.getKey() + " | Vezes que comprou o produto: " + vezcomprouprod + " | Total Gasto: " + totalgasto);
         }
     }
 
