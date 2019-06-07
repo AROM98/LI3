@@ -34,7 +34,7 @@ public class Triplo {
         this.o3 = o3;
     }
 
-    public Object getO3(Object o3){
+    public Object getO3(){
         return o3;
     }
 }

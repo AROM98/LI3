@@ -1,5 +1,6 @@
 import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
+import java.nio.channels.UnsupportedAddressTypeException;
 import java.util.*;
 import java.util.function.DoublePredicate;
 
@@ -204,7 +205,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         List<String> ret = new ArrayList<>();
 
         for (Produto p : catProd.getCatProd()) {
-            if(!filial.mycontains(p)){
+            if(!facturacao.mycontains(p)){
                 ret.add(p.getProduto());
             }
         }
@@ -253,21 +254,52 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return ret; // auxint vendas realizadas aux.size() compradores distintos
     }
 
-    public Map<String,Triplo> quer3(String cliente){
-        Map<String,Triplo> ret = new HashMap<>(3);
+    public List<Map<String,Triplo>> query3(String cliente) {
+        List<Map<String, Triplo>> ret = new ArrayList<>(12);
+        List<Set<String>> produtos = new ArrayList<>(12);
 
-        for(int mes = 0;mes<12;mes++) {
-            Map<String, List<Venda>> m = facturacao.retornaListaMes(mes);
-            for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
-                for (Venda v: entry.getValue()) {
-                    if(v.getCliente().equals(cliente)){
-                        Triplo t = new Triplo();
-                        ret.put(v.getCliente(),t);
-                        System.out.println("FART");
+        for(int i = 0;i<12;i++){
+            ret.add(new HashMap<>());
+            produtos.add(new TreeSet<>());
+        }
+
+        for (int fil = 0; fil < 3; fil++) {
+            Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
+            if (m.containsKey(cliente))
+                for (Venda v : m.get(cliente)) {
+                    System.out.println(v);
+                    produtos.get(v.getMes()).add(v.getProduto());
+                    if (ret.get(v.getMes()).containsKey(cliente)) {
+                        produtos.get(v.getMes()).add(v.getProduto());
+                        Triplo t = ret.get(v.getMes()).get(cliente);
+                        int i = (int) t.getO1() + 1;
+                        double d = (double) t.getO3() + v.getUniCompradas() * v.getPreco();
+                        t.setO1(i + 1);
+                        t.setO3(d);
+                        ret.get(v.getMes()).put(cliente, t);
+                    } else {
+                        double d = v.getPreco() * v.getUniCompradas();
+                        Triplo t = new Triplo(1, 0, d);
+                        ret.get(v.getMes()).put(cliente, t);
                     }
                 }
+        }
+
+        for(int i = 0;i<12;i++){
+            if(ret.get(i).containsKey(cliente)){
+                ret.get(i).get(cliente).setO2(produtos.get(i).size());
             }
+        }
+
+        for(int i = 0;i<12;i++){
+            if(ret.get(i).containsKey(cliente)) {
+                System.out.println("MES: " + i);
+                System.out.println(ret.get(i).get(cliente).getO1());
+                System.out.println(ret.get(i).get(cliente).getO2());
+                System.out.println(ret.get(i).get(cliente).getO3());
             }
+        }
+
 
         return ret;
     }

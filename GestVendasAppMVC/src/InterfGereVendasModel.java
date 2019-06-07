@@ -20,6 +20,7 @@ public interface InterfGereVendasModel {
     public Facturacao getFacturacao();
     public List<String> query1();
     public List<Map<Integer,Integer>> query2(int mes);
+    public List<Map<String,Triplo>> query3(String cliente);
     public List<Query4aux> query4(String produto);
     public void query9(String produto,int quant);
     //public Map<String,Double> query7();

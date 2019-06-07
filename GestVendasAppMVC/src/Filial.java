@@ -45,8 +45,8 @@ public class Filial implements Serializable {
      */
     public void myadd(Venda v) {
 
-        if (filial.get(v.getFilial()-1).containsKey(v.getProduto())) {
-            filial.get(v.getFilial()-1).get(v.getProduto()).add(v);
+        if (filial.get(v.getFilial()-1).containsKey(v.getCliente())) {
+            filial.get(v.getFilial()-1).get(v.getCliente()).add(v);
         } else {
             ArrayList<Venda> newv = new ArrayList<>();
             newv.add(v);
