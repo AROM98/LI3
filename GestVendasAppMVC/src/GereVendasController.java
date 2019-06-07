@@ -25,6 +25,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
     //menu e prints
     public void startController(){
         view.printFichProd(model.getFilePathProdutos(), model.getCatProd().getPinvalidos(), model.getCatProd().getPvaliados());
+        view.printFichClient(model.getFilePathClientes(), model.getCatClient().getCinvalidos(), model.getCatClient().getCvaliados());
         this.menu();
     }
 
@@ -67,6 +68,8 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                     ret4 = model.query4(palavra);
                     break;
                 case 5:
+                    palavra = "E4717";
+                    model.query5(palavra);
                     break;
                 case 6:
                     break;
@@ -83,6 +86,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                     model.query9(palavra,inteiro);
                     break;
                 case 10:
+                    model.verificar();
                     break;
                 case 11:
                     //salvar estado

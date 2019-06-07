@@ -346,6 +346,15 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
     public void query5(String cliente){
         Map<String, Integer> prodNUm = new TreeMap<>();
+        for(Venda v : filial.retornaListaFilial(0).get(cliente)){
+            if(prodNUm.containsKey(v.getProduto())){
+                prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
+            }
+            else {
+                prodNUm.put(v.getProduto(), v.getUniCompradas());
+            }
+        }
+
         for(Venda v : filial.retornaListaFilial(1).get(cliente)){
             if(prodNUm.containsKey(v.getProduto())){
                 prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
@@ -354,7 +363,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                 prodNUm.put(v.getProduto(), v.getUniCompradas());
             }
         }
-
         for(Venda v : filial.retornaListaFilial(2).get(cliente)){
             if(prodNUm.containsKey(v.getProduto())){
                 prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
@@ -363,18 +371,9 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                 prodNUm.put(v.getProduto(), v.getUniCompradas());
             }
         }
-        for(Venda v : filial.retornaListaFilial(3).get(cliente)){
-            if(prodNUm.containsKey(v.getProduto())){
-                prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
-            }
-            else {
-                prodNUm.put(v.getProduto(), v.getUniCompradas());
-            }
+        for (String s : prodNUm.keySet()) {
+            System.out.println(s + "--->" + prodNUm.get(s));
         }
-        for (String s : prodNUm.keySet()){
-            System.out.println(s+"--->"+prodNUm.get(s));
-        }
-
     }
 
 
@@ -538,5 +537,21 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         GereVendasModel gest = (GereVendasModel) ois.readObject();
         ois.close();
         return gest;
+    }
+
+    public void verificar(){
+        double r1 = 0, r2 = 0, r3 = 0;
+        for(Venda v : filial.retornaListaFilial(0).get("R2722")){
+            r1 += v.getPreco() * v.getUniCompradas();
+        }
+        for(Venda v : filial.retornaListaFilial(1).get("R2722")){
+            r2 += v.getPreco() * v.getUniCompradas();
+        }
+        for(Venda v : filial.retornaListaFilial(2).get("R2722")){
+            r3 += v.getPreco() * v.getUniCompradas();
+        }
+        System.out.println("FAC1---->"+r1+"\n");
+        System.out.println("FAC2---->"+r2+"\n");
+        System.out.println("FAC3---->"+r3+"\n");
     }
 }
