@@ -21,6 +21,7 @@ public interface InterfGereVendasModel {
     public List<String> query1();
     public List<Map<Integer,Integer>> query2(int mes);
     public List<Query4aux> query4(String produto);
+    public void query9(String produto,int quant);
     //public Map<String,Double> query7();
     //public void query9(String produto);
 

@@ -178,6 +178,8 @@ public class Venda implements Comparable<Venda>, Serializable{
         sb.append(this.getUniCompradas()+" "); // "\n"
         sb.append("T compra: ");
         sb.append(this.getTcompra()+" "); // "\n"
+        sb.append("Cliente: ");
+        sb.append(this.getCliente()+" ");
         sb.append("Mes: ");
         sb.append(this.getMes()+" "); // "\n"
         sb.append("Filial: ");

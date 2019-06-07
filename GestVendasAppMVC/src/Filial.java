@@ -12,7 +12,7 @@ public class Filial implements Serializable {
 
     public Filial(){
         filial =  new ArrayList<>();
-        for(int i = 0;i<4;i++)
+        for(int i = 0;i<3;i++)
             filial.add(new HashMap<>());
     }
 

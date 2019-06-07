@@ -30,7 +30,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
 
     //chama prints que estao no view.
     private void menu(){
-        int mes;
+        int inteiro;
         String produto;
         List<String> ret;
         List<Map<Integer,Integer>> ret2;
@@ -51,8 +51,8 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                     break;
                 case 2:
                     view.imprime("Mês: ");
-                    mes = Input.lerInt(); //ler um mes
-                    ret2 = model.query2(mes);
+                    inteiro = Input.lerInt(); //ler um mes
+                    ret2 = model.query2(inteiro);
 
                     break;
                 case 3:
@@ -73,7 +73,10 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                     break;
                 case 9:
                     view.imprime("Produto: ");
+                    view.imprime("Quantos a ler: ");
                     produto = Input.lerString();
+                    inteiro = Input.lerInt();
+                    model.query9(produto,inteiro);
                     break;
                 case 10:
                     break;

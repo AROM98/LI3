@@ -256,13 +256,13 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
         List<String> clientes = new ArrayList<>(12);
         List<Query4aux> ret = new ArrayList<>();
-        for(int i = 0;i<13;i++){
+        for(int i = 0;i<12;i++){
             ret.add(new Query4aux());
         }
 
         for(int mes = 0; mes <12;mes++){
             clientes.clear();
-            Map <String,List<Venda>> m = facturacao.retornaListaMes(mes-1);
+            Map <String,List<Venda>> m = facturacao.retornaListaMes(mes);
             Query4aux str = new Query4aux();
 
             if(m.containsKey(produto)){
@@ -274,33 +274,81 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             }
 
             str.setNcompradoresdistintos(clientes.size());
-           // System.out.println("STR: " + str);
             ret.add(mes,str);
         }
 
-        for (Query4aux q: ret
-        ) {
-            System.out.println(q);
+        for(int i = 0;i<12;i++){
+            System.out.println(ret.get(i));
         }
         return ret;
     }
 
-    /*
-    public void query9(String produto){
+    public void query9(String produto, int quant){
 
-        String produto = Input.lerString();
+        //weird shit JN1306
 
-        Map<String,Tuple2<Integer,Double>> aux = new HashMap<>();
+        Map<String,Tuplo> aux = new HashMap<>();
+        System.out.println("LMAO");
         for(int fil = 0;fil<3;fil++) {
+            System.out.println("FIL: " + (fil + 1));
             Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
+            if(m.containsKey(produto))
             for (Venda v: m.get(produto)) {
-                if(aux.containsKey(v.getCliente())){
-                    aux.put(v.getCliente(),aux.get(v.getCliente()).
+                System.out.println(v);
+                if (v.getProduto().equals(produto)) {
+                    if (aux.containsKey(v.getCliente())) {
+                        double segtuplo = (Double) aux.get(v.getCliente()).getO2() + v.getPreco() * v.getUniCompradas(); //total gasto
+                        int prituplo = (int) aux.get(v.getCliente()).getO1() + 1; //vezes que comprou o produto
+                        aux.get(v.getCliente()).setO1(prituplo);
+                        aux.get(v.getCliente()).setO2(segtuplo);
+                    } else {
+                        Tuplo t = new Tuplo(1, v.getPreco() * v.getUniCompradas());
+                        aux.put(v.getCliente(), t);
+                    }
                 }
             }
         }
+        System.out.println("LMAO");
+
+        Map<String,Tuplo> maxEntry = new HashMap<>(quant);
+        String stringtemp;
+        Tuplo tuplotemp = new Tuplo();
+
+        for(int i = 0;i<quant;i++){
+            Map.Entry<String,Tuplo> entryprep = aux.entrySet().iterator().next();
+            stringtemp = entryprep.getKey();
+            tuplotemp = entryprep.getValue();
+
+            for(Map.Entry<String,Tuplo> entry : aux.entrySet()){
+                if (maxEntry == null){
+                    Tuplo t = new Tuplo(entry.getValue().getO1(),entry.getValue().getO2());
+                    maxEntry.put(entry.getKey(),t);
+                }
+                else {
+                    int temp1 = (int) entry.getValue().getO1();
+                    int temp2 = (int) tuplotemp.getO1();
+                    if(temp1 > temp2){
+                        stringtemp = entry.getKey();
+                        tuplotemp = entry.getValue();
+                    }else{
+                        double temp3 = (double) entry.getValue().getO2();
+                        double temp4 = (double) tuplotemp.getO2();
+                        if(temp1 == temp2)
+                            if(temp3 > temp4){
+                                stringtemp = entry.getKey();
+                                tuplotemp = entry.getValue();
+                            }
+                    }
+                }
+            }
+            maxEntry.put(stringtemp,tuplotemp);
+        }
+
+        for(Map.Entry<String,Tuplo> entry : aux.entrySet()){
+            System.out.println(entry.getKey() + entry.getValue());
+        }
     }
-    */
+
 
 /*
     public List<List<Map<String,Double>>> query10(){
@@ -397,10 +445,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         System.out.println(xd);*/
   //      return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
 //    }
-
-    public void q7(){
-
-    }
 
     /**
      *  Guarda estado do objecto que é pedido (this.gravar())

@@ -11,7 +11,7 @@ public class Facturacao implements Serializable {
 
     Facturacao() {
         faturacao = new ArrayList<>();
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 12; i++) {
             faturacao.add(new HashMap<>());
         }
     }
@@ -34,12 +34,12 @@ public class Facturacao implements Serializable {
 
     public void myadd(Venda v) {
 
-        if (faturacao.get(v.getMes()).containsKey(v.getProduto())) {
-            faturacao.get(v.getMes()).get(v.getProduto()).add(v);
+        if (faturacao.get(v.getMes()-1).containsKey(v.getProduto())) {
+            faturacao.get(v.getMes()-1).get(v.getProduto()).add(v);
         } else {
             ArrayList<Venda> newv = new ArrayList<>();
             newv.add(v);
-            faturacao.get(v.getMes()).put(v.getProduto(), newv);
+            faturacao.get(v.getMes()-1).put(v.getProduto(), newv);
         }
     }
 
