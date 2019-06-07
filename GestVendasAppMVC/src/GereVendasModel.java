@@ -159,6 +159,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
     }
 
     public void createData(String filepathgeral){
+       //coisas
         sortFiles(filepathgeral);
 
         catProd.leFicheiro(filePathProdutos);
