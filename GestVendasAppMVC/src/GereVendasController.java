@@ -35,6 +35,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
         List<String> ret;
         List<Map<Integer,Integer>> ret2;
         List<Query4aux> ret4;
+        List<Map<String,Double>> ret7;
         while(true) {
             view.MenuQueries();
             int input = Input.lerInt();
@@ -70,7 +71,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                 case 6:
                     break;
                 case 7:
-                    //ret7 = model.query7();
+                    ret7 = model.query7();
                     break;
                 case 8:
                     break;

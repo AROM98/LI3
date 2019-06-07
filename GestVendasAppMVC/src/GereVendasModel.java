@@ -1,6 +1,7 @@
 import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
 import java.nio.channels.UnsupportedAddressTypeException;
+import java.nio.file.FileSystemNotFoundException;
 import java.util.*;
 import java.util.function.DoublePredicate;
 
@@ -283,7 +284,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                         Triplo t = ret.get(v.getMes()-1).get(cliente);
                         int i = (int) t.getO1() + 1;
                         double d = (double) t.getO3() + v.getUniCompradas() * v.getPreco();
-                        t.setO1(i + 1);
+                        t.setO1(i);
                         t.setO3(d);
                         ret.get(v.getMes()-1).put(cliente, t);
                     } else {
@@ -303,12 +304,11 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         for(int i = 0;i<12;i++){
             if(ret.get(i).containsKey(cliente)) {
                 System.out.println("MES: " + i+1);
-                System.out.println("" + ret.get(i).get(cliente).getO1());
-                System.out.println("Compras Feitas:  " + ret.get(i).get(cliente).getO2());
+                System.out.println("Compras Feitas: " + ret.get(i).get(cliente).getO1());
+                System.out.println("Produtos distintos: " + ret.get(i).get(cliente).getO2());
                 System.out.println("Total gasto; " + ret.get(i).get(cliente).getO3());
             }
         }
-
 
         return ret;
     }
@@ -377,54 +377,65 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
 
     }
 
-    public void query6(){
 
-    }
-
-    /*
     public List<Map<String,Double>> query7(){
 
-        List<Map<String, Double>> ret= new ArrayList<>(3);
+        List<Map<String, Double>> retaux= new ArrayList<>(3);
+        List<Map<String,Double>> ret = new ArrayList<>();
+
+        for(int i = 0;i<3;i++){
+            retaux.add(new HashMap<>());
+            ret.add(new HashMap<>());
+        }
 
         for(int fil = 0;fil<3;fil++) {
             Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
             for (Map.Entry<String, List<Venda>> entry : m.entrySet()) {
                 for (Venda v : entry.getValue()) {
-                    if(ret.get(v.getFilial()).containsKey(v.getCliente())){
-                        ret.get(v.getFilial()).put(v.getCliente(),ret.get(v.getFilial()).get(v.getCliente() + v.getUniCompradas() * v.getPreco()));
+                    if(retaux.get(fil).containsKey(entry.getKey())){
+                        retaux.get(fil).put(entry.getKey(),retaux.get(fil).get(entry.getKey()) + v.getUniCompradas() * v.getPreco());
+                    }
+                    else{
+                        retaux.get(fil).put(entry.getKey(),v.getPreco()*v.getUniCompradas());
                     }
                 }
-
             }
         }
-        String stringtemp;
-        Double doubletemp;
+
+        String stringtemp = null;
+        Double doubletemp = 0.0;
+        for(int j = 0;j<3;j++)
+            for(int i = 0;i<3;i++) {
+                Map<String, Double> m = retaux.get(j);
+                for (Map.Entry<String,Double> entry : m.entrySet()) {
+
+                    if (entry.getValue() >= doubletemp) {
+                        stringtemp = entry.getKey();
+                        doubletemp = entry.getValue();
+                    }
+                }
+                retaux.get(i).remove(stringtemp);
+                ret.get(i).put(stringtemp,doubletemp);
+                stringtemp = null;
+                doubletemp = 0.0;
+            }
 
         for(int i = 0;i<3;i++) {
-            Map<String, List<Venda>> m = filial.retornaListaFilial(i);
-            Map.Entry<String, Double> entryprep = ret.entrySet().iterator().next();
-            stringtemp = entryprep.getKey();
-            doubletemp = entryprep.getValue();
-
-            for (Map.Entry<String, Double> entry : ret.get(i).entrySet()) {
-                if (entry.getValue() >= doubletemp && !ret.get(i).containsKey(entry.getKey())) {
-                    stringtemp = entry.getKey();
-                    doubletemp = entry.getValue();
-                }
+            Map<String, Double> m = ret.get(i);
+            System.out.println("Filial " + (i+1));
+            for (Map.Entry<String, Double> entry : m.entrySet()) {
+                System.out.println(entry.getKey() + " " + entry.getValue());
             }
         }
-            maxEntry.put(stringtemp,tuplotemp);
-
-        return ret; // o return ainda nao ta direito. Tem de ser com os 3 maiores do ret, ret2 e ret3
+        return ret;
    }
-*/
+
 
     public void query9(String produto, int quant){
 
         //weird shit JN1306
 
         Map<String,Tuplo> aux = new HashMap<>();
-        System.out.println("LMAO");
         for(int fil = 0;fil<3;fil++) {
             System.out.println("FIL: " + (fil + 1));
             Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
@@ -444,7 +455,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                 }
             }
         }
-        System.out.println("LMAO");
 
         Map<String,Tuplo> maxEntry = new HashMap<>(quant);
         String stringtemp;
