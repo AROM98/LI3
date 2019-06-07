@@ -377,7 +377,15 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
     }
 
     public void query6(int inddex){
+        Map<String, Integer> r1 = new HashMap<>();
+        Map<String, Integer> resfinal = new HashMap<>();
+        int j = 0;
+        for(int i = 0; i < 12 ; i++){
+            Map<String, List<Venda>> map = facturacao.retornaListaMes(i);
+            for (List<Venda> v : map.values()){
 
+            }
+        }
     }
 
 
