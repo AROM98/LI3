@@ -376,6 +376,10 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         }
     }
 
+    public void query6(int inddex){
+
+    }
+
 
     public List<Map<String,Double>> query7(){
 
