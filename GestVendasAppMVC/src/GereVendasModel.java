@@ -413,8 +413,8 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
                         r1.put(entry.getKey(), new Tuplo( v.getUniCompradas(), clien.size()));
                     }
                 }
+                clien.clear();
             }
-            clien.clear();
         }
         int max = 0, cmax = 0;
         String maxKey = null;
