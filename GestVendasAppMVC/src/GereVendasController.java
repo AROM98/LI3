@@ -71,7 +71,12 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                 case 5:
                     view.imprime("Cliente: ");
                     palavra = Input.lerString();
-                    view.query5(model.query5(palavra));
+                    if(model.getCatClient().existeClient(palavra)){
+                        view.query5(model.query5(palavra));
+                    }
+                    else {
+                        view.imprime("Este cliente não existe!");
+                    }
                     break;
                 case 6:
                     view.imprime("Quantos a ler:");

@@ -391,10 +391,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
             ret.add(t);
             max = 0;
         }
-        //imprimir
-        for (Tuplo t : ret) {
-            System.out.println(t.getO1() + "--->" + t.getO2());
-        }
         return ret;
     }
 

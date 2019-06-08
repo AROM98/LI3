@@ -7,6 +7,7 @@ public class GereVendasAppMVC {
     public static void main(String[] args) {
 
         InterfGereVendasModel model = new GereVendasModel();
+
         model.createData("Ficheiros/FilePath");
         double tempo = Crono.stop();
         if(model == null) { System.out.println("ERRO INICIALIZACAO"); System.exit(-1); }
