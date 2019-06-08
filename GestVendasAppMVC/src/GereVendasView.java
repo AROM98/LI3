@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.StreamSupport;
 
 public class GereVendasView implements  InterfGereVendasView, Serializable {
-    //todos os prints do programa devem estar aqui.
 
     public void printFichProd(String path, int invalidos, int validos){
         System.out.println("Ficheiro lido: "+path);
@@ -19,8 +18,14 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
         System.out.println("Clientes invalidos: "+invalidos);
     }
 
+    public void printFichVendas(String path, int invalidos, int validos){
+        System.out.println("Ficheiro lido: "+path);
+        System.out.println("Vendas validas: "+validos);
+        System.out.println("Vendas invalidas: "+invalidos);
+    }
+
     public void MenuQueries() {
-        System.out.println("Menu Queries\n\n" +
+        System.out.println("\nMenu Queries\n\n" +
                 "Escolha uma query:\n" +
                 "1.Lista de Produtos nunca comprados.\n" +
                 "2.Dando um mes ou filial, determina vendas e o total de clientes que as fizeram.\n" +
@@ -82,7 +87,7 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
             for (Map.Entry<String, Double> entry : m.entrySet()) {
                 System.out.println("Comprador: " + entry.getKey() + " | Dinheiro faturado: " + entry.getValue());
             }
-            System.out.println("");
+            System.out.println(" ");
         }
     }
 

@@ -1,12 +1,7 @@
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.channels.UnsupportedAddressTypeException;
-import java.nio.file.FileSystemNotFoundException;
 import java.util.*;
-import java.util.function.DoublePredicate;
 
-public class GereVendasModel implements InterfGereVendasModel, Serializable{
+public class GereVendasModel implements InterfGereVendasModel, Serializable {
 
     private String filePathVendas; //= "Ficheiros/Vendas_1M.txt"
     private String filePathClientes; // "Ficheiros/Clientes.txt"
@@ -16,12 +11,16 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
     private CatClient catClient;
     private Filial filial;
     private Facturacao facturacao;
+    private int vendasVal;
+    private int vendasInval;
 
     public GereVendasModel(){
         catProd = new CatProd();
         catClient = new CatClient();
         filial = new Filial();
         facturacao = new Facturacao();
+        vendasVal = 0;
+        vendasInval = 0;
     }
 
 
@@ -48,8 +47,12 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return catProd;
     }
 
-    public Facturacao getFacturacao() {
-        return facturacao;
+    public int getVendasVal(){
+        return vendasVal;
+    }
+
+    public int getVendasInval(){
+        return vendasInval;
     }
 
     /**
@@ -143,7 +146,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         FileReader fr;
         BufferedReader inStream;
         String linha;
-        //int i = 1;
         try {
             int i = 1;
             fich = new File(filepathgeral);
@@ -172,7 +174,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
      * @param filepathgeral
      */
     public void createData(String filepathgeral){
-       //coisas
         sortFiles(filepathgeral);
 
         catProd.leFicheiro(filePathProdutos);
@@ -203,6 +204,10 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                 if (this.valida(v)) {
                     filial.myadd(v);
                     facturacao.myadd(v);
+                    this.vendasVal += 1;
+                }
+                else {
+                    this.vendasInval+=1;
                 }
             }
         }
@@ -274,7 +279,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             Map<String, List<Venda>> m = filial.retornaListaFilial(fil);
             if (m.containsKey(cliente))
                 for (Venda v : m.get(cliente)) {
-                  //  System.out.println(v);
                     produtos.get(v.getMes()-1).add(v.getProduto());
                     if (ret.get(v.getMes()-1).containsKey(cliente)) {
                         produtos.get(v.getMes()-1).add(v.getProduto());
@@ -395,26 +399,27 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
     }
 
     public List<Triplo> query6(int inddex){
+
         Map<String, Integer> r1 = new HashMap<>();
         //set de clientes que ja compraram;
         Set<String> clien= new TreeSet<>();
+        Map<String,Triplo> resfinal2 = new TreeMap<>();
         List<Triplo> resfinal = new ArrayList<>(); //produto, unidades, clientes
         String aux = null;
         int j = 0;
         for(int i = 0; i < 12 ; i++){
             Map<String, List<Venda>> map = facturacao.retornaListaMes(i);
-            for(Map.Entry<String, List<Venda>> entry : map.entrySet()){
+            for(Map.Entry<String, List<Venda>> entry : map.entrySet()) {
                 aux = entry.getKey();
                 r1.put(aux, 0); //mete o produto com 0 vendas;
-                for(Venda v : entry.getValue()){
+                for (Venda v : entry.getValue()) {
                     r1.put(aux, r1.get(aux) + v.getUniCompradas());
                     clien.add(v.getCliente());
                 }
-                //depois de adicionar todas as vendas e clientes individuais, produto é retirado do map
-                map.remove(aux);
-                Triplo t = new Triplo(aux, r1.get(aux), clien.size());
-                resfinal.add(t);
-                clien.clear();
+                    //depois de adicionar todas as vendas e clientes individuais, produto é retirado do map
+                    Triplo t = new Triplo(aux, r1.get(aux), clien.size());
+                    resfinal.add(t);
+                    clien.clear();
             }
         }
         //imprimir
@@ -560,8 +565,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return l;
     }
 
-
-
     public List<List<Map<String,Double>>> query10(){
 
         List<List<Map<String,Double>>> ret = new ArrayList<>(12);
@@ -584,21 +587,10 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
                     }
                 }
             }
-
             ret.add(mes,listafil);
-        }/*
-
-        for (int mes = 0;mes<12;mes++){
-            for(int fil = 0;fil<3;fil++){
-                for (Map.Entry<String,Double> m : ret.get(mes).get(fil).entrySet()){
-                    System.out.println(m.getKey() + " " + m.getValue());
-                }
-            }
-        }*/
-
+        }
         return ret;
     }
-
 
     /**
      *  Guarda estado do objecto que é pedido (this.gravar())
@@ -628,5 +620,4 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         ois.close();
         return gest;
     }
-
 }

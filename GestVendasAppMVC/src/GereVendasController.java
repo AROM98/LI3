@@ -25,6 +25,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
     public void startController(){
         view.printFichProd(model.getFilePathProdutos(), model.getCatProd().getPinvalidos(), model.getCatProd().getPvaliados());
         view.printFichClient(model.getFilePathClientes(), model.getCatClient().getCinvalidos(), model.getCatClient().getCvaliados());
+        view.printFichVendas(model.getFilePathVendas(),model.getVendasInval(),model.getVendasVal());
         this.menu();
     }
 
@@ -73,6 +74,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                     view.query5(model.query5(palavra));
                     break;
                 case 6:
+                    view.imprime("Quantos a ler:");
                     inteiro = Input.lerInt();
                     model.query6(inteiro);
                     break;

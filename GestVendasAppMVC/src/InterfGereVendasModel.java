@@ -10,8 +10,11 @@ public interface InterfGereVendasModel {
      */
     public String getFilePathProdutos();
     public String getFilePathClientes();
+    public String getFilePathVendas();
     public CatClient getCatClient();
     public CatProd getCatProd();
+    public int getVendasVal();
+    public int getVendasInval();
 
     public List<String> query1();
     public List<Map<Integer,Integer>> query2(int mes);
@@ -26,6 +29,4 @@ public interface InterfGereVendasModel {
 
     public void gravarEstado(String filename) throws IOException;
     public GereVendasModel recuperarEstado(String filename) throws IOException, ClassNotFoundException;
-
-
 }
