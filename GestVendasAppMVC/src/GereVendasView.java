@@ -1,8 +1,6 @@
 import java.io.Serializable;
-import java.security.MessageDigest;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.StreamSupport;
+
 
 public class GereVendasView implements  InterfGereVendasView, Serializable {
 
@@ -124,7 +122,6 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
         filial = Input.lerInt();
         opcao = 1;
 
-        //coisas a imprimir
         Map<String, Double> lm = l.get(mes - 1).get(filial - 1);
         List<String> listaprod = new ArrayList<>();
         List<Double> listfactprod = new ArrayList<>();
@@ -145,15 +142,6 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
             }
 
             if(opcao == 8) {
-                /*Map<String, Double> lm = l.get(mes - 1).get(filial - 1);
-                List<String> listaprod = new ArrayList<>();
-                List<Double> listfactprod = new ArrayList<>();
-
-                for (Map.Entry<String,Double> entry: lm.entrySet()){
-                    listaprod.add(entry.getKey());
-                    listfactprod.add(entry.getValue());
-                }
-                */
                 System.out.println("Mes: " + mes);
                 System.out.println("Filial: " + filial);
                 for (Map.Entry<String, Double> m : lm.entrySet()) {

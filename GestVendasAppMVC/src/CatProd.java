@@ -12,7 +12,7 @@ public class CatProd implements Serializable{
      */
 
     public CatProd(){
-        this.catProd = new TreeSet<Produto>(new ComparadorProduto());
+        this.catProd = new TreeSet<>(new ComparadorProduto());
         this.Pvaliados = 0;
         this.Pinvalidos = 0;
     }
@@ -36,13 +36,6 @@ public class CatProd implements Serializable{
 
     public int getPinvalidos() {
         return Pinvalidos;
-    }
-
-    /**
-     * Sets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     */
-    public void setCatProd(Produto p){
-        this.catProd.add(p);
     }
 
     /**
@@ -139,7 +132,5 @@ public class CatProd implements Serializable{
         catch (IOException e) {
             System.out.println(e);
         }
-        //System.out.println("Produtos validos: " + this.Pvaliados);
-        //System.out.println("Produtos invalidos: " + this.Pinvalidos);
     }
 }

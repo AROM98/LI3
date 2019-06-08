@@ -397,9 +397,8 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
     public List<Triplo> query6(int inddex){
 
         Map<String, Tuplo> r1 = new HashMap<>();
-        //set de clientes que ja compraram;
         Set<String> clien = new TreeSet<>();
-        List<Triplo> resfinal = new ArrayList<>(); //produto, unidades, clientes
+        List<Triplo> resfinal = new ArrayList<>();
         String aux = null;
         for(int i = 0; i < 12 ; i++){
             Map<String, List<Venda>> map = facturacao.retornaListaMes(i);
@@ -413,7 +412,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
                         r1.put(entry.getKey(), new Tuplo( v.getUniCompradas(), 0));
                     }
                 }
-                r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1(), (int)r1.get(entry.getKey()).getO2() + clien.size()));
+                r1.put(entry.getKey(), new Tuplo(r1.get(entry.getKey()).getO1(), (int)r1.get(entry.getKey()).getO2() + clien.size()));
                 clien.clear();
             }
         }
@@ -529,8 +528,8 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
             if (m.containsKey(produto))
                 for (Venda v : m.get(produto)) {
                     if (aux.containsKey(v.getCliente())) {
-                        double segtuplo = (Double) aux.get(v.getCliente()).getO2() + v.getPreco() * v.getUniCompradas(); //total gasto
-                        int prituplo = (int) aux.get(v.getCliente()).getO1() + 1; //vezes que comprou o produto
+                        double segtuplo = (Double) aux.get(v.getCliente()).getO2() + v.getPreco() * v.getUniCompradas();
+                        int prituplo = (int) aux.get(v.getCliente()).getO1() + 1;
                         aux.get(v.getCliente()).setO1(prituplo);
                         aux.get(v.getCliente()).setO2(segtuplo);
                     } else {

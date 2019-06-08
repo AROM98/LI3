@@ -3,8 +3,7 @@ import java.util.*;
 
 public class Filial implements Serializable {
 
-    //Filiais -> contem registo de compras realizadas em cada filial, por quem e quando.
-    private List<Map<String,List<Venda>>> filial; //agora contem vendas, mas é provavel que haja alteraçoes.
+    private List<Map<String,List<Venda>>> filial;
 
     /**
      * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -60,20 +59,6 @@ public class Filial implements Serializable {
             newv.add(v);
             filial.get(v.getFilial()-1).put(v.getCliente(), newv);
         }
-    }
-
-    /**
-     * Função que verifica se existe um produto
-     */
-    public boolean mycontains(Cliente c){
-        boolean ret = false;
-        for (Map<String,List<Venda>> f: filial) {
-            if (f.containsKey(c.getCliente())) {
-                ret = true;
-                break;
-            }
-        }
-        return ret;
     }
 
     public Map<String, List<Venda>> retornaListaFilial(int fil){

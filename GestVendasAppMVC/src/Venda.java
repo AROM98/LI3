@@ -1,27 +1,18 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
 
 public class Venda implements Comparable<Venda>, Serializable{
 
     /**
      *  Variaveis de instancia
-     *  (cada campo de Venda) ??
+     *  cada campo de Venda
      */
-    private String produto; //tipo Produto ou basta uma String.
+    private String produto;
     private double preco;
     private int uniCompradas;
     private String Tcompra;
-    private String cliente; //tipo Cliente ou basta uma String.
+    private String cliente;
     private int mes;
     private int filial;
-
-
-    /**
-     * Construtores -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     */
 
     /**
      * Constutor vazio
@@ -30,7 +21,7 @@ public class Venda implements Comparable<Venda>, Serializable{
         this.produto = "";
         this.preco = 0.0;
         this.uniCompradas = 0;
-        this.Tcompra = "N"; //deve ser alterado
+        this.Tcompra = "N";
         this.cliente = "";
         this.mes = 0;
         this.filial = 0;
@@ -198,7 +189,6 @@ public class Venda implements Comparable<Venda>, Serializable{
         return this.produto.compareTo(o.getProduto());
     }
 
-    //isto é preciso para alguma coisa???
     public int hashCode() {
         return 0;
     }

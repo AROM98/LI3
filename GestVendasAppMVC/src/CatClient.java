@@ -12,7 +12,7 @@ public class CatClient implements Serializable{
      */
 
     public CatClient(){
-        this.catClient = new TreeSet<Cliente>(new ComparadorCliente());
+        this.catClient = new TreeSet<>(new ComparadorCliente());
     }
 
     public CatClient(CatClient c){
@@ -32,13 +32,6 @@ public class CatClient implements Serializable{
 
     public int getCinvalidos() {
         return Cinvalidos;
-    }
-
-    /**
-     * Sets -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     */
-    public void setCatClient(Cliente c){
-        this.catClient.add(c);
     }
 
     /**
@@ -122,7 +115,7 @@ public class CatClient implements Serializable{
      * adiciona ao Set apenas os Clientes validos
      */
     private void poeList(FileReader fr){
-        int invalidas = 0, validas = 0;
+
         BufferedReader inStream;
         String linha;
         try {
@@ -141,7 +134,5 @@ public class CatClient implements Serializable{
         catch (IOException e) {
             System.out.println(e);
         }
-        //System.out.println("Cliente validos: "+validas);
-        //System.out.println("Cliente invalidos: "+invalidas);
     }
 }

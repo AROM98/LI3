@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.List;
-import java.util.Map;
 
 public class GereVendasController implements InterfGereVendasController, Serializable{
 
@@ -34,8 +33,6 @@ public class GereVendasController implements InterfGereVendasController, Seriali
         int inteiro;
         String palavra;
         List<String> ret;
-        List<Map<Integer,Integer>> ret2;
-        List<Map<String,Double>> ret7;
         while(true) {
             view.MenuQueries();
             int input = Input.lerInt();

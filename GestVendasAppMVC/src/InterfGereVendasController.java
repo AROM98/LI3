@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public interface InterfGereVendasController {
 
     void setView(InterfGereVendasView view);
