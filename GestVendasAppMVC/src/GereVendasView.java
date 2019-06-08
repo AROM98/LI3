@@ -71,7 +71,7 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
 
     public void query5(List<Tuplo> tp){
         for (Tuplo t : tp) {
-            System.out.println(t.getO1() + "--->" + t.getO2());
+            System.out.println("Produto: "+t.getO1() + " | " +"Quantidade: "+ t.getO2());
         }
     }
 
@@ -103,7 +103,7 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
 
     public void query10(List<List<Map<String,Double>>> l) {
 
-        int pagina = 0, opcao = 4, i = 0, v = 1;
+        int pagina = 0, paginatotal = 0, opcao = 4, i = 0, v = 1;
         int mes;
         int filial;
 
@@ -113,9 +113,19 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
         filial = Input.lerInt();
         opcao = 1;
 
-        while (v == 0) {
+        //coisas a imprimir
+        Map<String, Double> lm = l.get(mes - 1).get(filial - 1);
+        List<String> listaprod = new ArrayList<>();
+        List<Double> listfactprod = new ArrayList<>();
 
-            if(opcao == 3){
+        for (Map.Entry<String,Double> entry: lm.entrySet()){
+            listaprod.add(entry.getKey());
+            listfactprod.add(entry.getValue());
+        }
+        paginatotal = l.get(mes).size() / 20;
+        while (v == 1) {
+
+            if(opcao == 7){
                 System.out.println("Mes a inserir: ");
                 mes = Input.lerInt();
                 System.out.println("Filial a inserir: ");
@@ -123,8 +133,8 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
                 opcao = 4;
             }
 
-            if(opcao == 4) {
-                Map<String, Double> lm = l.get(mes - 1).get(filial - 1);
+            if(opcao == 8) {
+                /*Map<String, Double> lm = l.get(mes - 1).get(filial - 1);
                 List<String> listaprod = new ArrayList<>();
                 List<Double> listfactprod = new ArrayList<>();
 
@@ -132,18 +142,18 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
                     listaprod.add(entry.getKey());
                     listfactprod.add(entry.getValue());
                 }
-
+                */
                 System.out.println("Mes: " + mes);
                 System.out.println("Filial: " + filial);
                 for (Map.Entry<String, Double> m : lm.entrySet()) {
                     System.out.println("Produto: " + m.getKey() + " | Faturação Total: " + m.getValue());
                 }
             }
-/*
+
             if(opcao == 1 && pagina < paginatotal){
                 pagina++;
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime("Produto: "+ listaprod.get(i)+" | "+"Facturação: "+listfactprod.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("1.Página seguinte\n" +
@@ -154,7 +164,7 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
 
             if(opcao == 1 && pagina == paginatotal){
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime("Produto: "+ listaprod.get(i)+" | "+"Facturação: "+listfactprod.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("-> Não é possivel avançar\n" +
@@ -166,7 +176,7 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
             if(opcao == 2 && pagina > 0){
                 pagina--;
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime("Produto: "+ listaprod.get(i)+" | "+"Facturação: "+listfactprod.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("1.Página seguinte\n" +
@@ -177,16 +187,16 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
 
             if(opcao == 2 && pagina == 0){
                 for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
-                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                    imprime("Produto: "+ listaprod.get(i)+" | "+"Facturação: "+listfactprod.get(i+1));
                 }
                 System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
                 System.out.println("1.Página seguinte\n" +
                         "-> Não é possivel retroceder\n" +
                         "3.Sair\n");
                 opcao = Input.lerInt();
-            }*/
+            }
 
-            if (opcao == 5) v = 0;
+            if (opcao == 3) v = 0;
         }
     }
 

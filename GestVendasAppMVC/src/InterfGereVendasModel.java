@@ -28,6 +28,4 @@ public interface InterfGereVendasModel {
     public GereVendasModel recuperarEstado(String filename) throws IOException, ClassNotFoundException;
 
 
-
-    public void verificar();
 }

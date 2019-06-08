@@ -629,19 +629,4 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return gest;
     }
 
-    public void verificar(){
-        double r1 = 0, r2 = 0, r3 = 0;
-        for(Venda v : filial.retornaListaFilial(0).get("R2722")){
-            r1 += v.getPreco() * v.getUniCompradas();
-        }
-        for(Venda v : filial.retornaListaFilial(1).get("R2722")){
-            r2 += v.getPreco() * v.getUniCompradas();
-        }
-        for(Venda v : filial.retornaListaFilial(2).get("R2722")){
-            r3 += v.getPreco() * v.getUniCompradas();
-        }
-        System.out.println("FAC1---->"+r1+"\n");
-        System.out.println("FAC2---->"+r2+"\n");
-        System.out.println("FAC3---->"+r3+"\n");
-    }
 }
