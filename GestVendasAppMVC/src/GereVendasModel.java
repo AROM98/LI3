@@ -395,16 +395,35 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return ret;
     }
 
-    public void query6(int inddex){
+    public List<Triplo> query6(int inddex){
         Map<String, Integer> r1 = new HashMap<>();
-        Map<String, Integer> resfinal = new HashMap<>();
+        //set de clientes que ja compraram;
+        Set<String> clien= new TreeSet<>();
+        List<Triplo> resfinal = new ArrayList<>(); //produto, unidades, clientes
+        String aux = null;
         int j = 0;
         for(int i = 0; i < 12 ; i++){
             Map<String, List<Venda>> map = facturacao.retornaListaMes(i);
-            for (List<Venda> v : map.values()){
-
+            for(Map.Entry<String, List<Venda>> entry : map.entrySet()){
+                aux = entry.getKey();
+                r1.put(aux, 0); //mete o produto com 0 vendas;
+                for(Venda v : entry.getValue()){
+                    r1.put(aux, r1.get(aux) + v.getUniCompradas());
+                    clien.add(v.getCliente());
+                }
+                //depois de adicionar todas as vendas e clientes individuais, produto é retirado do map
+                map.remove(aux);
+                Triplo t = new Triplo(aux, r1.get(aux), clien.size());
+                resfinal.add(t);
+                clien.clear();
             }
         }
+        //imprimir
+        for (Triplo t : resfinal) {
+            System.out.println(t.getO1() + "--->" + t.getO2()+ "--->"+t.getO3());
+        }
+
+        return resfinal;
     }
 
 

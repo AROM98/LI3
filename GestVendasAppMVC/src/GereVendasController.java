@@ -72,6 +72,8 @@ public class GereVendasController implements InterfGereVendasController, Seriali
                     model.query5(palavra);
                     break;
                 case 6:
+                    inteiro = Input.lerInt();
+                    model.query6(inteiro);
                     break;
                 case 7:
                     view.query7(model.query7());
