@@ -3,6 +3,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.StreamSupport;
 
 public class GereVendasView implements  InterfGereVendasView, Serializable {
     //todos os prints do programa devem estar aqui.
@@ -29,7 +31,7 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
                 "5.Dado um cliente, determina os produtos que mais comprou.\n" +
                 "6.Determina, segundo um numero dado, os produtos mais vendidos em todo o ano.\n" +
                 "7.Determina para cada filial, a lista dos 3 maiores compradores.\n" +
-                "8.Determina, segundo um numero dade, os clientes que comprar mais produtos diferentes.\n" +
+                "8.Determina, segundo um numero dado, os clientes que comprar mais produtos diferentes.\n" +
                 "9.Dado um produto, determina, segundo um numero dado, os clientes que mais compraram e o seu valor gasto.\n" +
                 "10.Determinar mes a mes, e para cada mes, filial a filial, a faturacao total de cada produto.\n" +
                 "11.Gravar estado do programa\n" +
@@ -38,21 +40,63 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
                 "\n\nOpção: ");
     }
 
-    public void querie1(List<String> ret){
-        Collections.sort(ret);
-       // System.out.println(ret);
-        for (int i = 0; i < ret.size(); i++) {
-            System.out.println(ret.get(i));
+    public void query2(List<Map<Integer,Integer>> l,int mes){
+        System.out.println("Mes: " + mes);
+        Map.Entry<Integer,Integer> entry = l.get(0).entrySet().iterator().next();
+        System.out.println("Total de vendas realizadas: " + entry.getKey() + " | Numero de clientes: " + entry.getValue() + "\n");
+
+        for(int i = 1;i<4;i++){
+            System.out.println("Filial: " + i);
+            for (Map.Entry<Integer,Integer> m: l.get(i).entrySet()) {
+                System.out.println("Total de vendas realizadas: " + m.getKey() + " | Numero de clientes: " + m.getValue());
+            }
         }
-        System.out.println("Produtos nunca comprados: " + ret.size());
+    }
+    public void query3(List<Map<String,Triplo>> l,String cliente){
+
+        for(int mes = 0;mes<12;mes++){
+                System.out.println("MES: " + (mes+1));
+                System.out.println("Compras Feitas: " + l.get(mes).get(cliente).getO1() +
+                        " | Produtos distintos: " + l.get(mes).get(cliente).getO2() +
+                        " | Total gasto: " + l.get(mes).get(cliente).getO3());
+        }
     }
 
-    public void query7(Map<String,Double> ret){
-        int i;
-        for(i = 0;i<3;i++){
-            System.out.println("not finished");
+    public void query4(List<Triplo> l){
+        for(int mes = 0;mes<12;mes++){
+            System.out.println("MES: " + (mes+1));
+            System.out.println("Numero de vendas: " + l.get(mes).getO1() +
+                    " | Total Faturado: " + l.get(mes).getO2() +
+                    " | Compradores Distintos: " + l.get(mes).getO3());
         }
     }
+
+    public void query7(List<Map<String,Double>> ret) {
+        for (int i = 0; i < 3; i++) {
+            Map<String, Double> m = ret.get(i);
+            System.out.println("Filial " + (i + 1));
+            for (Map.Entry<String, Double> entry : m.entrySet()) {
+                System.out.println("Comprador: " + entry.getKey() + " | Dinheiro faturado: " + entry.getValue());
+            }
+            System.out.println("");
+        }
+    }
+
+    public void query8(List<Tuplo> l,int quant){
+        for (Tuplo t: l) {
+            System.out.println("Cliente: " + t.getO1() + " | Produtos diferentes comprados: " + t.getO2());
+        }
+    }
+
+    public void query9(List<Triplo> l , int quant){
+
+        for (Triplo t: l) {
+            System.out.println("Cliente: " + t.getO1() +
+                    " | Vezes que comprou o produto: " + t.getO2()  +
+                    " | Total Gasto: " + t.getO3());
+        }
+    }
+
 
     public void navegador(List<String> ret) throws Exception{
         int paginatotal = ret.size()/20;
