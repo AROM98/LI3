@@ -407,17 +407,29 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
             for(Map.Entry<String, List<Venda>> entry : map.entrySet()) {
                 for (Venda v : entry.getValue()) {
                     clien.add(v.getCliente());
-                    r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1() + v.getUniCompradas(), clien.size()));
+                    if(r1.containsKey(entry.getKey())){
+                        r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1() + v.getUniCompradas(), clien.size()));
+                    }
+                    else{
+                        r1.put(entry.getKey(), new Tuplo( v.getUniCompradas(), clien.size()));
+                    }
                 }
                 clien.clear();
             }
         }
-        int max = 0;
+        int max = 0, cmax = 0;
         String maxKey = null;
         for(int j = 0; j < inddex && r1.size() > 0; j++){
             for (Map.Entry<String, Tuplo> m : r1.entrySet()){
-                resfinal.add(new Triplo(m.getKey(), m.getValue().getO1(), m.getValue().getO2()));
+                if((int)m.getValue().getO1() > max){
+                    max = (int) m.getValue().getO1();
+                    maxKey = m.getKey();
+                    cmax = (int) m.getValue().getO2();
+                }
             }
+            r1.remove(maxKey);
+            resfinal.add(new Triplo(maxKey, max, cmax));
+            max = 0;
         }
 
         //imprimir
