@@ -334,14 +334,16 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         return ret;
     }
 
-    public void query5(String cliente){
+    public List<Tuplo> query5(String cliente){
         Map<String, Integer> prodNUm = new TreeMap<>();
+        int quant = 0;
         for(Venda v : filial.retornaListaFilial(0).get(cliente)){
             if(prodNUm.containsKey(v.getProduto())){
                 prodNUm.put(v.getProduto(), prodNUm.get(v.getProduto() + v.getUniCompradas()));
             }
             else {
                 prodNUm.put(v.getProduto(), v.getUniCompradas());
+                quant++;
             }
         }
 
@@ -351,6 +353,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             }
             else {
                 prodNUm.put(v.getProduto(), v.getUniCompradas());
+                quant++;
             }
         }
         for(Venda v : filial.retornaListaFilial(2).get(cliente)){
@@ -359,11 +362,37 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
             }
             else {
                 prodNUm.put(v.getProduto(), v.getUniCompradas());
+                quant++;
             }
         }
-        for (String s : prodNUm.keySet()) {
-            System.out.println(s + "--->" + prodNUm.get(s));
+
+        List<Tuplo> ret = new ArrayList<>();
+        int max = 0;
+        String maxKey = null;
+        for (int i = 0; i < quant && prodNUm.size() > 0; i++) {
+            for (Map.Entry<String, Integer> entry : prodNUm.entrySet()) {
+
+                if(entry.getValue() > max){
+                    max = entry.getValue();
+                    maxKey = entry.getKey();
+                }
+                if(entry.getValue() == max){
+                    if(entry.getKey().compareTo(maxKey) > 1){
+                        maxKey = entry.getKey();
+                        break;
+                    }
+                }
+            }
+            prodNUm.remove(maxKey);
+            Tuplo t = new Tuplo(maxKey,max);
+            ret.add(t);
+            max = 0;
         }
+        //imprimir
+        for (Tuplo t : ret) {
+            System.out.println(t.getO1() + "--->" + t.getO2());
+        }
+        return ret;
     }
 
     public void query6(int inddex){
