@@ -407,19 +407,10 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
                 for (Venda v : entry.getValue()) {
                     clien.add(v.getCliente());
                     if(r1.containsKey(entry.getKey())){
-                        if(entry.getKey().equals("WY1658")) {
-                            System.out.println("MES; " + i);
-                            System.out.println("To update: " + clien.size());
-                            System.out.println("UPDATED: " + ((int) r1.get(entry.getKey()).getO2() + clien.size()));
-                        }
                         r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1() + v.getUniCompradas(), r1.get(entry.getKey()).getO2()));
                     }
                     else{
-                        if(entry.getKey().equals("WY1658")){
-                            System.out.println("MES; " + i);
-                            System.out.println("To update: " + clien.size());
-                        }
-                        r1.put(entry.getKey(), new Tuplo( v.getUniCompradas(), clien.size()));
+                        r1.put(entry.getKey(), new Tuplo( v.getUniCompradas(), 0));
                     }
                 }
                 r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1(), (int)r1.get(entry.getKey()).getO2() + clien.size()));
