@@ -127,7 +127,7 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
             listaprod.add(entry.getKey());
             listfactprod.add(entry.getValue());
         }
-        paginatotal = l.get(mes-1).get(filial).size() / 20;
+        paginatotal = l.get(mes-1).get(filial-1).size() / 20;
         while (v == 1) {
 
             if(opcao == 7){
