@@ -14,5 +14,6 @@ public interface InterfGereVendasView {
     public void query7(List<Map<String,Double>> l);
     public void query8(List<Tuplo> l, int quant);
     public void query9(List<Triplo> l, int quant);
+    public void query10(List<List<Map<String,Double>>> l);
     public void imprime(String s);
 }

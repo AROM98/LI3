@@ -371,13 +371,12 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
         String maxKey = null;
         for (int i = 0; i < quant && prodNUm.size() > 0; i++) {
             for (Map.Entry<String, Integer> entry : prodNUm.entrySet()) {
-
                 if(entry.getValue() > max){
                     max = entry.getValue();
                     maxKey = entry.getKey();
                 }
                 if(entry.getValue() == max){
-                    if(entry.getKey().compareTo(maxKey) > 1){
+                    if(entry.getKey().compareTo(maxKey) < 0){
                         maxKey = entry.getKey();
                         break;
                     }
@@ -562,25 +561,43 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable{
     }
 
 
-/*
+
     public List<List<Map<String,Double>>> query10(){
-        double factotal = 0;
+
+        List<List<Map<String,Double>>> ret = new ArrayList<>(12);
+        List<Map<String,Double>> listafil = new ArrayList<>();
+        for(int fil = 0;fil<3;fil++){
+            listafil.add(new TreeMap<>());
+        }
 
         for(int mes = 0; mes <12;mes++) {
-            Map<String,Double> mapret = new HashMap<>();
-            List<Map<String,Double>> listafiliais = new ArrayList<>(3);
+
             Map<String, List<Venda>> m = facturacao.retornaListaMes(mes);
 
-            for(Map.Entry<String,List<Venda>> entry : m.entrySet()) {
-
-                for (Venda v: entry.getValue()) {
-                    listafiliais.get(v.getFilial()-1);
-                    factotal += v.getPreco()*v.getUniCompradas();
+            for(Map.Entry<String,List<Venda>> entry : m.entrySet()){
+                for(Venda v : entry.getValue()){
+                    if(listafil.get(v.getFilial()-1).containsKey(entry.getKey())){
+                        listafil.get(v.getFilial()-1).put(entry.getKey(),listafil.get(v.getFilial()-1).get(entry.getKey()) + v.getUniCompradas() * v.getPreco());
+                    }
+                    else{
+                        listafil.get(v.getFilial()-1).put(entry.getKey(),v.getPreco()*v.getUniCompradas());
+                    }
                 }
-                mapret.put(entry.getKey(),factotal);
             }
-        }
-    }*/
+
+            ret.add(mes,listafil);
+        }/*
+
+        for (int mes = 0;mes<12;mes++){
+            for(int fil = 0;fil<3;fil++){
+                for (Map.Entry<String,Double> m : ret.get(mes).get(fil).entrySet()){
+                    System.out.println(m.getKey() + " " + m.getValue());
+                }
+            }
+        }*/
+
+        return ret;
+    }
 
 
     /**
