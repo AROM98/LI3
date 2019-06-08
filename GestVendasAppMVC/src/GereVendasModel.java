@@ -398,8 +398,7 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
 
         Map<String, Tuplo> r1 = new HashMap<>();
         //set de clientes que ja compraram;
-        Set<String> clien= new TreeSet<>();
-        Map<String,Triplo> resfinal2 = new TreeMap<>();
+        Set<String> clien = new TreeSet<>();
         List<Triplo> resfinal = new ArrayList<>(); //produto, unidades, clientes
         String aux = null;
         for(int i = 0; i < 12 ; i++){
@@ -408,14 +407,14 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
                 for (Venda v : entry.getValue()) {
                     clien.add(v.getCliente());
                     if(r1.containsKey(entry.getKey())){
-                        r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1() + v.getUniCompradas(), clien.size()));
+                        r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1() + v.getUniCompradas(), (int)r1.get(entry.getKey()).getO2() + clien.size()));
                     }
                     else{
                         r1.put(entry.getKey(), new Tuplo( v.getUniCompradas(), clien.size()));
                     }
                 }
-                clien.clear();
             }
+            clien.clear();
         }
         int max = 0, cmax = 0;
         String maxKey = null;
@@ -431,12 +430,6 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
             resfinal.add(new Triplo(maxKey, max, cmax));
             max = 0;
         }
-
-        //imprimir
-        for (Triplo t : resfinal) {
-            System.out.println(t.getO1() + "--->" + t.getO2()+ "--->"+t.getO3());
-        }
-
         return resfinal;
     }
 
