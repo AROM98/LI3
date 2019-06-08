@@ -69,6 +69,12 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
         }
     }
 
+    public void query5(List<Tuplo> tp){
+        for (Tuplo t : tp) {
+            System.out.println(t.getO1() + "--->" + t.getO2());
+        }
+    }
+
     public void query7(List<Map<String,Double>> ret) {
         for (int i = 0; i < 3; i++) {
             Map<String, Double> m = ret.get(i);
