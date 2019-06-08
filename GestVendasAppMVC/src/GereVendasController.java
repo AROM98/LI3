@@ -90,7 +90,7 @@ public class GereVendasController implements InterfGereVendasController, Seriali
 
                     break;
                 case 10:
-                    model.verificar();
+                    view.query10(model.query10());
                     break;
                 case 11:
                     //salvar estado

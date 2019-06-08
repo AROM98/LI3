@@ -21,6 +21,7 @@ public interface InterfGereVendasModel {
     public List<Map<String,Double>> query7();
     public List<Tuplo> query8(int quant);
     public List<Triplo> query9(String produto,int quant);
+    public List<List<Map<String,Double>>> query10();
 
     public void gravarEstado(String filename) throws IOException;
     public GereVendasModel recuperarEstado(String filename) throws IOException, ClassNotFoundException;

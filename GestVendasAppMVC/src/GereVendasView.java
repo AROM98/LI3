@@ -1,8 +1,6 @@
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.security.MessageDigest;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.StreamSupport;
 
@@ -94,6 +92,95 @@ public class GereVendasView implements  InterfGereVendasView, Serializable {
             System.out.println("Cliente: " + t.getO1() +
                     " | Vezes que comprou o produto: " + t.getO2()  +
                     " | Total Gasto: " + t.getO3());
+        }
+    }
+
+    public void query10(List<List<Map<String,Double>>> l) {
+
+        int pagina = 0, opcao = 4, i = 0, v = 1;
+        int mes;
+        int filial;
+
+        System.out.println("Insira um mes: ");
+        mes = Input.lerInt();
+        System.out.println("Insira uma filial: ");
+        filial = Input.lerInt();
+        opcao = 1;
+
+        while (v == 0) {
+
+            if(opcao == 3){
+                System.out.println("Mes a inserir: ");
+                mes = Input.lerInt();
+                System.out.println("Filial a inserir: ");
+                filial = Input.lerInt();
+                opcao = 4;
+            }
+
+            if(opcao == 4) {
+                Map<String, Double> lm = l.get(mes - 1).get(filial - 1);
+                List<String> listaprod = new ArrayList<>();
+                List<Double> listfactprod = new ArrayList<>();
+
+                for (Map.Entry<String,Double> entry: lm.entrySet()){
+                    listaprod.add(entry.getKey());
+                    listfactprod.add(entry.getValue());
+                }
+
+                System.out.println("Mes: " + mes);
+                System.out.println("Filial: " + filial);
+                for (Map.Entry<String, Double> m : lm.entrySet()) {
+                    System.out.println("Produto: " + m.getKey() + " | Faturação Total: " + m.getValue());
+                }
+            }
+/*
+            if(opcao == 1 && pagina < paginatotal){
+                pagina++;
+                for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                }
+                System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
+                System.out.println("1.Página seguinte\n" +
+                        "2.Retroceder\n" +
+                        "3.Sair\n");
+                opcao = Input.lerInt();
+            }
+
+            if(opcao == 1 && pagina == paginatotal){
+                for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                }
+                System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
+                System.out.println("-> Não é possivel avançar\n" +
+                        "2.Retroceder\n" +
+                        "3.Sair\n");
+                opcao = Input.lerInt();
+            }
+
+            if(opcao == 2 && pagina > 0){
+                pagina--;
+                for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                }
+                System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
+                System.out.println("1.Página seguinte\n" +
+                        "2.Retroceder pagina\n" +
+                        "3.Sair\n");
+                opcao = Input.lerInt();
+            }
+
+            if(opcao == 2 && pagina == 0){
+                for(i = pagina*20; i < ((pagina*20)+20); i+= 2){
+                    imprime(ret.get(i)+"    |    "+ret.get(i+1));
+                }
+                System.out.println("Página "+ pagina +" de "+paginatotal+"\n");
+                System.out.println("1.Página seguinte\n" +
+                        "-> Não é possivel retroceder\n" +
+                        "3.Sair\n");
+                opcao = Input.lerInt();
+            }*/
+
+            if (opcao == 5) v = 0;
         }
     }
 
