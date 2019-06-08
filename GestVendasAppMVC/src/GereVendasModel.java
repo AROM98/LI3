@@ -396,28 +396,30 @@ public class GereVendasModel implements InterfGereVendasModel, Serializable {
 
     public List<Triplo> query6(int inddex){
 
-        Map<String, Integer> r1 = new HashMap<>();
+        Map<String, Tuplo> r1 = new HashMap<>();
         //set de clientes que ja compraram;
         Set<String> clien= new TreeSet<>();
         Map<String,Triplo> resfinal2 = new TreeMap<>();
         List<Triplo> resfinal = new ArrayList<>(); //produto, unidades, clientes
         String aux = null;
-        int j = 0;
         for(int i = 0; i < 12 ; i++){
             Map<String, List<Venda>> map = facturacao.retornaListaMes(i);
             for(Map.Entry<String, List<Venda>> entry : map.entrySet()) {
-                aux = entry.getKey();
-                r1.put(aux, 0); //mete o produto com 0 vendas;
                 for (Venda v : entry.getValue()) {
-                    r1.put(aux, r1.get(aux) + v.getUniCompradas());
                     clien.add(v.getCliente());
+                    r1.put(entry.getKey(), new Tuplo( (Integer)r1.get(entry.getKey()).getO1() + v.getUniCompradas(), clien.size()));
                 }
-                    //depois de adicionar todas as vendas e clientes individuais, produto é retirado do map
-                    Triplo t = new Triplo(aux, r1.get(aux), clien.size());
-                    resfinal.add(t);
-                    clien.clear();
+                clien.clear();
             }
         }
+        int max = 0;
+        String maxKey = null;
+        for(int j = 0; j < inddex && r1.size() > 0; j++){
+            for (Map.Entry<String, Tuplo> m : r1.entrySet()){
+                resfinal.add(new Triplo(m.getKey(), m.getValue().getO1(), m.getValue().getO2()));
+            }
+        }
+
         //imprimir
         for (Triplo t : resfinal) {
             System.out.println(t.getO1() + "--->" + t.getO2()+ "--->"+t.getO3());
